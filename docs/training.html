@@ -44,10 +44,10 @@
                 Pretraining builds <code>data/pretrained.json</code>, used as the base for new chat sessions.
             </p>
             <pre><code># Pretrain (sample up to 200k lines, with dedup + filters)
-node scripts/pretrain.js --epochs 5 --batch 200 --max 200000 --dedup --minLen 20 --maxLen 500
+node scripts/pretrain.mjs --epochs 5 --batch 200 --max 200000 --dedup --min-len 20 --max-len 500
 
 # Control adaptation strength during pretraining
-node scripts/pretrain.js --epochs 5 --rho 0.1
+node scripts/pretrain.mjs --epochs 5 --rl 0.1
 </code></pre>
 
             <h3>Scaling Tips</h3>
@@ -62,12 +62,12 @@ node scripts/pretrain.js --epochs 5 --rho 0.1
                 For small datasets or quick experiments, train a model and save it to disk:
             </p>
             <pre><code># Train on a text file (defaults to data/train.txt)
-node scripts/train.js data/train.txt data/model.json 3
+node scripts/train.mjs data/train.txt data/model.json 3
 </code></pre>
 
             <h2>3) Interactive Training via Chat</h2>
             <pre><code># Start the server (loads data/pretrained.json if present)
-node src/index.js
+node src/index.mjs
 
 # Then open:
 http://localhost:3000
@@ -95,4 +95,3 @@ http://localhost:3000
     </div>
 </body>
 </html>
-

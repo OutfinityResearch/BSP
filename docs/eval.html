@@ -40,17 +40,17 @@
 
             <h2>Run the Evaluation Suite</h2>
             <pre><code># Evaluate a trained model (model path is configurable)
-node scripts/evaluate.js --model data/model_wiki.json
+node scripts/evaluate.mjs --model data/model_wiki.json
 
 # Evaluate only LAMBADA (if present)
-node scripts/evaluate.js --type lambada --model data/model_wiki.json
+node scripts/evaluate.mjs --type lambada --model data/model_wiki.json
 </code></pre>
 
             <h2>Compare Against GPT-2 (Small) and Baselines</h2>
             <p>
                 The comparative benchmark reports BSP vs Shannon entropy, Gzip, and GPT-2 (Small) reference values.
             </p>
-            <pre><code>node scripts/benchmark_comparative.js</code></pre>
+            <pre><code>node scripts/benchmark_comparative.mjs</code></pre>
 
             <h3>Reference Benchmarks</h3>
             <ul>
@@ -76,4 +76,3 @@ node scripts/evaluate.js --type lambada --model data/model_wiki.json
     </div>
 </body>
 </html>
-

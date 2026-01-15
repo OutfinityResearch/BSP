@@ -24,7 +24,7 @@ However, the benchmarking suite (`DS-008`) is currently incomplete. While a skel
 ho$) modulation and prioritized replay buffer are implemented. |
 | **DS-006** | HTTP Server & Chat | ⚠️ **Partial** | Server exists and handles sessions/persistence. Response generation is template-based (MVP level), not generative. |
 | **DS-007** | Serialization | ✅ **Complete** | JSON serialization implemented for all components. Session management handles save/load. |
-| **DS-008** | Benchmarks | ❌ **Incomplete** | `evaluate.js` exists but uses rough approximations for perplexity. Standard datasets (WikiText-2, LAMBADA) are not integrated. |
+| **DS-008** | Benchmarks | ❌ **Incomplete** | `evaluate.mjs` exists but uses rough approximations for perplexity. Standard datasets (WikiText-2, LAMBADA) are not integrated. |
 
 ---
 
@@ -41,7 +41,7 @@ ho$) modulation and prioritized replay buffer are implemented. |
   - *Recommendation:* Evaluate `roaring-aws` or a WASM-based bitset library for production.
 - **Response Generation:** Currently, the bot "speaks" using templates like *"I see you're talking about [concept/token]"*. It cannot construct novel sentences.
   - *Recommendation:* Implement a simple n-gram language model *on top* of the active groups to generate coherent surface text.
-- **Approximation of Perplexity:** `evaluate.js` calculates perplexity as `2^(surprise_rate * 10)`. This is a heuristic and not scientifically comparable to GPT-2's perplexity.
+- **Approximation of Perplexity:** `evaluate.mjs` calculates perplexity as `2^(surprise_rate * 10)`. This is a heuristic and not scientifically comparable to GPT-2's perplexity.
   - *Recommendation:* Implement a rigorous probability estimator. Since BSP is not probabilistic in the standard sense, use **bits-back coding** or standard **MDL metrics** (bits per character) for fair comparison.
 
 ---
@@ -51,7 +51,7 @@ ho$) modulation and prioritized replay buffer are implemented. |
 The current testing infrastructure is insufficient to claim superiority or parity with GPT-2.
 
 ### Missing Datasets
-The `scripts/download-data.js` script relies on a hardcoded "Simple English" string or raw GitHub URLs for PTB. It is missing:
+The `scripts/download-data.mjs` script relies on a hardcoded "Simple English" string or raw GitHub URLs for PTB. It is missing:
 1.  **WikiText-2:** Required for standard perplexity comparison.
 2.  **LAMBADA:** Required for testing long-range dependency/deduction capabilities.
 
@@ -68,16 +68,16 @@ The `scripts/download-data.js` script relies on a hardcoded "Simple English" str
 To move from MVP to a demonstrable prototype comparable with GPT-2, I recommend the following commands/actions:
 
 ### Step 1: Fix Data Pipeline
-Create a robust `download-data.js` that fetches the actual WikiText-2 and LAMBADA datasets.
+Create a robust `download-data.mjs` that fetches the actual WikiText-2 and LAMBADA datasets.
 
 ```bash
 # Proposed command to be implemented
-node scripts/download-data.js --dataset wikitext2
-node scripts/download-data.js --dataset lambada
+node scripts/download-data.mjs --dataset wikitext2
+node scripts/download-data.mjs --dataset lambada
 ```
 
 ### Step 2: Implement Scientific Metrics
-Update `scripts/evaluate.js` to calculate **Bits Per Character (BPC)**.
+Update `scripts/evaluate.mjs` to calculate **Bits Per Character (BPC)**.
 - `BPC = TotalBits / TotalCharacters`
 - `TotalBits = ModelDescriptionLength + DataEncodingLength`
 - This allows direct comparison with compression-based benchmarks.
@@ -94,8 +94,8 @@ Modify `ResponseGenerator` to use a simple bigram model trained on the input tex
 ## 6. Suggested File Updates
 
 I can proceed with updating the following files to close the gaps:
-1.  **`scripts/download-data.js`**: Add WikiText-2 and LAMBADA sources.
-2.  **`scripts/evaluate.js`**: Add BPC calculation and LAMBADA "cloze" task evaluation.
+1.  **`scripts/download-data.mjs`**: Add WikiText-2 and LAMBADA sources.
+2.  **`scripts/evaluate.mjs`**: Add BPC calculation and LAMBADA "cloze" task evaluation.
 3.  **`src/core/ResponseGenerator.js`**: Improve templates to be less repetitive.
 
 Let me know if you want me to proceed with **Step 1 (Data Pipeline)** and **Step 2 (Metrics)** immediately.

@@ -1,0 +1,31 @@
+Backlog (verify status before doing work)
+
+Notes:
+- This repo treats the current codebase as a green project: remove legacy/compat shims instead of keeping them.
+- Anything committed to disk should be written in English.
+
+1) Documentation consistency
+- Verify all DS specs in `docs/specs/DS/` are fully in English. Several DS files still contain Romanian text; translate them end-to-end (not partial) to avoid mixed-language docs.
+- Verify all HTML docs in `docs/` share the same navbar and include links to `Training` and `Evaluation`.
+- Verify `docs/training.html` and `docs/eval.html` reflect the current scripts and file names after the ESM migration (`.mjs`).
+- Verify code snippets in docs use ESM imports and reference `node src/index.mjs`, not `.js`.
+
+2) Codebase module format (ESM)
+- Migrate all project `.js` files to `.mjs` and convert CommonJS (`require`, `module.exports`) to ESM (`import`, `export`).
+- Verify no implicit extension resolution is relied on; use explicit `.mjs` specifiers in internal imports.
+- Verify `package.json` points to `src/index.mjs` and `npm run start/tests/train/evaluate` all work.
+
+3) Async/await style
+- Replace remaining Promise constructor wrappers in code and tests with `async/await` + `node:events` (`once`) where applicable.
+- Prefer `node:fs/promises` for I/O (sessions, pretrained load/save, downloads) and keep sync I/O only when it is clearly harmless.
+
+4) Tests
+- Verify `npm run tests` finishes reliably under a shell timeout (no hangs).
+- Keep perf tests separate (e.g. `tests/perf`) and gate them behind an env flag (already used: `BSP_TEST_PERF=1`), then re-check after ESM migration.
+- Add/adjust unit tests only where needed to cover new refactors (module migration, async changes).
+
+5) Performance + data improvements (re-check what is already implemented)
+- Verify the Bitset fast path, capped inverted index, tokenizer single-pass encoding, and streaming pretrain are present and correct.
+- Add a dedicated DS discussing Roaring bitmaps vs adaptive containers only if DS-017 is not sufficient; include clear decision criteria and flags.
+- Add Training/Evaluation doc sections that explain: datasets used, synthetic reasoning curriculum, and benchmark comparisons (e.g., GPT-2 baselines).
+

@@ -75,6 +75,12 @@ interface PTBConfig {
 - **Scop**: Evaluare adaptare cu feedback
 - **Format**: Dialog tasks cu reward explicit
 
+### 3.3 Synthetic Grammar (DS-019)
+- **Scop**: Validare arhitecturală (transitive closures, long-range dependencies)
+- **Generare**: Gramatici formale deterministe/probabiliste
+- **Task**: Predicția stării finale dintr-o stare intermediară
+- **Detalii**: Vezi [DS-019: Synthetic Evaluation System](./DS-019-synthetic-evaluation.md)
+
 ---
 
 ## 4. Rezultate GPT-2 de Referință
@@ -560,28 +566,18 @@ Generated: ${new Date().toISOString()}
 ## 11. Structura Fișiere
 
 ```
-benchmarks/
-├── data/
-│   ├── ptb/
-│   │   ├── train.txt
-│   │   ├── valid.txt
-│   │   └── test.txt
-│   ├── wikitext2/
-│   └── lambada/
-├── configs/
-│   ├── ptb.json
-│   ├── wikitext2.json
-│   └── lambada.json
-├── results/
-│   ├── experiment_001/
-│   │   ├── config.json
-│   │   ├── metrics.json
-│   │   └── checkpoints/
-│   └── ...
-├── scripts/
-│   ├── download.ts
-│   ├── train.ts
-│   ├── evaluate.ts
-│   └── report.ts
-└── README.md
+evals/
+├── gpt2/                  # Comparative benchmarks
+│   ├── data/
+│   │   ├── ptb/
+│   │   ├── wikitext2/
+│   │   └── lambada/
+│   ├── benchmark_comparative.mjs
+│   └── README.md
+│
+└── synthetic/             # Architectural validation (DS-019)
+    ├── grammar.mjs        # Grammar definition
+    ├── generate.mjs       # Dataset generator
+    ├── evaluate.mjs       # Evaluation runner
+    └── README.md
 ```

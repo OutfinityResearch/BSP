@@ -28,7 +28,7 @@ Acest document descrie serverul HTTP care expune BSP ca un serviciu de chat inte
 
 ```bash
 # Descarcă date și pre-antrenează modelul
-node scripts/pretrain.js
+node scripts/pretrain.mjs
 ```
 
 Aceasta creează `data/pretrained.json` care conține:

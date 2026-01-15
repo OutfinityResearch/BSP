@@ -2,15 +2,15 @@
   "name": "bsp",
   "version": "1.0.0",
   "description": "Bitset System for Prediction - CPU-friendly continuous learning",
-  "main": "src/index.js",
+  "main": "src/index.mjs",
   "scripts": {
-    "start": "node src/index.js",
-    "server": "node src/index.js",
-    "train": "node scripts/train.js",
-    "evaluate": "node scripts/evaluate.js",
-    "test": "node tests/run.js",
-    "tests": "node tests/run.js",
-    "demo": "node scripts/demo.js"
+    "start": "node src/index.mjs",
+    "server": "node src/index.mjs",
+    "train": "node scripts/train.mjs",
+    "evaluate": "node scripts/evaluate.mjs",
+    "test": "node tests/run.mjs",
+    "tests": "node tests/run.mjs",
+    "demo": "node scripts/demo.mjs"
   },
   "keywords": [
     "machine-learning",

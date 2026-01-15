@@ -223,7 +223,7 @@ This is a classic “hard example mining” loop and improves sample efficiency.
 
 ### 5.2 Training Script Flags
 
-Applies to `scripts/pretrain.js` / future train pipelines:
+Applies to `scripts/pretrain.mjs` / future train pipelines:
 
 - `--epochs`
 - `--batchSize`
@@ -251,4 +251,3 @@ Applies to `scripts/pretrain.js` / future train pipelines:
 2. Implement index caps and hot-token subsampling.
 3. Add a streaming training pipeline with dedup + filtering.
 4. Benchmark on WikiText-2 / Gutenberg corpus with throughput + quality proxies.
-
