@@ -1,798 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BPCM - Bitset Predictive Coding Memory</title>
-  <meta name="description" content="Design specifications and documentation for BPCM - a CPU-friendly LLM-like learner using bitsets and compression-based learning">
-  <style>
-    :root {
-      --bg-primary: #0d1117;
-      --bg-secondary: #161b22;
-      --bg-tertiary: #21262d;
-      --text-primary: #e6edf3;
-      --text-secondary: #8b949e;
-      --accent-primary: #58a6ff;
-      --accent-secondary: #1f6feb;
-      --accent-gradient: linear-gradient(135deg, #58a6ff 0%, #a371f7 50%, #f778ba 100%);
-      --border-color: #30363d;
-      --success: #3fb950;
-      --warning: #d29922;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    /* Header */
-    header {
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border-color);
-      padding: 2rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .logo-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--accent-gradient);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .logo h1 {
-      font-size: 1.5rem;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .logo-subtitle {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    nav ul {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-
-    nav a:hover {
-      color: var(--accent-primary);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 4rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
-      max-width: 800px;
-      margin: 0 auto 2rem;
-    }
-
-    .hero-features {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    .hero-feature {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.5rem;
-      max-width: 250px;
-      text-align: left;
-    }
-
-    .hero-feature h4 {
-      color: var(--accent-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-feature p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin: 0;
-    }
-
-    /* Main Content */
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    /* Specs Grid */
-    .section-title {
-      font-size: 1.75rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--accent-secondary);
-    }
-
-    .specs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .spec-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .spec-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent-primary);
-      box-shadow: 0 8px 24px rgba(88, 166, 255, 0.1);
-    }
-
-    .spec-card-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .spec-id {
-      background: var(--accent-gradient);
-      color: var(--bg-primary);
-      padding: 0.25rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .spec-status {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      background: var(--bg-tertiary);
-      color: var(--warning);
-    }
-
-    .spec-status.ready {
-      color: var(--success);
-    }
-
-    .spec-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-    }
-
-    .spec-card p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin: 0;
-    }
-
-    .spec-topics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-
-    .spec-topic {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.5rem;
-      background: var(--bg-tertiary);
-      border-radius: 4px;
-      color: var(--text-secondary);
-    }
-
-    /* Roadmap Section */
-    .roadmap {
-      margin: 3rem 0;
-    }
-
-    .roadmap-phases {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .phase {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .phase::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--accent-gradient);
-    }
-
-    .phase-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .phase-title {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .phase-number {
-      background: var(--bg-tertiary);
-      color: var(--accent-primary);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-
-    .phase h3 {
-      font-size: 1.1rem;
-    }
-
-    .phase-duration {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .phase-tasks {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 0.75rem;
-    }
-
-    .task {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
-    .task-checkbox {
-      width: 16px;
-      height: 16px;
-      border: 2px solid var(--border-color);
-      border-radius: 4px;
-      flex-shrink: 0;
-    }
-
-    /* Architecture Diagram */
-    .architecture {
-      margin: 3rem 0;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 2rem;
-    }
-
-    .architecture pre {
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.8rem;
-      line-height: 1.4;
-      overflow-x: auto;
-      color: var(--text-secondary);
-    }
-
-    /* Footer */
-    footer {
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border-color);
-      padding: 2rem;
-      margin-top: 4rem;
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .hero h2 {
-        font-size: 1.75rem;
-      }
-
-      .specs-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-features {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPCM Documentation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hero {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .hero h1 { color: white; margin: 0; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .card h3 { margin-top: 0; }
+        .card a {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="header-content">
-      <div class="logo">
-        <div class="logo-icon">B</div>
-        <div>
-          <h1>BPCM</h1>
-          <span class="logo-subtitle">Bitset Predictive Coding Memory</span>
-        </div>
-      </div>
-      <nav>
+    <nav>
+        <a href="index.html" class="logo">BPCM Docs</a>
         <ul>
-          <li><a href="#specs">Specifications</a></li>
-          <li><a href="#roadmap">Roadmap</a></li>
-          <li><a href="#architecture">Architecture</a></li>
-          <li><a href="https://github.com">GitHub</a></li>
+            <li><a href="architecture/index.html">Architecture</a></li>
+            <li><a href="theory/index.html">Theory</a></li>
+            <li><a href="wiki/index.html">Wiki & Glossary</a></li>
         </ul>
-      </nav>
+    </nav>
+
+    <div class="container">
+        <main class="content" style="max-width: 1200px;">
+            <div class="hero">
+                <h1>BPCM Project</h1>
+                <p>Bitset Predictive Coding Memory</p>
+                <p>A CPU-first approach to continuous learning and artificial intelligence.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>🏗️ Architecture</h3>
+                    <p>Understand how BPCM works under the hood. Learn about the Tokenizer, GroupStore, and DeductionGraph components.</p>
+                    <a href="architecture/index.html">Explore Architecture &rarr;</a>
+                </div>
+
+                <div class="card">
+                    <h3>🧠 Theory</h3>
+                    <p>Dive into the mathematical and neuroscientific foundations. Predictive Coding, Minimizing Surprise, and Reinforcement Learning.</p>
+                    <a href="theory/index.html">Read Theory &rarr;</a>
+                </div>
+
+                <div class="card">
+                    <h3>📚 Wiki & Glossary</h3>
+                    <p>New to Bitsets or SDRs? Check the glossary for simple definitions of complex technical terms.</p>
+                    <a href="wiki/index.html">Open Glossary &rarr;</a>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Specs & Roadmap</h3>
+                    <p>Technical specifications and future plans for the project.</p>
+                    <a href="ROADMAP.md">View Roadmap &rarr;</a>
+                </div>
+            </div>
+            
+            <h2 style="margin-top: 4rem;">Quick Start</h2>
+            <pre><code># Install dependencies
+npm install
+
+# Run tests
+npm test
+
+# Start the server
+npm run server</code></pre>
+
+        </main>
     </div>
-  </header>
-
-  <section class="hero">
-    <h2>CPU-Friendly Continuous Learning</h2>
-    <p>
-      A novel approach to building LLM-like capabilities using bitsets, compression-based learning, 
-      and permanent RL - all running efficiently on CPU without large matrix operations.
-    </p>
-    <div class="hero-features">
-      <div class="hero-feature">
-        <h4>Essence & Grouping</h4>
-        <p>Groups become stable "identity of meaning" through predictive co-occurrence.</p>
-      </div>
-      <div class="hero-feature">
-        <h4>Direct & Indirect Deduction</h4>
-        <p>Multi-hop reasoning through temporal transitions and graph traversal.</p>
-      </div>
-      <div class="hero-feature">
-        <h4>Continuous RL</h4>
-        <p>Every conversation becomes a learning opportunity with importance-weighted updates.</p>
-      </div>
-      <div class="hero-feature">
-        <h4>Interpretable</h4>
-        <p>Groups are explicit lists of identities - no opaque embeddings.</p>
-      </div>
-    </div>
-  </section>
-
-  <main>
-    <section id="specs">
-      <h2 class="section-title">Design Specifications</h2>
-      <div class="specs-grid">
-        
-        <a href="specs/DS/DS-001-core-architecture.md" class="spec-card">
-          <div class="spec-card-header">
-            <span class="spec-id">DS-001</span>
-            <span class="spec-status">Draft</span>
-          </div>
-          <h3>Core Architecture</h3>
-          <p>Overall system design, components, and data flow for BPCM.</p>
-          <div class="spec-topics">
-            <span class="spec-topic">System Design</span>
-            <span class="spec-topic">Components</span>
-            <span class="spec-topic">Parameters</span>
-          </div>
-        </a>
-
-        <a href="specs/DS/DS-002-data-structures.md" class="spec-card">
-          <div class="spec-card-header">
-            <span class="spec-id">DS-002</span>
-            <span class="spec-status">Draft</span>
-          </div>
-          <h3>Data Structures</h3>
-          <p>Bitsets, groups, indexes, and memory-efficient representations.</p>
-          <div class="spec-topics">
-            <span class="spec-topic">Roaring Bitmaps</span>
-            <span class="spec-topic">GroupStore</span>
-            <span class="spec-topic">Indexes</span>
-          </div>
-        </a>
-
-        <a href="specs/DS/DS-003-learning-algorithms.md" class="spec-card">
-          <div class="spec-card-header">
-            <span class="spec-id">DS-003</span>
-            <span class="spec-status">Draft</span>
-          </div>
-          <h3>Learning Algorithms</h3>
-          <p>Online learning rules, group creation/merge/split, and decay mechanisms.</p>
-          <div class="spec-topics">
-            <span class="spec-topic">MDL Loss</span>
-            <span class="spec-topic">Incremental Update</span>
-            <span class="spec-topic">Consolidation</span>
-          </div>
-        </a>
-
-        <a href="specs/DS/DS-004-deduction-engine.md" class="spec-card">
-          <div class="spec-card-header">
-            <span class="spec-id">DS-004</span>
-            <span class="spec-status">Draft</span>
-          </div>
-          <h3>Deduction Engine</h3>
-          <p>Direct and multi-hop deduction, reasoning chains, and prediction.</p>
-          <div class="spec-topics">
-            <span class="spec-topic">Temporal Links</span>
-            <span class="spec-topic">BFS/Beam</span>
-            <span class="spec-topic">Explainability</span>
-          </div>
-        </a>
-
-        <a href="specs/DS/DS-005-rl-importance.md" class="spec-card">
-          <div class="spec-card-header">
-            <span class="spec-id">DS-005</span>
-            <span class="spec-status">Draft</span>
-          </div>
-          <h3>RL Integration & Importance</h3>
-          <p>Continuous RL, importance mechanism, and adaptive learning rates.</p>
-          <div class="spec-topics">
-            <span class="spec-topic">Reward Signals</span>
-            <span class="spec-topic">RL Pressure (ρ)</span>
-            <span class="spec-topic">Salience</span>
-          </div>
-        </a>
-
-        <a href="specs/DS/DS-006-http-server-chat.md" class="spec-card">
-          <div class="spec-card-header">
-            <span class="spec-id">DS-006</span>
-            <span class="spec-status">Draft</span>
-          </div>
-          <h3>HTTP Server & Chat Interface</h3>
-          <p>REST API, WebSocket protocol, and interactive chat commands.</p>
-          <div class="spec-topics">
-            <span class="spec-topic">REST API</span>
-            <span class="spec-topic">WebSocket</span>
-            <span class="spec-topic">Commands</span>
-          </div>
-        </a>
-
-        <a href="specs/DS/DS-007-serialization-sessions.md" class="spec-card">
-          <div class="spec-card-header">
-            <span class="spec-id">DS-007</span>
-            <span class="spec-status">Draft</span>
-          </div>
-          <h3>Serialization & Sessions</h3>
-          <p>State persistence, session management, snapshots, and export/import.</p>
-          <div class="spec-topics">
-            <span class="spec-topic">MessagePack</span>
-            <span class="spec-topic">Delta Save</span>
-            <span class="spec-topic">Time Travel</span>
-          </div>
-        </a>
-
-        <a href="specs/DS/DS-008-benchmarks-comparison.md" class="spec-card">
-          <div class="spec-card-header">
-            <span class="spec-id">DS-008</span>
-            <span class="spec-status">Draft</span>
-          </div>
-          <h3>Benchmarks & GPT-2 Comparison</h3>
-          <p>Evaluation datasets, metrics, and comparison with GPT-2.</p>
-          <div class="spec-topics">
-            <span class="spec-topic">PTB/WikiText-2</span>
-            <span class="spec-topic">LAMBADA</span>
-            <span class="spec-topic">Perplexity</span>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
-    <section id="roadmap" class="roadmap">
-      <h2 class="section-title">Implementation Roadmap</h2>
-      <div class="roadmap-phases">
-        
-        <div class="phase">
-          <div class="phase-header">
-            <div class="phase-title">
-              <span class="phase-number">1</span>
-              <h3>Foundation</h3>
-            </div>
-            <span class="phase-duration">Week 1-2</span>
-          </div>
-          <div class="phase-tasks">
-            <div class="task"><span class="task-checkbox"></span> Project setup (TypeScript, ESM)</div>
-            <div class="task"><span class="task-checkbox"></span> Roaring bitmap integration</div>
-            <div class="task"><span class="task-checkbox"></span> Basic tokenizer implementation</div>
-            <div class="task"><span class="task-checkbox"></span> GroupStore class</div>
-            <div class="task"><span class="task-checkbox"></span> BitmapIndex class</div>
-            <div class="task"><span class="task-checkbox"></span> Unit tests for core structures</div>
-          </div>
-        </div>
-
-        <div class="phase">
-          <div class="phase-header">
-            <div class="phase-title">
-              <span class="phase-number">2</span>
-              <h3>Core Learning</h3>
-            </div>
-            <span class="phase-duration">Week 3-4</span>
-          </div>
-          <div class="phase-tasks">
-            <div class="task"><span class="task-checkbox"></span> Activation algorithm</div>
-            <div class="task"><span class="task-checkbox"></span> Reconstruction & surprise</div>
-            <div class="task"><span class="task-checkbox"></span> Membership update rules</div>
-            <div class="task"><span class="task-checkbox"></span> Group creation/merge/split</div>
-            <div class="task"><span class="task-checkbox"></span> Decay and pruning</div>
-            <div class="task"><span class="task-checkbox"></span> Basic training loop</div>
-          </div>
-        </div>
-
-        <div class="phase">
-          <div class="phase-header">
-            <div class="phase-title">
-              <span class="phase-number">3</span>
-              <h3>Deduction Engine</h3>
-            </div>
-            <span class="phase-duration">Week 5-6</span>
-          </div>
-          <div class="phase-tasks">
-            <div class="task"><span class="task-checkbox"></span> DeductionGraph class</div>
-            <div class="task"><span class="task-checkbox"></span> Temporal transition learning</div>
-            <div class="task"><span class="task-checkbox"></span> Direct prediction</div>
-            <div class="task"><span class="task-checkbox"></span> Multi-hop BFS/beam search</div>
-            <div class="task"><span class="task-checkbox"></span> Reasoning chain extraction</div>
-            <div class="task"><span class="task-checkbox"></span> Prediction to bits decoding</div>
-          </div>
-        </div>
-
-        <div class="phase">
-          <div class="phase-header">
-            <div class="phase-title">
-              <span class="phase-number">4</span>
-              <h3>RL Integration</h3>
-            </div>
-            <span class="phase-duration">Week 7-8</span>
-          </div>
-          <div class="phase-tasks">
-            <div class="task"><span class="task-checkbox"></span> Reward signal parsing</div>
-            <div class="task"><span class="task-checkbox"></span> Importance computation</div>
-            <div class="task"><span class="task-checkbox"></span> RL pressure controller</div>
-            <div class="task"><span class="task-checkbox"></span> Salience updates</div>
-            <div class="task"><span class="task-checkbox"></span> Replay buffer (prioritized)</div>
-            <div class="task"><span class="task-checkbox"></span> Consolidation loop</div>
-          </div>
-        </div>
-
-        <div class="phase">
-          <div class="phase-header">
-            <div class="phase-title">
-              <span class="phase-number">5</span>
-              <h3>Server & Chat</h3>
-            </div>
-            <span class="phase-duration">Week 9-10</span>
-          </div>
-          <div class="phase-tasks">
-            <div class="task"><span class="task-checkbox"></span> HTTP server setup</div>
-            <div class="task"><span class="task-checkbox"></span> REST API endpoints</div>
-            <div class="task"><span class="task-checkbox"></span> WebSocket handler</div>
-            <div class="task"><span class="task-checkbox"></span> Session manager</div>
-            <div class="task"><span class="task-checkbox"></span> Chat command parser</div>
-            <div class="task"><span class="task-checkbox"></span> Basic HTML UI</div>
-          </div>
-        </div>
-
-        <div class="phase">
-          <div class="phase-header">
-            <div class="phase-title">
-              <span class="phase-number">6</span>
-              <h3>Persistence</h3>
-            </div>
-            <span class="phase-duration">Week 11</span>
-          </div>
-          <div class="phase-tasks">
-            <div class="task"><span class="task-checkbox"></span> Serialization (MessagePack)</div>
-            <div class="task"><span class="task-checkbox"></span> Save/load implementation</div>
-            <div class="task"><span class="task-checkbox"></span> Delta saves</div>
-            <div class="task"><span class="task-checkbox"></span> Snapshot manager</div>
-            <div class="task"><span class="task-checkbox"></span> Export/import (JSON)</div>
-            <div class="task"><span class="task-checkbox"></span> Integrity verification</div>
-          </div>
-        </div>
-
-        <div class="phase">
-          <div class="phase-header">
-            <div class="phase-title">
-              <span class="phase-number">7</span>
-              <h3>Benchmarks</h3>
-            </div>
-            <span class="phase-duration">Week 12-14</span>
-          </div>
-          <div class="phase-tasks">
-            <div class="task"><span class="task-checkbox"></span> Dataset downloaders</div>
-            <div class="task"><span class="task-checkbox"></span> Data loaders (PTB, WikiText-2)</div>
-            <div class="task"><span class="task-checkbox"></span> Evaluation pipeline</div>
-            <div class="task"><span class="task-checkbox"></span> LAMBADA evaluation</div>
-            <div class="task"><span class="task-checkbox"></span> GPT-2 comparison</div>
-            <div class="task"><span class="task-checkbox"></span> Ablation studies</div>
-            <div class="task"><span class="task-checkbox"></span> Final report</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="architecture" class="architecture">
-      <h2 class="section-title">System Architecture</h2>
-      <pre>
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              HTTP Server                                     │
-│                           (Chat Interface)                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  ┌──────────────┐    ┌──────────────┐    ┌────────────────────────────────┐  │
-│  │   Tokenizer  │───▶│   Encoder    │───▶│       Group Activator          │  │
-│  │  (text→IDs)  │    │  (IDs→bitset)│    │   (bitset → top-K groups)      │  │
-│  └──────────────┘    └──────────────┘    └───────────────┬────────────────┘  │
-│                                                          │                   │
-│  ┌───────────────────────────────────────────────────────▼─────────────────┐ │
-│  │                           Core Engine                                   │ │
-│  │  ┌──────────────┐  ┌──────────────────┐  ┌────────────────────────────┐ │ │
-│  │  │  GroupStore  │  │  DeductionGraph  │  │        Predictor           │ │ │
-│  │  │  (members,   │◀▶│  (deduce links,  │◀▶│  (next groups prediction)  │ │ │
-│  │  │   salience)  │  │   weights)       │  └────────────────────────────┘ │ │
-│  │  └──────────────┘  └──────────────────┘                                 │ │
-│  │         ▲                  ▲                                            │ │
-│  │         │                  │                                            │ │
-│  │  ┌──────┴──────────────────┴──────┐  ┌────────────────────────────────┐ │ │
-│  │  │           Learner              │◀─│      Importance Module         │ │ │
-│  │  │  (update groups & deductions)  │  │  (novelty, utility, RL, ρ)    │ │ │
-│  │  └────────────────────────────────┘  └────────────────────────────────┘ │ │
-│  └─────────────────────────────────────────────────────────────────────────┘ │
-│                                                                              │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────────────────────┐   │
-│  │ ReplayBuffer │    │  Serializer  │    │     Session Manager          │   │
-│  │ (prioritized)│    │ (save/load)  │    │  (continuity, snapshots)     │   │
-│  └──────────────┘    └──────────────┘    └──────────────────────────────┘   │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-Data Flow:
-  Text Input → Tokenize → Encode → Bitset → Activate → Predict → Learn → Response
-                                      ↓
-                              Surprise/Hallucination
-                                      ↓
-                              Importance Modulation
-                                      ↓
-                              Update Groups + Deductions
-      </pre>
-    </section>
-
-    <section id="comparison">
-      <h2 class="section-title">Target Metrics vs GPT-2</h2>
-      <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
-          <thead>
-            <tr style="background: var(--bg-secondary); border-bottom: 2px solid var(--border-color);">
-              <th style="padding: 1rem; text-align: left;">Metric</th>
-              <th style="padding: 1rem; text-align: center;">GPT-2 Medium</th>
-              <th style="padding: 1rem; text-align: center;">BPCM Target (MVP)</th>
-              <th style="padding: 1rem; text-align: center;">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom: 1px solid var(--border-color);">
-              <td style="padding: 1rem;">WikiText-2 Perplexity</td>
-              <td style="padding: 1rem; text-align: center; color: var(--accent-primary);">29.41</td>
-              <td style="padding: 1rem; text-align: center;">&lt;100</td>
-              <td style="padding: 1rem; color: var(--text-secondary);">Approximated via surprise rate</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border-color);">
-              <td style="padding: 1rem;">PTB Perplexity</td>
-              <td style="padding: 1rem; text-align: center; color: var(--accent-primary);">65.85</td>
-              <td style="padding: 1rem; text-align: center;">&lt;200</td>
-              <td style="padding: 1rem; color: var(--text-secondary);">Smaller dataset, faster iteration</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border-color);">
-              <td style="padding: 1rem;">LAMBADA Accuracy</td>
-              <td style="padding: 1rem; text-align: center; color: var(--accent-primary);">55.48%</td>
-              <td style="padding: 1rem; text-align: center;">&gt;20%</td>
-              <td style="padding: 1rem; color: var(--text-secondary);">Tests deduction capabilities</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border-color);">
-              <td style="padding: 1rem;">Parameters</td>
-              <td style="padding: 1rem; text-align: center;">355M</td>
-              <td style="padding: 1rem; text-align: center;">~100K groups</td>
-              <td style="padding: 1rem; color: var(--text-secondary);">Explicit, interpretable</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border-color);">
-              <td style="padding: 1rem;">Training</td>
-              <td style="padding: 1rem; text-align: center;">~40GB, GPU</td>
-              <td style="padding: 1rem; text-align: center;">Online, CPU</td>
-              <td style="padding: 1rem; color: var(--text-secondary);">Continuous learning</td>
-            </tr>
-            <tr>
-              <td style="padding: 1rem;">Memory</td>
-              <td style="padding: 1rem; text-align: center;">~1.5GB</td>
-              <td style="padding: 1rem; text-align: center;">&lt;200MB</td>
-              <td style="padding: 1rem; color: var(--text-secondary);">Sparse representations</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>BPCM - Bitset Predictive Coding Memory | 2026</p>
-    <p style="margin-top: 0.5rem;">
-      CPU-friendly continuous learning without transformers
-    </p>
-  </footer>
-
 </body>
 </html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPCM Wiki - Glossary</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BPCM Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="../theory/index.html">Theory</a></li>
+            <li><a href="../wiki/index.html" class="active">Wiki & Glossary</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Jump to</h3>
+            <ul>
+                <li><a href="#bitset">Bitset</a></li>
+                <li><a href="#sdr">SDR</a></li>
+                <li><a href="#jaccard">Jaccard Index</a></li>
+                <li><a href="#popcount">Popcount</a></li>
+                <li><a href="#surprise">Surprise</a></li>
+                <li><a href="#hallucination">Hallucination</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Wiki & Glossary</h1>
+            <p>Definitions of core concepts used in the BPCM project.</p>
+
+            <div class="glossary-item" id="bitset">
+                <div class="glossary-term">Bitset / Bitmap</div>
+                <p>A data structure that represents a set of integers as a sequence of bits. If the 5th bit is <code>1</code>, it means the integer <code>5</code> is in the set.</p>
+                <p><em>In BPCM:</em> Used to represent inputs and concepts efficiently. Instead of storing an array `[1, 5, 10]`, we store a bitset where indices 1, 5, and 10 are set to 1.</p>
+            </div>
+
+            <div class="glossary-item" id="sdr">
+                <div class="glossary-term">SDR (Sparse Distributed Representation)</div>
+                <p>A way of representing information where only a small percentage of bits are active (1) at any time. This mimics how neurons work in the brain.</p>
+                <p><em>Benefit:</em> Robust to noise. Even if you flip a few bits, the overall meaning (the set overlap) remains largely the same.</p>
+            </div>
+
+            <div class="glossary-item" id="jaccard">
+                <div class="glossary-term">Jaccard Index</div>
+                <p>A statistic used for comparing the similarity and diversity of sample sets.</p>
+                <code>J(A, B) = |A ∩ B| / |A ∪ B|</code>
+                <p><em>In BPCM:</em> We use this to decide if two Groups are similar enough to be merged. If two concepts share 90% of their bits, they are likely the same concept.</p>
+            </div>
+
+            <div class="glossary-item" id="popcount">
+                <div class="glossary-term">Popcount (Population Count)</div>
+                <p>The number of set bits (1s) in a bitset. Also known as Hamming weight.</p>
+                <p><em>Example:</em> Popcount of <code>10110</code> is 3.</p>
+            </div>
+
+            <div class="glossary-item" id="surprise">
+                <div class="glossary-term">Surprise</div>
+                <p>The information in the input that the model <strong>failed</strong> to predict.</p>
+                <code>Surprise = Input AND (NOT Prediction)</code>
+                <p>If Surprise is 0, the model perfectly understood and predicted the input.</p>
+            </div>
+
+            <div class="glossary-item" id="hallucination">
+                <div class="glossary-term">Hallucination</div>
+                <p>Information that the model predicted, but was <strong>not</strong> present in the actual input.</p>
+                <code>Hallucination = Prediction AND (NOT Input)</code>
+                <p>While often bad, small hallucinations in BPCM can represent "imagination" or filling in missing details.</p>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>

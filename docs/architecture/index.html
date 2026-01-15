@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPCM Architecture - System Overview</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BPCM Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html" class="active">Architecture</a></li>
+            <li><a href="../theory/index.html">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Contents</h3>
+            <ul>
+                <li><a href="#overview">System Overview</a></li>
+                <li><a href="#pipeline">Processing Pipeline</a></li>
+                <li><a href="#components">Key Components</a></li>
+                <li><a href="#data-structures">Data Structures</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>System Architecture</h1>
+            <p class="lead">BPCM (Bitset Predictive Coding Memory) is a CPU-first learning system that abandons heavy matrix multiplications in favor of fast set operations (intersections, unions).</p>
+
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>Unlike traditional Transformers that use continuous embeddings (vectors of floats), BPCM uses <strong>Sparse Distributed Representations (SDR)</strong> implemented as Bitsets. Concepts are not vectors; they are groups of bits.</p>
+                
+                <div class="diagram">
+┌────────────────┐      ┌─────────────────┐      ┌─────────────────┐
+│     Input      │ ===> │    Tokenizer    │ ===> │     Encoder     │
+└────────────────┘      └─────────────────┘      └────────┬────────┘
+                                                          │
+                                                          ▼
+┌────────────────┐      ┌─────────────────┐      ┌─────────────────┐
+│   Predictions  │ <=== │     Learner     │ <=== │   Activator     │
+└────────────────┘      └────────┬────────┘      └─────────────────┘
+                                 │
+                        ┌────────▼────────┐
+                        │   GroupStore    │
+                        └─────────────────┘
+                </div>
+            </section>
+
+            <section id="pipeline">
+                <h2>Processing Pipeline</h2>
+                <ol>
+                    <li><strong>Tokenize:</strong> Text is split into tokens (words/subwords) and n-grams.</li>
+                    <li><strong>Hash/Encode:</strong> Tokens are hashed into a fixed "Universe" (e.g., 100,000 bits). Input becomes a sparse bitset.</li>
+                    <li><strong>Activate:</strong> The system finds <a href="../wiki/index.html#groups" class="term-link">Groups</a> that overlap significantly with the input bitset.</li>
+                    <li><strong>Surprise:</strong> The system calculates <code>Input \ Reconstructed_Groups</code>. This residual is the "Surprise".</li>
+                    <li><strong>Learn:</strong> 
+                        <ul>
+                            <li>If surprise is high, create new groups.</li>
+                            <li>If surprise is low, strengthen existing group memberships.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="components">
+                <h2>Key Components</h2>
+                
+                <div class="card">
+                    <h3>GroupStore</h3>
+                    <p>The long-term memory. It stores "Groups" (Concepts). Each group is a cluster of bits that frequently appear together. Think of it as a "Soft Dictionary" where keys are fuzzy.</p>
+                </div>
+
+                <div class="card">
+                    <h3>DeductionGraph</h3>
+                    <p>Manages temporal transitions. If Group A is often followed by Group B, a link <code>A -> B</code> is strengthened. This allows the system to predict future inputs based on current context.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Learner</h3>
+                    <p>The "brain" logic. It decides when to merge groups, when to split them, and how much to adjust weights based on <a href="../wiki/index.html#surprise" class="term-link">Surprise</a> and Importance.</p>
+                </div>
+            </section>
+
+            <section id="data-structures">
+                <h2>Data Structures</h2>
+                <p>We rely heavily on <code>SimpleBitset</code> (and potentially Roaring Bitmaps). Operations like <code>intersection</code> (AND) and <code>union</code> (OR) are extremely fast on modern CPUs, allowing the system to scale without GPUs.</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

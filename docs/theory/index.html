@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPCM Theory - Predictive Coding</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BPCM Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="../theory/index.html" class="active">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Contents</h3>
+            <ul>
+                <li><a href="#predictive-coding">Predictive Coding</a></li>
+                <li><a href="#minimizing-surprise">Minimizing Surprise</a></li>
+                <li><a href="#rl-integration">RL Integration</a></li>
+                <li><a href="#why-bitsets">Why Bitsets?</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Theoretical Foundation</h1>
+
+            <section id="predictive-coding">
+                <h2>Predictive Coding</h2>
+                <p>BPCM is inspired by the neuroscientific theory of <strong>Predictive Coding</strong> (Karl Friston). The core idea is that the brain is a prediction machine. It constantly generates a model of the world to predict sensory input.</p>
+                <p>Learning only happens when predictions fail. If you predict everything perfectly, there is no need to update your internal model.</p>
+            </section>
+
+            <section id="minimizing-surprise">
+                <h2>Minimizing Surprise (The Loss Function)</h2>
+                <p>In standard Deep Learning, we minimize "Cross-Entropy". In BPCM, we minimize <strong>Surprise</strong>.</p>
+                
+                <div class="card">
+                    <code>Surprise = Input \ Prediction</code>
+                </div>
+
+                <p>This is a set difference operation. The "Surprise" contains all the features (bits) in the input that our active groups (concepts) did not explain.</p>
+                <ul>
+                    <li><strong>High Surprise:</strong> Indicates novel information. We should create a new Group.</li>
+                    <li><strong>Low Surprise:</strong> Indicates familiar patterns. We should reinforce the active Groups.</li>
+                </ul>
+            </section>
+
+            <section id="rl-integration">
+                <h2>Reinforcement Learning (RL)</h2>
+                <p>While the system learns patterns automatically (unsupervised), it adapts its behavior using RL.</p>
+                <p>We introduce a parameter <code>&rho; (rho)</code> which balances:</p>
+                <ul>
+                    <li><strong>Internal Drive:</strong> Minimize surprise (Consistency).</li>
+                    <li><strong>External Drive:</strong> Maximize Reward (Utility).</li>
+                </ul>
+                <p>If a user provides positive feedback, the system increases the <strong>Salience</strong> (importance) of the active groups, making them more likely to be activated in the future.</p>
+            </section>
+
+            <section id="why-bitsets">
+                <h2>Why Bitsets?</h2>
+                <p>Neural networks use dense vectors (e.g., arrays of 768 floats). This requires heavy matrix multiplication ($O(N^2)$).</p>
+                <p>BPCM uses <strong>Sparse Distributed Representations</strong> (sets of bits). Comparing two bitsets is done via bitwise AND/OR, which is $O(N/64)$ on a 64-bit CPU. This allows us to handle massive "vocabularies" (1M+ features) with minimal compute.</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
