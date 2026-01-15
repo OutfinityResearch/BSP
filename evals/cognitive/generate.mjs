@@ -6,7 +6,6 @@
  */
 
 import fs from 'node:fs/promises';
-import { createWriteStream } from 'node:fs';
 import path from 'node:path';
 
 const SYSTEMS = [
@@ -34,10 +33,9 @@ const SYSTEMS = [
 
 // Resolve paths relative to this script's location
 const __dirname = new URL('.', import.meta.url).pathname;
-const DATA_DIR = path.join(__dirname, 'data');
 
 async function loadSystem(systemId) {
-  const modulePath = `./systems/${systemId}.mjs`;
+  const modulePath = `./${systemId}/generator.mjs`;
   return await import(modulePath);
 }
 
@@ -47,22 +45,22 @@ async function generateSystem(systemId, config = {}) {
   const module = await loadSystem(systemId);
   const grammar = module.createGrammar(config);
   
-  const systemDataDir = path.join(DATA_DIR, systemId);
-  await fs.mkdir(systemDataDir, { recursive: true });
+  const systemDir = path.join(__dirname, systemId);
+  await fs.mkdir(systemDir, { recursive: true });
   
   // Generate training data
   console.log('  Generating training data...');
   const trainData = grammar.generateTrainingData(config.trainCount || 10000);
-  const trainPath = path.join(systemDataDir, 'train.txt');
+  const trainPath = path.join(systemDir, 'train.txt');
   await fs.writeFile(trainPath, trainData.join('\n') + '\n');
-  console.log(`  -> ${trainData.length} training samples written to ${trainPath}`);
+  console.log(`  -> ${trainData.length} training samples written`);
   
   // Generate test data
   console.log('  Generating test data...');
   const testData = grammar.generateTestData(config.testCount || 1000);
-  const testPath = path.join(systemDataDir, 'test.txt');
+  const testPath = path.join(systemDir, 'test.txt');
   await fs.writeFile(testPath, testData.join('\n') + '\n');
-  console.log(`  -> ${testData.length} test samples written to ${testPath}`);
+  console.log(`  -> ${testData.length} test samples written`);
   
   // Write metadata
   const metadata = {
@@ -76,7 +74,7 @@ async function generateSystem(systemId, config = {}) {
     testCount: testData.length
   };
   
-  const metaPath = path.join(systemDataDir, 'metadata.json');
+  const metaPath = path.join(systemDir, 'metadata.json');
   await fs.writeFile(metaPath, JSON.stringify(metadata, null, 2));
   
   return metadata;
@@ -100,7 +98,7 @@ async function generateAll(config = {}) {
   }
   
   // Write summary
-  const summaryPath = path.join(DATA_DIR, 'generation_summary.json');
+  const summaryPath = path.join(__dirname, 'generation_summary.json');
   await fs.writeFile(summaryPath, JSON.stringify({
     generatedAt: new Date().toISOString(),
     systems: results

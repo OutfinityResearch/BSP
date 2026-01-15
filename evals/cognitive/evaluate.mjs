@@ -39,7 +39,8 @@ const TIERS = {
   3: ['16_recursion', '17_inhibition', '18_noise_robustness', '19_memory_decay', '20_transfer']
 };
 
-const DATA_DIR = 'evals/cognitive/data';
+// Resolve paths relative to this script's location
+const __dirname = new URL('.', import.meta.url).pathname;
 
 async function loadEngine() {
   // Try to import BSPEngine
@@ -55,10 +56,10 @@ async function loadEngine() {
 async function evaluateSystem(systemId, BSPEngine) {
   console.log(`\n=== Evaluating: ${systemId} ===`);
   
-  const systemDataDir = path.join(DATA_DIR, systemId);
-  const trainPath = path.join(systemDataDir, 'train.txt');
-  const testPath = path.join(systemDataDir, 'test.txt');
-  const metaPath = path.join(systemDataDir, 'metadata.json');
+  const systemDir = path.join(__dirname, systemId);
+  const trainPath = path.join(systemDir, 'train.txt');
+  const testPath = path.join(systemDir, 'test.txt');
+  const metaPath = path.join(systemDir, 'metadata.json');
   
   // Check if data exists
   if (!fs.existsSync(trainPath)) {
@@ -256,7 +257,7 @@ async function evaluateAll() {
   printCognitiveProfile(results);
   
   // Save results
-  const resultsPath = path.join(DATA_DIR, 'evaluation_results.json');
+  const resultsPath = path.join(__dirname, 'evaluation_results.json');
   fs.writeFileSync(resultsPath, JSON.stringify({
     evaluatedAt: new Date().toISOString(),
     results
