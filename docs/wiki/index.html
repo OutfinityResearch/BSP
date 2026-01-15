@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BPCM Wiki - Glossary</title>
+    <title>BPCM Wiki & Glossary</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -18,59 +18,159 @@
 
     <div class="container">
         <aside class="sidebar">
-            <h3>Jump to</h3>
+            <h3>Core Concepts</h3>
             <ul>
-                <li><a href="#bitset">Bitset</a></li>
-                <li><a href="#sdr">SDR</a></li>
-                <li><a href="#jaccard">Jaccard Index</a></li>
+                <li><a href="#bitset">Bitset / Bitmap</a></li>
+                <li><a href="#sdr">SDR (Sparse Distributed Rep)</a></li>
+                <li><a href="#group">Group (Concept)</a></li>
+            </ul>
+            <h3>Metrics & Math</h3>
+            <ul>
+                <li><a href="#jaccard">Jaccard Similarity</a></li>
                 <li><a href="#popcount">Popcount</a></li>
-                <li><a href="#surprise">Surprise</a></li>
-                <li><a href="#hallucination">Hallucination</a></li>
+                <li><a href="#surprise">Surprise vs Hallucination</a></li>
             </ul>
         </aside>
 
         <main class="content">
             <h1>Wiki & Glossary</h1>
-            <p>Definitions of core concepts used in the BPCM project.</p>
+            <p class="lead">A deep dive into the technical concepts powering BPCM, designed for developers transitioning from traditional NLP to Sparse AI.</p>
 
-            <div class="glossary-item" id="bitset">
-                <div class="glossary-term">Bitset / Bitmap</div>
-                <p>A data structure that represents a set of integers as a sequence of bits. If the 5th bit is <code>1</code>, it means the integer <code>5</code> is in the set.</p>
-                <p><em>In BPCM:</em> Used to represent inputs and concepts efficiently. Instead of storing an array `[1, 5, 10]`, we store a bitset where indices 1, 5, and 10 are set to 1.</p>
+            <!-- BITSET SECTION -->
+            <div id="bitset" class="term-header">
+                <h2>Bitset / Bitmap</h2>
+                <span class="term-tag">Data Structure</span>
+            </div>
+            <p>A <strong>Bitset</strong> is a highly compact array of booleans, stored as bits within integers. Instead of storing an array of numbers like <code>[1, 5, 63]</code>, we store a sequence of 64 bits where the 1st, 5th, and 63rd bits are set to <code>1</code>.</p>
+            
+            <div class="callout">
+                <h4>Why use Bitsets?</h4>
+                <p><strong>Speed:</strong> A modern CPU can compare 64 features in a single clock cycle using bitwise instructions. This effectively gives us 64x parallelism without using a GPU.</p>
+                <p><strong>Memory:</strong> A dense vector of 1000 floats takes 4KB. A bitset of 1000 features takes only ~125 bytes.</p>
             </div>
 
-            <div class="glossary-item" id="sdr">
-                <div class="glossary-term">SDR (Sparse Distributed Representation)</div>
-                <p>A way of representing information where only a small percentage of bits are active (1) at any time. This mimics how neurons work in the brain.</p>
-                <p><em>Benefit:</em> Robust to noise. Even if you flip a few bits, the overall meaning (the set overlap) remains largely the same.</p>
+            <div class="diagram-container">
+                <svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Labels -->
+                    <text x="10" y="45" font-family="monospace" font-size="14">Set A</text>
+                    <text x="10" y="95" font-family="monospace" font-size="14">Set B</text>
+                    <text x="10" y="155" font-family="monospace" font-size="14" font-weight="bold">A AND B</text>
+                    
+                    <!-- Line separator -->
+                    <line x1="80" y1="120" x2="580" y2="120" stroke="#ccc" stroke-width="2"/>
+
+                    <!-- Bit boxes A -->
+                    <g transform="translate(80, 30)">
+                        <rect x="0" y="0" width="30" height="30" fill="#e2e8f0" stroke="#94a3b8"/> <text x="10" y="20" font-family="monospace">0</text>
+                        <rect x="35" y="0" width="30" height="30" fill="#3b82f6" stroke="#2563eb"/> <text x="45" y="20" font-family="monospace" fill="white">1</text>
+                        <rect x="70" y="0" width="30" height="30" fill="#e2e8f0" stroke="#94a3b8"/> <text x="80" y="20" font-family="monospace">0</text>
+                        <rect x="105" y="0" width="30" height="30" fill="#3b82f6" stroke="#2563eb"/> <text x="115" y="20" font-family="monospace" fill="white">1</text>
+                        <rect x="140" y="0" width="30" height="30" fill="#3b82f6" stroke="#2563eb"/> <text x="150" y="20" font-family="monospace" fill="white">1</text>
+                    </g>
+
+                    <!-- Bit boxes B -->
+                    <g transform="translate(80, 80)">
+                        <rect x="0" y="0" width="30" height="30" fill="#e2e8f0" stroke="#94a3b8"/> <text x="10" y="20" font-family="monospace">0</text>
+                        <rect x="35" y="0" width="30" height="30" fill="#3b82f6" stroke="#2563eb"/> <text x="45" y="20" font-family="monospace" fill="white">1</text>
+                        <rect x="70" y="0" width="30" height="30" fill="#e2e8f0" stroke="#94a3b8"/> <text x="80" y="20" font-family="monospace">0</text>
+                        <rect x="105" y="0" width="30" height="30" fill="#e2e8f0" stroke="#94a3b8"/> <text x="115" y="20" font-family="monospace">0</text>
+                        <rect x="140" y="0" width="30" height="30" fill="#3b82f6" stroke="#2563eb"/> <text x="150" y="20" font-family="monospace" fill="white">1</text>
+                    </g>
+
+                    <!-- Result -->
+                    <g transform="translate(80, 140)">
+                        <rect x="0" y="0" width="30" height="30" fill="#f1f5f9" stroke="#cbd5e1"/> <text x="10" y="20" font-family="monospace" fill="#94a3b8">0</text>
+                        <rect x="35" y="0" width="30" height="30" fill="#10b981" stroke="#059669"/> <text x="45" y="20" font-family="monospace" fill="white">1</text>
+                        <rect x="70" y="0" width="30" height="30" fill="#f1f5f9" stroke="#cbd5e1"/> <text x="10" y="20" font-family="monospace" fill="#94a3b8">0</text>
+                        <rect x="105" y="0" width="30" height="30" fill="#f1f5f9" stroke="#cbd5e1"/> <text x="10" y="20" font-family="monospace" fill="#94a3b8">0</text>
+                        <rect x="140" y="0" width="30" height="30" fill="#10b981" stroke="#059669"/> <text x="150" y="20" font-family="monospace" fill="white">1</text>
+                    </g>
+                </svg>
+            </div>
+            <div class="diagram-caption">Visualizing a Bitwise AND operation. Only positions where both rows have '1' result in '1'.</div>
+
+
+            <!-- SDR SECTION -->
+            <div id="sdr" class="term-header">
+                <h2>SDR (Sparse Distributed Representation)</h2>
+                <span class="term-tag">Theory</span>
+            </div>
+            <p>SDR is the language of the brain. Unlike "Dense Representations" (standard Word2Vec/BERT embeddings) where every value is a non-zero float, SDRs are massive bitsets where only a tiny fraction (e.g., 2%) of bits are active.</p>
+            
+            <div class="diagram-container">
+                <svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Dense -->
+                    <text x="50" y="30" font-weight="bold" font-size="14">Dense Vector (Standard AI)</text>
+                    <rect x="50" y="40" width="500" height="40" fill="#f3f4f6" stroke="#ccc"/>
+                    <g font-family="monospace" font-size="10" text-anchor="middle">
+                        <text x="75" y="65">0.82</text>
+                        <text x="125" y="65">-0.14</text>
+                        <text x="175" y="65">0.05</text>
+                        <text x="225" y="65">0.91</text>
+                        <text x="275" y="65">-0.33</text>
+                        <text x="400" y="65">... (all values meaningful)</text>
+                    </g>
+
+                    <!-- SDR -->
+                    <text x="50" y="120" font-weight="bold" font-size="14">SDR / Sparse Bitset (BPCM)</text>
+                    <rect x="50" y="130" width="500" height="40" fill="#f3f4f6" stroke="#ccc"/>
+                    <g>
+                        <!-- Inactive bits -->
+                        <rect x="50" y="130" width="10" height="40" fill="white" stroke="#eee"/>
+                        <rect x="60" y="130" width="10" height="40" fill="white" stroke="#eee"/>
+                        <!-- Active bit -->
+                        <rect x="120" y="130" width="10" height="40" fill="#2563eb"/>
+                        <!-- More inactive -->
+                        <rect x="130" y="130" width="200" height="40" fill="white" stroke="#eee"/>
+                        <!-- Active bit -->
+                        <rect x="350" y="130" width="10" height="40" fill="#2563eb"/>
+                         <!-- More inactive -->
+                         <rect x="360" y="130" width="190" height="40" fill="white" stroke="#eee"/>
+                    </g>
+                    <text x="300" y="190" font-size="12" text-anchor="middle" fill="#666">Only ~2% of bits are ON (Blue). The rest are absolute zeros.</text>
+                </svg>
             </div>
 
-            <div class="glossary-item" id="jaccard">
-                <div class="glossary-term">Jaccard Index</div>
-                <p>A statistic used for comparing the similarity and diversity of sample sets.</p>
-                <code>J(A, B) = |A ∩ B| / |A ∪ B|</code>
-                <p><em>In BPCM:</em> We use this to decide if two Groups are similar enough to be merged. If two concepts share 90% of their bits, they are likely the same concept.</p>
+            <!-- JACCARD SECTION -->
+            <div id="jaccard" class="term-header">
+                <h2>Jaccard Similarity</h2>
+                <span class="term-tag">Math</span>
             </div>
+            <p>Since we cannot use Cosine Similarity (which requires dot products of floats), we use Jaccard Similarity to compare sets. It answers the question: <em>"Out of all the bits these two concepts use, how many do they share?"</em></p>
+            <pre><code>J(A, B) = Intersection(A, B) / Union(A, B)</code></pre>
+            <p>If Jaccard is 1.0, the sets are identical. If 0.0, they have no overlap.</p>
 
-            <div class="glossary-item" id="popcount">
-                <div class="glossary-term">Popcount (Population Count)</div>
-                <p>The number of set bits (1s) in a bitset. Also known as Hamming weight.</p>
-                <p><em>Example:</em> Popcount of <code>10110</code> is 3.</p>
-            </div>
 
-            <div class="glossary-item" id="surprise">
-                <div class="glossary-term">Surprise</div>
-                <p>The information in the input that the model <strong>failed</strong> to predict.</p>
-                <code>Surprise = Input AND (NOT Prediction)</code>
-                <p>If Surprise is 0, the model perfectly understood and predicted the input.</p>
+            <!-- SURPRISE SECTION -->
+            <div id="surprise" class="term-header">
+                <h2>Surprise vs. Hallucination</h2>
+                <span class="term-tag">Core Mechanic</span>
             </div>
+            <p>This is the heartbeat of BPCM's learning loop. We compare what the system <em>expected</em> (Prediction) versus what it actually <em>saw</em> (Input).</p>
 
-            <div class="glossary-item" id="hallucination">
-                <div class="glossary-term">Hallucination</div>
-                <p>Information that the model predicted, but was <strong>not</strong> present in the actual input.</p>
-                <code>Hallucination = Prediction AND (NOT Input)</code>
-                <p>While often bad, small hallucinations in BPCM can represent "imagination" or filling in missing details.</p>
+            <div class="diagram-container">
+                <svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Circle 1: Input -->
+                    <circle cx="200" cy="150" r="100" fill="rgba(37, 99, 235, 0.3)" stroke="#2563eb" stroke-width="2"/>
+                    <text x="140" y="150" font-weight="bold" fill="#1e3a8a">Input</text>
+                    
+                    <!-- Circle 2: Prediction -->
+                    <circle cx="300" cy="150" r="100" fill="rgba(245, 158, 11, 0.3)" stroke="#f59e0b" stroke-width="2"/>
+                    <text x="360" y="150" font-weight="bold" fill="#78350f">Prediction</text>
+
+                    <!-- Labels -->
+                    <line x1="120" y1="150" x2="80" y2="100" stroke="#333"/>
+                    <text x="30" y="90" font-size="12">SURPRISE (Unpredicted)</text>
+
+                    <line x1="380" y1="150" x2="420" y2="100" stroke="#333"/>
+                    <text x="380" y="90" font-size="12">HALLUCINATION (Excess)</text>
+
+                    <text x="250" y="155" text-anchor="middle" font-size="10" font-weight="bold">Correct</text>
+                </svg>
             </div>
+            
+            <p><strong>Surprise:</strong> Bits that were in the Input but missing from Prediction. The model failed to see this coming.</p>
+            <p><strong>Hallucination:</strong> Bits that were in the Prediction but missing from Input. The model imagined things that weren't there.</p>
 
         </main>
     </div>

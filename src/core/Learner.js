@@ -225,14 +225,23 @@ class Learner {
       this.ngramFrequencies.set(bit, (this.ngramFrequencies.get(bit) || 0) + 1);
     }
     
-    // Track co-occurrences (pairs of bits that appear together)
-    for (let i = 0; i < inputBits.length && i < 20; i++) {
-      for (let j = i + 1; j < inputBits.length && j < 20; j++) {
+    // Track co-occurrences (pairs of bits that appear together) - sample only
+    const sampleSize = Math.min(8, inputBits.length);
+    for (let i = 0; i < sampleSize; i++) {
+      for (let j = i + 1; j < sampleSize; j++) {
         const key = inputBits[i] < inputBits[j] 
           ? `${inputBits[i]},${inputBits[j]}`
           : `${inputBits[j]},${inputBits[i]}`;
         this.cooccurrenceMatrix.set(key, (this.cooccurrenceMatrix.get(key) || 0) + 1);
       }
+    }
+    
+    // Limit cooccurrence matrix size periodically
+    if (this.totalInputs % 500 === 0 && this.cooccurrenceMatrix.size > 20000) {
+      const entries = [...this.cooccurrenceMatrix.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10000);
+      this.cooccurrenceMatrix = new Map(entries);
     }
     
     const surpriseRatio = surprise.size / Math.max(1, input.size);

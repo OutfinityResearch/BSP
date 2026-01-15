@@ -51,15 +51,16 @@ async function pretrain(options = {}) {
   console.log(`Loaded ${sentences.length} sentences`);
   console.log(`Total characters: ${corpusText.length.toLocaleString()}`);
 
-  // Create engine
+  // Create engine with vocabulary enabled for interpretable tokens
   console.log('\nCreating engine...');
   const engine = new BPCMEngine({
+    useVocab: true,  // IMPORTANT: Enable vocabulary for readable output
     tokenizer: {
       ngramSizes: [1, 2, 3],  // Unigrams, bigrams, trigrams
     },
     learner: {
       groupCreationThreshold: 0.3,
-      minGroupSize: 3,
+      minGroupSize: 2,
     },
     rlPressure: rlPressure,
   });

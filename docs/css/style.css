@@ -1,17 +1,21 @@
 :root {
     --primary-color: #2563eb;
+    --secondary-color: #475569;
     --text-color: #1f2937;
     --bg-color: #ffffff;
-    --sidebar-bg: #f3f4f6;
+    --sidebar-bg: #f8fafc;
     --code-bg: #1e293b;
     --code-text: #e2e8f0;
+    --border-color: #e2e8f0;
     --accent-color: #3b82f6;
-    --border-color: #e5e7eb;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
 }
 
 body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
     color: var(--text-color);
     margin: 0;
     display: flex;
@@ -23,18 +27,22 @@ body {
 nav {
     background: var(--code-bg);
     color: white;
-    padding: 1rem 2rem;
+    padding: 0 2rem;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 nav .logo {
-    font-weight: bold;
-    font-size: 1.5rem;
+    font-weight: 700;
+    font-size: 1.25rem;
     color: white;
     text-decoration: none;
+    letter-spacing: -0.5px;
 }
 
 nav ul {
@@ -46,9 +54,11 @@ nav ul {
 }
 
 nav a {
-    color: #cbd5e1;
+    color: #94a3b8;
     text-decoration: none;
-    transition: color 0.2s;
+    font-weight: 500;
+    transition: all 0.2s;
+    font-size: 0.95rem;
 }
 
 nav a:hover, nav a.active {
@@ -65,11 +75,24 @@ nav a:hover, nav a.active {
 }
 
 .sidebar {
-    width: 250px;
+    width: 280px;
     background: var(--sidebar-bg);
     padding: 2rem;
     border-right: 1px solid var(--border-color);
     flex-shrink: 0;
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+}
+
+.sidebar h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--secondary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 
 .sidebar ul {
@@ -78,51 +101,79 @@ nav a:hover, nav a.active {
 }
 
 .sidebar li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .sidebar a {
     color: var(--text-color);
     text-decoration: none;
     display: block;
-    padding: 0.5rem;
-    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
 }
 
 .sidebar a:hover {
-    background: #e5e7eb;
+    background: #e2e8f0;
     color: var(--primary-color);
 }
 
 .content {
     flex: 1;
-    padding: 2rem 4rem;
+    padding: 3rem 5rem;
     max-width: 900px;
 }
 
 /* Typography */
-h1 { font-size: 2.5rem; color: var(--code-bg); margin-bottom: 1.5rem; }
-h2 { font-size: 1.8rem; margin-top: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
-h3 { font-size: 1.4rem; margin-top: 1.5rem; color: var(--primary-color); }
+h1 { font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 1.5rem; color: #111827; }
+h2 { font-size: 1.8rem; margin-top: 3rem; margin-bottom: 1rem; color: #1f2937; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+h3 { font-size: 1.4rem; margin-top: 2rem; margin-bottom: 1rem; color: #374151; }
 
-p { margin-bottom: 1rem; }
+p { margin-bottom: 1.25rem; color: #4b5563; }
+li { margin-bottom: 0.5rem; color: #4b5563; }
 
-/* Components */
-.card {
+/* Diagram / SVG Container */
+.diagram-container {
+    background: white;
     border: 1px solid var(--border-color);
     border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.diagram-caption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-top: -1.5rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+/* Components */
+.callout {
+    background: #eff6ff;
+    border-left: 4px solid var(--primary-color);
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    background: #fafafa;
+    border-radius: 0 8px 8px 0;
 }
+
+.callout h4 { margin-top: 0; color: var(--primary-color); }
+.callout p:last-child { margin-bottom: 0; }
 
 code {
     background: #f1f5f9;
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
-    font-family: 'Consolas', monospace;
+    font-family: 'Menlo', 'Monaco', monospace;
     font-size: 0.9em;
-    color: #d63384;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
 }
 
 pre {
@@ -131,39 +182,38 @@ pre {
     padding: 1.5rem;
     border-radius: 8px;
     overflow-x: auto;
+    margin: 1.5rem 0;
 }
 
 pre code {
     background: none;
     color: inherit;
     padding: 0;
+    border: none;
 }
 
-.term-link {
+/* Wiki Specifics */
+.term-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-top: 3rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.term-header h2 {
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.term-tag {
+    background: #e0e7ff;
     color: var(--primary-color);
-    text-decoration: underline;
-    text-decoration-style: dotted;
-    cursor: help;
-}
-
-/* Glossary specifics */
-.glossary-item {
-    margin-bottom: 2rem;
-}
-.glossary-term {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: var(--primary-color);
-}
-
-/* Diagrams */
-.diagram {
-    background: white;
-    border: 1px dashed var(--border-color);
-    padding: 2rem;
-    text-align: center;
-    font-family: monospace;
-    white-space: pre;
-    overflow-x: auto;
-    margin: 2rem 0;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
 }

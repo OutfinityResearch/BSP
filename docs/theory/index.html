@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BPCM Theory - Predictive Coding</title>
+    <title>BPCM Theory</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -18,55 +18,86 @@
 
     <div class="container">
         <aside class="sidebar">
-            <h3>Contents</h3>
+            <h3>Fundamentals</h3>
             <ul>
                 <li><a href="#predictive-coding">Predictive Coding</a></li>
                 <li><a href="#minimizing-surprise">Minimizing Surprise</a></li>
-                <li><a href="#rl-integration">RL Integration</a></li>
-                <li><a href="#why-bitsets">Why Bitsets?</a></li>
+                <li><a href="#sdr-theory">SDR Theory</a></li>
+                <li><a href="#rl-theory">RL & Homeostasis</a></li>
             </ul>
         </aside>
 
         <main class="content">
             <h1>Theoretical Foundation</h1>
+            <p class="lead">BPCM is not a Neural Network. It is a "Predictive Processing System" built on set theory.</p>
 
             <section id="predictive-coding">
                 <h2>Predictive Coding</h2>
-                <p>BPCM is inspired by the neuroscientific theory of <strong>Predictive Coding</strong> (Karl Friston). The core idea is that the brain is a prediction machine. It constantly generates a model of the world to predict sensory input.</p>
-                <p>Learning only happens when predictions fail. If you predict everything perfectly, there is no need to update your internal model.</p>
+                <p>The core philosophy comes from Neuroscience (Karl Friston's Free Energy Principle). The brain is not a passive receiver of information; it is an active prediction machine.</p>
+                
+                <div class="diagram-container">
+                    <svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- World -->
+                        <rect x="50" y="200" width="100" height="60" rx="4" fill="#f1f5f9" stroke="#94a3b8"/>
+                        <text x="100" y="235" text-anchor="middle" font-weight="bold">The World</text>
+
+                        <!-- Agent -->
+                        <rect x="300" y="50" width="200" height="210" rx="8" fill="#fff" stroke="#333" stroke-dasharray="5,5"/>
+                        <text x="400" y="40" text-anchor="middle" font-weight="bold" fill="#333">The Agent (BPCM)</text>
+
+                        <!-- Internal Model -->
+                        <rect x="350" y="80" width="100" height="50" rx="4" fill="#e0e7ff" stroke="#3730a3"/>
+                        <text x="400" y="110" text-anchor="middle" font-size="12">Internal Model</text>
+
+                        <!-- Arrows -->
+                        <!-- Sensory Input -->
+                        <path d="M 150 220 L 300 220" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-green)"/>
+                        <text x="225" y="210" text-anchor="middle" font-size="10" fill="#059669">Sensory Input</text>
+
+                        <!-- Prediction -->
+                        <path d="M 350 105 L 100 105 L 100 200" stroke="#f59e0b" stroke-width="2" fill="none" marker-end="url(#arrow-orange)"/>
+                        <text x="225" y="95" text-anchor="middle" font-size="10" fill="#d97706">Top-Down Prediction</text>
+
+                        <!-- Error/Surprise -->
+                        <path d="M 300 240 L 350 240 L 350 140" stroke="#ef4444" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/>
+                        <text x="320" y="190" text-anchor="middle" font-size="10" fill="#b91c1c" transform="rotate(-90, 320, 190)">Prediction Error (Surprise)</text>
+
+                        <defs>
+                            <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#10b981" /></marker>
+                            <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#f59e0b" /></marker>
+                            <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#ef4444" /></marker>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="diagram-caption">The Prediction Loop: The agent only learns when its Top-Down prediction fails to match the Sensory Input (Surprise).</div>
             </section>
 
             <section id="minimizing-surprise">
-                <h2>Minimizing Surprise (The Loss Function)</h2>
-                <p>In standard Deep Learning, we minimize "Cross-Entropy". In BPCM, we minimize <strong>Surprise</strong>.</p>
-                
-                <div class="card">
-                    <code>Surprise = Input \ Prediction</code>
+                <h2>Minimizing Surprise</h2>
+                <p>Standard AI minimizes "Loss". BPCM minimizes "Surprise". While similar, the implementation is different.</p>
+                <div class="callout">
+                    <h4>The Mathematical Goal</h4>
+                    <p>We want to minimize the set difference: <code>| Input \ Predicted_Groups |</code>.</p>
+                    <p>If this value is high, it means the world is chaotic to the agent. By creating new groups to "explain" these unexplained bits, the agent reduces future surprise.</p>
                 </div>
+            </section>
 
-                <p>This is a set difference operation. The "Surprise" contains all the features (bits) in the input that our active groups (concepts) did not explain.</p>
+            <section id="sdr-theory">
+                <h2>SDR (Sparse Distributed Representations)</h2>
+                <p>Theory from <strong>Numenta (Jeff Hawkins)</strong> states that the brain uses sparse codes. </p>
                 <ul>
-                    <li><strong>High Surprise:</strong> Indicates novel information. We should create a new Group.</li>
-                    <li><strong>Low Surprise:</strong> Indicates familiar patterns. We should reinforce the active Groups.</li>
+                    <li><strong>Sparse:</strong> Most neurons are silent at any given time.</li>
+                    <li><strong>Distributed:</strong> A concept is not one neuron, but a set of neurons.</li>
                 </ul>
+                <p>BPCM implements this via Bitsets. A concept is a set of active bits (1s) in a sea of inactive bits (0s). This allows us to perform "Semantic Union" efficiently (OR operations).</p>
             </section>
 
-            <section id="rl-integration">
-                <h2>Reinforcement Learning (RL)</h2>
-                <p>While the system learns patterns automatically (unsupervised), it adapts its behavior using RL.</p>
-                <p>We introduce a parameter <code>&rho; (rho)</code> which balances:</p>
-                <ul>
-                    <li><strong>Internal Drive:</strong> Minimize surprise (Consistency).</li>
-                    <li><strong>External Drive:</strong> Maximize Reward (Utility).</li>
-                </ul>
-                <p>If a user provides positive feedback, the system increases the <strong>Salience</strong> (importance) of the active groups, making them more likely to be activated in the future.</p>
+            <section id="rl-theory">
+                <h2>RL & Homeostasis</h2>
+                <p>Why does the agent learn? In BPCM, learning is driven by <strong>Homeostasis</strong> - the desire to keep internal parameters stable.</p>
+                <p>If Surprise is high, the system is unstable. Learning restores stability. We add an external signal (Reward) to steer this stability towards useful tasks (like answering questions correctly).</p>
             </section>
 
-            <section id="why-bitsets">
-                <h2>Why Bitsets?</h2>
-                <p>Neural networks use dense vectors (e.g., arrays of 768 floats). This requires heavy matrix multiplication ($O(N^2)$).</p>
-                <p>BPCM uses <strong>Sparse Distributed Representations</strong> (sets of bits). Comparing two bitsets is done via bitwise AND/OR, which is $O(N/64)$ on a 64-bit CPU. This allows us to handle massive "vocabularies" (1M+ features) with minimal compute.</p>
-            </section>
         </main>
     </div>
 </body>

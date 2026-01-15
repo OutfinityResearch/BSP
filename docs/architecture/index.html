@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BPCM Architecture - System Overview</title>
+    <title>BPCM Architecture</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -18,78 +18,111 @@
 
     <div class="container">
         <aside class="sidebar">
-            <h3>Contents</h3>
+            <h3>Structure</h3>
             <ul>
-                <li><a href="#overview">System Overview</a></li>
-                <li><a href="#pipeline">Processing Pipeline</a></li>
-                <li><a href="#components">Key Components</a></li>
-                <li><a href="#data-structures">Data Structures</a></li>
+                <li><a href="#pipeline">System Pipeline</a></li>
+                <li><a href="#groupstore">GroupStore (Memory)</a></li>
+                <li><a href="#learner">The Learner (CPU)</a></li>
+                <li><a href="#deduction">Deduction Graph</a></li>
             </ul>
         </aside>
 
         <main class="content">
             <h1>System Architecture</h1>
-            <p class="lead">BPCM (Bitset Predictive Coding Memory) is a CPU-first learning system that abandons heavy matrix multiplications in favor of fast set operations (intersections, unions).</p>
-
-            <section id="overview">
-                <h2>Overview</h2>
-                <p>Unlike traditional Transformers that use continuous embeddings (vectors of floats), BPCM uses <strong>Sparse Distributed Representations (SDR)</strong> implemented as Bitsets. Concepts are not vectors; they are groups of bits.</p>
-                
-                <div class="diagram">
-┌────────────────┐      ┌─────────────────┐      ┌─────────────────┐
-│     Input      │ ===> │    Tokenizer    │ ===> │     Encoder     │
-└────────────────┘      └─────────────────┘      └────────┬────────┘
-                                                          │
-                                                          ▼
-┌────────────────┐      ┌─────────────────┐      ┌─────────────────┐
-│   Predictions  │ <=== │     Learner     │ <=== │   Activator     │
-└────────────────┘      └────────┬────────┘      └─────────────────┘
-                                 │
-                        ┌────────▼────────┐
-                        │   GroupStore    │
-                        └─────────────────┘
-                </div>
-            </section>
+            <p class="lead">BPCM is designed to be a "CPU-First" AI. It rejects the massive matrix multiplication paradigm of Transformers in favor of high-speed set operations.</p>
 
             <section id="pipeline">
-                <h2>Processing Pipeline</h2>
-                <ol>
-                    <li><strong>Tokenize:</strong> Text is split into tokens (words/subwords) and n-grams.</li>
-                    <li><strong>Hash/Encode:</strong> Tokens are hashed into a fixed "Universe" (e.g., 100,000 bits). Input becomes a sparse bitset.</li>
-                    <li><strong>Activate:</strong> The system finds <a href="../wiki/index.html#groups" class="term-link">Groups</a> that overlap significantly with the input bitset.</li>
-                    <li><strong>Surprise:</strong> The system calculates <code>Input \ Reconstructed_Groups</code>. This residual is the "Surprise".</li>
-                    <li><strong>Learn:</strong> 
-                        <ul>
-                            <li>If surprise is high, create new groups.</li>
-                            <li>If surprise is low, strengthen existing group memberships.</li>
-                        </ul>
-                    </li>
-                </ol>
+                <h2>The Processing Pipeline</h2>
+                <p>Data flows through the system in a strictly defined loop. Unlike Neural Networks which are "End-to-End" differentiable black boxes, BPCM has distinct, inspectable stages.</p>
+
+                <div class="diagram-container">
+                    <svg width="800" height="250" viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
+                            </marker>
+                        </defs>
+
+                        <!-- Input -->
+                        <g transform="translate(20, 100)">
+                            <rect width="80" height="40" rx="4" fill="#f1f5f9" stroke="#cbd5e1"/>
+                            <text x="40" y="25" text-anchor="middle" font-size="12">Text Input</text>
+                        </g>
+
+                        <line x1="100" y1="120" x2="140" y2="120" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Tokenizer -->
+                        <g transform="translate(140, 80)">
+                            <rect width="100" height="80" rx="4" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+                            <text x="50" y="35" text-anchor="middle" font-weight="bold" fill="#2563eb">Tokenizer</text>
+                            <text x="50" y="55" text-anchor="middle" font-size="10" fill="#64748b">Hash -> ID</text>
+                        </g>
+
+                        <line x1="240" y1="120" x2="280" y2="120" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Encoder -->
+                        <g transform="translate(280, 80)">
+                            <rect width="100" height="80" rx="4" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+                            <text x="50" y="35" text-anchor="middle" font-weight="bold" fill="#2563eb">Encoder</text>
+                            <text x="50" y="55" text-anchor="middle" font-size="10" fill="#64748b">ID -> Bitset</text>
+                        </g>
+
+                        <line x1="380" y1="120" x2="420" y2="120" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Engine Core -->
+                        <g transform="translate(420, 40)">
+                            <rect width="200" height="160" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-dasharray="5,5"/>
+                            <text x="100" y="25" text-anchor="middle" font-weight="bold" fill="#1e40af">BPCM Engine Core</text>
+                            
+                            <!-- Internal Modules -->
+                            <rect x="20" y="40" width="70" height="40" rx="2" fill="white" stroke="#3b82f6"/>
+                            <text x="55" y="65" text-anchor="middle" font-size="10">Activator</text>
+
+                            <rect x="110" y="40" width="70" height="40" rx="2" fill="white" stroke="#3b82f6"/>
+                            <text x="145" y="65" text-anchor="middle" font-size="10">Learner</text>
+
+                            <rect x="20" y="100" width="160" height="40" rx="2" fill="#1e3a8a" stroke="#1e3a8a"/>
+                            <text x="100" y="125" text-anchor="middle" font-size="12" fill="white" font-weight="bold">GroupStore</text>
+                        </g>
+
+                        <line x1="620" y1="120" x2="660" y2="120" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Output -->
+                        <g transform="translate(660, 100)">
+                            <rect width="100" height="40" rx="4" fill="#f0fdf4" stroke="#86efac"/>
+                            <text x="50" y="25" text-anchor="middle" font-size="12" fill="#166534">Prediction</text>
+                        </g>
+                    </svg>
+                </div>
             </section>
 
-            <section id="components">
-                <h2>Key Components</h2>
-                
-                <div class="card">
-                    <h3>GroupStore</h3>
-                    <p>The long-term memory. It stores "Groups" (Concepts). Each group is a cluster of bits that frequently appear together. Think of it as a "Soft Dictionary" where keys are fuzzy.</p>
-                </div>
-
-                <div class="card">
-                    <h3>DeductionGraph</h3>
-                    <p>Manages temporal transitions. If Group A is often followed by Group B, a link <code>A -> B</code> is strengthened. This allows the system to predict future inputs based on current context.</p>
-                </div>
-
-                <div class="card">
-                    <h3>Learner</h3>
-                    <p>The "brain" logic. It decides when to merge groups, when to split them, and how much to adjust weights based on <a href="../wiki/index.html#surprise" class="term-link">Surprise</a> and Importance.</p>
+            <section id="groupstore">
+                <h2>GroupStore (The Memory)</h2>
+                <p>The <strong>GroupStore</strong> is not just a database; it is a "Concept Space". Instead of storing rigid definitions, it stores "fuzzy clusters".</p>
+                <div class="callout">
+                    <h4>The Dictionary Analogy</h4>
+                    <p>Imagine a dictionary where definitions are not written in words, but in "features". </p>
+                    <p><strong>Concept:</strong> "Apple"</p>
+                    <p><strong>Features (Bits):</strong> [Red, Round, Fruit, Sweet, Crunch]</p>
+                    <p>If you see an object that is [Red, Round, Sweet], the GroupStore activates "Apple" because the intersection is high (3/5 features match).</p>
                 </div>
             </section>
 
-            <section id="data-structures">
-                <h2>Data Structures</h2>
-                <p>We rely heavily on <code>SimpleBitset</code> (and potentially Roaring Bitmaps). Operations like <code>intersection</code> (AND) and <code>union</code> (OR) are extremely fast on modern CPUs, allowing the system to scale without GPUs.</p>
+            <section id="learner">
+                <h2>The Learner (The CPU)</h2>
+                <p>The Learner is the dynamic component. It performs two critical operations:</p>
+                <ul>
+                    <li><strong>Online Clustering:</strong> If the input doesn't match any existing group (High Surprise), the Learner creates a new Group on the fly. This is "One-Shot Learning".</li>
+                    <li><strong>Weight Adjustment:</strong> If the input partially matches, the Learner updates the weights (bit counts) of the existing group, refining the definition.</li>
+                </ul>
             </section>
+
+             <section id="deduction">
+                <h2>Deduction Graph</h2>
+                <p>Memory is useless without prediction. The Deduction Graph learns transitions between groups.</p>
+                <p>If <code>Group A (Cloud)</code> is frequently followed by <code>Group B (Rain)</code>, the graph strengthens the edge <code>A -> B</code>. During inference, if "Cloud" is active, "Rain" is automatically pre-activated (predicted).</p>
+            </section>
+
         </main>
     </div>
 </body>
