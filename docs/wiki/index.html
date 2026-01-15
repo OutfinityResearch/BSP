@@ -44,7 +44,7 @@
                 <h2 id="roaring-bitmap">Roaring Bitmap</h2>
                 <span class="term-tag">Optimization</span>
             </div>
-            <p>A compressed bitmap data structure that is efficient for both sparse and dense data. BSP uses Roaring Bitmaps for all set operations to minimize memory usage and maximize CPU throughput.</p>
+            <p>A compressed bitmap data structure that is efficient for both sparse and dense data. BSP can use Roaring Bitmaps as a high-performance backend for set operations. In this repository, the default engine uses a custom <code>SimpleBitset</code> implementation for portability (no external dependencies).</p>
 
             <div class="term-header">
                 <h2 id="identity">Identity</h2>
@@ -97,6 +97,12 @@
                 <span class="term-tag">Component</span>
             </div>
             <p>The database of all learned Groups. It supports operations like creating, updating, merging, and pruning groups.</p>
+
+            <div class="term-header">
+                <h2 id="simple-bitset">SimpleBitset</h2>
+                <span class="term-tag">Implementation</span>
+            </div>
+            <p>A minimal bitset implementation backed by <code>Uint32Array</code>. It supports fast membership checks and bitwise operations without external dependencies and is used by the current Node.js implementation of BSP.</p>
 
             <h2 id="theory">Theory</h2>
 

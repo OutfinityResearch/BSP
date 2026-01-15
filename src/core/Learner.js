@@ -85,6 +85,7 @@ class Learner {
   activate(input, store) {
     // Get candidates
     const candidateIds = store.getCandidates(input);
+    const inputBits = input.toArray();
     
     // Score candidates
     const scored = [];
@@ -103,18 +104,25 @@ class Learner {
     
     // Greedy selection to reduce redundancy
     const selected = [];
-    const explained = new SimpleBitset(input.maxSize);
+    const explained = new Set();
     
     for (const { group, score } of scored) {
       if (selected.length >= this.topK) break;
       
       // Check marginal value
-      const newBits = group.members.andNot(explained);
-      const marginalValue = newBits.andCardinality(input);
+      let marginalValue = 0;
+      for (const bit of inputBits) {
+        if (explained.has(bit)) continue;
+        if (group.members.has(bit)) marginalValue++;
+      }
       
       if (marginalValue >= 1) {
         selected.push(group);
-        explained.orInPlace(group.members);
+        
+        // Only mark input bits as explained (we only need overlap with input)
+        for (const bit of inputBits) {
+          if (group.members.has(bit)) explained.add(bit);
+        }
         store.markUsed(group);
       }
     }

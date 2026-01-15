@@ -367,10 +367,10 @@ class SessionManager {
     
     const state = session.getState();
     const buffer = await this.serializer.serialize(state);
-    const path = this.getSessionPath(id);
+    const filePath = this.getSessionPath(id);
     
-    await fs.mkdir(path.dirname(path), { recursive: true });
-    await fs.writeFile(path, buffer);
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, buffer);
   }
   
   // Close and optionally save session

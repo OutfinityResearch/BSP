@@ -123,14 +123,14 @@ Sistemul generează răspunsuri în **limbaj natural**, nu doar metrici tehnice:
 
 ## 4. Arhitectura Server
 
-### 2.1 Stack Tehnologic
+### 4.1 Stack Tehnologic
 
 - **Runtime**: Node.js (v18+)
 - **Framework**: Native HTTP sau Fastify (lightweight)
 - **WebSocket**: Pentru streaming și real-time
 - **Format**: JSON pentru API, SSE pentru streaming
 
-### 2.2 Structura
+### 4.2 Structura
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
@@ -158,9 +158,9 @@ Sistemul generează răspunsuri în **limbaj natural**, nu doar metrici tehnice:
 
 ---
 
-## 3. API Endpoints
+## 5. API Endpoints
 
-### 3.1 Session Management
+### 5.1 Session Management
 
 ```
 POST /api/sessions
@@ -180,7 +180,7 @@ GET /api/sessions
   Response: { "sessions": [...] }
 ```
 
-### 3.2 Chat
+### 5.2 Chat
 
 ```
 POST /api/sessions/:id/messages
@@ -205,7 +205,7 @@ GET /api/sessions/:id/messages
   Response: { "messages": [...], "total": number }
 ```
 
-### 3.3 Control
+### 5.3 Control
 
 ```
 POST /api/sessions/:id/control
@@ -227,7 +227,7 @@ GET /api/sessions/:id/stats
   }
 ```
 
-### 3.4 Persistence
+### 5.4 Persistence
 
 ```
 POST /api/sessions/:id/save
@@ -246,9 +246,9 @@ GET /api/snapshots
 
 ---
 
-## 4. WebSocket Protocol
+## 6. WebSocket Protocol
 
-### 4.1 Connection
+### 6.1 Connection
 
 ```javascript
 // Client
@@ -258,7 +258,7 @@ const ws = new WebSocket('ws://localhost:3000/ws?session=SESSION_ID');
 const ws = new WebSocket('ws://localhost:3000/ws?new=true');
 ```
 
-### 4.2 Message Format
+### 6.2 Message Format
 
 ```typescript
 interface WSMessage {
@@ -269,7 +269,7 @@ interface WSMessage {
 }
 ```
 
-### 4.3 Chat Messages
+### 6.3 Chat Messages
 
 ```typescript
 // Client → Server
@@ -311,7 +311,7 @@ interface WSMessage {
 }
 ```
 
-### 4.4 Feedback Messages
+### 6.4 Feedback Messages
 
 ```typescript
 // Quick feedback
@@ -335,7 +335,7 @@ interface WSMessage {
 }
 ```
 
-### 4.5 Control Messages
+### 6.5 Control Messages
 
 ```typescript
 // Set RL pressure
@@ -367,9 +367,9 @@ interface WSMessage {
 
 ---
 
-## 5. Implementare Server
+## 7. Implementare Server
 
-### 5.1 Main Server
+### 7.1 Main Server
 
 ```typescript
 import { createServer } from 'http';
@@ -439,7 +439,7 @@ server.listen(PORT, () => {
 });
 ```
 
-### 5.2 Session Class
+### 7.2 Session Class
 
 ```typescript
 class Session {
@@ -577,9 +577,9 @@ class Session {
 
 ---
 
-## 6. Comenzi din Chat
+## 8. Comenzi din Chat
 
-### 6.1 Comenzi Suportate
+### 8.1 Comenzi Suportate
 
 | Comandă | Descriere | Exemplu |
 |---------|-----------|---------|
@@ -594,7 +594,7 @@ class Session {
 | `/reset` | Resetează contextul | `/reset` |
 | `/debug` | Toggle mod debug | `/debug on` |
 
-### 6.2 Implementare Comenzi
+### 8.2 Implementare Comenzi
 
 ```typescript
 class CommandHandler {
@@ -679,9 +679,9 @@ Available commands:
 
 ---
 
-## 7. UI HTML (Optional)
+## 9. UI HTML (Optional)
 
-### 7.1 Structura Fișiere
+### 9.1 Structura Fișiere
 
 ```
 public/
@@ -690,7 +690,7 @@ public/
 └── styles.css      # Styling
 ```
 
-### 7.2 Minimal Chat UI
+### 9.2 Minimal Chat UI
 
 ```html
 <!DOCTYPE html>
@@ -735,9 +735,9 @@ public/
 
 ---
 
-## 8. Configurare
+## 10. Configurare
 
-### 8.1 Environment Variables
+### 10.1 Environment Variables
 
 ```bash
 # Server
@@ -758,7 +758,7 @@ SESSIONS_DIR=./data/sessions
 SNAPSHOTS_DIR=./data/snapshots
 ```
 
-### 8.2 Config Object
+### 10.2 Config Object
 
 ```typescript
 interface ServerConfig {
@@ -787,9 +787,9 @@ interface ServerConfig {
 
 ---
 
-## 9. Security Considerations
+## 11. Security Considerations
 
-### 9.1 Basic Security
+### 11.1 Basic Security
 
 ```typescript
 // Rate limiting
@@ -819,7 +819,7 @@ function sanitizeInput(input: string): string {
 }
 ```
 
-### 9.2 Session Security
+### 11.2 Session Security
 
 ```typescript
 // Session token generation
@@ -835,7 +835,7 @@ function validateSession(sessionId: string): boolean {
 
 ---
 
-## 10. Diagrama Interacțiune
+## 12. Diagrama Interacțiune
 
 ```
 ┌──────────┐                    ┌──────────┐                    ┌──────────┐

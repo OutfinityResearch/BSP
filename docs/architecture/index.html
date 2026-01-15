@@ -39,7 +39,7 @@
                 <h4>Key Philosophy</h4>
                 <p><strong>Groups as Identity:</strong> Concepts are represented as stable groups of co-occurring features (bitsets).<br>
                 <strong>Learning via Surprise:</strong> The system learns only when its predictions fail (high surprise).<br>
-                <strong>CPU Efficiency:</strong> Optimized for modern CPUs using Roaring Bitmaps and SIMD operations.</p>
+                <strong>CPU Efficiency:</strong> Optimized for modern CPUs using sparse bitset operations (the current Node.js implementation uses <code>SimpleBitset</code>; Roaring Bitmaps are a possible future optimization).</p>
             </div>
 
             <h2>Comparison with Classic ML</h2>

@@ -520,6 +520,7 @@
   <script>
     let sessionId = null;
     let messageCount = 0;
+    let nextImportant = false;
     const API_BASE = '';
 
     // Initialize
@@ -600,7 +601,7 @@
         const res = await fetch(`${API_BASE}/api/sessions/${sessionId}/messages`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content }),
+          body: JSON.stringify({ content, importance: nextImportant ? 1 : null }),
         });
         
         const data = await res.json();
@@ -616,6 +617,7 @@
       }
       
       setLoading(false);
+      nextImportant = false;
     }
 
     async function sendFeedback(value) {
@@ -641,19 +643,11 @@
 
     async function markImportant() {
       if (!sessionId) return;
-      
-      try {
-        await fetch(`${API_BASE}/api/sessions/${sessionId}/messages`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: '/important marked', importance: 1 }),
-        });
-        
-        addMessage('user', '⭐ Important');
-        updateStats();
-      } catch (e) {
-        console.error('Failed to mark important:', e);
-      }
+      nextImportant = !nextImportant;
+      addMessage('assistant', nextImportant
+        ? 'Next message will be treated as important (higher learning rate).'
+        : 'Important flag cleared.'
+      );
     }
 
     async function saveSession() {

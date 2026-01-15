@@ -26,10 +26,21 @@ class BPCMEngine {
       ...options,
     };
     
+    const tokenizerConfig = options.tokenizerConfig || options.tokenizer || {};
+    const learnerConfig = options.learnerConfig || options.learner || {};
+    const sequenceConfig = options.sequenceModelConfig || options.sequenceModel || {};
+    const idfConfig = options.idfTrackerConfig || options.idfTracker || {};
+
+    const ngramSizes = Array.isArray(tokenizerConfig.ngramSizes) ? tokenizerConfig.ngramSizes : null;
+    const ngramMin = tokenizerConfig.ngramMin ?? (ngramSizes ? Math.min(...ngramSizes) : undefined);
+    const ngramMax = tokenizerConfig.ngramMax ?? (ngramSizes ? Math.max(...ngramSizes) : undefined);
+
     // Core components
     this.tokenizer = new Tokenizer({
       universeSize: this.config.universeSize,
       useVocab: this.config.useVocab,
+      ...(ngramMin !== undefined ? { ngramMin } : {}),
+      ...(ngramMax !== undefined ? { ngramMax } : {}),
     });
     
     this.store = new GroupStore({
@@ -39,17 +50,17 @@ class BPCMEngine {
     
     this.graph = new DeductionGraph();
     
-    this.learner = new Learner(options.learnerConfig || {});
+    this.learner = new Learner(learnerConfig);
     
     this.buffer = new ReplayBuffer({
       maxSize: options.replayBufferSize || 50000,
     });
     
     // NEW: Sequence model for word order (DS-009)
-    this.sequenceModel = new SequenceModel();
+    this.sequenceModel = new SequenceModel(sequenceConfig);
     
-    // NEW: IDF tracker for semantic weighting (DS-010)
-    this.idfTracker = new IDFTracker();
+    // NEW: IDF tracker for semantic weighting (DS-012)
+    this.idfTracker = new IDFTracker(idfConfig);
     
     // State
     this.step = 0;
@@ -203,7 +214,7 @@ class BPCMEngine {
         this.sequenceModel.learn(wordTokens);
       }
       
-      // 11. Update IDF statistics (DS-010)
+      // 11. Update IDF statistics (DS-012)
       this.idfTracker.update(new Set(wordTokens));
       
       // 12. Periodic maintenance
@@ -454,7 +465,7 @@ class BPCMEngine {
       learner: this.learner.toJSON(),
       buffer: this.buffer.toJSON(),
       sequenceModel: this.sequenceModel.toJSON(),  // DS-009
-      idfTracker: this.idfTracker.toJSON(),        // DS-010
+      idfTracker: this.idfTracker.toJSON(),        // DS-012
       state: {
         step: this.step,
         context: this.context,

@@ -1,4 +1,4 @@
-# DS-010: Semantic Group Specialization
+# DS-012: Semantic Group Specialization
 
 ## Status: Implemented
 ## Author: BSP Team

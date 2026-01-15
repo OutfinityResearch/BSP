@@ -59,7 +59,8 @@ async function pretrain(options = {}) {
       ngramSizes: [1, 2, 3],  // Unigrams, bigrams, trigrams
     },
     learner: {
-      groupCreationThreshold: 0.3,
+      // More aggressive group creation during pretraining helps bootstrap concepts faster.
+      newGroupThreshold: 0.2,
       minGroupSize: 2,
     },
     rlPressure: rlPressure,

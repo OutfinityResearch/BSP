@@ -1,6 +1,6 @@
 /**
  * IDFTracker - Tracks Inverse Document Frequency for semantic weighting
- * Implements DS-010: Semantic Group Specialization
+ * Implements DS-012: Semantic Group Specialization
  */
 
 class IDFTracker {

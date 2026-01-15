@@ -13,6 +13,8 @@ class SimpleBitset {
     this.words = new Uint32Array(this.wordCount);
     this._size = 0; // Cached count of set bits
     this._dirty = false;
+    // Optional fast-path for bitsets built from sparse arrays (e.g. per-input encodings)
+    this._sparseBits = null;
   }
 
   /**
@@ -26,6 +28,7 @@ class SimpleBitset {
     if (!(this.words[wordIndex] & bitMask)) {
       this.words[wordIndex] |= bitMask;
       this._dirty = true;
+      this._sparseBits = null;
     }
   }
 
@@ -52,6 +55,7 @@ class SimpleBitset {
     if (this.words[wordIndex] & bitMask) {
       this.words[wordIndex] &= ~bitMask;
       this._dirty = true;
+      this._sparseBits = null;
     }
   }
 
@@ -62,6 +66,7 @@ class SimpleBitset {
     this.words.fill(0);
     this._size = 0;
     this._dirty = false;
+    this._sparseBits = null;
   }
 
   /**
@@ -69,6 +74,7 @@ class SimpleBitset {
    * @returns {number}
    */
   get size() {
+    if (this._sparseBits && !this._dirty) return this._sparseBits.length;
     if (this._dirty) {
       this._size = 0;
       for (let i = 0; i < this.wordCount; i++) {
@@ -94,6 +100,10 @@ class SimpleBitset {
    * @yields {number}
    */
   *[Symbol.iterator]() {
+    if (this._sparseBits && !this._dirty) {
+      for (const bit of this._sparseBits) yield bit;
+      return;
+    }
     for (let wordIndex = 0; wordIndex < this.wordCount; wordIndex++) {
       let word = this.words[wordIndex];
       if (word === 0) continue;
@@ -111,6 +121,7 @@ class SimpleBitset {
    * @returns {number[]}
    */
   toArray() {
+    if (this._sparseBits && !this._dirty) return [...this._sparseBits];
     return [...this];
   }
 
@@ -185,6 +196,7 @@ class SimpleBitset {
       this.words[i] |= other.words[i];
     }
     this._dirty = true;
+    this._sparseBits = null;
   }
 
   /**
@@ -193,6 +205,13 @@ class SimpleBitset {
    * @returns {number}
    */
   andCardinality(other) {
+    if (other?._sparseBits && !other._dirty) {
+      let count = 0;
+      for (const bit of other._sparseBits) {
+        if (this.has(bit)) count++;
+      }
+      return count;
+    }
     let count = 0;
     const minWords = Math.min(this.wordCount, other.wordCount);
     for (let i = 0; i < minWords; i++) {
@@ -210,6 +229,7 @@ class SimpleBitset {
     result.words.set(this.words);
     result._size = this._size;
     result._dirty = this._dirty;
+    result._sparseBits = this._sparseBits ? [...this._sparseBits] : null;
     return result;
   }
 
@@ -242,6 +262,11 @@ class SimpleBitset {
     for (const bit of bits) {
       result.add(bit);
     }
+    // If caller provides unique sparse bits (typical for tokenizer outputs),
+    // keep them for fast iteration/intersection during activation and learning.
+    result._sparseBits = Array.isArray(bits) ? [...new Set(bits)] : null;
+    result._size = result._sparseBits ? result._sparseBits.length : result._size;
+    result._dirty = false;
     return result;
   }
 

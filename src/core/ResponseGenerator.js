@@ -1,6 +1,6 @@
 /**
  * Response Generator - Generates coherent text from learned patterns
- * Implements DS-009 (Sequences), DS-010 (Semantic), DS-011 (Context)
+ * Implements DS-009 (Sequences), DS-012 (Semantic), DS-013 (Context)
  * NO HARDCODED TEMPLATES - everything from learned patterns
  */
 
@@ -13,7 +13,7 @@ class ResponseGenerator {
    * Generate a response from learned patterns
    * @param {object} result - Processing result from engine
    * @param {object} options - Additional context
-   * @param {ConversationContext} context - Conversation context (DS-011)
+   * @param {ConversationContext} context - Conversation context (DS-013)
    * @returns {object} Response with text and metadata
    */
   generate(result, options = {}, context = null) {
@@ -74,13 +74,13 @@ class ResponseGenerator {
         
         let score = pred.score;
         
-        // IDF boost for content words (DS-010)
+        // IDF boost for content words (DS-012)
         const isContent = hasIDF ? idf.isContentWord(token) : token.length > 3;
         if (isContent) {
           score *= 2.0;
         }
         
-        // Context boost (DS-011)
+        // Context boost (DS-013)
         if (context) {
           score *= context.scoreCandidate(token, pred.groupId);
         }

@@ -1,6 +1,6 @@
 /**
  * ConversationContext - Tracks conversation state for coherent responses
- * Implements DS-011: Context-Based Response Coherence
+ * Implements DS-013: Context-Based Response Coherence
  */
 
 class ConversationContext {
