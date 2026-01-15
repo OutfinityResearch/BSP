@@ -144,20 +144,29 @@ class ResponseGenerator {
       return this._fallbackGeneration(candidates);
     }
     
-    // Get seed tokens (prefer content words)
+    // Get seed tokens (prefer content words AND context keywords)
     const seedTokens = candidates
-      .filter(c => c.isContent)
-      .slice(0, 10)
+      .filter(c => c.isContent && (!context || context.keywords.has(c.token)))
+      .slice(0, 5)
       .map(c => c.token);
+    
+    // If no strict context matches, fall back to any content words
+    if (seedTokens.length === 0) {
+      const contentSeeds = candidates
+        .filter(c => c.isContent)
+        .slice(0, 8)
+        .map(c => c.token);
+      seedTokens.push(...contentSeeds);
+    }
     
     if (seedTokens.length === 0) {
       seedTokens.push(...candidates.slice(0, 5).map(c => c.token));
     }
     
-    // Generate sequence
-    const sequence = seq.generate(seedTokens, {
+    // Generate sequence with Beam Search (DS-011)
+    const sequence = seq.generateBeamSearch(seedTokens, {
       maxLength: 12,
-      temperature: 0.8,
+      beamWidth: 5,
       preferSeeds: true
     });
     

@@ -1,6 +1,6 @@
 /**
- * BPCM Demo Script
- * Interactive demo of BPCM capabilities
+ * BSP Demo Script
+ * Interactive demo of BSP capabilities
  */
 
 const readline = require('readline');
@@ -29,7 +29,7 @@ const pretrainData = [
 ];
 
 console.log('='.repeat(60));
-console.log('BPCM Interactive Demo');
+console.log('BSP Interactive Demo');
 console.log('='.repeat(60));
 console.log('');
 console.log('Commands:');
@@ -147,7 +147,7 @@ rl.on('line', (line) => {
   
   // Display response
   console.log('');
-  console.log('BPCM> Processed input');
+  console.log('BSP> Processed input');
   console.log(`      Surprise: ${result.surprise} / ${result.inputSize} bits (${(result.surprise/result.inputSize*100).toFixed(1)}%)`);
   console.log(`      Importance: ${result.importance.toFixed(2)}`);
   

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Pre-train BPCM model on large corpus
+ * Pre-train BSP model on large corpus
  * Creates a base model that all chat sessions will use
  */
 
@@ -24,7 +24,7 @@ async function pretrain(options = {}) {
   } = options;
 
   console.log('============================================================');
-  console.log('BPCM Pre-training');
+  console.log('BSP Pre-training');
   console.log('============================================================\n');
 
   // Check for corpus

@@ -1,5 +1,5 @@
 /**
- * GroupStore - Manages groups (concepts) in BPCM
+ * GroupStore - Manages groups (concepts) in BSP
  * Each group represents a cluster of co-occurring identities
  */
 

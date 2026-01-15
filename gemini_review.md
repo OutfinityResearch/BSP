@@ -1,12 +1,12 @@
-# BPCM Implementation Review
+# BSP Implementation Review
 
 **Date:** 2026-01-15
 **Reviewer:** Gemini Agent
-**Project:** Bitset Predictive Coding Memory (BPCM)
+**Project:** Bitset Predictive Coding Memory (BSP)
 
 ## 1. Executive Summary
 
-The BPCM project has reached a solid **MVP (Minimum Viable Product)** stage. The core architecture described in `DS-001` is fully implemented in JavaScript/Node.js, with all critical components (`GroupStore`, `Learner`, `DeductionGraph`, `Bitset`) operational. The system supports continuous learning, group formation, and simple multi-hop deduction.
+The BSP project has reached a solid **MVP (Minimum Viable Product)** stage. The core architecture described in `DS-001` is fully implemented in JavaScript/Node.js, with all critical components (`GroupStore`, `Learner`, `DeductionGraph`, `Bitset`) operational. The system supports continuous learning, group formation, and simple multi-hop deduction.
 
 However, the benchmarking suite (`DS-008`) is currently incomplete. While a skeleton exists, it lacks the specific datasets (WikiText-2, LAMBADA) required for a rigorous comparison with GPT-2. The response generation is currently template-based, which limits the "Chat" experience (`DS-006`) to a debugging/exploratory tool rather than a fluent conversational agent.
 
@@ -20,7 +20,8 @@ However, the benchmarking suite (`DS-008`) is currently incomplete. While a skel
 | **DS-002** | Data Structures | ✅ **Complete** | `SimpleBitset` implements sparse/dense logic. `GroupStore` handles pruning/merging. Tokenizer supports n-grams. |
 | **DS-003** | Learning Algorithms | ✅ **Complete** | Surprise-based learning, group creation logic, and stability patterns are implemented. Importance modulation exists. |
 | **DS-004** | Deduction Engine | ✅ **Complete** | Multi-hop BFS prediction, strengthening/weakening of links, and reasoning chain extraction are functional. |
-| **DS-005** | RL & Importance | ✅ **Complete** | RL pressure ($ho$) modulation and prioritized replay buffer are implemented. |
+| **DS-005** | RL & Importance | ✅ **Complete** | RL pressure ($
+ho$) modulation and prioritized replay buffer are implemented. |
 | **DS-006** | HTTP Server & Chat | ⚠️ **Partial** | Server exists and handles sessions/persistence. Response generation is template-based (MVP level), not generative. |
 | **DS-007** | Serialization | ✅ **Complete** | JSON serialization implemented for all components. Session management handles save/load. |
 | **DS-008** | Benchmarks | ❌ **Incomplete** | `evaluate.js` exists but uses rough approximations for perplexity. Standard datasets (WikiText-2, LAMBADA) are not integrated. |
@@ -41,7 +42,7 @@ However, the benchmarking suite (`DS-008`) is currently incomplete. While a skel
 - **Response Generation:** Currently, the bot "speaks" using templates like *"I see you're talking about [concept/token]"*. It cannot construct novel sentences.
   - *Recommendation:* Implement a simple n-gram language model *on top* of the active groups to generate coherent surface text.
 - **Approximation of Perplexity:** `evaluate.js` calculates perplexity as `2^(surprise_rate * 10)`. This is a heuristic and not scientifically comparable to GPT-2's perplexity.
-  - *Recommendation:* Implement a rigorous probability estimator. Since BPCM is not probabilistic in the standard sense, use **bits-back coding** or standard **MDL metrics** (bits per character) for fair comparison.
+  - *Recommendation:* Implement a rigorous probability estimator. Since BSP is not probabilistic in the standard sense, use **bits-back coding** or standard **MDL metrics** (bits per character) for fair comparison.
 
 ---
 
@@ -56,7 +57,7 @@ The `scripts/download-data.js` script relies on a hardcoded "Simple English" str
 
 ### Metric Discrepancy
 - **GPT-2 Metric:** Perplexity (based on next-token probability distribution).
-- **BPCM Current Metric:** Surprise Rate (percentage of unexplained bits).
+- **BSP Current Metric:** Surprise Rate (percentage of unexplained bits).
 - **Bridge:** We need a mathematical bridge to convert "Unexplained Bits" into "Probability".
   - *Proposal:* Treat unexplained bits as a uniform distribution over the remaining vocabulary space.
 

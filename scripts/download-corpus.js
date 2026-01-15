@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Download large training corpus for BPCM
+ * Download large training corpus for BSP
  * Downloads from multiple sources without external dependencies
  */
 
@@ -46,7 +46,7 @@ function fetch(url, maxRedirects = 5) {
     
     const request = protocol.get(url, {
       headers: {
-        'User-Agent': 'BPCM-Trainer/1.0',
+        'User-Agent': 'BSP-Trainer/1.0',
         'Accept': 'text/plain,text/html,*/*',
       },
       timeout: 30000,
@@ -212,7 +212,7 @@ function cleanSentence(sentence) {
  */
 async function downloadCorpus() {
   console.log('============================================================');
-  console.log('BPCM Corpus Downloader');
+  console.log('BSP Corpus Downloader');
   console.log('============================================================\n');
   
   // Ensure data directory exists

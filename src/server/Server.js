@@ -1,5 +1,5 @@
 /**
- * HTTP Server for BPCM Chat Interface
+ * HTTP Server for BSP Chat Interface
  * No external dependencies - uses Node.js built-in http module
  */
 
@@ -355,7 +355,7 @@ class BPCMServer {
     this.server = http.createServer((req, res) => this.handleRequest(req, res));
     
     this.server.listen(this.port, this.host, () => {
-      console.log(`BPCM Server running at http://${this.host}:${this.port}`);
+      console.log(`BSP Server running at http://${this.host}:${this.port}`);
       console.log(`Open http://${this.host}:${this.port} in your browser to start`);
     });
     

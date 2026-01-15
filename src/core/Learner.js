@@ -1,5 +1,5 @@
 /**
- * Learner - Implements learning algorithms for BPCM
+ * Learner - Implements learning algorithms for BSP
  * Handles activation, surprise computation, and updates
  */
 
@@ -367,7 +367,61 @@ class Learner {
   }
 
   /**
-   * Check and merge similar groups
+   * Perform sleep consolidation (DS-010)
+   * Merges similar groups efficiently using hierarchical clustering approximation
+   * @param {import('./GroupStore').GroupStore} store
+   * @param {import('./DeductionGraph').DeductionGraph} graph
+   * @returns {number} Number of merges
+   */
+  performSleepConsolidation(store, graph) {
+    const groups = [...store.getAll()];
+    // Sort by size (merge smaller into larger) - descending
+    groups.sort((a, b) => b.members.size - a.members.size);
+    
+    const visited = new Set();
+    let merges = 0;
+    
+    for (const primary of groups) {
+      if (visited.has(primary.id)) continue;
+      if (!store.get(primary.id)) continue; // Already merged away
+      
+      // Find merge candidates using inverse index
+      const candidates = store.getCandidates(primary.members);
+      
+      for (const candidateId of candidates) {
+        if (candidateId === primary.id) continue;
+        if (visited.has(candidateId)) continue;
+        
+        const candidate = store.get(candidateId);
+        if (!candidate) continue;
+        
+        const jaccard = primary.members.jaccard(candidate.members);
+        
+        if (jaccard >= this.mergeThreshold) {
+          // Merge candidate into primary
+          this._mergeGroups(primary, candidate, store, graph);
+          visited.add(candidate.id);
+          merges++;
+        }
+      }
+      
+      visited.add(primary.id);
+    }
+    
+    return merges;
+  }
+
+  _mergeGroups(target, source, store, graph) {
+    // Merge graph edges first (redirect source edges to target)
+    graph.mergeNodes(target.id, source.id);
+    
+    // Merge group content
+    store.merge(target, source);
+  }
+
+  /**
+   * Check and merge similar groups (legacy O(N^2) method)
+   * @deprecated Use performSleepConsolidation instead
    * @param {import('./GroupStore').GroupStore} store
    * @returns {number} Number of merges
    */

@@ -293,6 +293,38 @@ class DeductionGraph {
   }
 
   /**
+   * Merge two nodes, redirecting edges from source to target
+   * @param {number} targetId
+   * @param {number} sourceId
+   */
+  mergeNodes(targetId, sourceId) {
+    if (targetId === sourceId) return;
+
+    // 1. Move outgoing edges from source to target
+    const sourceOutgoing = this.forward.get(sourceId);
+    if (sourceOutgoing) {
+      for (const [to, weight] of sourceOutgoing) {
+        if (to !== targetId) { // Avoid self-loop
+          this.strengthen(targetId, to, weight);
+        }
+      }
+    }
+
+    // 2. Move incoming edges pointing to source, to point to target
+    const sourceIncoming = this.backward.get(sourceId);
+    if (sourceIncoming) {
+      for (const [from, weight] of sourceIncoming) {
+        if (from !== targetId) { // Avoid self-loop
+          this.strengthen(from, targetId, weight);
+        }
+      }
+    }
+
+    // 3. Remove source node
+    this.removeGroup(sourceId);
+  }
+
+  /**
    * Remove all edges for a group
    * @param {number} groupId
    */

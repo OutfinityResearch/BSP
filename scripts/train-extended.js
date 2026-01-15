@@ -1,5 +1,5 @@
 /**
- * BPCM Full Training Example
+ * BSP Full Training Example
  * Demonstrates training with more data and proper group/deduction formation
  */
 
@@ -65,7 +65,7 @@ The early bird catches the worm.
 
 async function train() {
   console.log('='.repeat(60));
-  console.log('BPCM Extended Training');
+  console.log('BSP Extended Training');
   console.log('='.repeat(60));
   console.log(`Training samples: ${TRAINING_DATA.length}`);
   console.log('');

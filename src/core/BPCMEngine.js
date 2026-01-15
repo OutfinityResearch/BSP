@@ -1,5 +1,5 @@
 /**
- * BPCMEngine - Main engine integrating all BPCM components
+ * BPCMEngine - Main engine integrating all BSP components
  */
 
 const { SimpleBitset } = require('./Bitset');
@@ -294,9 +294,9 @@ class BPCMEngine {
       this.consolidate(10);
     }
     
-    // Merge check
+    // Merge check (Sleep Consolidation)
     if (this.step % 500 === 0) {
-      this.learner.maybeMerge(this.store);
+      this.learner.performSleepConsolidation(this.store, this.graph);
     }
     
     // Prune
@@ -344,6 +344,14 @@ class BPCMEngine {
       const consolidationImportance = episode.importance * 0.3;
       this.learner.updateMemberships(activeGroups, input, hallucination, consolidationImportance, this.store);
     }
+  }
+
+  /**
+   * Run sleep consolidation phase (DS-010)
+   * @returns {number} Merges performed
+   */
+  runSleepPhase() {
+    return this.learner.performSleepConsolidation(this.store, this.graph);
   }
 
   /**

@@ -203,21 +203,22 @@ class SequenceModel {
       const scored = candidates.map(c => {
         let score = c.prob;
         
-        // Boost seed tokens
+        // Boost seed tokens significantly if they are valid next tokens
         if (preferSeeds && seedTokens.includes(c.token)) {
-          score *= 2.0;
+          score *= 5.0;  // Strong boost for staying on topic
         }
         
-        // Penalize already used tokens
+        // Penalize already used tokens (avoid loops)
         if (used.has(c.token)) {
-          score *= 0.1;
+          score *= 0.05;
         }
         
         return { ...c, score };
       });
       
       // Select based on score with temperature
-      const selected = this.weightedSelect(scored, temperature);
+      // Lower temperature = more deterministic/grammatical
+      const selected = this.weightedSelect(scored, 0.7);
       
       if (!selected) break;
       
@@ -232,6 +233,100 @@ class SequenceModel {
     }
     
     return sequence;
+  }
+
+  /**
+   * Generate a sequence using Beam Search (DS-011)
+   * Finds the most probable sequence of tokens
+   * @param {string[]} seedTokens - Tokens to incorporate
+   * @param {object} options
+   * @returns {string[]}
+   */
+  generateBeamSearch(seedTokens, options = {}) {
+    const {
+      maxLength = 12,
+      beamWidth = 5,
+      preferSeeds = true
+    } = options;
+    
+    if (seedTokens.length === 0) return [];
+    
+    // Initial beam: start with seed tokens
+    let beam = [];
+    const startToken = this.selectStart(seedTokens) || seedTokens[0];
+    
+    beam.push({
+      tokens: [startToken],
+      score: 0, // Log probability (0 = log(1))
+      usedSeeds: new Set(seedTokens.includes(startToken) ? [startToken] : [])
+    });
+    
+    // Expand beam step by step
+    for (let t = 0; t < maxLength; t++) {
+      const candidates = [];
+      
+      for (const path of beam) {
+        const lastToken = path.tokens[path.tokens.length - 1];
+        
+        // Stop if end token or max length
+        if (this.isEndToken(lastToken) && path.tokens.length >= 4) {
+          candidates.push(path); // Finished path
+          continue;
+        }
+        
+        // Get transitions
+        const nextTokens = this.getNextCandidates(lastToken);
+        
+        if (nextTokens.length === 0) {
+          // Dead end, maybe try unused seed
+          const unusedSeeds = seedTokens.filter(s => !path.usedSeeds.has(s));
+          if (unusedSeeds.length > 0) {
+            const nextSeed = unusedSeeds[0];
+            candidates.push({
+              tokens: [...path.tokens, nextSeed],
+              score: path.score - 2.0, // Penalty for jump
+              usedSeeds: new Set([...path.usedSeeds, nextSeed])
+            });
+          } else {
+            candidates.push(path); // Keep as is
+          }
+          continue;
+        }
+        
+        // Expand
+        for (const { token, prob } of nextTokens.slice(0, 10)) { // Consider top 10 transitions
+          let logProb = Math.log(prob + 1e-10);
+          
+          // Boost seeds
+          if (preferSeeds && seedTokens.includes(token)) {
+            logProb += 2.0;
+          }
+          
+          // Penalize repetition
+          if (path.tokens.includes(token)) {
+            logProb -= 3.0;
+          }
+          
+          candidates.push({
+            tokens: [...path.tokens, token],
+            score: path.score + logProb,
+            usedSeeds: new Set([...path.usedSeeds, token])
+          });
+        }
+      }
+      
+      // Prune beam: Keep top K candidates
+      candidates.sort((a, b) => b.score - a.score);
+      beam = candidates.slice(0, beamWidth);
+      
+      // Early exit if top path is finished
+      if (beam[0] && this.isEndToken(beam[0].tokens[beam[0].tokens.length - 1]) && beam[0].tokens.length >= 4) {
+        break;
+      }
+    }
+    
+    // Return best path
+    return beam.length > 0 ? beam[0].tokens : [];
   }
 
   /**

@@ -1,5 +1,5 @@
 /**
- * BPCM Training Script
+ * BSP Training Script
  * Train a model on text data
  */
 
@@ -36,7 +36,7 @@ function progressBar(current, total, width = 40) {
 
 async function train() {
   console.log('='.repeat(60));
-  console.log('BPCM Training Script');
+  console.log('BSP Training Script');
   console.log('='.repeat(60));
   console.log(`Data: ${CONFIG.dataPath}`);
   console.log(`Output: ${CONFIG.outputPath}`);

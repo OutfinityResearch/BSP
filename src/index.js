@@ -1,5 +1,5 @@
 /**
- * BPCM Main Entry Point
+ * BSP Main Entry Point
  * Starts the HTTP server for chat interface
  */
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BPCM Manual - Training & Testing Guide</title>
+  <title>BSP Manual - Training & Testing Guide</title>
   <style>
     :root {
       --bg: #0d1117;
@@ -114,7 +114,7 @@
   </style>
 </head>
 <body>
-  <h1>BPCM Manual</h1>
+  <h1>BSP Manual</h1>
   <p>Complete guide to training and testing Bitset Predictive Coding Memory models</p>
   
   <div class="toc">
@@ -133,7 +133,7 @@
   <h2 id="quick-start">1. Quick Start</h2>
   
   <h3>Installation</h3>
-  <p>BPCM has zero external dependencies. Just clone and run:</p>
+  <p>BSP has zero external dependencies. Just clone and run:</p>
   
   <pre><code># Clone the repository
 git clone &lt;repository-url&gt;
@@ -149,15 +149,15 @@ node scripts/train.js</code></pre>
   <pre><code>node src/index.js
 
 # Output:
-# BPCM Server running at http://localhost:3000
+# BSP Server running at http://localhost:3000
 # Open http://localhost:3000 in your browser to start</code></pre>
   
   <p>Open <code>http://localhost:3000</code> in your browser and start chatting!</p>
 
   <h2 id="concepts">2. Core Concepts</h2>
   
-  <h3>What is BPCM?</h3>
-  <p>BPCM (Bitset Predictive Coding Memory) is a continuous learning system that:</p>
+  <h3>What is BSP?</h3>
+  <p>BSP (Bitset Predictive Coding Memory) is a continuous learning system that:</p>
   <ul>
     <li><strong>Uses bitsets</strong> instead of neural network embeddings</li>
     <li><strong>Learns online</strong> from every interaction (no batch training)</li>
@@ -176,7 +176,7 @@ node scripts/train.js</code></pre>
   </table>
   
   <h3>Learning Objective</h3>
-  <p>BPCM minimizes:</p>
+  <p>BSP minimizes:</p>
   <pre><code>Loss = |surprise| + β × |hallucination| + γ × |active_groups|</code></pre>
   <p>This is similar to MDL (Minimum Description Length) - compress the input using as few groups as possible.</p>
 
@@ -281,10 +281,10 @@ for (const group of engine.getTopGroups(5)) {
   </ul>
   
   <pre><code>You: Explain how photosynthesis works
-BPCM: [concepts: plants, energy, sunlight...]
+BSP: [concepts: plants, energy, sunlight...]
 
 You: +++ That's a good explanation!
-BPCM: Feedback recorded (reward: 0.5)</code></pre>
+BSP: Feedback recorded (reward: 0.5)</code></pre>
   
   <h3>RL Pressure (ρ)</h3>
   <p>Control the learning balance:</p>
@@ -470,12 +470,12 @@ Response: { "sessions": [...] }</code></pre>
   </ul>
   
   <div class="success">
-    <strong>You're ready!</strong> Start the server with <code>node src/index.js</code> and begin training your BPCM model.
+    <strong>You're ready!</strong> Start the server with <code>node src/index.js</code> and begin training your BSP model.
   </div>
   
   <hr style="margin: 3rem 0; border-color: var(--border);">
   <p style="text-align: center; color: var(--text-dim);">
-    BPCM - Bitset Predictive Coding Memory | 2026
+    BSP - Bitset Predictive Coding Memory | 2026
   </p>
 </body>
 </html>

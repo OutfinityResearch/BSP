@@ -1,5 +1,5 @@
 /**
- * BPCM Evaluation Script
+ * BSP Evaluation Script
  * Evaluate a trained model on test data with scientific metrics
  * Usage:
  *   node scripts/evaluate.js                      # Runs full suite on all available data
@@ -40,7 +40,7 @@ async function main() {
   }
 
   console.log('='.repeat(60));
-  console.log('BPCM Evaluation Suite');
+  console.log('BSP Evaluation Suite');
   console.log('='.repeat(60));
   
   // Load model once

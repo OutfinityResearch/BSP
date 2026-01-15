@@ -1,6 +1,6 @@
 /**
- * BPCM Comparative Benchmark Suite
- * Compares BPCM against Theoretical Baselines, Compression Algorithms, and SOTA LLMs
+ * BSP Comparative Benchmark Suite
+ * Compares BSP against Theoretical Baselines, Compression Algorithms, and SOTA LLMs
  * on the exact same dataset (WikiText-2 Test Set).
  */
 
@@ -20,7 +20,7 @@ const REFERENCES = [
 
 async function runBenchmark() {
   console.log('================================================================');
-  console.log('  BPCM FORMAL COMPARATIVE BENCHMARK');
+  console.log('  BSP FORMAL COMPARATIVE BENCHMARK');
   console.log(`  Dataset: ${TEST_FILE}`);
   console.log('================================================================\n');
 
@@ -52,8 +52,8 @@ async function runBenchmark() {
   console.log(`[Baseline] Gzip (Standard Compression): ${gzipBPC.toFixed(4)} BPC (Algorithmic baseline)`);
 
 
-  // 2. Evaluate BPCM (Our Model)
-  console.log('\n--- 2. BPCM Evaluation (Current Model) ---');
+  // 2. Evaluate BSP (Our Model)
+  console.log('\n--- 2. BSP Evaluation (Current Model) ---');
   const state = JSON.parse(fs.readFileSync(MODEL_FILE, 'utf8'));
   const engine = BPCMEngine.fromJSON(state);
   
@@ -72,7 +72,7 @@ async function runBenchmark() {
   const duration = (Date.now() - start) / 1000;
   
   const bpcmBPC = bpcmBits / totalChars;
-  console.log(`[Target]   BPCM (MVP):                  \x1b[36m${bpcmBPC.toFixed(4)} BPC\x1b[0m`);
+  console.log(`[Target]   BSP (MVP):                  \x1b[36m${bpcmBPC.toFixed(4)} BPC\x1b[0m`);
   console.log(`           Throughput:                  ${(lines.length / duration).toFixed(0)} lines/sec`);
 
 
@@ -87,13 +87,13 @@ async function runBenchmark() {
     { name: 'LSTM (2017)', val: 1.25 },
     { name: 'Gzip (Compression)', val: gzipBPC },
     { name: 'Shannon Entropy', val: entropy },
-    { name: 'BPCM (Current)', val: bpcmBPC }
+    { name: 'BSP (Current)', val: bpcmBPC }
   ];
 
   rows.sort((a, b) => a.val - b.val);
 
   for (const row of rows) {
-    const isUs = row.name.includes('BPCM');
+    const isUs = row.name.includes('BSP');
     const color = isUs ? '\x1b[36m' : '';
     const reset = isUs ? '\x1b[0m' : '';
     const gap = row.val / 1.08; // Ratio to GPT-2
@@ -103,11 +103,11 @@ async function runBenchmark() {
   
   console.log('\nAnalysis:');
   if (bpcmBPC > gzipBPC) {
-    console.log(`\x1b[33mWarning: BPCM (${bpcmBPC.toFixed(2)}) is performing worse than Gzip (${gzipBPC.toFixed(2)}).\x1b[0m`);
+    console.log(`\x1b[33mWarning: BSP (${bpcmBPC.toFixed(2)}) is performing worse than Gzip (${gzipBPC.toFixed(2)}).\x1b[0m`);
     console.log('This means the model is currently not "compressing" effectively. It adds more overhead than it saves.');
     console.log('Reason: Surprise rate is too high (~90%). The model pays full cost for raw bits + overhead for group pointers.');
   } else {
-    console.log('\x1b[32mSuccess: BPCM is compressing better than generic algorithms.\x1b[0m');
+    console.log('\x1b[32mSuccess: BSP is compressing better than generic algorithms.\x1b[0m');
   }
   console.log('================================================================');
 }

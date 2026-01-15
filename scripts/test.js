@@ -1,5 +1,5 @@
 /**
- * BPCM Test Script
+ * BSP Test Script
  * Run basic tests for all components
  */
 
@@ -27,7 +27,7 @@ function assert(condition, message) {
 }
 
 console.log('='.repeat(60));
-console.log('BPCM Test Suite');
+console.log('BSP Test Suite');
 console.log('='.repeat(60));
 
 // SimpleBitset tests
@@ -230,7 +230,7 @@ test('process creates groups', () => {
 
 test('process returns metrics', () => {
   const engine = new BPCMEngine();
-  const result = engine.process('Testing BPCM engine');
+  const result = engine.process('Testing BSP engine');
   assert('surprise' in result, 'should have surprise');
   assert('importance' in result, 'should have importance');
   assert('activeGroups' in result, 'should have activeGroups');

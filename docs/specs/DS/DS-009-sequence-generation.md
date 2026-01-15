@@ -1,7 +1,7 @@
 # DS-009: Sequence-Aware Text Generation
 
-## Status: Draft
-## Author: BPCM Team
+## Status: Implemented
+## Author: BSP Team
 ## Date: 2026-01-15
 
 ## 1. Problem Statement
