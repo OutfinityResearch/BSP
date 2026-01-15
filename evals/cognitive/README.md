@@ -20,18 +20,17 @@ node evaluate.mjs --system=01
 
 ```
 cognitive/
-├── systems/              # Grammar definitions for each cognitive primitive
-│   ├── 01_convergence.mjs
-│   ├── 02_divergence.mjs
-│   └── ... (20 systems)
-├── data/                 # Generated train/test data
-│   ├── 01_convergence/
-│   │   ├── train.txt
-│   │   ├── test.txt
-│   │   └── metadata.json
+├── 01_convergence/
+│   ├── generator.mjs      # Grammar definition
+│   ├── train.txt          # Training data
+│   ├── test.txt           # Test data
+│   └── metadata.json      # System info
+├── 02_divergence/
 │   └── ...
-├── generate.mjs          # Unified data generator
-├── evaluate.mjs          # Unified evaluator
+├── ... (20 systems total)
+├── generate.mjs           # Unified data generator
+├── evaluate.mjs           # Unified evaluator
+├── generation_summary.json
 └── README.md
 ```
 
@@ -41,8 +40,8 @@ cognitive/
 
 | # | System | What it Tests | Real-World Analogue |
 |---|--------|--------------|---------------------|
-| 01 | **Convergence** | Many paths → single conclusion | Diagnosis, debugging |
-| 02 | **Divergence** | Single → multiple outcomes | Forecasting, risk |
+| 01 | **Convergence** | Many paths -> single conclusion | Diagnosis, debugging |
+| 02 | **Divergence** | Single -> multiple outcomes | Forecasting, risk |
 | 03 | **Cycles** | Temporal loops | Days of week, seasons |
 | 04 | **Hierarchy** | Taxonomy/inheritance | Biology, OOP |
 | 05 | **Composition** | Zero-shot combination | Grammar, chemistry |
