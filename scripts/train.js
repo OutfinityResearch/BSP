@@ -5,7 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { BPCMEngine } = require('../src/core');
+const { BSPEngine } = require('../src/core');
 
 // Configuration
 const CONFIG = {
@@ -82,7 +82,7 @@ Recursion solves problems by breaking them down.
   console.log(`Loaded ${lines.length} training lines\n`);
 
   // Create engine
-  const engine = new BPCMEngine({
+  const engine = new BSPEngine({
     universeSize: CONFIG.universeSize,
     maxGroups: CONFIG.maxGroups,
     rlPressure: CONFIG.rlPressure,

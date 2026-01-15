@@ -72,10 +72,23 @@ class Tokenizer {
   /**
    * Encode text to identity IDs
    * @param {string} text
+   * @param {object} [options]
    * @returns {number[]}
    */
-  encode(text) {
+  encode(text, options = {}) {
     const tokens = this.tokenizeWords(text);
+    return this.encodeFromTokens(tokens, options);
+  }
+
+  /**
+   * Encode pre-tokenized words to identity IDs.
+   * @param {string[]} tokens
+   * @param {object} [options]
+   * @param {boolean} [options.allowVocabGrowth=true]
+   * @returns {number[]}
+   */
+  encodeFromTokens(tokens, options = {}) {
+    const { allowVocabGrowth = true } = options;
     const ngrams = this.generateNgrams(tokens);
     
     const ids = new Set();
@@ -84,6 +97,7 @@ class Tokenizer {
       if (this.useVocab) {
         // Use vocabulary-based encoding
         if (!this.vocab.has(ngram)) {
+          if (!allowVocabGrowth) continue;
           const id = this.nextVocabId++;
           this.vocab.set(ngram, id);
           this.reverseVocab.set(id, ngram);

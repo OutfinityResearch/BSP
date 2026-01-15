@@ -399,12 +399,12 @@ class SessionManager {
     
     return Promise.all(
       files
-        .filter(f => f.endsWith('.bpcm'))
+        .filter(f => f.endsWith('.bsp'))
         .map(async f => {
           const path = `${dir}/${f}`;
           const stat = await fs.stat(path);
           return {
-            id: f.replace('.bpcm', ''),
+            id: f.replace('.bsp', ''),
             path,
             size: stat.size,
             modified: stat.mtime,
@@ -436,7 +436,7 @@ class SessionManager {
   }
   
   private getSessionPath(id: string): string {
-    return `${this.config.sessionsDir}/${id}.bpcm`;
+    return `${this.config.sessionsDir}/${id}.bsp`;
   }
 }
 ```
@@ -588,7 +588,7 @@ class SnapshotManager {
     label?: string
   ): Promise<string> {
     const snapshotId = `${sessionId}_${Date.now()}`;
-    const path = `${this.snapshotsDir}/${snapshotId}.bpcm`;
+    const path = `${this.snapshotsDir}/${snapshotId}.bsp`;
     
     const serializer = new BSPSerializer();
     const buffer = await serializer.serialize(state);
@@ -621,7 +621,7 @@ class SnapshotManager {
     const snapshots: SnapshotInfo[] = [];
     
     for (const file of files) {
-      if (file.startsWith(sessionId) && file.endsWith('.bpcm.meta')) {
+      if (file.startsWith(sessionId) && file.endsWith('.bsp.meta')) {
         const meta = JSON.parse(
           await fs.readFile(`${this.snapshotsDir}/${file}`, 'utf8')
         );
@@ -633,7 +633,7 @@ class SnapshotManager {
   }
   
   async restoreSnapshot(snapshotId: string): Promise<BSPState> {
-    const path = `${this.snapshotsDir}/${snapshotId}.bpcm`;
+    const path = `${this.snapshotsDir}/${snapshotId}.bsp`;
     const buffer = await fs.readFile(path);
     
     const serializer = new BSPSerializer();
@@ -647,8 +647,8 @@ class SnapshotManager {
       const toDelete = snapshots.slice(this.maxSnapshots);
       
       for (const snapshot of toDelete) {
-        await fs.unlink(`${this.snapshotsDir}/${snapshot.snapshotId}.bpcm`);
-        await fs.unlink(`${this.snapshotsDir}/${snapshot.snapshotId}.bpcm.meta`);
+        await fs.unlink(`${this.snapshotsDir}/${snapshot.snapshotId}.bsp`);
+        await fs.unlink(`${this.snapshotsDir}/${snapshot.snapshotId}.bsp.meta`);
       }
     }
   }
@@ -663,7 +663,7 @@ class SnapshotManager {
 
 ```typescript
 interface PortableExport {
-  format: 'bpcm-export';
+  format: 'bsp-export';
   version: '1.0';
   exported: number;
   
@@ -680,7 +680,7 @@ class Exporter {
     const serializer = new JSONSerializer();
     
     const portable: PortableExport = {
-      format: 'bpcm-export',
+      format: 'bsp-export',
       version: '1.0',
       exported: Date.now(),
       state: await serializer.toSerializable(state),
@@ -693,7 +693,7 @@ class Exporter {
   async importFromJSON(json: string): Promise<BSPState> {
     const portable = JSON.parse(json) as PortableExport;
     
-    if (portable.format !== 'bpcm-export') {
+    if (portable.format !== 'bsp-export') {
       throw new Error('Invalid export format');
     }
     
@@ -817,7 +817,7 @@ class IntegrityChecker {
                     │
                     ▼
     ┌─────────────────────────────────┐
-    │         .bpcm File              │
+    │         .bsp File               │
     │  [Header][Compressed MsgPack]   │
     └─────────────────────────────────┘
                     │

@@ -16,7 +16,7 @@ However, the benchmarking suite (`DS-008`) is currently incomplete. While a skel
 
 | Spec ID | Component | Status | Notes |
 |---------|-----------|--------|-------|
-| **DS-001** | Core Architecture | ✅ **Complete** | All modules (Tokenizer, Encoder, Activator, Learner, Deduction) are wired correctly in `BPCMEngine`. |
+| **DS-001** | Core Architecture | ✅ **Complete** | All modules (Tokenizer, Encoder, Activator, Learner, Deduction) are wired correctly in `BSPEngine`. |
 | **DS-002** | Data Structures | ✅ **Complete** | `SimpleBitset` implements sparse/dense logic. `GroupStore` handles pruning/merging. Tokenizer supports n-grams. |
 | **DS-003** | Learning Algorithms | ✅ **Complete** | Surprise-based learning, group creation logic, and stability patterns are implemented. Importance modulation exists. |
 | **DS-004** | Deduction Engine | ✅ **Complete** | Multi-hop BFS prediction, strengthening/weakening of links, and reasoning chain extraction are functional. |
@@ -33,8 +33,8 @@ ho$) modulation and prioritized replay buffer are implemented. |
 ### 3.1 Strengths
 - **Modular Design:** The separation of concerns between `Learner`, `GroupStore`, and `DeductionGraph` is excellent. This makes unit testing and future refactoring safe.
 - **No Dependencies:** The `SimpleBitset` implementation is a great zero-dependency solution for the MVP, ensuring easy deployment.
-- **Self-Healing:** The system includes periodic maintenance (pruning, decay, consolidation) in `BPCMEngine._periodicMaintenance`, preventing unbounded growth.
-- **Inspectability:** `ResponseGenerator` and `BPCMEngine` provide good tools for explaining *why* a prediction was made (reasoning chains).
+- **Self-Healing:** The system includes periodic maintenance (pruning, decay, consolidation) in `BSPEngine._periodicMaintenance`, preventing unbounded growth.
+- **Inspectability:** `ResponseGenerator` and `BSPEngine` provide good tools for explaining *why* a prediction was made (reasoning chains).
 
 ### 3.2 Weaknesses / Optimizations
 - **Bitset Performance:** `SimpleBitset` uses standard JS arrays/Uint32Arrays. For scaling to 1M+ bits and high throughput, this will be the bottleneck.

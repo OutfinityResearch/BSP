@@ -89,7 +89,7 @@ User: /stats
 BSP: Groups: 1,234 | Deductions: 5,678 | Surprise: 0.23
 
 User: /save mysession
-BSP: Session saved to ./sessions/mysession.bpcm
+BSP: Session saved to ./sessions/mysession.bsp
 ```
 
 ## RL Pressure

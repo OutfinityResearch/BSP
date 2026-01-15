@@ -564,7 +564,7 @@ class Session {
   
   // Salvare/încărcare
   async save(path?: string): Promise<string> {
-    const savePath = path || `./sessions/${this.id}.bpcm`;
+    const savePath = path || `./sessions/${this.id}.bsp`;
     await this.engine.save(savePath);
     return savePath;
   }

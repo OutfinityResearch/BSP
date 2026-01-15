@@ -6,7 +6,7 @@
 
 const fs = require('fs');
 const zlib = require('zlib');
-const { BPCMEngine } = require('../src/core');
+const { BSPEngine } = require('../src/core');
 
 const TEST_FILE = 'data/wikitext2_test.txt';
 const MODEL_FILE = 'data/model_wiki.json';
@@ -55,11 +55,11 @@ async function runBenchmark() {
   // 2. Evaluate BSP (Our Model)
   console.log('\n--- 2. BSP Evaluation (Current Model) ---');
   const state = JSON.parse(fs.readFileSync(MODEL_FILE, 'utf8'));
-  const engine = BPCMEngine.fromJSON(state);
+  const engine = BSPEngine.fromJSON(state);
   
   // We compute strictly the Encoding Cost
   const lines = text.split('\n').filter(l => l.trim().length > 0);
-  let bpcmBits = 0;
+  let bspBits = 0;
   
   const start = Date.now();
   for (const line of lines) {
@@ -67,12 +67,12 @@ async function runBenchmark() {
     // Cost = Model Description (Active Groups) + Residuals (Surprise)
     const modelCost = result.activeGroups.length * Math.log2(Math.max(2, engine.store.size));
     const dataCost = result.surprise * Math.log2(engine.config.universeSize);
-    bpcmBits += (modelCost + dataCost);
+    bspBits += (modelCost + dataCost);
   }
   const duration = (Date.now() - start) / 1000;
   
-  const bpcmBPC = bpcmBits / totalChars;
-  console.log(`[Target]   BSP (MVP):                  \x1b[36m${bpcmBPC.toFixed(4)} BPC\x1b[0m`);
+  const bspBPC = bspBits / totalChars;
+  console.log(`[Target]   BSP (MVP):                  \x1b[36m${bspBPC.toFixed(4)} BPC\x1b[0m`);
   console.log(`           Throughput:                  ${(lines.length / duration).toFixed(0)} lines/sec`);
 
 
@@ -87,7 +87,7 @@ async function runBenchmark() {
     { name: 'LSTM (2017)', val: 1.25 },
     { name: 'Gzip (Compression)', val: gzipBPC },
     { name: 'Shannon Entropy', val: entropy },
-    { name: 'BSP (Current)', val: bpcmBPC }
+    { name: 'BSP (Current)', val: bspBPC }
   ];
 
   rows.sort((a, b) => a.val - b.val);
@@ -102,8 +102,8 @@ async function runBenchmark() {
   }
   
   console.log('\nAnalysis:');
-  if (bpcmBPC > gzipBPC) {
-    console.log(`\x1b[33mWarning: BSP (${bpcmBPC.toFixed(2)}) is performing worse than Gzip (${gzipBPC.toFixed(2)}).\x1b[0m`);
+  if (bspBPC > gzipBPC) {
+    console.log(`\x1b[33mWarning: BSP (${bspBPC.toFixed(2)}) is performing worse than Gzip (${gzipBPC.toFixed(2)}).\x1b[0m`);
     console.log('This means the model is currently not "compressing" effectively. It adds more overhead than it saves.');
     console.log('Reason: Surprise rate is too high (~90%). The model pays full cost for raw bits + overhead for group pointers.');
   } else {

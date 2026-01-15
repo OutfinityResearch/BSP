@@ -4,10 +4,10 @@
  */
 
 const readline = require('readline');
-const { BPCMEngine } = require('../src/core');
+const { BSPEngine } = require('../src/core');
 
 // Create engine
-const engine = new BPCMEngine({
+const engine = new BSPEngine({
   universeSize: 50000,
   maxGroups: 5000,
   rlPressure: 0.3,

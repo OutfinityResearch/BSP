@@ -6,13 +6,87 @@
 
 const fs = require('fs');
 const path = require('path');
+const readline = require('readline');
 
 const DATA_DIR = path.join(__dirname, '../data');
 const CORPUS_FILE = path.join(DATA_DIR, 'corpus.txt');
 const PRETRAINED_PATH = path.join(DATA_DIR, 'pretrained.json');
 
 // Add core modules to path
-const { BPCMEngine } = require('../src/core/BPCMEngine');
+const { BSPEngine } = require('../src/core/BSPEngine');
+
+function fnv1a64(str) {
+  let hash = 0xcbf29ce484222325n;
+  const prime = 0x100000001b3n;
+  for (let i = 0; i < str.length; i++) {
+    hash ^= BigInt(str.charCodeAt(i));
+    hash = (hash * prime) & 0xffffffffffffffffn;
+  }
+  return hash;
+}
+
+async function reservoirSampleSentences(filePath, sampleSize, options) {
+  const {
+    minLen = 10,
+    maxLen = 500,
+    dedup = false,
+  } = options;
+
+  const samples = [];
+  const seen = dedup ? new Set() : null;
+  let seenCount = 0;
+
+  const rl = readline.createInterface({
+    input: fs.createReadStream(filePath),
+    crlfDelay: Infinity,
+  });
+
+  for await (const line of rl) {
+    const s = (line || '').trim();
+    if (s.length <= minLen || s.length > maxLen) continue;
+
+    if (seen) {
+      const h = fnv1a64(s);
+      if (seen.has(h)) continue;
+      seen.add(h);
+    }
+
+    seenCount++;
+    if (samples.length < sampleSize) {
+      samples.push(s);
+    } else {
+      const j = Math.floor(Math.random() * seenCount);
+      if (j < sampleSize) samples[j] = s;
+    }
+  }
+
+  return samples;
+}
+
+async function* iterateCorpus(filePath, options) {
+  const {
+    minLen = 10,
+    maxLen = 500,
+    dedup = false,
+  } = options;
+
+  const seen = dedup ? new Set() : null;
+  const rl = readline.createInterface({
+    input: fs.createReadStream(filePath),
+    crlfDelay: Infinity,
+  });
+
+  for await (const line of rl) {
+    const s = (line || '').trim();
+    if (s.length <= minLen || s.length > maxLen) continue;
+    if (seen) {
+      const h = fnv1a64(s);
+      if (seen.has(h)) continue;
+      seen.add(h);
+    }
+    yield s;
+  }
+}
 
 async function pretrain(options = {}) {
   const {
@@ -21,6 +95,12 @@ async function pretrain(options = {}) {
     saveEvery = 1000,
     maxSentences = null,  // null = use all
     rlPressure = 0.1,     // Low RL pressure during pretraining
+    minLen = 10,
+    maxLen = 500,
+    dedup = false,
+    shuffle = true,
+    subsample = true,
+    subsampleT = 1e-3,
   } = options;
 
   console.log('============================================================');
@@ -34,34 +114,44 @@ async function pretrain(options = {}) {
     await downloadCorpus();
   }
 
-  // Load corpus
-  console.log('Loading corpus...');
-  const corpusText = fs.readFileSync(CORPUS_FILE, 'utf8');
-  let sentences = corpusText.split('\n').filter(s => s.trim().length > 10);
-  
-  if (maxSentences && sentences.length > maxSentences) {
-    // Shuffle and take subset
-    for (let i = sentences.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+  let sentences = null;
+  if (maxSentences) {
+    console.log('Sampling corpus...');
+    sentences = await reservoirSampleSentences(CORPUS_FILE, maxSentences, { minLen, maxLen, dedup });
+    console.log(`Sampled ${sentences.length} sentences`);
+  } else {
+    console.log('Streaming corpus (no in-memory load)...');
+    console.log(`Filters: minLen>${minLen}, maxLen<=${maxLen}, dedup=${dedup}`);
+    if (!shuffle) {
+      // ok
+    } else {
+      console.log('Note: shuffle is disabled when streaming the full corpus.');
     }
-    sentences = sentences.slice(0, maxSentences);
   }
-  
-  console.log(`Loaded ${sentences.length} sentences`);
-  console.log(`Total characters: ${corpusText.length.toLocaleString()}`);
 
   // Create engine with vocabulary enabled for interpretable tokens
   console.log('\nCreating engine...');
-  const engine = new BPCMEngine({
+  const engine = new BSPEngine({
     useVocab: true,  // IMPORTANT: Enable vocabulary for readable output
     tokenizer: {
       ngramSizes: [1, 2, 3],  // Unigrams, bigrams, trigrams
+      subsampleHotTokens: subsample,
+      subsampleT: subsampleT,
     },
     learner: {
       // More aggressive group creation during pretraining helps bootstrap concepts faster.
       newGroupThreshold: 0.2,
       minGroupSize: 2,
+    },
+    // Prevent candidate explosion on very frequent identities.
+    index: {
+      maxGroupsPerIdentity: 256,
+      indexEvictPolicy: 'lowestUsage',
+    },
+    // Improve early decoding quality when transition counts are sparse.
+    sequenceModel: {
+      smoothing: 'addAlpha',
+      smoothingAlpha: 0.1,
     },
     rlPressure: rlPressure,
   });
@@ -80,36 +170,68 @@ async function pretrain(options = {}) {
     let epochSurprise = 0;
     let epochCount = 0;
 
-    // Shuffle sentences each epoch
-    for (let i = sentences.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
-    }
-
-    // Process in batches
-    for (let i = 0; i < sentences.length; i += batchSize) {
-      const batch = sentences.slice(i, i + batchSize);
-      
-      for (const sentence of batch) {
-        const result = engine.process(sentence, {
-          reward: 0,  // No reward during pretraining
-        });
-        
-        epochSurprise += result.surprise;
-        epochCount++;
-        totalProcessed++;
+    if (sentences) {
+      if (shuffle) {
+        for (let i = sentences.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+        }
       }
 
-      // Progress update every batch
-      if (totalProcessed % (batchSize * 10) === 0) {
-        const stats = engine.getStats();
-        const progress = ((i / sentences.length) * 100).toFixed(1);
-        process.stdout.write(`\r  Epoch ${epoch}/${epochs}: ${progress}% | Groups: ${stats.groupCount} | Edges: ${stats.edgeCount}`);
+      for (let i = 0; i < sentences.length; i += batchSize) {
+        const batch = sentences.slice(i, i + batchSize);
+
+        for (const sentence of batch) {
+          const result = engine.process(sentence, { reward: 0 });
+          epochSurprise += result.surprise;
+          epochCount++;
+          totalProcessed++;
+        }
+
+        if (totalProcessed % (batchSize * 10) === 0) {
+          const stats = engine.getStats();
+          const progress = ((i / sentences.length) * 100).toFixed(1);
+          process.stdout.write(`\r  Epoch ${epoch}/${epochs}: ${progress}% | Groups: ${stats.groupCount} | Edges: ${stats.edgeCount}`);
+        }
+
+        if (totalProcessed % 500 === 0) {
+          engine.consolidate(20);
+        }
+      }
+    } else {
+      let batch = [];
+      let batchIndex = 0;
+
+      for await (const sentence of iterateCorpus(CORPUS_FILE, { minLen, maxLen, dedup })) {
+        batch.push(sentence);
+        if (batch.length < batchSize) continue;
+
+        for (const s of batch) {
+          const result = engine.process(s, { reward: 0 });
+          epochSurprise += result.surprise;
+          epochCount++;
+          totalProcessed++;
+        }
+        batch = [];
+        batchIndex++;
+
+        if (batchIndex % 10 === 0) {
+          const stats = engine.getStats();
+          process.stdout.write(`\r  Epoch ${epoch}/${epochs}: processed=${epochCount.toLocaleString()} | Groups: ${stats.groupCount} | Edges: ${stats.edgeCount}`);
+        }
+
+        if (totalProcessed % 500 === 0) {
+          engine.consolidate(20);
+        }
       }
 
-      // Periodic consolidation
-      if (totalProcessed % 500 === 0) {
-        engine.consolidate(20);
+      if (batch.length > 0) {
+        for (const s of batch) {
+          const result = engine.process(s, { reward: 0 });
+          epochSurprise += result.surprise;
+          epochCount++;
+          totalProcessed++;
+        }
       }
     }
 
@@ -182,11 +304,31 @@ if (require.main === module) {
     if (args[i] === '--epochs' && args[i + 1]) {
       options.epochs = parseInt(args[i + 1]);
       i++;
+    } else if (args[i] === '--batch' && args[i + 1]) {
+      options.batchSize = parseInt(args[i + 1]);
+      i++;
     } else if (args[i] === '--max' && args[i + 1]) {
       options.maxSentences = parseInt(args[i + 1]);
       i++;
     } else if (args[i] === '--rho' && args[i + 1]) {
       options.rlPressure = parseFloat(args[i + 1]);
+      i++;
+    } else if (args[i] === '--minLen' && args[i + 1]) {
+      options.minLen = parseInt(args[i + 1]);
+      i++;
+    } else if (args[i] === '--maxLen' && args[i + 1]) {
+      options.maxLen = parseInt(args[i + 1]);
+      i++;
+    } else if (args[i] === '--dedup') {
+      options.dedup = true;
+    } else if (args[i] === '--no-shuffle') {
+      options.shuffle = false;
+    } else if (args[i] === '--subsample') {
+      options.subsample = true;
+    } else if (args[i] === '--no-subsample') {
+      options.subsample = false;
+    } else if (args[i] === '--subsampleT' && args[i + 1]) {
+      options.subsampleT = parseFloat(args[i + 1]);
       i++;
     }
   }

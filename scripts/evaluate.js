@@ -9,7 +9,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { BPCMEngine } = require('../src/core');
+const { BSPEngine } = require('../src/core');
 
 // Parse args
 const args = process.argv.slice(2);
@@ -46,7 +46,7 @@ async function main() {
   // Load model once
   console.log(`Loading model from ${modelPath}...`);
   const state = JSON.parse(fs.readFileSync(modelPath, 'utf8'));
-  const engine = BPCMEngine.fromJSON(state);
+  const engine = BSPEngine.fromJSON(state);
   console.log(`Model loaded: ${engine.store.size} groups, ${engine.graph.edgeCount} edges.`);
 
   if (specificType) {

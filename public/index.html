@@ -527,7 +527,7 @@
     async function init() {
       // Check for existing session in URL or localStorage
       const urlParams = new URLSearchParams(window.location.search);
-      const savedSession = urlParams.get('session') || localStorage.getItem('bpcm_session');
+      const savedSession = urlParams.get('session') || localStorage.getItem('bsp_session');
       
       if (savedSession) {
         try {
@@ -548,7 +548,7 @@
         const data = await res.json();
         
         sessionId = data.sessionId;
-        localStorage.setItem('bpcm_session', sessionId);
+        localStorage.setItem('bsp_session', sessionId);
         
         document.getElementById('session-id').textContent = sessionId.split('_').pop();
         document.getElementById('message-input').disabled = false;
@@ -569,7 +569,7 @@
       
       const data = await res.json();
       sessionId = id;
-      localStorage.setItem('bpcm_session', sessionId);
+      localStorage.setItem('bsp_session', sessionId);
       
       document.getElementById('session-id').textContent = id.split('_').pop();
       document.getElementById('message-input').disabled = false;

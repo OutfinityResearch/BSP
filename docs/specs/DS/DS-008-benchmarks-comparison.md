@@ -472,12 +472,12 @@ interface BenchmarkReport {
   // Comparison cu GPT-2
   comparison: {
     wikitext2Perplexity: {
-      bpcm: number;
+      bsp: number;
       gpt2Medium: 29.41;
       ratio: number;
     };
     lambadaAccuracy: {
-      bpcm: number;
+      bsp: number;
       gpt2Medium: 0.5548;
       ratio: number;
     };

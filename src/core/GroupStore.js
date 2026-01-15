@@ -22,10 +22,16 @@ class GroupStore {
    * @param {object} options
    * @param {number} [options.maxGroups=10000] - Maximum groups allowed
    * @param {number} [options.universeSize=100000] - Size of identity space
+   * @param {number} [options.maxGroupsPerIdentity=Infinity] - Cap for inverted index fanout
+   * @param {'random'|'lowestUsage'|'lowestSalience'} [options.indexEvictPolicy='random'] - Eviction policy when cap is exceeded
    */
   constructor(options = {}) {
     this.maxGroups = options.maxGroups || 10000;
     this.universeSize = options.universeSize || 100000;
+    this.maxGroupsPerIdentity = Number.isFinite(options.maxGroupsPerIdentity)
+      ? options.maxGroupsPerIdentity
+      : Infinity;
+    this.indexEvictPolicy = options.indexEvictPolicy || 'random';
     
     /** @type {Map<number, Group>} */
     this.groups = new Map();
@@ -204,7 +210,46 @@ class GroupStore {
     if (!this.belongsTo.has(identity)) {
       this.belongsTo.set(identity, new Set());
     }
-    this.belongsTo.get(identity).add(groupId);
+    const set = this.belongsTo.get(identity);
+    set.add(groupId);
+
+    if (set.size > this.maxGroupsPerIdentity) {
+      this._evictFromIndex(identity, set);
+    }
+  }
+
+  _evictFromIndex(identity, set) {
+    if (!Number.isFinite(this.maxGroupsPerIdentity)) return;
+    if (set.size <= this.maxGroupsPerIdentity) return;
+
+    if (this.indexEvictPolicy === 'random') {
+      for (const id of set) {
+        set.delete(id);
+        break;
+      }
+      return;
+    }
+
+    let worstId = null;
+    let worstScore = Infinity;
+
+    for (const id of set) {
+      const group = this.groups.get(id);
+      if (!group) continue;
+
+      const score = this.indexEvictPolicy === 'lowestUsage'
+        ? (group.usageCount || 0)
+        : (group.salience || 0);
+
+      if (score < worstScore) {
+        worstScore = score;
+        worstId = id;
+      }
+    }
+
+    if (worstId !== null) {
+      set.delete(worstId);
+    }
   }
 
   _removeFromIndex(identity, groupId) {
@@ -341,6 +386,8 @@ class GroupStore {
     return {
       maxGroups: this.maxGroups,
       universeSize: this.universeSize,
+      maxGroupsPerIdentity: this.maxGroupsPerIdentity,
+      indexEvictPolicy: this.indexEvictPolicy,
       nextId: this.nextId,
       groups,
       stats: this.stats,
@@ -356,6 +403,8 @@ class GroupStore {
     const store = new GroupStore({
       maxGroups: json.maxGroups,
       universeSize: json.universeSize,
+      maxGroupsPerIdentity: json.maxGroupsPerIdentity,
+      indexEvictPolicy: json.indexEvictPolicy,
     });
     
     store.nextId = json.nextId;

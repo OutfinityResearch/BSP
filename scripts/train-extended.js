@@ -5,7 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { BPCMEngine } = require('../src/core');
+const { BSPEngine } = require('../src/core');
 
 // Extended training corpus
 const TRAINING_DATA = `
@@ -70,7 +70,7 @@ async function train() {
   console.log(`Training samples: ${TRAINING_DATA.length}`);
   console.log('');
 
-  const engine = new BPCMEngine({
+  const engine = new BSPEngine({
     universeSize: 50000,
     maxGroups: 5000,
     rlPressure: 0.3,

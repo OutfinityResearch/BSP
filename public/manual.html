@@ -186,11 +186,11 @@ node scripts/train.js</code></pre>
   <p>Create a training script for your data:</p>
   
   <pre><code>// scripts/train.js
-const { BPCMEngine } = require('../src/core');
+const { BSPEngine } = require('../src/core');
 const fs = require('fs');
 
 // Create engine
-const engine = new BPCMEngine({
+const engine = new BSPEngine({
   universeSize: 100000,
   maxGroups: 10000,
   rlPressure: 0.3,
@@ -227,9 +227,9 @@ console.log('Model saved to data/model.json');</code></pre>
   
   <h3>Method 2: Programmatic Training</h3>
   
-  <pre><code>const { BPCMEngine } = require('./src/core');
+  <pre><code>const { BSPEngine } = require('./src/core');
 
-const engine = new BPCMEngine();
+const engine = new BSPEngine();
 
 // Train on individual texts
 const trainingData = [
@@ -301,12 +301,12 @@ BSP: Feedback recorded (reward: 0.5)</code></pre>
   <h3>Evaluation Script</h3>
   
   <pre><code>// scripts/evaluate.js
-const { BPCMEngine } = require('../src/core');
+const { BSPEngine } = require('../src/core');
 const fs = require('fs');
 
 // Load trained model
 const state = JSON.parse(fs.readFileSync('data/model.json', 'utf8'));
-const engine = BPCMEngine.fromJSON(state);
+const engine = BSPEngine.fromJSON(state);
 
 // Load test data
 const testLines = fs.readFileSync('data/test.txt', 'utf8')
@@ -367,12 +367,12 @@ for (const pred of predictions) {
 
   <h2 id="api">6. API Reference</h2>
   
-  <h3>BPCMEngine</h3>
+  <h3>BSPEngine</h3>
   
-  <pre><code>const { BPCMEngine } = require('./src/core');
+  <pre><code>const { BSPEngine } = require('./src/core');
 
 // Create engine
-const engine = new BPCMEngine({
+const engine = new BSPEngine({
   universeSize: 100000,    // Identity space size
   maxGroups: 10000,        // Maximum groups
   rlPressure: 0.3,         // RL vs LM balance
@@ -410,7 +410,7 @@ const stats = engine.getStats();
 const state = engine.toJSON();
 fs.writeFileSync('model.json', JSON.stringify(state));
 
-const loaded = BPCMEngine.fromJSON(JSON.parse(fs.readFileSync('model.json')));
+const loaded = BSPEngine.fromJSON(JSON.parse(fs.readFileSync('model.json')));
 </code></pre>
   
   <h3>REST API</h3>
@@ -455,7 +455,7 @@ Response: { "sessions": [...] }</code></pre>
   
   <h3>Memory Optimization</h3>
   <p>For large datasets, reduce memory usage:</p>
-  <pre><code>const engine = new BPCMEngine({
+  <pre><code>const engine = new BSPEngine({
   maxGroups: 5000,        // Fewer groups
   universeSize: 50000,    // Smaller identity space
   replayBufferSize: 10000, // Smaller buffer

@@ -8,7 +8,7 @@ const { GroupStore } = require('./GroupStore');
 const { DeductionGraph } = require('./DeductionGraph');
 const { Learner } = require('./Learner');
 const { ReplayBuffer } = require('./ReplayBuffer');
-const { BPCMEngine } = require('./BPCMEngine');
+const { BSPEngine } = require('./BSPEngine');
 const { ResponseGenerator } = require('./ResponseGenerator');
 const { SequenceModel } = require('./SequenceModel');
 const { IDFTracker } = require('./IDFTracker');
@@ -22,7 +22,7 @@ module.exports = {
   DeductionGraph,
   Learner,
   ReplayBuffer,
-  BPCMEngine,
+  BSPEngine,
   ResponseGenerator,
   SequenceModel,
   IDFTracker,

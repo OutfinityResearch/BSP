@@ -166,7 +166,7 @@ function computeTopicBonus(group, context) {
 ## 4. Integration Points
 
 - **Session**: Store ConversationContext per session
-- **BPCMEngine.process()**: Update context after each turn
+- **BSPEngine.process()**: Update context after each turn
 - **ResponseGenerator**: Use context for scoring
 - **Serialization**: Save/restore context with session
 

@@ -3,7 +3,7 @@
  * Starts the HTTP server for chat interface
  */
 
-const { BPCMServer } = require('./server');
+const { BSPServer } = require('./server');
 const path = require('path');
 
 // Configuration from environment or defaults
@@ -15,7 +15,7 @@ const config = {
 };
 
 // Create and start server
-const server = new BPCMServer(config);
+const server = new BSPServer(config);
 server.start();
 
 // Handle shutdown

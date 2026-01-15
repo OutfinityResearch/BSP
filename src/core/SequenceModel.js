@@ -7,6 +7,8 @@ class SequenceModel {
   constructor(options = {}) {
     this.maxTransitions = options.maxTransitions || 100000;
     this.maxVocab = options.maxVocab || 50000;
+    this.smoothing = options.smoothing || 'none'; // 'none' | 'addAlpha'
+    this.smoothingAlpha = options.smoothingAlpha ?? 0.1;
     
     // Bigram transition counts: token -> (next_token -> count)
     this.transitions = new Map();
@@ -90,6 +92,36 @@ class SequenceModel {
     const total = this.tokenCounts.get(current) || 1;
     
     return count / total;
+  }
+
+  /**
+   * Smoothed transition probability.
+   * For add-alpha: (c + α) / (total + α * V)
+   * @param {string} current
+   * @param {string} next
+   * @returns {number}
+   */
+  getTransitionProbSmoothed(current, next) {
+    if (this.smoothing !== 'addAlpha') return this.getTransitionProb(current, next);
+
+    const alpha = Math.max(0, Number(this.smoothingAlpha) || 0);
+    const nextMap = this.transitions.get(current);
+    const count = nextMap ? (nextMap.get(next) || 0) : 0;
+    const total = this.tokenCounts.get(current) || 0;
+    const vocabSize = Math.max(1, this.tokenCounts.size);
+    return (count + alpha) / (total + alpha * vocabSize);
+  }
+
+  /**
+   * Unigram probability as a backoff when no bigram evidence exists.
+   * @param {string} token
+   * @returns {number}
+   */
+  getUnigramProb(token) {
+    const tokenCount = this.tokenCounts.get(token) || 0;
+    let total = 0;
+    for (const c of this.tokenCounts.values()) total += c;
+    return total > 0 ? tokenCount / total : 0;
   }
 
   /**
@@ -218,7 +250,7 @@ class SequenceModel {
       
       // Select based on score with temperature
       // Lower temperature = more deterministic/grammatical
-      const selected = this.weightedSelect(scored, 0.7);
+      const selected = this.weightedSelect(scored, temperature);
       
       if (!selected) break;
       
@@ -295,7 +327,9 @@ class SequenceModel {
         
         // Expand
         for (const { token, prob } of nextTokens.slice(0, 10)) { // Consider top 10 transitions
-          let logProb = Math.log(prob + 1e-10);
+          const p = this.getTransitionProbSmoothed(lastToken, token) || prob;
+          const backoff = p > 0 ? p : this.getUnigramProb(token);
+          let logProb = Math.log(backoff + 1e-10);
           
           // Boost seeds
           if (preferSeeds && seedTokens.includes(token)) {
@@ -421,7 +455,9 @@ class SequenceModel {
       startTokens: [...this.startTokens.entries()],
       endTokens: [...this.endTokens],
       totalTransitions: this.totalTransitions,
-      totalSentences: this.totalSentences
+      totalSentences: this.totalSentences,
+      smoothing: this.smoothing,
+      smoothingAlpha: this.smoothingAlpha
     };
   }
 
@@ -431,7 +467,10 @@ class SequenceModel {
    * @returns {SequenceModel}
    */
   static fromJSON(json) {
-    const model = new SequenceModel();
+    const model = new SequenceModel({
+      smoothing: json.smoothing,
+      smoothingAlpha: json.smoothingAlpha,
+    });
     
     // Restore transitions
     if (json.transitions) {
@@ -466,7 +505,6 @@ class SequenceModel {
     
     model.totalTransitions = json.totalTransitions || 0;
     model.totalSentences = json.totalSentences || 0;
-    
     return model;
   }
 }

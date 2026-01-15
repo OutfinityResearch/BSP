@@ -6,7 +6,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { BPCMEngine } = require('../core/BPCMEngine');
+const { BSPEngine } = require('../core/BSPEngine');
 const { ResponseGenerator } = require('../core/ResponseGenerator');
 const { ConversationContext } = require('../core/ConversationContext');
 
@@ -85,7 +85,9 @@ class SessionManager {
     }
     
     // Cleanup interval
-    setInterval(() => this.cleanup(), 60000);
+    this._cleanupTimer = setInterval(() => this.cleanup(), 60000);
+    // Do not keep the event loop alive (important for tests).
+    this._cleanupTimer.unref?.();
   }
 
   create(engineConfig = {}) {
@@ -95,14 +97,14 @@ class SessionManager {
     let engine;
     if (pretrainedState) {
       console.log(`Creating session ${id} from pretrained model`);
-      engine = BPCMEngine.fromJSON(pretrainedState);
+      engine = BSPEngine.fromJSON(pretrainedState);
       // Apply any config overrides
       if (engineConfig.rlPressure !== undefined) {
         engine.setRLPressure(engineConfig.rlPressure);
       }
     } else {
       console.log(`Creating session ${id} from scratch (no pretrained model)`);
-      engine = new BPCMEngine(engineConfig);
+      engine = new BSPEngine(engineConfig);
     }
     
     const session = new Session(id, engine);
@@ -156,7 +158,7 @@ class SessionManager {
     }
     
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    const engine = BPCMEngine.fromJSON(data.engine);
+    const engine = BSPEngine.fromJSON(data.engine);
     const session = new Session(id, engine);
     session.created = data.created;
     session.messageHistory = data.messageHistory || [];
@@ -330,10 +332,10 @@ Engine Stats:
   }
 }
 
-class BPCMServer {
+class BSPServer {
   constructor(options = {}) {
-    this.port = options.port || 3000;
-    this.host = options.host || 'localhost';
+    this.port = options.port !== undefined ? options.port : 3000;
+    this.host = options.host !== undefined ? options.host : 'localhost';
     this.publicDir = options.publicDir || path.join(__dirname, '../../public');
     
     this.sessionManager = new SessionManager({
@@ -626,4 +628,4 @@ class BPCMServer {
   }
 }
 
-module.exports = { BPCMServer, SessionManager, Session };
+module.exports = { BSPServer, SessionManager, Session };
