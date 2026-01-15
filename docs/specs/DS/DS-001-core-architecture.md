@@ -9,28 +9,28 @@
 
 ## 1. Overview
 
-BSP este un sistem de învățare continuă bazat pe CPU care folosește bitset-uri ca reprezentări și un obiectiv de compresie/minimizare surpriză, fără dependență de arhitecturi Transformer.
+BSP is a CPU-based continuous-learning system that uses bitsets as representations and an MDL-style compression/minimum-surprise objective, without relying on Transformer architectures.
 
-### 1.1 Principii Fundamentale
+### 1.1 Fundamental Principles
 
-- **Essence**: Grupurile devin "identitatea de sens" stabilă
-- **Grouping**: Identitățile rămân împreună dacă apar împreună predictibil
-- **Deduction**: Legături între grupuri din co-apariție temporală + condiționare
-- **Continuous Learning**: RL permanent din interacțiuni
+- **Essence**: Groups become a stable "identity of meaning"
+- **Grouping**: Identities stay together when they co-occur predictably
+- **Deduction**: Links between groups learned from temporal co-occurrence + conditioning
+- **Continuous Learning**: Continuous RL signals from interactions
 
-### 1.2 Diferențe față de LLM-uri Tradiționale
+### 1.2 Differences vs Traditional LLMs
 
-| Aspect | LLM Tradițional | BSP |
+| Aspect | Traditional LLM | BSP |
 |--------|-----------------|------|
-| Reprezentări | Embeddings float + attention | Bitset-uri + seturi discrete |
-| Memorie | Ponderile rețelei | Grupuri explicite + contori |
-| Inference | Forward pass matrice | Intersecții seturi + popcount |
-| Învățare | Batch training offline | Online, incremental |
-| Interpretabilitate | Opacă | Grupuri = liste de identități |
+| Representations | Float embeddings + attention | Bitsets + discrete sets |
+| Memory | Network weights | Explicit groups + counters |
+| Inference | Matrix forward pass | Set intersections + popcount |
+| Learning | Offline batch training | Online, incremental |
+| Interpretability | Opaque | Groups = explicit identity lists |
 
 ---
 
-## 2. Arhitectura Sistem
+## 2. System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -68,9 +68,9 @@ BSP este un sistem de învățare continuă bazat pe CPU care folosește bitset-
 
 ---
 
-## 3. Flow Principal
+## 3. Main Flow
 
-### 3.1 Procesare Input
+### 3.1 Input Processing
 
 ```
 Text Input
@@ -92,129 +92,129 @@ Text Input
     │
     ▼
 ┌─────────────┐
-│ Activate    │ → A: top-K grupuri active
+│ Activate    │ → A: top-K active groups
 └─────────────┘
     │
     ▼
 ┌─────────────┐
-│ Predict     │ → Â: grupuri anticipate (din context)
+│ Predict     │ → A_hat: predicted groups (from context)
 └─────────────┘
     │
     ▼
 ┌─────────────┐
-│ Surprise    │ → biți neexplicați + halucinare
+│ Surprise    │ → unexplained bits + hallucination
 └─────────────┘
     │
     ▼
 ┌─────────────┐
-│ Learn       │ → update grupuri + deducții
+│ Learn       │ → update groups + deductions
 └─────────────┘
 ```
 
-### 3.2 Predicție și Generare
+### 3.2 Prediction and Generation
 
 ```
 Context Groups (A_prev)
     │
     ▼
 ┌─────────────────┐
-│ Expand Deductions│ → candidați din deduce[g]
+│ Expand Deductions│ → candidates from deduce[g]
 └─────────────────┘
     │
     ▼
 ┌─────────────────┐
-│ Score & Rank    │ → Â: top grupuri probabile
+│ Score & Rank    │ → A_hat: top likely groups
 └─────────────────┘
     │
     ▼
 ┌─────────────────┐
-│ Decode to Bits  │ → x̂: biți anticipați
+│ Decode to Bits  │ → x̂: predicted bits
 └─────────────────┘
     │
     ▼
 ┌─────────────────┐
-│ Map to Tokens   │ → text output (sau embedding pentru generare)
+│ Map to Tokens   │ → text output (or embeddings for generation)
 └─────────────────┘
 ```
 
 ---
 
-## 4. Componente Principale
+## 4. Core Components
 
 ### 4.1 GroupStore
-- Stochează grupurile (concepte)
-- Fiecare grup: members (bitset), memberCounts, salience, age, usage
+- Stores groups (concepts)
+- Each group: members (bitset), memberCounts, salience, age, usage
 
 ### 4.2 BitmapIndex
-- Index invers: belongsTo[identity] → grupuri
-- Permite retrieval rapid
+- Inverted index: belongsTo[identity] → groups
+- Enables fast candidate retrieval
 
 ### 4.3 DeductionGraph
-- Legături între grupuri: deduce[g] → h
-- Contori/greutăți pentru probabilități
+- Links between groups: deduce[g] → h
+- Counters/weights for estimating link strength/probabilities
 
 ### 4.4 Learner
-- Update memberships bazat pe surpriză
-- Creare/split/merge grupuri
-- Update deducții din tranziții temporale
+- Membership updates driven by surprise
+- Group create/split/merge
+- Deduction updates from temporal transitions
 
 ### 4.5 Importance Module
-- Calculează importance = f(novelty, utility, stability)
-- Modulează learning rate
+- Computes importance = f(novelty, utility, stability)
+- Modulates learning rate
 
 ### 4.6 ReplayBuffer
-- Stochează experiențe prioritizate
-- Permite consolidare (offline learning)
+- Stores prioritized experiences
+- Enables consolidation (offline learning)
 
 ---
 
-## 5. Metrici și Obiective
+## 5. Metrics and Objectives
 
-### 5.1 Loss Principal (MDL-style)
+### 5.1 Primary Loss (MDL-style)
 
 ```
 L = |surprise| + β*|hallucination| + γ*|A|
 ```
 
-Unde:
-- `surprise` = x \ x_hat (biți neexplicați)
-- `hallucination` = x_hat \ x (biți explicați dar inexistenți)
-- `|A|` = numărul de grupuri folosite
+Where:
+- `surprise` = x \ x_hat (unexplained bits)
+- `hallucination` = x_hat \ x (explained-but-absent bits)
+- `|A|` = the number of groups used
 
-### 5.2 Metrici de Evaluare
+### 5.2 Evaluation Metrics
 
 - **Surprise Rate**: |surprise| / |x|
 - **Hallucination Rate**: |hallucination| / |x_hat|
 - **Compression Ratio**: |x| / |A|
-- **Prediction Accuracy**: pentru next-token tasks
+- **Prediction Accuracy**: for next-token tasks
 
 ---
 
-## 6. Parametri Globali (MVP)
+## 6. Global Parameters (MVP)
 
-| Parametru | Valoare Default | Descriere |
+| Parameter | Default Value | Description |
 |-----------|-----------------|-----------|
-| K (top groups) | 16 | Grupuri active per input |
-| Activation threshold | 0.2 | Prag minim scor grup |
-| Membership threshold | 3 | Count minim pentru bit în grup |
-| Decay rate | -1/1000 | Decrement la fiecare 1k updates |
-| Deduction depth | 3 | Adâncime maximă BFS |
-| Beam width | 128 | Noduri explorate în inferență |
-| Replay buffer size | 50,000 | Episoade stocate |
-| RL pressure (ρ) | 0.3 | Echilibru LM vs RL |
+| K (top groups) | 16 | Active groups per input |
+| Activation threshold | 0.2 | Minimum group score threshold |
+| Membership threshold | 3 | Minimum count for an identity to be considered a member |
+| Decay rate | -1/1000 | Decrement applied every 1k updates |
+| Deduction depth | 3 | Maximum BFS depth |
+| Beam width | 128 | Nodes explored during inference |
+| Replay buffer size | 50,000 | Stored episodes |
+| RL pressure (ρ) | 0.3 | LM vs RL trade-off |
 
 ---
 
-## 7. Extinderi Viitoare
+## 7. Future Extensions
 
-1. **Multi-modal**: Suport pentru imagini/audio ca identități
-2. **Distributed**: Sharding pe mai multe procese
-3. **Hierarchical Groups**: Grupuri de grupuri pentru abstracție
-4. **External Memory**: Integrare cu storage persistent pentru scale mare
+1. **Multi-modal**: Support images/audio as identities
+2. **Distributed**: Sharding across multiple processes
+3. **Hierarchical Groups**: Groups-of-groups for abstraction
+4. **External Memory**: Integration with persistent storage at larger scale
 
 ---
 
-## 8. Referințe
+## 8. References
 
 - Roaring Bitmaps: https://roaringbitmap.org/
 - MDL (Minimum Description Length): Rissanen, 1978

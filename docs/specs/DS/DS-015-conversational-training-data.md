@@ -7,7 +7,21 @@
 
 ---
 
-## 1. Problem
+## 1. Overview
+
+General language-modeling corpora help BSP bootstrap language patterns, but a usable chat system requires additional structure:
+- role conditioning (user vs assistant)
+- instruction following under constraints (format, style, “do X, not Y”)
+- preference learning from explicit and implicit feedback
+
+This DS defines practical data formats and a training loop that connects:
+- `engine.process(...)` (online learning)
+- `DeductionGraph` (cross-turn transitions)
+- RL/importance signals (DS-005)
+
+---
+
+## 2. Problem
 
 General LM corpora (PTB/WikiText) help bootstrap language patterns, but they are insufficient for:
 
@@ -19,7 +33,24 @@ To build a usable conversational system, we need targeted conversational data an
 
 ---
 
-## 2. Data Formats
+## 3. Goals and Non-goals
+
+### 3.1 Goals
+
+1. Provide a training data format that is easy to generate, version, and stream.
+2. Enable multi-turn learning of stable conversational “chains” via deductions:
+   - user intent → assistant behavior
+   - correction → improved behavior
+3. Support reward and importance signals without requiring a separate RL framework.
+
+### 3.2 Non-goals
+
+1. Full “SFT on tokens” training like transformer models; BSP learns via groups/deductions.
+2. A single dataset that solves all alignment; we aim for a practical starting point.
+
+---
+
+## 4. Data Formats
 
 ### 2.1 Dialogue JSONL (recommended)
 
@@ -45,7 +76,7 @@ One JSON object per line:
 
 ---
 
-## 3. Training Policy
+## 5. Training Policy
 
 ### 3.1 Two-Stage Bootstrap
 
@@ -67,7 +98,28 @@ This creates stable conversational chains in the DeductionGraph.
 
 ---
 
-## 4. What Data to Add
+## 6. Making Roles Explicit (Recommended)
+
+BSP’s core `process(text)` does not currently encode role explicitly. For role conditioning we should introduce a deterministic role marker so the engine can learn different patterns for user vs assistant turns.
+
+Recommended approaches (planning):
+
+1. **Prefix tokens (string-level)**
+   - Add a reserved marker token at the beginning of each turn:
+     - `bsp_user` for user turns
+     - `bsp_assistant` for assistant turns
+   - Then encode from tokens:
+     - `encodeFromTokens([roleToken, ...tokenizeWords(content)])`
+
+2. **Text prefix (lowest effort, less clean)**
+   - Prepend `User:` / `Assistant:` to the raw text and rely on tokenization.
+   - This is less robust because punctuation is stripped and the markers can collide with natural text.
+
+For now, datasets should store `role` explicitly, even if the training script chooses a simpler encoding.
+
+---
+
+## 7. What Data to Add
 
 ### 4.1 Instruction Following
 
@@ -85,9 +137,30 @@ If the system must operate in Romanian, add conversational examples in Romanian 
 
 ---
 
-## 5. Evaluation
+## 8. Evaluation
+
+Recommended evaluation should cover both coherence and controllability.
 
 - multi-turn coherence on a fixed conversation set
 - positive-feedback rate on preference dataset
 - reduced input echo rate (less repetition)
 
+Additional concrete checks:
+1. **Constraint adherence rate**: for “return JSON”, compute the percentage of responses that parse as JSON.
+2. **Correction learning**: measure whether negative feedback reduces repetition of the corrected behavior.
+3. **Topic continuity**: measure overlap with context keywords (DS-013) over 2–3 turns.
+
+---
+
+## 9. Implementation Plan (For Development Planning)
+
+1. Add a training script mode for JSONL dialogues:
+   - stream turns
+   - inject role markers
+   - call `engine.process(turnText, { reward, learn: true })`
+2. Add a feedback ingestion step:
+   - join feedback events to turns
+   - map `rating` and `reward` to the engine’s `reward` parameter
+3. Add evaluation harness:
+   - constraint adherence tests
+   - coherence tests on fixed prompts

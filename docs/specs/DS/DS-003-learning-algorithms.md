@@ -9,11 +9,11 @@
 
 ## 1. Overview
 
-Acest document descrie algoritmii de învățare online și incrementală ai BSP, concentrați pe minimizarea surprizei și adaptare continuă.
+This document describes BSP's online, incremental learning algorithms, focused on minimizing surprise and enabling continuous adaptation.
 
 ---
 
-## 2. Obiectivul de Învățare
+## 2. Learning Objective
 
 ### 2.1 Loss Function (MDL-style)
 
@@ -21,33 +21,33 @@ Acest document descrie algoritmii de învățare online și incrementală ai BSP
 L(x, A) = |surprise(x, A)| + β * |hallucination(x, A)| + γ * |A|
 ```
 
-Unde:
+Where:
 - `x` = input bitset
-- `A` = grupuri active selectate
-- `surprise = x \ reconstruct(A)` = biți neexplicați
-- `hallucination = reconstruct(A) \ x` = biți excesivi
-- `|A|` = cost de cod (câte grupuri folosim)
+- `A` = selected active groups
+- `surprise = x \ reconstruct(A)` = unexplained bits
+- `hallucination = reconstruct(A) \ x` = extra bits (present in reconstruction but not in input)
+- `|A|` = code cost (how many groups we use)
 
-### 2.2 Obiectiv
+### 2.2 Goal
 
-Minimizăm surpriza viitoare prin:
-1. Ajustarea membership-urilor grupurilor
-2. Crearea de grupuri noi pentru patterns recurente
-3. Merge/split pentru eficiență
-4. Întărirea deducțiilor corecte
+We minimize future surprise by:
+1. Adjusting group memberships
+2. Creating new groups for recurring patterns
+3. Merge/split operations for efficiency
+4. Strengthening correct deductions
 
 ---
 
-## 3. Activare Grupuri
+## 3. Group Activation
 
-### 3.1 Algoritmul de Selecție
+### 3.1 Selection Algorithm
 
 ```typescript
 function activate(x: RoaringBitmap, store: GroupStore, index: BitmapIndex): Group[] {
-  // 1. Găsește candidați
+  // 1. Find candidates
   const candidates = index.getCandidates(x);
   
-  // 2. Scorează fiecare candidat
+  // 2. Score each candidate
   const scores: {group: Group, score: number}[] = [];
   
   for (const groupId of candidates) {
@@ -60,11 +60,11 @@ function activate(x: RoaringBitmap, store: GroupStore, index: BitmapIndex): Grou
     }
   }
   
-  // 3. Sortează și selectează top-K
+  // 3. Sort and select top-K
   scores.sort((a, b) => b.score - a.score);
   const topK = scores.slice(0, MAX_ACTIVE_GROUPS);
   
-  // 4. Greedy selection pentru a minimiza redundanța
+  // 4. Greedy selection to minimize redundancy
   return greedySelect(topK, x);
 }
 
@@ -74,13 +74,13 @@ function computeScore(group: Group, x: RoaringBitmap): number {
   
   if (groupSize === 0) return 0;
   
-  // Coverage: cât din grup e prezent în input
+  // Coverage: how much of the group appears in the input
   const coverage = intersection / groupSize;
   
-  // Penalizare pentru grupuri prea mari
+  // Penalty for overly large groups
   const sizePenalty = LAMBDA * Math.log(groupSize + 1);
   
-  // Boost pentru salience
+  // Salience boost
   const salienceBoost = SALIENCE_WEIGHT * group.salience;
   
   return coverage - sizePenalty + salienceBoost;
@@ -94,7 +94,7 @@ function greedySelect(
   const explained = new RoaringBitmap();
   
   for (const {group, score} of candidates) {
-    // Cât de mult adaugă acest grup?
+    // How much does this group add?
     const newBits = group.members.andNot(explained);
     const marginalValue = newBits.andCardinality(x);
     
@@ -102,7 +102,7 @@ function greedySelect(
       selected.push(group);
       explained.orInPlace(group.members);
       
-      // Stop dacă am explicat suficient
+      // Stop if we have explained enough
       const remainingSurprise = x.andNot(explained).size;
       if (remainingSurprise < MIN_SURPRISE_THRESHOLD) break;
     }
@@ -116,7 +116,7 @@ function greedySelect(
 
 ## 4. Update Memberships
 
-### 4.1 Regula de Update
+### 4.1 Update Rule
 
 ```typescript
 function updateMemberships(
@@ -129,21 +129,21 @@ function updateMemberships(
   const hallucination = reconstruction.andNot(x);
   
   for (const group of activeGroups) {
-    // 4.1.1 Întărește identitățile din input
+    // 4.1.1 Strengthen identities from the input
     for (const identity of x) {
       if (group.members.has(identity) || shouldExpand(group, identity, x)) {
         const currentCount = group.memberCounts.get(identity) || 0;
         const delta = ALPHA * importance;
         group.memberCounts.set(identity, currentCount + delta);
         
-        // Adaugă în members dacă depășește prag
+        // Add to members if it crosses the threshold
         if (currentCount + delta >= MEMBERSHIP_THRESHOLD) {
           group.members.add(identity);
         }
       }
     }
     
-    // 4.1.2 Slăbește identitățile din halucinare
+    // 4.1.2 Weaken identities from hallucination
     for (const identity of hallucination) {
       if (group.members.has(identity)) {
         const currentCount = group.memberCounts.get(identity) || 0;
@@ -169,7 +169,7 @@ function updateMemberships(
 }
 
 function shouldExpand(group: Group, identity: number, x: RoaringBitmap): boolean {
-  // Expandează grupul dacă identitatea apare consistent cu membrii existenți
+  // Expand the group if the identity co-occurs consistently with existing members
   const coOccurrence = group.members.andCardinality(x) / group.members.size;
   return coOccurrence >= CO_OCCURRENCE_THRESHOLD;
 }
@@ -177,13 +177,13 @@ function shouldExpand(group: Group, identity: number, x: RoaringBitmap): boolean
 
 ---
 
-## 5. Creare Grupuri Noi
+## 5. Creating New Groups
 
-### 5.1 Trigger
+### 5.1 Trigger Conditions
 
-Creăm un grup nou când:
-1. Surpriza e mare și niciun grup nu explică suficient
-2. Pattern-ul e recurent (apare de mai multe ori)
+We create a new group when:
+1. Surprise is high and no existing group explains enough
+2. The pattern is recurrent (it appears multiple times)
 
 ```typescript
 function maybeCreateGroup(
@@ -196,22 +196,22 @@ function maybeCreateGroup(
   const surpriseRatio = surprise.size / x.size;
   
   if (surpriseRatio < NEW_GROUP_THRESHOLD) {
-    return null; // Surpriza e acceptabilă
+    return null; // Surprise is acceptable
   }
   
-  // Verifică dacă pattern-ul e recurent
+  // Check whether the pattern is recurrent
   const patternHash = hashPattern(surprise);
   const occurrences = recentPatterns.record(patternHash, surprise);
   
   if (occurrences < MIN_OCCURRENCES_FOR_GROUP) {
-    return null; // Pattern prea rar
+    return null; // Pattern is too rare
   }
   
-  // Creează grup din partea cea mai stabilă a surprizei
+  // Create the group from the most stable part of the surprise
   const stableCore = recentPatterns.getStableCore(patternHash);
   
   const newGroup = store.create(stableCore);
-  newGroup.salience = 0.5; // Start moderat
+  newGroup.salience = 0.5; // Moderate starting value
   
   return newGroup;
 }
@@ -227,7 +227,7 @@ class PatternTracker {
     const existing = this.patterns.get(hash);
     
     if (existing) {
-      // Intersectează pentru a păstra doar părțile consistente
+      // Intersect to keep only the consistent parts
       existing.bitmap = existing.bitmap.and(pattern);
       existing.count++;
       existing.lastSeen = Date.now();
@@ -250,9 +250,9 @@ class PatternTracker {
 
 ---
 
-## 6. Merge și Split
+## 6. Merge and Split
 
-### 6.1 Merge Grupuri Similare
+### 6.1 Merge Similar Groups
 
 ```typescript
 function maybeMerge(store: GroupStore): void {
@@ -266,7 +266,7 @@ function maybeMerge(store: GroupStore): void {
       const jaccard = computeJaccard(g1.members, g2.members);
       
       if (jaccard >= MERGE_THRESHOLD) {
-        // Verifică și co-activare
+        // Also check co-activation
         const coActivation = computeCoActivation(g1, g2);
         
         if (coActivation >= CO_ACTIVATION_THRESHOLD) {
@@ -278,39 +278,39 @@ function maybeMerge(store: GroupStore): void {
 }
 
 function mergeGroups(g1: Group, g2: Group, store: GroupStore): void {
-  // Păstrăm grupul cu mai mult usage
+  // Keep the group with higher usage
   const [keep, discard] = g1.usageCount >= g2.usageCount ? [g1, g2] : [g2, g1];
   
-  // Uniune membership
+  // Union memberships
   keep.members.orInPlace(discard.members);
   
-  // Combinăm contori
+  // Combine counters
   for (const [id, count] of discard.memberCounts) {
     const existing = keep.memberCounts.get(id) || 0;
     keep.memberCounts.set(id, existing + count);
   }
   
-  // Combinăm deducții
+  // Combine deductions
   keep.deduce.orInPlace(discard.deduce);
   for (const [id, count] of discard.deduceCounts) {
     const existing = keep.deduceCounts.get(id) || 0;
     keep.deduceCounts.set(id, existing + count);
   }
   
-  // Actualizăm salience
+  // Update salience
   keep.salience = Math.max(keep.salience, discard.salience);
   
-  // Ștergem grupul absorbit
+  // Delete the absorbed group
   store.delete(discard.id);
 }
 ```
 
-### 6.2 Split Grupuri Prea Generale
+### 6.2 Split Overly General Groups
 
 ```typescript
 function maybeSplit(store: GroupStore, stats: ActivationStats): void {
   for (const group of store.getAll()) {
-    // Grup prea general = se activează prea des
+    // Overly general group = activates too often
     const activationRate = stats.getActivationRate(group.id);
     
     if (activationRate >= OVERGENERAL_THRESHOLD) {
@@ -320,7 +320,7 @@ function maybeSplit(store: GroupStore, stats: ActivationStats): void {
 }
 
 function splitGroup(group: Group, store: GroupStore): void {
-  // Identificăm core vs peripheral based on counts
+  // Identify core vs peripheral based on counts
   const coreIdentities = new RoaringBitmap();
   const peripheralIdentities = new RoaringBitmap();
   
@@ -336,22 +336,22 @@ function splitGroup(group: Group, store: GroupStore): void {
   }
   
   if (peripheralIdentities.size < MIN_GROUP_SIZE) {
-    return; // Nu merită split
+    return; // Split is not worth it
   }
   
-  // Păstrăm core în grupul original
+  // Keep the core in the original group
   group.members = coreIdentities;
   
-  // Curățăm contori pentru peripheral
+  // Clear counters for peripheral
   for (const id of peripheralIdentities) {
     group.memberCounts.delete(id);
   }
   
-  // Creăm grup nou pentru peripheral
+  // Create a new group for the peripheral
   const newGroup = store.create(peripheralIdentities);
   newGroup.salience = group.salience * 0.7;
   
-  // Copiem deducții relevante
+  // Copy relevant deductions
   newGroup.deduce = group.deduce.clone();
   newGroup.deduceCounts = new Map(group.deduceCounts);
 }
@@ -359,9 +359,9 @@ function splitGroup(group: Group, store: GroupStore): void {
 
 ---
 
-## 7. Decay și Pruning
+## 7. Decay and Pruning
 
-### 7.1 Decay Global
+### 7.1 Global Decay
 
 ```typescript
 function applyDecay(store: GroupStore, step: number): void {
@@ -392,7 +392,7 @@ function applyDecay(store: GroupStore, step: number): void {
       }
     }
     
-    // Decay salience pentru grupuri nefolosite
+    // Decay salience for unused groups
     if (Date.now() - group.lastUsed > UNUSED_PERIOD) {
       group.salience *= SALIENCE_DECAY;
     }
@@ -410,11 +410,11 @@ function pruneGroups(store: GroupStore): number {
   
   for (const group of store.getAll()) {
     const shouldPrune = 
-      // Grup prea mic
+      // Group is too small
       group.members.size < MIN_GROUP_SIZE ||
-      // Salience prea mică și vechi
+      // Salience too low and too old
       (group.salience < MIN_SALIENCE && group.age > MIN_AGE_FOR_PRUNE) ||
-      // Nefolosit mult timp
+      // Unused for a long time
       (Date.now() - group.lastUsed > MAX_UNUSED_TIME);
     
     if (shouldPrune) {
@@ -429,7 +429,7 @@ function pruneGroups(store: GroupStore): number {
 
 ---
 
-## 8. Consolidare din Replay Buffer
+## 8. Consolidation from Replay Buffer
 
 ### 8.1 Offline Learning
 
@@ -440,16 +440,16 @@ async function consolidate(
   graph: DeductionGraph,
   batchSize: number
 ): Promise<void> {
-  // Sample episoade prioritizate
+  // Sample prioritized episodes
   const episodes = buffer.sample(batchSize);
   
   for (const episode of episodes) {
-    // Re-activate cu starea curentă
+    // Re-activate with the current state
     const currentGroups = activate(episode.input, store);
     const reconstruction = reconstruct(currentGroups);
     const {surprise, hallucination} = computeSurprise(episode.input, reconstruction);
     
-    // Calculăm importanța actualizată
+    // Compute updated importance
     const importance = computeImportance({
       novelty: surprise.size / episode.input.size,
       utility: episode.reward,
@@ -459,7 +459,7 @@ async function consolidate(
     // Update
     updateMemberships(currentGroups, episode.input, reconstruction, importance);
     
-    // Update deducții dacă avem context
+    // Update deductions if we have context
     if (episode.context && episode.context.length > 0) {
       updateDeductions(
         episode.context,
@@ -474,24 +474,24 @@ async function consolidate(
 
 ---
 
-## 9. Parametri
+## 9. Parameters
 
-| Parametru | Valoare | Descriere |
+| Parameter | Value | Description |
 |-----------|---------|-----------|
-| `ALPHA` | 0.1 | Learning rate pentru membership |
-| `ALPHA_DECAY` | 0.05 | Decay rate pentru halucinări |
-| `ACTIVATION_THRESHOLD` | 0.2 | Scor minim pentru activare |
-| `MAX_ACTIVE_GROUPS` | 16 | Top-K grupuri activate |
-| `MEMBERSHIP_THRESHOLD` | 3.0 | Count minim pentru membru |
-| `NEW_GROUP_THRESHOLD` | 0.5 | Surpriză minimă pentru grup nou |
-| `MIN_OCCURRENCES_FOR_GROUP` | 3 | Recurențe pentru grup nou |
-| `MERGE_THRESHOLD` | 0.8 | Jaccard minim pentru merge |
-| `DECAY_INTERVAL` | 1000 | Updates între decay-uri |
+| `ALPHA` | 0.1 | Learning rate for membership |
+| `ALPHA_DECAY` | 0.05 | Decay rate for hallucinations |
+| `ACTIVATION_THRESHOLD` | 0.2 | Minimum score for activation |
+| `MAX_ACTIVE_GROUPS` | 16 | Top-K activated groups |
+| `MEMBERSHIP_THRESHOLD` | 3.0 | Minimum count for membership |
+| `NEW_GROUP_THRESHOLD` | 0.5 | Minimum surprise for a new group |
+| `MIN_OCCURRENCES_FOR_GROUP` | 3 | Recurrences required for a new group |
+| `MERGE_THRESHOLD` | 0.8 | Minimum Jaccard for merge |
+| `DECAY_INTERVAL` | 1000 | Updates between decays |
 | `DECAY_AMOUNT` | 0.1 | Decrement per decay |
 
 ---
 
-## 10. Pseudocod Complet: Training Step
+## 10. Complete Pseudocode: Training Step
 
 ```typescript
 function trainStep(

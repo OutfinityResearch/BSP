@@ -9,31 +9,31 @@
 
 ## 1. Overview
 
-Acest document descrie integrarea Reinforcement Learning în BSP și mecanismul de "importanță" care modulează viteza de învățare și consolidare.
+This document describes the integration of Reinforcement Learning (RL) into BSP and the "importance" mechanism that modulates learning speed and consolidation.
 
 ---
 
-## 2. Filosofia RL în BSP
+## 2. RL Philosophy in BSP
 
-### 2.1 Principii
+### 2.1 Principles
 
-1. **Orice conversație e RL**: Fiecare interacțiune oferă feedback implicit sau explicit
-2. **Importanța e subiectivă**: User-ul poate marca explicit cât de important e un input
-3. **Echilibru LM ↔ RL**: Parametrul ρ controlează balanța între compresie și adaptare
-4. **Învățare continuă**: Nu există separare training/inference
+1. **Every conversation is RL**: Each interaction provides implicit or explicit feedback
+2. **Importance is subjective**: The user can explicitly mark how important an input is
+3. **LM ↔ RL balance**: Parameter ρ controls the trade-off between compression and adaptation
+4. **Continuous learning**: There is no strict training/inference separation
 
-### 2.2 Tipuri de Reward
+### 2.2 Reward Types
 
-| Tip | Sursa | Exemplu |
+| Type | Source | Example |
 |-----|-------|---------|
-| **Explicit** | User direct | 👍/👎, rating 1-5, "important!" |
-| **Implicit Pozitiv** | Comportament | User continuă conversația, acceptă sugestia |
-| **Implicit Negativ** | Comportament | User corectează, abandonează, reformulează |
-| **Task-based** | Completion | Task finalizat cu succes |
+| **Explicit** | User (direct) | 👍/👎, rating 1-5, "important!" |
+| **Implicit Positive** | Behavior | User continues the conversation, accepts the suggestion |
+| **Implicit Negative** | Behavior | User corrects, abandons, rephrases |
+| **Task-based** | Completion | Task completed successfully |
 
 ---
 
-## 3. Structura Reward
+## 3. Reward Structure
 
 ### 3.1 Reward Signal
 
@@ -43,7 +43,7 @@ interface RewardSignal {
   type: RewardType;
   source: RewardSource;
   timestamp: number;
-  confidence: number;      // 0-1, cât de siguri suntem
+  confidence: number;      // 0-1, how confident we are
 }
 
 enum RewardType {
@@ -68,16 +68,16 @@ enum RewardSource {
 
 ```typescript
 class RewardParser {
-  // Parsează input pentru reward explicit
+  // Parse input for explicit reward
   parseExplicit(input: string): RewardSignal | null {
-    // Patterns pentru feedback explicit
+    // Patterns for explicit feedback
     const patterns = [
-      {regex: /\+{1,3}|👍|good|corect|da\b/i, value: 0.5},
-      {regex: /\+{4,}|excelent|perfect/i, value: 1.0},
-      {regex: /-{1,3}|👎|bad|greșit|nu\b/i, value: -0.5},
-      {regex: /-{4,}|groaznic|total greșit/i, value: -1.0},
+      {regex: /\+{1,3}|👍|good|correct|yes\\b/i, value: 0.5},
+      {regex: /\+{4,}|excellent|perfect/i, value: 1.0},
+      {regex: /-{1,3}|👎|bad|wrong|no\\b/i, value: -0.5},
+      {regex: /-{4,}|terrible|totally wrong/i, value: -1.0},
       {regex: /important!?/i, value: 0.8, type: 'importance_marker'},
-      {regex: /ignoră|skip/i, value: -0.3, type: 'skip_marker'},
+      {regex: /ignore|skip/i, value: -0.3, type: 'skip_marker'},
     ];
     
     for (const pattern of patterns) {
@@ -97,12 +97,12 @@ class RewardParser {
     return null;
   }
   
-  // Inferă reward din comportament
+  // Infer reward from behavior
   inferImplicit(
     prevContext: ConversationContext,
     currentInput: string
   ): RewardSignal {
-    // User continuă conversația = implicit pozitiv
+    // User continues the conversation => implicit positive
     if (prevContext.awaitingResponse && currentInput.length > 10) {
       return {
         value: 0.1,
@@ -113,7 +113,7 @@ class RewardParser {
       };
     }
     
-    // User corectează = implicit negativ
+    // User corrects => implicit negative
     if (this.detectCorrection(prevContext, currentInput)) {
       return {
         value: -0.3,
@@ -138,7 +138,7 @@ class RewardParser {
 
 ---
 
-## 4. Importanță (Importance)
+## 4. Importance
 
 ### 4.1 Formula
 
@@ -147,12 +147,12 @@ function computeImportance(factors: ImportanceFactors): number {
   const {
     novelty,      // |surprise| / |input|
     utility,      // reward value
-    stability,    // recurență în timp
-    recency,      // cât de recent
-    explicitMark, // user a marcat explicit
+    stability,    // recurrence over time
+    recency,      // how recent
+    explicitMark, // user explicitly marked it
   } = factors;
   
-  // Weights configurabile
+  // Configurable weights
   const W = {
     novelty: 0.25,
     utility: 0.35,
@@ -163,12 +163,12 @@ function computeImportance(factors: ImportanceFactors): number {
   
   const raw = 
     W.novelty * novelty +
-    W.utility * Math.abs(utility) +  // Atât pozitiv cât și negativ e important
+    W.utility * Math.abs(utility) +  // Both positive and negative feedback can be important
     W.stability * stability +
     W.recency * recency +
     W.explicit * (explicitMark ? 1 : 0);
   
-  // Clamp și scale
+  // Clamp and scale
   return clamp(raw, 0.1, 1.0);
 }
 
@@ -203,56 +203,56 @@ function getEffectiveLearningRate(
 
 ### 5.1 Conceptul
 
-ρ ∈ [0, 1] controlează echilibrul:
-- ρ = 0: Învățare pură tip "LM" (minimizare surpriză, stabilitate)
-- ρ = 1: Adaptare agresivă tip "policy shaping" (risc de drift)
+ρ ∈ [0, 1] controls the balance:
+- ρ = 0: Pure "LM" learning (surprise minimization, stability)
+- ρ = 1: Aggressive "policy shaping" adaptation (risk of drift)
 
-### 5.2 Cum afectează sistemul
+### 5.2 How It Affects the System
 
 ```typescript
 class RLPressureController {
   private rho: number = 0.3;  // Default
   
-  // Aplică presiunea RL la loss/update
+  // Apply RL pressure to loss/update
   computeLoss(
     surprise: number,
     hallucination: number,
     groupCount: number,
     reward: number
   ): number {
-    // Loss LM (compresie)
+    // LM loss (compression)
     const lmLoss = surprise + BETA * hallucination + GAMMA * groupCount;
     
     // Loss RL (reward)
     const rlLoss = -reward;  // Maximize reward = minimize negative
     
-    // Combinație
+    // Combination
     return (1 - this.rho) * lmLoss + this.rho * rlLoss;
   }
   
-  // Aplică la consolidare
+  // Apply to consolidation
   shouldConsolidate(episode: Episode): boolean {
     if (this.rho < 0.2) {
-      // Low ρ: consolidează bazat pe surpriză
+      // Low ρ: consolidate based on surprise
       return episode.surprise > SURPRISE_THRESHOLD;
     } else {
-      // High ρ: consolidează bazat pe reward
+      // High ρ: consolidate based on reward
       return Math.abs(episode.reward) > REWARD_THRESHOLD;
     }
   }
   
-  // Setare dinamică
+  // Dynamic setting
   setRho(value: number): void {
     this.rho = clamp(value, 0, 1);
   }
   
-  // Auto-adjust bazat pe performance
+  // Auto-adjust based on performance
   autoAdjust(metrics: PerformanceMetrics): void {
     if (metrics.rewardVariance > HIGH_VARIANCE) {
-      // Mult feedback contradictoriu → reduce RL pressure
+      // Lots of contradictory feedback => reduce RL pressure
       this.rho *= 0.9;
     } else if (metrics.avgReward > GOOD_REWARD_THRESHOLD) {
-      // Reward consistent bun → poate crește
+      // Consistently good reward => can increase
       this.rho = Math.min(this.rho * 1.05, 0.8);
     }
   }
@@ -261,9 +261,9 @@ class RLPressureController {
 
 ---
 
-## 6. Value Function pe Grupuri
+## 6. Value Function Over Groups
 
-### 6.1 Salience ca Value
+### 6.1 Salience as Value
 
 ```typescript
 function updateGroupSalience(
@@ -285,7 +285,7 @@ function computeBaseline(recentRewards: number[]): number {
 }
 ```
 
-### 6.2 Propagare Value
+### 6.2 Value Propagation
 
 ```typescript
 function propagateValue(
@@ -296,19 +296,19 @@ function propagateValue(
 ): void {
   const baseline = computeBaseline(recentRewards);
   
-  // Grupurile direct active primesc update complet
+  // Directly active groups receive the full update
   for (const group of activeGroups) {
     updateGroupSalience(group, reward, 1.0, baseline);
   }
   
-  // Propagare backwards pe graf (credit assignment)
+  // Back-propagation over the graph (credit assignment)
   for (const group of activeGroups) {
     const predecessors = graph.getBackwardLinks(group.id);
     
     for (const [predId, weight] of predecessors) {
       const predGroup = store.get(predId);
       if (predGroup) {
-        // Discount bazat pe weight și depth
+        // Discount based on weight and depth
         const discountedReward = reward * weight * CREDIT_DECAY;
         updateGroupSalience(predGroup, discountedReward, 0.5, baseline);
       }
@@ -319,9 +319,9 @@ function propagateValue(
 
 ---
 
-## 7. Integrare în Flow
+## 7. Flow Integration
 
-### 7.1 Training Step cu RL
+### 7.1 Training Step with RL
 
 ```typescript
 async function trainStepWithRL(
@@ -333,29 +333,29 @@ async function trainStepWithRL(
   // 1. Parse reward explicit
   const explicitSignal = engine.rewardParser.parseExplicit(input);
   
-  // 2. Infer reward implicit din context
+  // 2. Infer implicit reward from context
   const implicitSignal = engine.rewardParser.inferImplicit(
     engine.context,
     input
   );
   
-  // 3. Combină rewards
+  // 3. Combine rewards
   const reward = combineRewards(explicitSignal, implicitSignal, explicitReward);
   
   // 4. Compute importance
   const importance = computeImportance({
-    novelty: 0,  // Se calculează după encoding
+    novelty: 0,  // Computed after encoding
     utility: reward.value,
     stability: engine.getPatternStability(input),
     recency: 1.0,
     explicitMark: explicitSignal?.type === 'importance_marker',
   });
   
-  // 5. Encode și activate
+  // 5. Encode and activate
   const x = engine.encode(input);
   const activeGroups = engine.activate(x);
   
-  // 6. Update importance cu novelty reală
+  // 6. Update importance with the true novelty
   const reconstruction = engine.reconstruct(activeGroups);
   const {surprise} = engine.computeSurprise(x, reconstruction);
   
@@ -374,13 +374,13 @@ async function trainStepWithRL(
     rlController.getRho()
   );
   
-  // 8. Learn cu α modulat
+  // 8. Learn with modulated α
   engine.learn(activeGroups, x, alpha);
   
   // 9. Update salience (value function)
   propagateValue(activeGroups, reward.value, engine.graph, engine.store);
   
-  // 10. Store în replay buffer cu prioritate
+  // 10. Store in replay buffer with priority
   engine.buffer.add({
     input: x,
     activeGroups: activeGroups.map(g => g.id),
@@ -401,7 +401,7 @@ async function trainStepWithRL(
 
 ---
 
-## 8. Metrici RL
+## 8. RL Metrics
 
 ### 8.1 Tracking
 
@@ -417,7 +417,7 @@ interface RLMetrics {
   salienceDistribution: {mean: number, std: number};
   
   // Stability
-  groupChurn: number;  // Câte grupuri s-au schimbat semnificativ
+  groupChurn: number;  // How many groups changed significantly
   deductionChurn: number;
   
   // RL pressure
@@ -455,36 +455,36 @@ class RLMetricsTracker {
 
 ---
 
-## 9. API pentru User Control
+## 9. API for User Control
 
-### 9.1 Comenzi Explicite
+### 9.1 Explicit Commands
 
 ```typescript
 interface RLUserCommands {
-  // Marcaj importanță
+  // Importance markers
   markImportant(): void;      // /important
   markIgnore(): void;         // /ignore
   
   // Feedback
-  thumbsUp(): void;           // 👍 sau /good
-  thumbsDown(): void;         // 👎 sau /bad
+  thumbsUp(): void;           // 👍 or /good
+  thumbsDown(): void;         // 👎 or /bad
   rate(value: number): void;  // /rate 4
   
   // Control RL pressure
   setRLPressure(rho: number): void;  // /rl-pressure 0.5
   
-  // Vizualizare
+  // Visualization
   showSalience(): Group[];    // /show-salience
   showMetrics(): RLMetrics;   // /rl-metrics
 }
 ```
 
-### 9.2 Sintaxa în Chat
+### 9.2 Chat Syntax
 
 ```
-User: Asta e foarte important! +++ /important
+User: This is very important! +++ /important
 
-User: Nu, greșit --- 
+User: No, wrong ---
 
 User: /rl-pressure 0.7
 
@@ -497,21 +497,21 @@ System: Top 10 groups by salience:
 
 ---
 
-## 10. Parametri
+## 10. Parameters
 
-| Parametru | Valoare | Descriere |
+| Parameter | Value | Description |
 |-----------|---------|-----------|
-| `DEFAULT_RHO` | 0.3 | Presiune RL default |
-| `BASE_ALPHA` | 0.1 | Learning rate bază |
+| `DEFAULT_RHO` | 0.3 | Default RL pressure |
+| `BASE_ALPHA` | 0.1 | Base learning rate |
 | `SALIENCE_LR` | 0.05 | Learning rate salience |
-| `CREDIT_DECAY` | 0.5 | Decay pentru propagare |
-| `IMPORTANCE_MIN` | 0.1 | Importanță minimă |
-| `REWARD_THRESHOLD` | 0.3 | Prag pentru consolidare RL |
-| `SURPRISE_THRESHOLD` | 0.4 | Prag pentru consolidare LM |
+| `CREDIT_DECAY` | 0.5 | Decay for propagation |
+| `IMPORTANCE_MIN` | 0.1 | Minimum importance |
+| `REWARD_THRESHOLD` | 0.3 | Threshold for RL consolidation |
+| `SURPRISE_THRESHOLD` | 0.4 | Threshold for LM consolidation |
 
 ---
 
-## 11. Diagrama Flow RL
+## 11. RL Flow Diagram
 
 ```
 User Input

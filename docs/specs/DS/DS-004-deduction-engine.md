@@ -9,54 +9,54 @@
 
 ## 1. Overview
 
-Deduction Engine-ul BSP gestionează legăturile cauzale/temporale între grupuri, permițând predicție și raționament multi-hop fără forward pass neuronal.
+The BSP Deduction Engine manages causal/temporal links between groups, enabling multi-hop prediction and reasoning without a neural forward pass.
 
 ---
 
-## 2. Tipuri de Deducții
+## 2. Types of Deductions
 
-### 2.1 Deducție Directă (Temporal)
+### 2.1 Direct Deduction (Temporal)
 
-Învățată din tranziții consecutive:
-- Dacă grupul G apare la t, și grupul H apare la t+1, se întărește G → H
+Learned from consecutive transitions:
+- If group G appears at time t and group H appears at time t+1, strengthen G → H
 
 ```
 A_{t-1} ────► A_t
   │            │
-  └──(învață)──┘
+  └──(learns)──┘
       g → h
 ```
 
-### 2.2 Deducție Indirectă (Multi-hop)
+### 2.2 Indirect Deduction (Multi-hop)
 
-Derivată prin tranzitivitate:
-- Dacă G → H și H → I, atunci putem infera G ⇝ I (cu discount)
+Derived via transitivity:
+- If G → H and H → I, we can infer G ⇝ I (with discount)
 
 ```
 G ──► H ──► I
 └────────⇝──┘ (indirect)
 ```
 
-### 2.3 Deducție Condiționată
+### 2.3 Conditional Deduction
 
-Deducții care depind de context:
-- G → H doar dacă C este activ
+Deductions that depend on context:
+- G → H only if C is active
 
 ---
 
-## 3. Structuri de Date
+## 3. Data Structures
 
 ### 3.1 DeductionGraph
 
 ```typescript
 class DeductionGraph {
-  // Legături forward: source → Map<target, weight>
+  // Forward links: source → Map<target, weight>
   private forward: Map<number, Map<number, number>>;
   
-  // Bitset-uri pentru căutare rapidă
+  // Bitsets for fast search
   private forwardBits: Map<number, RoaringBitmap>;
   
-  // Legături backward pentru query-uri inverse
+  // Backward links for reverse queries
   private backward: Map<number, Map<number, number>>;
   
   // Metadata per link
@@ -74,15 +74,15 @@ interface DeductionMeta {
   created: number;
   lastStrengthened: number;
   strengthenCount: number;
-  context?: number[];  // Grupuri de context când s-a învățat
+  context?: number[];  // Context groups when the link was learned
 }
 ```
 
 ---
 
-## 4. Învățarea Deducțiilor
+## 4. Learning Deductions
 
-### 4.1 Update din Tranziții
+### 4.1 Update from Transitions
 
 ```typescript
 function updateDeductions(
@@ -101,7 +101,7 @@ function updateDeductions(
 }
 ```
 
-### 4.2 Strengthen cu Threshold
+### 4.2 Strengthen with Threshold
 
 ```typescript
 class DeductionGraph {
@@ -118,7 +118,7 @@ class DeductionGraph {
     const newWeight = currentWeight + delta;
     fwdMap.set(to, newWeight);
     
-    // Update bitset dacă depășește threshold
+    // Update bitset when crossing the threshold
     if (newWeight >= DEDUCTION_THRESHOLD && currentWeight < DEDUCTION_THRESHOLD) {
       let bits = this.forwardBits.get(from);
       if (!bits) {
@@ -176,9 +176,9 @@ class DeductionGraph {
 
 ---
 
-## 5. Predicție prin Deducție
+## 5. Prediction via Deductions
 
-### 5.1 Predicție Directă
+### 5.1 Direct Prediction
 
 ```typescript
 function predictDirect(
@@ -192,7 +192,7 @@ function predictDirect(
     
     for (const [target, weight] of weights) {
       const current = predictions.get(target) || 0;
-      // Combinăm cu max sau sum
+      // Combine via max or sum
       predictions.set(target, Math.max(current, weight));
     }
   }
@@ -201,7 +201,7 @@ function predictDirect(
 }
 ```
 
-### 5.2 Predicție Multi-hop (BFS cu Beam)
+### 5.2 Multi-hop Prediction (BFS with Beam)
 
 ```typescript
 function predictMultiHop(
@@ -212,7 +212,7 @@ function predictMultiHop(
 ): Map<number, number> {
   const scores = new Map<number, number>();
   
-  // Inițializăm cu grupurile de start
+  // Initialize with the start groups
   let frontier = new Set(startGroups);
   for (const g of startGroups) {
     scores.set(g, 1.0);
@@ -227,7 +227,7 @@ function predictMultiHop(
       const deductions = graph.getWeightedDeductions(sourceId);
       
       for (const [targetId, weight] of deductions) {
-        // Skip dacă e în start (nu vrem să revenim)
+        // Skip if it's in start (avoid returning to the seed set)
         if (startGroups.includes(targetId)) continue;
         
         const propagatedScore = sourceScore * weight * decay;
@@ -236,7 +236,7 @@ function predictMultiHop(
       }
     }
     
-    // Beam: păstrăm doar top-M
+    // Beam: keep only top-M
     const sorted = Array.from(nextFrontier.entries())
       .sort((a, b) => b[1] - a[1])
       .slice(0, beamWidth);
@@ -251,7 +251,7 @@ function predictMultiHop(
     if (frontier.size === 0) break;
   }
   
-  // Eliminăm grupurile de start din rezultat
+  // Remove start groups from the result
   for (const g of startGroups) {
     scores.delete(g);
   }
@@ -262,7 +262,7 @@ function predictMultiHop(
 
 ---
 
-## 6. Inferență pentru Generare
+## 6. Inference for Generation
 
 ### 6.1 Next-Group Prediction
 
@@ -278,7 +278,7 @@ function predictNextGroups(
   // Multi-hop prediction
   const scores = predictMultiHop(contextIds, graph, INFERENCE_DEPTH, BEAM_WIDTH);
   
-  // Sortează și returnează top-K
+  // Sort and return top-K
   return Array.from(scores.entries())
     .map(([id, score]) => ({groupId: id, score}))
     .sort((a, b) => b.score - a.score)
@@ -294,10 +294,10 @@ function predictNextBits(
   graph: DeductionGraph,
   store: GroupStore
 ): RoaringBitmap {
-  // Predicție de grupuri
+  // Group prediction
   const predictedGroups = predictNextGroups(context, graph, store, TOP_K_PREDICT);
   
-  // Reconstrucție în biți
+  // Reconstruction into bits
   const result = new RoaringBitmap();
   
   for (const {groupId, score} of predictedGroups) {
@@ -305,7 +305,7 @@ function predictNextBits(
     
     const group = store.get(groupId);
     if (group) {
-      // Adaugă biții weighted by score
+      // Add bits (weighted by score)
       result.orInPlace(group.members);
     }
   }
@@ -318,7 +318,7 @@ function predictNextBits(
 
 ## 7. Reasoning Chains
 
-### 7.1 Extragere Lanțuri
+### 7.1 Chain Extraction
 
 ```typescript
 interface ReasoningChain {
@@ -340,7 +340,7 @@ function extractReasoningChains(
   const chains: ReasoningChain[] = [];
   const targetSet = new Set(targetGroups);
   
-  // DFS cu memoization
+  // DFS with memoization
   function dfs(
     current: number,
     depth: number,
@@ -358,7 +358,7 @@ function extractReasoningChains(
     
     const deductions = graph.getWeightedDeductions(current);
     for (const [next, weight] of deductions) {
-      // Evităm cicluri
+      // Avoid cycles
       if (path.some(s => s.to === next)) continue;
       
       const newScore = score * weight * Math.pow(DEPTH_DECAY, depth);
@@ -378,7 +378,7 @@ function extractReasoningChains(
 }
 ```
 
-### 7.2 Explicabilitate
+### 7.2 Explainability
 
 ```typescript
 function explainPrediction(
@@ -417,9 +417,9 @@ function explainPrediction(
 
 ---
 
-## 8. Decay și Maintenance
+## 8. Decay and Maintenance
 
-### 8.1 Decay Deducții
+### 8.1 Deduction Decay
 
 ```typescript
 function decayDeductions(graph: DeductionGraph): void {
@@ -437,7 +437,7 @@ function decayDeductions(graph: DeductionGraph): void {
 }
 ```
 
-### 8.2 Pruning Deducții Slabe
+### 8.2 Pruning Weak Deductions
 
 ```typescript
 function pruneWeakDeductions(
@@ -461,22 +461,22 @@ function pruneWeakDeductions(
 
 ---
 
-## 9. Metrici
+## 9. Metrics
 
-### 9.1 Evaluare Predicții
+### 9.1 Prediction Evaluation
 
 ```typescript
 interface DeductionMetrics {
-  // Precision: câte predicții corecte / total predicții
+  // Precision: correct predictions / total predictions
   precision: number;
   
-  // Recall: câte grupuri reale au fost prezise / total reale
+  // Recall: true groups predicted / total true groups
   recall: number;
   
-  // Average path length pentru deducții corecte
+  // Average path length for correct deductions
   avgPathLength: number;
   
-  // Diversitate: câte grupuri distincte sunt prezise
+  // Diversity: how many distinct groups are predicted
   diversity: number;
 }
 
@@ -500,23 +500,23 @@ function evaluatePredictions(
 
 ---
 
-## 10. Parametri
+## 10. Parameters
 
-| Parametru | Valoare | Descriere |
+| Parameter | Value | Description |
 |-----------|---------|-----------|
-| `ALPHA_DEDUCTION` | 0.15 | Learning rate deducții |
-| `DEDUCTION_THRESHOLD` | 1.0 | Prag pentru bitset |
+| `ALPHA_DEDUCTION` | 0.15 | Learning rate for deductions |
+| `DEDUCTION_THRESHOLD` | 1.0 | Bitset threshold |
 | `DEPTH_DECAY` | 0.7 | Discount per hop |
-| `INFERENCE_DEPTH` | 3 | Max hops pentru predicție |
-| `BEAM_WIDTH` | 128 | Noduri în beam search |
+| `INFERENCE_DEPTH` | 3 | Max hops for prediction |
+| `BEAM_WIDTH` | 128 | Nodes in beam search |
 | `DEDUCTION_DECAY_FACTOR` | 0.999 | Decay per step |
-| `DEDUCTION_MIN_WEIGHT` | 0.01 | Sub acest prag = prune |
-| `MIN_PREDICTION_SCORE` | 0.1 | Prag minim pentru output |
-| `MIN_CHAIN_SCORE` | 0.01 | Prag pentru lanțuri |
+| `DEDUCTION_MIN_WEIGHT` | 0.01 | Below this threshold => prune |
+| `MIN_PREDICTION_SCORE` | 0.1 | Minimum threshold for output |
+| `MIN_CHAIN_SCORE` | 0.01 | Minimum threshold for chains |
 
 ---
 
-## 11. Diagrama Flow
+## 11. Flow Diagram
 
 ```
                      Context Groups

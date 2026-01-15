@@ -9,38 +9,38 @@
 
 ## 1. Overview
 
-Acest document definește planul de benchmarking pentru BSP, incluzând seturi de date pentru antrenare/evaluare, metrici de comparație cu GPT-2, și metodologia de testare.
+This document defines the benchmarking plan for BSP, including training/evaluation datasets, comparison metrics against GPT-2, and the testing methodology.
 
 ---
 
-## 2. Obiective de Evaluare
+## 2. Evaluation Objectives
 
-### 2.1 Metrici Principale
+### 2.1 Primary Metrics
 
-1. **Compresie** (Language Modeling): Cât de bine prezice/comprimă textul
-2. **Deducție** (Long-range): Capacitatea de a face inferențe pe distanțe lungi
-3. **Adaptare** (RL): Viteza de adaptare la feedback
-4. **Eficiență** (Resources): CPU time, memorie, latență
+1. **Compression** (Language Modeling): How well the system predicts/compresses text
+2. **Deduction** (Long-range): Ability to make long-range inferences
+3. **Adaptation** (RL): Speed of adapting to feedback
+4. **Efficiency** (Resources): CPU time, memory, latency
 
-### 2.2 Comparație cu GPT-2
+### 2.2 Comparison with GPT-2
 
-| Model | Parametri | Context | Antrenare |
+| Model | Parameters | Context | Training |
 |-------|-----------|---------|-----------|
 | GPT-2 Small | 124M | 1024 | ~40GB text |
 | GPT-2 Medium | 355M | 1024 | ~40GB text |
-| BSP (MVP) | ~100K groups | Illimitat | Online |
+| BSP (MVP) | ~100K groups | Unlimited | Online |
 
 ---
 
-## 3. Seturi de Date
+## 3. Datasets
 
-### 3.1 Pentru Antrenare
+### 3.1 For Training
 
 #### PTB (Penn Treebank)
-- **Scop**: Antrenare inițială și validare rapidă
-- **Dimensiune**: ~929K tokens train, ~73K valid, ~82K test
-- **Sursa**: https://github.com/pytorch/examples/tree/main/word_language_model/data/ptb
-- **Preprocesare**: Lower-case, vocabulary limitat
+- **Purpose**: Initial training and quick validation
+- **Size**: ~929K train tokens, ~73K valid tokens, ~82K test tokens
+- **Source**: https://github.com/pytorch/examples/tree/main/word_language_model/data/ptb
+- **Preprocessing**: Lower-case, limited vocabulary
 
 ```typescript
 interface PTBConfig {
@@ -52,38 +52,38 @@ interface PTBConfig {
 ```
 
 #### WikiText-2
-- **Scop**: Benchmark standard pentru perplexity
-- **Dimensiune**: ~2M tokens train, ~217K valid, ~245K test
-- **Sursa**: https://huggingface.co/datasets/wikitext
-- **Preprocesare**: Tokenizare standard
+- **Purpose**: Standard benchmark for perplexity
+- **Size**: ~2M train tokens, ~217K valid tokens, ~245K test tokens
+- **Source**: https://huggingface.co/datasets/wikitext
+- **Preprocessing**: Standard tokenization
 
 #### TinyStories (Subset)
-- **Scop**: Antrenare cu date simple și coerente
-- **Dimensiune**: Selectăm 1M-10M tokens
-- **Sursa**: https://huggingface.co/datasets/roneneldan/TinyStories
-- **Preprocesare**: Filtrare și deduplicare
+- **Purpose**: Training on simple and coherent data
+- **Size**: Select 1M-10M tokens
+- **Source**: https://huggingface.co/datasets/roneneldan/TinyStories
+- **Preprocessing**: Filtering and deduplication
 
-### 3.2 Pentru Evaluare
+### 3.2 For Evaluation
 
 #### LAMBADA
-- **Scop**: Testare dependențe lungi / deducție
-- **Dimensiune**: 10,022 pasaje (dev + test)
-- **Sursa**: https://huggingface.co/datasets/cimec/lambada
-- **Metric**: Accuracy pe ultimul cuvânt
+- **Purpose**: Test long-range dependencies / deduction
+- **Size**: 10,022 passages (dev + test)
+- **Source**: https://huggingface.co/datasets/cimec/lambada
+- **Metric**: Accuracy on the last word
 
 #### Custom RL Tasks
-- **Scop**: Evaluare adaptare cu feedback
-- **Format**: Dialog tasks cu reward explicit
+- **Purpose**: Evaluate adaptation with feedback
+- **Format**: Dialog tasks with explicit reward
 
 ### 3.3 Synthetic Grammar (DS-019)
-- **Scop**: Validare arhitecturală (transitive closures, long-range dependencies)
-- **Generare**: Gramatici formale deterministe/probabiliste
-- **Task**: Predicția stării finale dintr-o stare intermediară
-- **Detalii**: Vezi [DS-019: Synthetic Evaluation System](./DS-019-synthetic-evaluation.md)
+- **Purpose**: Architectural validation (transitive closures, long-range dependencies)
+- **Generation**: Deterministic/probabilistic formal grammars
+- **Task**: Predict the final state from an intermediate state
+- **Details**: See [DS-019: Synthetic Evaluation System](./DS-019-synthetic-evaluation.md)
 
 ---
 
-## 4. Rezultate GPT-2 de Referință
+## 4. GPT-2 Reference Results
 
 ### 4.1 Perplexity
 
@@ -103,24 +103,24 @@ interface PTBConfig {
 
 ---
 
-## 5. Metrici BSP Echivalente
+## 5. Equivalent BSP Metrics
 
 ### 5.1 Surprise Metrics
 
-Definim metrici care aproximează perplexity:
+We define metrics that approximate perplexity:
 
 ```typescript
 interface BSPMetrics {
-  // Surprise rate: proporția de biți neexplicați
+  // Surprise rate: proportion of unexplained bits
   surpriseRate: number;  // |surprise| / |input|
   
-  // Hallucination rate: proporția de biți excesivi
+  // Hallucination rate: proportion of extra bits
   hallucinationRate: number;  // |hallucination| / |reconstruction|
   
-  // Cross-entropy proxy (dacă avem probabilități)
+  // Cross-entropy proxy (if we have probabilities)
   crossEntropyProxy: number;
   
-  // Bits per token (pentru comparație directă)
+  // Bits per token (for direct comparison)
   bitsPerToken: number;
   
   // Compression ratio
@@ -131,11 +131,11 @@ interface BSPMetrics {
 ### 5.2 Mapare la Perplexity
 
 ```typescript
-// Aproximare: perplexity ≈ 2^(bits_per_token)
+// Approximation: perplexity ≈ 2^(bits_per_token)
 function approximatePerplexity(metrics: BSPMetrics): number {
-  // surpriseRate → bits neexplicate per bit
-  // Presupunem că biții neexplicați au distribuție uniformă
-  const bitsPerUnexplained = 10;  // log2(vocab_size) aproximativ
+  // surpriseRate → unexplained bits per bit
+  // Assume unexplained bits are uniformly distributed
+  const bitsPerUnexplained = 10;  // approx log2(vocab_size)
   
   const avgBitsPerToken = 
     metrics.surpriseRate * bitsPerUnexplained +
@@ -147,11 +147,11 @@ function approximatePerplexity(metrics: BSPMetrics): number {
 
 ### 5.3 Deduction Accuracy
 
-Pentru LAMBADA-style tasks:
+For LAMBADA-style tasks:
 
 ```typescript
 interface DeductionMetrics {
-  // Accuracy: cât de des ultimul token/concept e în top-K predicții
+  // Accuracy: how often the last token/concept is in the top-K predictions
   top1Accuracy: number;
   top5Accuracy: number;
   top10Accuracy: number;
@@ -163,9 +163,9 @@ interface DeductionMetrics {
 
 ---
 
-## 6. Pipeline de Evaluare
+## 6. Evaluation Pipeline
 
-### 6.1 Structura
+### 6.1 Structure
 
 ```typescript
 class EvaluationPipeline {
@@ -197,7 +197,7 @@ class EvaluationPipeline {
       // Encode
       const encoded = batch.map(text => this.engine.encode(text));
       
-      // Process și colectează metrici
+      // Process and collect metrics
       for (const x of encoded) {
         const activeGroups = this.engine.activate(x);
         const reconstruction = this.engine.reconstruct(activeGroups);
@@ -207,7 +207,7 @@ class EvaluationPipeline {
           surpriseRate: surprise.size / x.size,
           hallucinationRate: hallucination.size / reconstruction.size,
           compressionRatio: x.size / activeGroups.length,
-          crossEntropyProxy: 0,  // Calculat separat dacă avem probabilități
+          crossEntropyProxy: 0,  // Computed separately if we have probabilities
           bitsPerToken: 0,
         });
       }
@@ -322,53 +322,53 @@ class TrainingPipeline {
 
 ## 7. Experimental Setup
 
-### 7.1 Experimente de Bază
+### 7.1 Baseline Experiments
 
-#### Experiment 1: Convergență pe PTB
-- **Obiectiv**: Verifică că BSP învață și converge
+#### Experiment 1: Convergence on PTB
+- **Objective**: Verify that BSP learns and converges
 - **Setup**: 
-  - Train pe PTB train
-  - Evaluare pe PTB valid la fiecare 1K steps
-- **Metrici**: Surprise rate, group count, deduction count
-- **Durată estimată**: 1-2 ore pe CPU
+  - Train on PTB train
+  - Evaluate on PTB valid every 1K steps
+- **Metrics**: Surprise rate, group count, deduction count
+- **Estimated duration**: 1-2 hours on CPU
 
-#### Experiment 2: Comparație WikiText-2
-- **Obiectiv**: Comparație directă cu GPT-2 pe perplexity
+#### Experiment 2: WikiText-2 Comparison
+- **Objective**: Direct comparison with GPT-2 on perplexity
 - **Setup**:
-  - Train pe WikiText-2 train
-  - Eval pe WikiText-2 test
-- **Metrici**: Surprise rate → aproximare perplexity
-- **Target**: Perplexity proxy < 100 (realist pentru MVP)
+  - Train on WikiText-2 train
+  - Eval on WikiText-2 test
+- **Metrics**: Surprise rate → approximate perplexity
+- **Target**: Perplexity proxy < 100 (realistic for MVP)
 
 #### Experiment 3: LAMBADA Deduction
-- **Obiectiv**: Testare capacitate de deducție
+- **Objective**: Test deduction capability
 - **Setup**:
-  - Train pe WikiText-2 sau TinyStories
-  - Eval pe LAMBADA test
-- **Metrici**: Top-1, Top-5, Top-10 accuracy, MRR
+  - Train on WikiText-2 or TinyStories
+  - Eval on LAMBADA test
+- **Metrics**: Top-1, Top-5, Top-10 accuracy, MRR
 - **Target**: Top-10 accuracy > 20%
 
 #### Experiment 4: RL Adaptation
-- **Obiectiv**: Verifică adaptarea cu feedback
+- **Objective**: Verify adaptation with feedback
 - **Setup**:
-  - Pre-train pe text
-  - Fine-tune cu RL pe dialog tasks
-  - Variază ρ: 0, 0.3, 0.7, 1.0
-- **Metrici**: Reward mediu, stability (perplexity drift)
+  - Pre-train on text
+  - Fine-tune with RL on dialog tasks
+  - Sweep ρ: 0, 0.3, 0.7, 1.0
+- **Metrics**: Mean reward, stability (perplexity drift)
 
 ### 7.2 Ablation Studies
 
-#### Ablation 1: Număr de grupuri (K)
+#### Ablation 1: Number of Groups (K)
 - K ∈ {4, 8, 16, 32, 64}
-- Măsurăm: surprise vs K, compute time vs K
+- Measure: surprise vs K, compute time vs K
 
-#### Ablation 2: Adâncime deducție
+#### Ablation 2: Deduction Depth
 - Depth ∈ {1, 2, 3, 4, 5}
-- Măsurăm: accuracy LAMBADA vs depth, time vs depth
+- Measure: LAMBADA accuracy vs depth, time vs depth
 
 #### Ablation 3: RL Pressure
 - ρ ∈ {0, 0.1, 0.3, 0.5, 0.7, 0.9, 1.0}
-- Măsurăm: reward vs ρ, perplexity drift vs ρ
+- Measure: reward vs ρ, perplexity drift vs ρ
 
 ---
 
@@ -413,7 +413,7 @@ class PTBDataset implements Dataset {
 }
 
 class WikiText2Dataset implements Dataset {
-  // Similar, dar cu handling pentru format specific
+  // Similar, but with handling for the specific format
 }
 
 class LAMBADADataset implements Dataset {
@@ -421,8 +421,8 @@ class LAMBADADataset implements Dataset {
   type = 'cloze' as const;
   
   async *iterate(batchSize: number): AsyncGenerator<{context: string, target: string}[]> {
-    // Load și parsează LAMBADA format
-    // Fiecare exemplu: context + ultimul cuvânt
+    // Load and parse LAMBADA format
+    // Each example: context + last word
   }
 }
 ```
@@ -471,11 +471,11 @@ interface BenchmarkReport {
     [name: string]: {
       surpriseRate: number;
       approximatePerplexity: number;
-      accuracy?: number;  // Pentru cloze
+      accuracy?: number;  // For cloze
     };
   };
   
-  // Comparison cu GPT-2
+  // Comparison with GPT-2
   comparison: {
     wikitext2Perplexity: {
       bsp: number;
@@ -531,31 +531,31 @@ Generated: ${new Date().toISOString()}
 
 ---
 
-## 10. Plan de Implementare
+## 10. Implementation Plan
 
-### Faza 1: Dataset Setup (2-3 zile)
-1. [ ] Download script pentru PTB, WikiText-2, LAMBADA
-2. [ ] Data loaders implementați
-3. [ ] Preprocesare și tokenizare
+### Phase 1: Dataset Setup (2-3 days)
+1. [ ] Download script for PTB, WikiText-2, LAMBADA
+2. [ ] Data loaders implemented
+3. [ ] Preprocessing and tokenization
 
-### Faza 2: Evaluation Pipeline (3-4 zile)
+### Phase 2: Evaluation Pipeline (3-4 days)
 1. [ ] Metrics computations
 2. [ ] Language modeling evaluation
 3. [ ] Cloze evaluation (LAMBADA-style)
 4. [ ] Reporting
 
-### Faza 3: Baseline Experiments (5-7 zile)
+### Phase 3: Baseline Experiments (5-7 days)
 1. [ ] Experiment 1: PTB convergence
 2. [ ] Experiment 2: WikiText-2 comparison
 3. [ ] Experiment 3: LAMBADA deduction
 4. [ ] Document results
 
-### Faza 4: RL Experiments (3-4 zile)
+### Phase 4: RL Experiments (3-4 days)
 1. [ ] RL task definition
 2. [ ] Experiment 4: RL adaptation
 3. [ ] ρ sweep analysis
 
-### Faza 5: Ablations și Optimizări (5-7 zile)
+### Phase 5: Ablations and Optimizations (5-7 days)
 1. [ ] All ablation studies
 2. [ ] Identify bottlenecks
 3. [ ] Optimize critical paths
@@ -563,7 +563,7 @@ Generated: ${new Date().toISOString()}
 
 ---
 
-## 11. Structura Fișiere
+## 11. File Structure
 
 ```
 evals/

@@ -9,25 +9,25 @@
 
 ## 1. Overview
 
-Acest document descrie structurile de date fundamentale ale BSP, optimizate pentru operații pe CPU cu seturi mari și sparse.
+This document describes BSP's core data structures, optimized for CPU operations over large sparse sets.
 
 ---
 
-## 2. Identități (Identity Universe)
+## 2. Identities (Identity Universe)
 
-### 2.1 Definiție
+### 2.1 Definition
 
-- **Univers**: `0..(N-1)` unde `N ≤ 1,000,000`
-- Fiecare identitate reprezintă o caracteristică atomică (token, n-gram hash, feature)
+- **Universe**: `0..(N-1)` where `N ≤ 1,000,000`
+- Each identity represents an atomic feature (token, n-gram hash, feature)
 
-### 2.2 Mapare Text → Identități
+### 2.2 Mapping Text → Identities
 
 ```typescript
 interface Tokenizer {
-  // Tokenizare text în IDs
+  // Tokenize text into IDs
   tokenize(text: string): number[];
   
-  // Detokenizare
+  // Detokenize
   detokenize(ids: number[]): string;
   
   // Vocabulary size
@@ -35,7 +35,7 @@ interface Tokenizer {
 }
 
 interface FeatureHasher {
-  // Hash n-grams și features în identity space
+  // Hash n-grams and features into the identity space
   hash(tokens: number[], n: number): number[];
   
   // Universe size
@@ -59,27 +59,27 @@ function encode(text: string): RoaringBitmap {
 
 ---
 
-## 3. Grupuri (Groups/Concepts)
+## 3. Groups (Concepts)
 
-### 3.1 Structura Grupului
+### 3.1 Group Structure
 
 ```typescript
 interface Group {
   id: number;                          // Unique identifier
   
   // Membership
-  members: RoaringBitmap;              // Identitățile "esențiale"
-  memberCounts: Map<number, number>;   // Contori per identitate (sparse)
+  members: RoaringBitmap;              // The "essential" identities
+  memberCounts: Map<number, number>;   // Counters per identity (sparse)
   
   // Metadata
-  salience: number;                    // Importanță (0-1)
+  salience: number;                    // Importance (0-1)
   age: number;                         // Epochs since creation
   lastUsed: number;                    // Timestamp last activation
   usageCount: number;                  // Total activations
   
-  // Deducții (outgoing)
-  deduce: RoaringBitmap;               // Grupuri implicate
-  deduceCounts: Map<number, number>;   // Greutăți per deducție
+  // Deductions (outgoing)
+  deduce: RoaringBitmap;               // Linked/target groups
+  deduceCounts: Map<number, number>;   // Weights per deduction
 }
 ```
 
@@ -110,24 +110,24 @@ class GroupStore {
 }
 ```
 
-### 3.3 Operații pe Grupuri
+### 3.3 Group Operations
 
 ```typescript
-// Scor de potrivire grup-input
+// Group-input match score
 function groupScore(group: Group, input: RoaringBitmap): number {
   const intersection = group.members.andCardinality(input);
   const groupSize = group.members.size;
   
   if (groupSize === 0) return 0;
   
-  // Jaccard-style cu penalizare pentru grupuri mari
+  // Jaccard-style with a penalty for large groups
   const coverage = intersection / groupSize;
   const sizePenalty = Math.log(groupSize + 1) * LAMBDA;
   
   return coverage - sizePenalty;
 }
 
-// Reconstrucție din grupuri active
+// Reconstruction from active groups
 function reconstruct(activeGroups: Group[]): RoaringBitmap {
   const result = new RoaringBitmap();
   for (const g of activeGroups) {
@@ -136,7 +136,7 @@ function reconstruct(activeGroups: Group[]): RoaringBitmap {
   return result;
 }
 
-// Surpriză
+// Surprise
 function computeSurprise(input: RoaringBitmap, reconstruction: RoaringBitmap) {
   return {
     surprise: input.andNot(reconstruction),       // x \ x_hat
@@ -147,27 +147,27 @@ function computeSurprise(input: RoaringBitmap, reconstruction: RoaringBitmap) {
 
 ---
 
-## 4. Index Invers (BelongsTo)
+## 4. Inverted Index (BelongsTo)
 
-### 4.1 Provocare
+### 4.1 Challenge
 
-Cu 1M identități și mii de grupuri, păstrarea unui index invers complet poate fi costisitoare.
+With 1M identities and thousands of groups, maintaining a full inverted index can be expensive.
 
-### 4.2 Strategie Hibridă
+### 4.2 Hybrid Strategy
 
 ```typescript
 class BitmapIndex {
-  // Pentru identități frecvente: index complet
+  // For frequent identities: full index
   private hotIndex: Map<number, RoaringBitmap>;
   
-  // Pentru identități rare: index on-demand sau shingle-based
+  // For rare identities: on-demand index or shingle-based approximation
   private coldShingles: Map<number, RoaringBitmap>; // shingle hash → groups
   
-  // Threshold pentru hot vs cold
+  // Threshold for hot vs cold
   private hotThreshold: number;
   private identityUsage: Map<number, number>;
   
-  // Adaugă un grup în index
+  // Add a group to the index
   addGroup(group: Group): void {
     for (const identity of group.members) {
       if (this.isHot(identity)) {
@@ -177,11 +177,11 @@ class BitmapIndex {
     this.addToShingleIndex(group);
   }
   
-  // Găsește grupuri candidate pentru un input
+  // Find candidate groups for an input
   getCandidates(input: RoaringBitmap): RoaringBitmap {
     const candidates = new RoaringBitmap();
     
-    // Din hot index
+    // From hot index
     for (const identity of input) {
       const groups = this.hotIndex.get(identity);
       if (groups) {
@@ -189,7 +189,7 @@ class BitmapIndex {
       }
     }
     
-    // Din shingle index (pentru cold identities)
+    // From shingle index (for cold identities)
     const shingles = this.computeShingles(input);
     for (const sh of shingles) {
       const groups = this.coldShingles.get(sh);
@@ -206,7 +206,7 @@ class BitmapIndex {
   }
   
   private computeShingles(input: RoaringBitmap): number[] {
-    // Min-hash sau similar pentru similaritate aproximativă
+    // Min-hash or similar for approximate similarity
     // ...
   }
 }
@@ -214,29 +214,29 @@ class BitmapIndex {
 
 ---
 
-## 5. Graful de Deducții
+## 5. Deduction Graph
 
-### 5.1 Structură
+### 5.1 Structure
 
 ```typescript
 class DeductionGraph {
   // Forward links: g → {h: weight}
   private forward: Map<number, Map<number, number>>;
   
-  // Backward links pentru queries inverse
+  // Backward links for reverse queries
   private backward: Map<number, Map<number, number>>;
   
-  // Bitset-uri pentru căutare rapidă
+  // Bitsets for fast search
   private forwardBits: Map<number, RoaringBitmap>;
   
-  // Adaugă sau întărește o deducție
+  // Add or strengthen a deduction
   strengthen(from: number, to: number, delta: number): void {
     // Update forward
     const fwdMap = this.forward.get(from) || new Map();
     fwdMap.set(to, (fwdMap.get(to) || 0) + delta);
     this.forward.set(from, fwdMap);
     
-    // Update bitset dacă depășește prag
+    // Update bitset when crossing the threshold
     if (fwdMap.get(to)! >= DEDUCTION_THRESHOLD) {
       let bits = this.forwardBits.get(from);
       if (!bits) {
@@ -250,17 +250,17 @@ class DeductionGraph {
     // ...
   }
   
-  // Obține grupurile deduse direct
+  // Get directly deduced groups
   getDirectDeductions(groupId: number): RoaringBitmap {
     return this.forwardBits.get(groupId) || new RoaringBitmap();
   }
   
-  // Obține grupurile deduse cu greutăți
+  // Get weighted deductions
   getWeightedDeductions(groupId: number): Map<number, number> {
     return this.forward.get(groupId) || new Map();
   }
   
-  // BFS pentru deducții indirecte
+  // BFS for indirect deductions
   expandDeductions(
     startGroups: RoaringBitmap, 
     maxDepth: number, 
@@ -282,7 +282,7 @@ class DeductionGraph {
         }
       }
       
-      // Beam: păstrează doar top-M
+      // Beam: keep only top-M
       frontier = this.topK(nextFrontier, scores, beamWidth);
       decay *= DECAY_FACTOR;
     }
@@ -296,17 +296,17 @@ class DeductionGraph {
 
 ## 6. Replay Buffer
 
-### 6.1 Structura Episodului
+### 6.1 Episode Structure
 
 ```typescript
 interface Episode {
   timestamp: number;
-  input: RoaringBitmap;          // Input original
-  activeGroups: number[];        // Grupuri activate
-  surprise: number;              // Mărimea surprizei
-  reward: number;                // Semnal RL (dacă există)
-  importance: number;            // Calculat la momentul înregistrării
-  context?: number[];            // Grupuri din context anterior
+  input: RoaringBitmap;          // Original input
+  activeGroups: number[];        // Activated groups
+  surprise: number;              // Surprise magnitude
+  reward: number;                // RL signal (if any)
+  importance: number;            // Computed at record time
+  context?: number[];            // Groups from prior context
 }
 ```
 
@@ -322,7 +322,7 @@ class ReplayBuffer {
     const priority = this.computePriority(episode);
     
     if (this.buffer.length >= this.maxSize) {
-      // Elimină episodul cu prioritate minimă
+      // Evict the minimum-priority episode
       const min = this.priorityIndex.pop();
       this.buffer[min.index] = episode;
       this.priorityIndex.push({priority, index: min.index});
@@ -334,7 +334,7 @@ class ReplayBuffer {
   }
   
   sample(k: number): Episode[] {
-    // Sampling proporțional cu prioritatea
+    // Sampling proportional to priority
     // ...
   }
   
@@ -346,9 +346,9 @@ class ReplayBuffer {
 
 ---
 
-## 7. Serializare
+## 7. Serialization
 
-### 7.1 Format pe Disc
+### 7.1 On-disk Format
 
 ```typescript
 interface SerializedState {
@@ -363,7 +363,7 @@ interface SerializedState {
   groups: SerializedGroup[];
   deductions: SerializedDeduction[];
   
-  // Indexes (opțional, pot fi reconstruite)
+  // Indexes (optional, can be rebuilt)
   belongsToHot?: {identity: number, groups: number[]}[];
   
   // Replay buffer
@@ -372,7 +372,7 @@ interface SerializedState {
 
 interface SerializedGroup {
   id: number;
-  members: number[];         // Sau base64 encoded roaring
+  members: number[];         // Or base64-encoded Roaring
   memberCounts: [number, number][];  // [identity, count][]
   salience: number;
   age: number;
@@ -380,11 +380,11 @@ interface SerializedGroup {
 }
 ```
 
-### 7.2 Formatul Roaring Serializat
+### 7.2 Serialized Roaring Format
 
 ```typescript
 class RoaringSerializer {
-  // Serializare eficientă
+  // Efficient serialization
   static toBuffer(bitmap: RoaringBitmap): Buffer {
     return bitmap.serialize();  // Built-in roaring method
   }
@@ -405,22 +405,22 @@ class RoaringSerializer {
 
 ---
 
-## 8. Complexitate și Memorie
+## 8. Complexity and Memory
 
-### 8.1 Estimări Memorie
+### 8.1 Memory Estimates
 
-| Structură | Estimare | Pentru N=1M, G=10K |
+| Structure | Estimate | For N=1M, G=10K |
 |-----------|----------|-------------------|
-| Un grup (avg) | ~2KB | - |
-| Toate grupurile | G * 2KB | ~20MB |
+| One group (avg) | ~2KB | - |
+| All groups | G * 2KB | ~20MB |
 | Hot index (10%) | 0.1N * 8B * avgGroups | ~80MB |
 | Deduction graph | G * avgDeduce * 8B | ~8MB |
 | Replay buffer (50K) | 50K * 500B | ~25MB |
 | **Total** | - | **~135MB** |
 
-### 8.2 Complexitate Operații
+### 8.2 Operation Complexity
 
-| Operație | Complexitate |
+| Operation | Complexity |
 |----------|--------------|
 | encode(text) | O(tokens) |
 | activate(x) | O(\|candidates\| * log G) |
@@ -431,9 +431,9 @@ class RoaringSerializer {
 
 ---
 
-## 9. Implementare Recomandată
+## 9. Recommended Implementation
 
-### 9.1 Librării Node.js
+### 9.1 Node.js Packages
 
 ```json
 {
@@ -445,7 +445,7 @@ class RoaringSerializer {
 }
 ```
 
-### 9.2 Alternativă: Custom Bitset pentru seturi mici
+### 9.2 Alternative: Custom Bitset for Small Sets
 
 ```typescript
 class SimpleBitset {
@@ -489,7 +489,7 @@ class SimpleBitset {
 
 ---
 
-## 10. Referințe
+## 10. References
 
 - Roaring Bitmap Paper: Chambi et al., "Better bitmap performance with Roaring bitmaps"
 - Sparse Distributed Representations: SDR theory from Numenta

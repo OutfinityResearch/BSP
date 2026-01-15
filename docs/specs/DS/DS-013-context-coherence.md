@@ -1,227 +1,245 @@
-# DS-013: Context-Based Response Coherence
+# DS-013: Context-Based Response Coherence (ConversationContext)
 
-## Status: Implemented
-## Author: BSP Team
-## Date: 2026-01-15
+**Version**: 1.1  
+**Status**: Implemented (v1) + Planned Improvements  
+**Author**: BSP Team  
+**Date**: 2026-01-15
 
-## 1. Problem Statement
+---
 
-Current responses lack coherence:
-1. No connection between consecutive turns
-2. Responses don't build on previous context
-3. No topic continuity in conversation
+## 1. Overview
 
-Example:
+BSP learns patterns and predicts likely next concepts, but a chat system requires **continuity across turns**:
+- keep talking about the same topic unless the user shifts
+- reuse relevant entities/keywords from earlier messages
+- avoid “topic jumping” (random unrelated tokens)
+
+This DS specifies a per-session `ConversationContext` that tracks:
+1. recency-weighted tokens (short-term memory)
+2. topic groups (group IDs with a decayed strength)
+3. lightweight keywords (token-level salience across turns)
+
+The context is used as a multiplier in candidate token scoring and influences seed selection for DS-009/DS-011 sequence generation.
+
+---
+
+## 2. Problem
+
+Without context tracking, responses can lose continuity:
+
 ```
 User: The detective examined the room.
-BSP: upon room it and of his
+BSP:  upon room it and of his
 
 User: He found a clue.
-BSP: upon to and it of        <- Lost context of "detective", "room"
+BSP:  upon to and it of        <- lost "detective", "room"
 ```
 
-## 2. Solution Overview
+The system has learned some relevant groups/tokens, but generation is not anchored to the conversation history.
 
-### 2.1 Conversation Context Window
+---
 
-Maintain a sliding window of recent tokens and active groups:
-```javascript
-class ConversationContext {
-  recentTokens: number[]      // Last N tokens seen
-  activeTopics: Set<number>   // Group IDs representing topics
-  turnCount: number
-  
-  // Decay older context, boost recent
-  getWeightedContext(): Map<number, number>
-}
+## 3. Goals and Non-goals
+
+### 3.1 Goals
+
+1. Preserve topical continuity across 2–3 turns by default.
+2. Provide a bounded-memory representation (fixed windows, decay, caps).
+3. Keep scoring cheap (simple arithmetic; no expensive similarity search).
+4. Make the mechanism serializable so sessions can be saved/restored.
+
+### 3.2 Non-goals
+
+1. Full entity tracking/coreference resolution.
+2. Long-term memory across many sessions (that is a separate system concern).
+3. Perfect discourse planning; this is a heuristic coherence layer.
+
+---
+
+## 4. Data Model
+
+### 4.1 Turn
+
+A “turn” is a single user message (or training input line). It has:
+- tokens from `Tokenizer.tokenizeWords()`
+- active groups returned by the engine
+- optional importance (e.g. explicit feedback or higher weight)
+
+### 4.2 Stored State (Per Session)
+
+`ConversationContext` maintains:
+
+- `recentTokens: string[]` (FIFO window)
+- `tokenWeights: Map<string, number>` (recency-weighted token strength)
+- `activeTopics: Map<number, number>` (groupId → strength)
+- `keywords: Map<string, number>` (token → keyword score)
+- `turnCount: number`
+
+All maps are capped/decayed to keep memory bounded.
+
+---
+
+## 5. Update Rules
+
+On each turn, we call:
+
+```
+context.addTurn(tokens, activeGroups, { importance })
 ```
 
-### 2.2 Context-Aware Prediction
+Where `importance` defaults to 1.0 but can be increased for important messages.
 
-Modify prediction scoring to consider conversation history:
+### 5.1 Token Recency Weights
+
+For token `t` at position `i` in a sentence of length `L`:
+
 ```
-score(prediction) = base_score 
-                  * context_relevance 
-                  * topic_continuity
-```
-
-### 2.3 Topic Tracking
-
-Identify dominant topics in conversation:
-```javascript
-function updateTopics(activeGroups, context) {
-  for (const group of activeGroups) {
-    if (group.purity > 0.5) {  // Content-rich group
-      context.activeTopics.add(group.id);
-    }
-  }
-  
-  // Decay old topics
-  context.decayTopics();
-}
+positionWeight(i, L) = 0.7 + 0.3 * (i / max(1, L-1))
+tokenWeight(t) = importance * positionWeight(i, L)
 ```
 
-## 3. Implementation Details
+Then:
+- append tokens into a FIFO `recentTokens` window
+- store the maximum observed weight for that token:
+  ```
+  tokenWeights[t] = max(tokenWeights[t], tokenWeight(t))
+  ```
 
-### 3.1 Context Window
+When tokens fall out of the FIFO window:
+- reduce their weights (`weight *= 0.5`)
+- delete tokens with very small weight (`<= 0.1`)
 
-```javascript
-class ConversationContext {
-  constructor(options = {}) {
-    this.windowSize = options.windowSize || 100;
-    this.topicDecay = options.topicDecay || 0.9;
-    
-    this.recentTokens = [];
-    this.tokenWeights = new Map();  // token -> recency weight
-    this.activeTopics = new Map();  // groupId -> strength
-  }
-  
-  addTurn(tokens, groups) {
-    // Add tokens with recency weight
-    for (let i = 0; i < tokens.length; i++) {
-      const weight = 1.0 - (i / tokens.length) * 0.5;
-      this.recentTokens.push(tokens[i]);
-      this.tokenWeights.set(tokens[i], weight);
-    }
-    
-    // Trim to window size
-    while (this.recentTokens.length > this.windowSize) {
-      const old = this.recentTokens.shift();
-      this.tokenWeights.delete(old);
-    }
-    
-    // Update topics
-    for (const group of groups) {
-      const current = this.activeTopics.get(group.id) || 0;
-      this.activeTopics.set(group.id, current + 1);
-    }
-    
-    // Decay all topics
-    for (const [id, strength] of this.activeTopics) {
-      const newStrength = strength * this.topicDecay;
-      if (newStrength < 0.1) {
-        this.activeTopics.delete(id);
-      } else {
-        this.activeTopics.set(id, newStrength);
-      }
-    }
-  }
-  
-  getContextRelevance(token) {
-    return this.tokenWeights.get(token) || 0;
-  }
-  
-  getTopicStrength(groupId) {
-    return this.activeTopics.get(groupId) || 0;
-  }
-}
+This creates a short-term memory that fades quickly but smoothly.
+
+### 5.2 Topic Tracking (Group IDs)
+
+When the engine activates groups for the turn, we boost topic strengths:
+
+```
+topicBoost(g) = (g.salience || 0.5) * importance
+activeTopics[g.id] += topicBoost(g)
 ```
 
-### 3.2 Context-Aware Response Generation
+Then we decay topics:
 
-```javascript
-function generateWithContext(predictions, context, sequenceModel) {
-  const candidates = [];
-  
-  for (const pred of predictions) {
-    const group = store.get(pred.groupId);
-    const tokens = extractTokens(group);
-    
-    for (const token of tokens) {
-      const score = 
-        pred.strength *                           // Base prediction
-        (1 + context.getContextRelevance(token)) * // Context boost
-        (1 + context.getTopicStrength(pred.groupId) * 0.5); // Topic continuity
-      
-      candidates.push({ token, score, groupId: pred.groupId });
-    }
-  }
-  
-  // Sort by score and generate sequence
-  candidates.sort((a, b) => b.score - a.score);
-  return sequenceModel.generateFrom(candidates.slice(0, 20));
-}
+```
+activeTopics[id] *= topicDecay
+delete if < 0.05
 ```
 
-### 3.3 Topic Continuity Bonus
+Finally, we cap to `maxTopics` by keeping only the strongest topics.
 
-When a response relates to an ongoing topic, boost it:
-```javascript
-function computeTopicBonus(group, context) {
-  // Check if group shares tokens with active topics
-  let bonus = 0;
-  
-  for (const [topicId, strength] of context.activeTopics) {
-    const topicGroup = store.get(topicId);
-    if (topicGroup) {
-      const overlap = group.members.andCardinality(topicGroup.members);
-      bonus += overlap * strength * 0.1;
-    }
-  }
-  
-  return Math.min(bonus, 2.0);  // Cap bonus
-}
+### 5.3 Keyword Tracking
+
+Keywords are token-level signals that persist across turns longer than pure recency.
+
+Update:
+- for each token `t` with `len(t) >= 3`, do:
+  ```
+  keywords[t] += importance
+  ```
+
+Decay:
+```
+keywords[t] *= 0.9
+delete if < 0.1
 ```
 
-## 4. Integration Points
+Cap:
+- keep only the top-N keywords (implementation keeps up to ~50).
 
-- **Session**: Store ConversationContext per session
-- **BSPEngine.process()**: Update context after each turn
-- **ResponseGenerator**: Use context for scoring
-- **Serialization**: Save/restore context with session
+---
 
-## 5. Session-Level Changes
+## 6. Scoring: How Context Influences Generation
 
-```javascript
-class Session {
-  constructor(id, engine) {
-    this.id = id;
-    this.engine = engine;
-    this.context = new ConversationContext();
-    // ...
-  }
-  
-  processMessage(content) {
-    const result = this.engine.process(content);
-    
-    // Update conversation context
-    const tokens = this.engine.tokenizer.tokenizeWords(content);
-    this.context.addTurn(tokens, result.activeGroups);
-    
-    // Generate with context
-    const response = this.responseGenerator.generateWithContext(
-      result, 
-      this.context
-    );
-    
-    return response;
-  }
-}
+Context is used in candidate token scoring (inside response generation).
+
+### 6.1 Token Relevance
+
+Token relevance combines recency and keyword score:
+
+```
+relevance(t) = tokenWeights[t] + 0.5 * keywords[t]
 ```
 
-## 6. Expected Behavior
+### 6.2 Candidate Score Multiplier
+
+Given candidate token `t` coming from group `g`:
+
+```
+scoreCandidate(t, g) =
+  (1 + relevance(t))
+  * (1 + 0.5 * activeTopics[g])
+  * keywordBoost(t)
+```
+
+Where `keywordBoost(t) = 1.2` if `t` is currently a keyword, otherwise `1.0`.
+
+This multiplier is applied on top of base scores derived from:
+- prediction score (`DeductionGraph` output)
+- group salience
+- semantic weighting (DS-012)
+
+---
+
+## 7. Interaction with DS-009 / DS-011
+
+Context affects sequence generation in two ways:
+
+1. **Candidate scoring**: context boosts certain tokens and topics so they rise to the top.
+2. **Seed selection**: when choosing seed tokens for beam-search decoding, the generator can prefer tokens that are also context keywords.
+
+The practical effect is:
+- turn-to-turn continuity in output tokens
+- reduced random drift into unrelated tokens
+
+---
+
+## 8. Integration in BSP
+
+Relevant modules:
+- `src/core/ConversationContext.mjs`
+- `src/core/ResponseGenerator.mjs`
+- `src/server/Server.mjs` (stores a context instance per session)
+
+Serialization:
+- `ConversationContext.toJSON()` / `ConversationContext.fromJSON()`
+
+---
+
+## 9. Example Behavior
 
 Before:
 ```
 User: The detective examined the room.
-BSP: upon room it and of his
+BSP:  upon room it and of his
 
 User: He found a clue.
-BSP: upon to and it of
+BSP:  upon to and it of
 ```
 
 After:
 ```
 User: The detective examined the room.
-BSP: evidence floor window careful
+BSP:  evidence floor window careful
 
-User: He found a clue.  
-BSP: detective case mystery solved evidence  <- Maintains topic
+User: He found a clue.
+BSP:  detective case mystery solved evidence
 ```
 
-## 7. Success Metrics
+---
 
-- Topic persistence: Same topic words appear across 2-3 turns
-- Context relevance: 30%+ of response tokens relate to recent context
-- Conversation coherence score (manual evaluation)
-- Reduced "topic jumping" between unrelated concepts
+## 10. Success Metrics
+
+1. **Topic persistence**: topic keywords appear across multiple turns when the user stays on the topic.
+2. **Context relevance**: ≥ 30% of response tokens overlap with recent tokens/keywords (excluding stopwords).
+3. **Reduced topic jumping**: fewer responses that contain no meaningful overlap with the last 1–2 turns.
+4. **Bounded memory**: context state size stays under configured caps.
+
+---
+
+## 11. Planned Improvements
+
+1. Use IDF-aware keyword selection (avoid promoting stopwords into `keywords`).
+2. Tie context importance to reward/importance signals (DS-005), so important corrections persist longer.
+3. Add a small “novelty penalty” so responses do not over-repeat the user’s last input (avoid echoing).

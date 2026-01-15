@@ -9,34 +9,34 @@
 
 ## 1. Overview
 
-Acest document descrie serverul HTTP care expune BSP ca un serviciu de chat interactiv, cu suport pentru sesiuni, RL implicit, și control din conversație.
+This document describes the HTTP server that exposes BSP as an interactive chat service, with support for sessions, implicit RL, and in-conversation control.
 
 ---
 
 ## 2. Pre-trained Model (IMPORTANT)
 
-### 2.1 Principiu
+### 2.1 Principle
 
-**Sesiunile noi NU pornesc de la zero.** În schimb:
+**New sessions do NOT start from zero.** Instead:
 
-1. Sistemul are un **model pre-antrenat** pe un corpus de bază
-2. Fiecare sesiune nouă pornește de la acest model
-3. Învățarea continuă adaugă cunoștințe specifice sesiunii
-4. Sesiunile pot fi salvate și reluate
+1. The system has a **pretrained model** learned from a base corpus
+2. Each new session starts from this model
+3. Continuous learning adds session-specific knowledge
+4. Sessions can be saved and resumed
 
-### 2.2 Pre-antrenare
+### 2.2 Pre-training
 
 ```bash
-# Descarcă date și pre-antrenează modelul
+# Download data and pretrain the model
 node scripts/pretrain.mjs
 ```
 
-Aceasta creează `data/pretrained.json` care conține:
-- Grupuri învățate din corpus
-- Deducții între grupuri
-- Vocabular (dacă useVocab=true)
+This creates `data/pretrained.json` containing:
+- Groups learned from the corpus
+- Deductions between groups
+- Vocabulary (if `useVocab=true`)
 
-### 2.3 Flow la Pornire Server
+### 2.3 Server Startup Flow
 
 ```
 Server Start
@@ -56,7 +56,7 @@ Server Start
     Ready for sessions
 ```
 
-### 2.4 Flow la Creare Sesiune
+### 2.4 Session Creation Flow
 
 ```
 POST /api/sessions
@@ -87,7 +87,7 @@ POST /api/sessions
 
 ### 3.1 ResponseGenerator
 
-Sistemul generează răspunsuri în **limbaj natural**, nu doar metrici tehnice:
+The system generates **natural language** responses, not only technical metrics:
 
 ```javascript
 // Input: "Tell me about cats"
@@ -97,17 +97,17 @@ Sistemul generează răspunsuri în **limbaj natural**, nu doar metrici tehnice:
 // NOT: "Surprise: 5, Importance: 0.3"
 ```
 
-### 3.2 Tipuri de Răspunsuri
+### 3.2 Response Types
 
-| Tip | Trigger | Exemplu |
+| Type | Trigger | Example |
 |-----|---------|---------|
 | Greeting | "Hello", "Hi" | "Hello! I'm learning from our conversation..." |
-| Understanding | Grupuri active | "I see you're talking about X and Y..." |
+| Understanding | Active groups | "I see you're talking about X and Y..." |
 | High Surprise | Surprise > 70% | "This is new to me! I'm learning..." |
 | Low Confidence | No groups | "I don't have patterns for this yet..." |
 | Feedback | +++ / --- | "Thanks for the feedback!" |
 
-### 3.3 Structura Răspuns
+### 3.3 Response Structure
 
 ```javascript
 {
@@ -121,16 +121,16 @@ Sistemul generează răspunsuri în **limbaj natural**, nu doar metrici tehnice:
 
 ---
 
-## 4. Arhitectura Server
+## 4. Server Architecture
 
-### 4.1 Stack Tehnologic
+### 4.1 Technology Stack
 
 - **Runtime**: Node.js (v18+)
-- **Framework**: Native HTTP sau Fastify (lightweight)
-- **WebSocket**: Pentru streaming și real-time
-- **Format**: JSON pentru API, SSE pentru streaming
+- **Framework**: Native HTTP or Fastify (lightweight)
+- **WebSocket**: For streaming and real-time
+- **Format**: JSON for API, SSE for streaming
 
-### 4.2 Structura
+### 4.2 Structure
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
@@ -164,19 +164,19 @@ Sistemul generează răspunsuri în **limbaj natural**, nu doar metrici tehnice:
 
 ```
 POST /api/sessions
-  → Creează sesiune nouă
+  → Create a new session
   Body: { "name"?: string, "loadFrom"?: string }
   Response: { "sessionId": string, "created": timestamp }
 
 GET /api/sessions/:id
-  → Info despre sesiune
+  → Session info
   Response: { "id", "created", "lastActive", "messageCount", "stats" }
 
 DELETE /api/sessions/:id
-  → Închide și opțional salvează sesiunea
+  → Close and optionally save the session
 
 GET /api/sessions
-  → Listează sesiunile active
+  → List active sessions
   Response: { "sessions": [...] }
 ```
 
@@ -184,11 +184,11 @@ GET /api/sessions
 
 ```
 POST /api/sessions/:id/messages
-  → Trimite mesaj
+  → Send a message
   Body: {
     "content": string,
     "reward"?: number,        // Reward explicit (-1 to 1)
-    "importance"?: number,    // Override importanță
+    "importance"?: number,    // Override importance
     "metadata"?: object
   }
   Response: {
@@ -200,7 +200,7 @@ POST /api/sessions/:id/messages
   }
 
 GET /api/sessions/:id/messages
-  → Istoric conversație
+  → Conversation history
   Query: ?limit=50&offset=0
   Response: { "messages": [...], "total": number }
 ```
@@ -209,14 +209,14 @@ GET /api/sessions/:id/messages
 
 ```
 POST /api/sessions/:id/control
-  → Comenzi de control
+  → Control commands
   Body: {
     "command": "set-rl-pressure" | "consolidate" | "reset-context" | ...,
     "params": {...}
   }
 
 GET /api/sessions/:id/stats
-  → Statistici sesiune
+  → Session statistics
   Response: {
     "groupCount": number,
     "deductionCount": number,
@@ -231,17 +231,17 @@ GET /api/sessions/:id/stats
 
 ```
 POST /api/sessions/:id/save
-  → Salvează starea
+  → Save state
   Body: { "path"?: string, "format"?: "msgpack" | "json" }
   Response: { "path": string, "size": number }
 
 POST /api/sessions/:id/load
-  → Încarcă stare
+  → Load state
   Body: { "path": string }
   Response: { "loaded": true, "stats": {...} }
 
 GET /api/snapshots
-  → Listează snapshot-uri disponibile
+  → List available snapshots
 ```
 
 ---
@@ -254,7 +254,7 @@ GET /api/snapshots
 // Client
 const ws = new WebSocket('ws://localhost:3000/ws?session=SESSION_ID');
 
-// Sau creează sesiune nouă
+// Or create a new session
 const ws = new WebSocket('ws://localhost:3000/ws?new=true');
 ```
 
@@ -265,7 +265,7 @@ interface WSMessage {
   type: 'chat' | 'control' | 'feedback' | 'stream' | 'error' | 'status';
   payload: any;
   timestamp: number;
-  id?: string;  // Pentru corelare request-response
+  id?: string;  // For request-response correlation
 }
 ```
 
@@ -367,7 +367,7 @@ interface WSMessage {
 
 ---
 
-## 7. Implementare Server
+## 7. Server Implementation
 
 ### 7.1 Main Server
 
@@ -479,13 +479,13 @@ class Session {
   private async handleChat(payload: ChatPayload): Promise<WSMessage> {
     const { content, reward, importance } = payload;
     
-    // Parse pentru comenzi speciale
+    // Parse for special commands
     const command = this.parseCommand(content);
     if (command) {
       return this.executeCommand(command);
     }
     
-    // Procesare normală
+    // Normal processing
     const result = await this.engine.process(content, {
       context: this.context,
       reward,
@@ -503,7 +503,7 @@ class Session {
       timestamp: Date.now(),
     });
     
-    // Generează răspuns
+    // Generate response
     const response = await this.generateResponse(result);
     
     this.messageHistory.push({
@@ -545,11 +545,11 @@ class Session {
     confidence: number;
     reasoning?: string[];
   }> {
-    // Folosește predicția de grupuri pentru a genera răspuns
+    // Use group prediction to generate a response
     const predictedGroups = this.engine.predictNext(this.context);
     
-    // În MVP: returnează un rezumat al grupurilor active
-    // În versiunea avansată: integrare cu un generator de text
+    // In the MVP: return a summary of active groups
+    // In an advanced version: integrate with a text generator
     
     const groupLabels = predictedGroups
       .slice(0, 5)
@@ -562,7 +562,7 @@ class Session {
     };
   }
   
-  // Salvare/încărcare
+  // Save/load
   async save(path?: string): Promise<string> {
     const savePath = path || `./sessions/${this.id}.bsp`;
     await this.engine.save(savePath);
@@ -577,24 +577,24 @@ class Session {
 
 ---
 
-## 8. Comenzi din Chat
+## 8. Chat Commands
 
-### 8.1 Comenzi Suportate
+### 8.1 Supported Commands
 
-| Comandă | Descriere | Exemplu |
+| Command | Description | Example |
 |---------|-----------|---------|
-| `/help` | Afișează comenzile disponibile | `/help` |
-| `/stats` | Statistici sesiune | `/stats` |
-| `/rl <value>` | Setează RL pressure | `/rl 0.5` |
-| `/save [path]` | Salvează starea | `/save mysession` |
-| `/load <path>` | Încarcă stare | `/load mysession` |
-| `/groups [n]` | Afișează top grupuri | `/groups 10` |
-| `/explain <id>` | Explică un grup | `/explain 42` |
-| `/consolidate [n]` | Rulează consolidare | `/consolidate 100` |
-| `/reset` | Resetează contextul | `/reset` |
-| `/debug` | Toggle mod debug | `/debug on` |
+| `/help` | Show available commands | `/help` |
+| `/stats` | Session statistics | `/stats` |
+| `/rl <value>` | Set RL pressure | `/rl 0.5` |
+| `/save [path]` | Save state | `/save mysession` |
+| `/load <path>` | Load state | `/load mysession` |
+| `/groups [n]` | Show top groups | `/groups 10` |
+| `/explain <id>` | Explain a group | `/explain 42` |
+| `/consolidate [n]` | Run consolidation | `/consolidate 100` |
+| `/reset` | Reset context | `/reset` |
+| `/debug` | Toggle debug mode | `/debug on` |
 
-### 8.2 Implementare Comenzi
+### 8.2 Command Implementation
 
 ```typescript
 class CommandHandler {
@@ -681,7 +681,7 @@ Available commands:
 
 ## 9. UI HTML (Optional)
 
-### 9.1 Structura Fișiere
+### 9.1 File Structure
 
 ```
 public/
@@ -735,7 +735,7 @@ public/
 
 ---
 
-## 10. Configurare
+## 10. Configuration
 
 ### 10.1 Environment Variables
 
@@ -835,7 +835,7 @@ function validateSession(sessionId: string): boolean {
 
 ---
 
-## 12. Diagrama Interacțiune
+## 12. Interaction Diagram
 
 ```
 ┌──────────┐                    ┌──────────┐                    ┌──────────┐

@@ -9,30 +9,30 @@
 
 ## 1. Overview
 
-Acest document descrie mecanismele de serializare pentru starea BSP și managementul sesiunilor pentru continuitate și persistență.
+ tradu corect toate in engleThis document describes the serialization mechanisms for BSP state and session management for continuity and persistence.
 
 ---
 
-## 2. Cerințe
+## 2. Requirements
 
-### 2.1 Funcționale
+### 2.1 Functional
 
-1. **Save/Load rapid**: Încărcare în < 1s pentru sesiuni normale
-2. **Incremental save**: Posibilitate de save diferențial
-3. **Continuitate sesiuni**: Reluare conversație din punctul exact
-4. **Snapshots**: Multiple puncte de restaurare
-5. **Export/Import**: Format portabil între instanțe
+1. **Fast save/load**: Load in < 1s for normal sessions
+2. **Incremental save**: Support differential (delta) saves
+3. **Session continuity**: Resume the conversation from the exact point
+4. **Snapshots**: Multiple restore points
+5. **Export/import**: Portable format across instances
 
-### 2.2 Non-funcționale
+### 2.2 Non-functional
 
-1. **Compactitate**: Minimizare spațiu pe disc
-2. **Compatibilitate**: Versioning pentru migrări
-3. **Integritate**: Detectare corupție
-4. **Security**: Opțional criptare
+1. **Compactness**: Minimize disk space
+2. **Compatibility**: Versioning for migrations
+3. **Integrity**: Corruption detection
+4. **Security**: Optional encryption
 
 ---
 
-## 3. Structura Serializată
+## 3. Serialized Structure
 
 ### 3.1 Top-Level Format
 
@@ -82,7 +82,7 @@ interface SerializedGroup {
   // Members as compressed bitmap
   members: string;  // Base64 encoded Roaring bitmap
   
-  // Counts - doar pentru membri activi (sparse)
+  // Counts - only for active members (sparse)
   counts: [number, number][];  // [id, count][]
   
   // Metadata
@@ -91,7 +91,7 @@ interface SerializedGroup {
   usageCount: number;
   lastUsed: number;
   
-  // Deducții outgoing (duplicate pentru fast access)
+  // Outgoing deductions (duplicated for fast access)
   deduce?: string;  // Base64 Roaring
 }
 ```
@@ -150,35 +150,35 @@ interface SerializedMessage {
 
 ---
 
-## 4. Formatul de Fișier
+## 4. File Format
 
 ### 4.1 Binary Format (MessagePack)
 
-Preferabil pentru performanță și compactitate.
+Preferred for performance and compactness.
 
 ```typescript
 import * as msgpack from 'msgpack-lite';
 import * as zlib from 'zlib';
 
 class BSPSerializer {
-  // Serializare
+  // Serialize
   async serialize(state: BSPState): Promise<Buffer> {
-    // Convert la format serializabil
+    // Convert to a serializable format
     const serializable = this.toSerializable(state);
     
-    // Encode cu msgpack
+    // Encode with msgpack
     const packed = msgpack.encode(serializable);
     
-    // Compress cu gzip
+    // Compress with gzip
     const compressed = await this.compress(packed);
     
     // Add header
     return this.addHeader(compressed);
   }
   
-  // Deserializare
+  // Deserialize
   async deserialize(buffer: Buffer): Promise<BSPState> {
-    // Verify și strip header
+    // Verify and strip header
     const data = this.verifyAndStripHeader(buffer);
     
     // Decompress
@@ -187,7 +187,7 @@ class BSPSerializer {
     // Decode
     const serializable = msgpack.decode(packed);
     
-    // Convert la state
+    // Convert to state
     return this.fromSerializable(serializable);
   }
   
@@ -237,7 +237,7 @@ class BSPSerializer {
 
 ### 4.2 JSON Format (Human-readable)
 
-Pentru debugging și interoperabilitate.
+For debugging and interoperability.
 
 ```typescript
 class JSONSerializer {
@@ -291,7 +291,7 @@ class JSONSerializer {
 
 ## 5. Session Manager
 
-### 5.1 Structura
+### 5.1 Structure
 
 ```typescript
 class SessionManager {
@@ -573,7 +573,7 @@ class DeltaWriter {
 
 ---
 
-## 7. Snapshots și Time Travel
+## 7. Snapshots and Time Travel
 
 ### 7.1 Snapshot Manager
 
@@ -705,21 +705,21 @@ class Exporter {
 
 ---
 
-## 9. Performanță
+## 9. Performance
 
 ### 9.1 Benchmarks Target
 
-| Operație | Target | Cu compresie |
+| Operation | Target | With compression |
 |----------|--------|--------------|
 | Save (10K groups) | < 100ms | < 200ms |
 | Load (10K groups) | < 150ms | < 300ms |
 | Delta save | < 50ms | < 100ms |
 | Snapshot create | < 500ms | < 1s |
 
-### 9.2 Optimizări
+### 9.2 Optimizations
 
 ```typescript
-// Lazy loading pentru grupuri
+// Lazy loading for groups
 class LazyGroupStore {
   private loaded: Map<number, Group> = new Map();
   private serialized: Map<number, SerializedGroup> = new Map();
@@ -739,7 +739,7 @@ class LazyGroupStore {
   }
 }
 
-// Streaming serialization pentru fișiere mari
+// Streaming serialization for large files
 async function* serializeStream(state: BSPState): AsyncGenerator<Buffer> {
   // Header
   yield createHeader(state);
@@ -799,7 +799,7 @@ class IntegrityChecker {
 
 ---
 
-## 11. Diagrama Flow
+## 11. Flow Diagram
 
 ```
                     Session

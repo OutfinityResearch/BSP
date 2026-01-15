@@ -1,172 +1,209 @@
-# DS-012: Semantic Group Specialization
+# DS-012: Semantic Group Specialization (IDF + Stopword Handling)
 
-## Status: Implemented
-## Author: BSP Team
-## Date: 2026-01-15
+**Version**: 1.1  
+**Status**: Implemented (IDF tracking + semantic weighting) + Planned Improvements  
+**Author**: BSP Team  
+**Date**: 2026-01-15
 
-## 1. Problem Statement
+---
 
-Current groups are too generic, containing mostly stopwords:
+## 1. Overview
+
+BSP’s group learning is driven by co-occurrence in a sparse identity space. In natural language, a large fraction of tokens are extremely frequent (“stopwords”), and without explicit handling they dominate:
+- group membership
+- candidate retrieval
+- generated responses (generic filler tokens)
+
+This DS introduces an **IDFTracker** that estimates token specificity online, enabling:
+1. stopword detection
+2. content-word preference in response generation
+3. optional subsampling of very frequent tokens during feature extraction (reduces wasted work)
+
+---
+
+## 2. Problem
+
+Example of overly generic groups (mostly stopwords / function words):
+
 ```
 G0: and, to, was, my, i, the, had, with, she, in...
 G1: and, to, was, my, i, the, had, in, of, it...
 ```
 
-Groups should capture **semantic concepts**, not just co-occurring function words:
-```
-G_ship: ship, sail, captain, crew, ocean, voyage, deck
-G_detective: detective, clue, evidence, mystery, case, solve
-```
+Desired behavior: emphasize content-bearing tokens:
 
-## 2. Solution Overview
-
-### 2.1 TF-IDF Weighting for Group Members
-
-Not all tokens are equally important. Weight by inverse document frequency:
-```
-weight(token) = log(totalDocs / docsWithToken)
-```
-
-Stopwords appear everywhere → low weight
-Content words appear selectively → high weight
-
-### 2.2 Group Purity Score
-
-Measure how "focused" a group is:
-```
-purity = sum(weights of content words) / sum(all weights)
-```
-
-Split groups with low purity into specialized subgroups.
-
-### 2.3 Semantic Clustering
-
-When creating groups, prefer tokens that:
-1. Co-occur frequently (existing behavior)
-2. Have similar IDF weights (new)
-3. Share n-gram patterns (new)
-
-## 3. Implementation Details
-
-### 3.1 IDF Computation
-
-```javascript
-class IDFTracker {
-  documentCount: number
-  tokenDocCounts: Map<number, number>  // token -> docs containing it
-  
-  update(tokens: Set<number>) {
-    this.documentCount++;
-    for (const token of tokens) {
-      this.tokenDocCounts.set(token, 
-        (this.tokenDocCounts.get(token) || 0) + 1);
-    }
-  }
-  
-  getIDF(token: number): number {
-    const docCount = this.tokenDocCounts.get(token) || 1;
-    return Math.log(this.documentCount / docCount);
-  }
-  
-  isStopword(token: number): boolean {
-    // Appears in more than 30% of documents
-    return (this.tokenDocCounts.get(token) || 0) > 
-           this.documentCount * 0.3;
-  }
-}
-```
-
-### 3.2 Group Creation with IDF
-
-```javascript
-maybeCreateGroup(surprise, input, store) {
-  // Filter out stopwords from group seed
-  const inputBits = input.toArray();
-  const contentBits = inputBits.filter(
-    bit => !this.idfTracker.isStopword(bit)
-  );
-  
-  // Only create group from content words
-  if (contentBits.length >= this.minGroupSize) {
-    return store.create(contentBits, 0.5);
-  }
-  return null;
-}
-```
-
-### 3.3 Group Splitting
-
-Periodically check groups for purity:
-```javascript
-function splitLowPurityGroups(store, idfTracker) {
-  for (const group of store.getAll()) {
-    const purity = computePurity(group, idfTracker);
-    
-    if (purity < 0.3) {
-      // Split into content-focused subgroups
-      const contentBits = group.members.toArray()
-        .filter(b => !idfTracker.isStopword(b));
-      
-      if (contentBits.length >= 2) {
-        store.create(contentBits, group.salience);
-      }
-    }
-  }
-}
-```
-
-### 3.4 Stopword Handling
-
-Don't ignore stopwords entirely - they're useful for:
-- Sequence generation (grammar)
-- Context matching
-
-But exclude them from:
-- Group creation seeds
-- Group purity calculations
-- Response content word selection
-
-## 4. Data Structures
-
-```javascript
-// Add to Learner
-class Learner {
-  idfTracker: IDFTracker
-  
-  // Existing fields...
-}
-
-// Add to GroupStore
-class GroupStore {
-  getContentGroups(): Group[]  // Groups with purity > threshold
-  getTopicGroups(): Group[]    // Groups representing semantic topics
-}
-```
-
-## 5. Integration Points
-
-- **Learner**: Track IDF during learning, filter group creation
-- **GroupStore**: Add purity computation, group splitting
-- **ResponseGenerator**: Prefer content words from high-purity groups
-- **Serialization**: Save IDF statistics
-
-## 6. Expected Output
-
-Before (generic groups):
-```
-G0: and, to, was, my, i, the, had, with, she, in...
-```
-
-After (semantic groups):
 ```
 G_nautical: ship, captain, sail, ocean, deck, crew, voyage
-G_mystery: detective, clue, evidence, crime, suspect, murder
-G_nature: forest, tree, river, mountain, sky, wind, rain
+G_mystery:  detective, clue, evidence, mystery, case, solve
 ```
 
-## 7. Success Metrics
+---
 
-- Average group purity > 0.5
-- Content word ratio in responses > 60%
-- Semantic coherence: group members are topically related
-- Fewer redundant groups (groups with high Jaccard similarity)
+## 3. Definitions
+
+### 3.1 Document Frequency
+
+Define a “document” as a single training input (line/turn). For token `t`:
+- `DF(t)` = number of documents that contain `t`
+- `N` = number of documents seen so far
+
+### 3.2 IDF (Inverse Document Frequency)
+
+The implementation uses a numerically stable form:
+
+```
+IDF(t) = log((N + 1) / (DF(t) + 1))
+```
+
+Properties:
+- higher IDF = rarer/more specific token
+- lower IDF = more common token
+
+### 3.3 Stopwords
+
+A token is treated as a stopword when:
+
+```
+DF(t) / N > τ_stop
+```
+
+Where `τ_stop` is a configurable threshold (default in code: `0.25`).
+
+### 3.4 Purity (Lightweight)
+
+The current “purity” proxy is the ratio of content words:
+
+```
+purity(tokens) = |{t : t is content}| / |tokens|
+```
+
+This is intentionally simple and cheap. A weighted purity (using IDF magnitudes) is a planned improvement.
+
+---
+
+## 4. Design: Online IDF Tracking
+
+### 4.1 Data Structures
+
+The IDF tracker stores:
+- `documentCount = N`
+- `tokenDocCounts[t] = DF(t)`
+
+It updates with **unique tokens per document** (set semantics), which makes DF meaningful.
+
+### 4.2 Update Rule
+
+For each training input:
+1. tokenize text into word tokens
+2. compute `uniqueTokens = Set(tokens)`
+3. increment `DF(t)` for all `t ∈ uniqueTokens`
+4. increment `N`
+
+Periodic pruning:
+- keep the map size under a cap (`maxVocab`)
+- remove extremely rare tokens (implementation keeps tokens that appear in at least 2 documents)
+
+---
+
+## 5. How It Is Used in BSP
+
+### 5.1 During Training / Processing
+
+`BSPEngine.process(text, { learn=true })` updates IDF early:
+- it calls `idfTracker.update(new Set(wordTokens))`
+
+This makes IDF available both for response generation and for optional token subsampling.
+
+### 5.2 Semantic Weighting in Response Generation
+
+When scoring candidate tokens for response generation:
+- content words (non-stopwords) are boosted
+- stopwords are still allowed (they are useful for grammar/order), but they are not preferred as the main semantic payload
+
+This improves outputs from:
+```
+and to was in of ...
+```
+to:
+```
+detective evidence clue ...
+```
+
+### 5.3 Subsampling Very Frequent Tokens (Optional)
+
+Feature extraction can waste time on extremely frequent tokens that match many groups.
+
+When enabled, the engine uses a Mikolov-style subsampling rule with document frequency as a proxy:
+
+```
+keepProb(t) = min(1, sqrt(T / f(t)))
+```
+
+Where:
+- `f(t) = DF(t) / N`
+- `T` is a small constant (e.g. `1e-3`)
+
+This is applied only for encoding/features, not for sequence learning.
+
+---
+
+## 6. Implementation Details (Current Code)
+
+The implementation is in:
+- `src/core/IDFTracker.mjs`
+- integrated in `src/core/BSPEngine.mjs`
+- used by `src/core/ResponseGenerator.mjs`
+
+Key methods:
+- `update(tokens)`
+- `getIDF(token)`
+- `getDocFrequencyRatio(token)`
+- `isStopword(token)` / `isContentWord(token)`
+- `computePurity(tokens)`
+- `toJSON()` / `fromJSON()`
+
+---
+
+## 7. Configuration
+
+### 7.1 Implemented Options
+
+IDF tracker:
+- `idfTracker.stopwordThreshold` (default `0.25`)
+- `idfTracker.maxVocab` (default `100000`)
+
+Tokenizer / encoding:
+- `tokenizer.subsampleHotTokens` (boolean)
+- `tokenizer.subsampleT` (number, default `1e-3`)
+
+### 7.2 Planned Options
+
+- `idf.minDocsForStopword` (stabilize early estimates)
+- weighted purity thresholds for “content-rich group” detection
+- tying IDF into group creation/splitting decisions (see below)
+
+---
+
+## 8. Planned Improvements (For Development Planning)
+
+1. **Weighted purity**
+   - Current purity is unweighted; a group with many medium-frequency tokens can look “pure” even if not informative.
+   - Proposed:
+     ```
+     purity_w = Σ_{t∈content} IDF(t) / Σ_{t∈all} IDF(t)
+     ```
+
+2. **IDF-aware group creation**
+   - Prefer seeding new groups from content identities, not stopword-heavy inputs.
+
+3. **IDF-aware consolidation**
+   - During DS-010 merges, require overlap in high-IDF tokens to avoid merging broad but distinct concepts.
+
+---
+
+## 9. Success Metrics
+
+1. **Response content ratio**: > 60% of response tokens are content words on representative prompts.
+2. **Stopword dominance reduction**: fewer top-salience groups dominated by stopwords.
+3. **Compute efficiency**: reduced candidate explosion when subsampling is enabled.
+4. **Stability**: no major regression in surprise-rate metrics after enabling content weighting.
