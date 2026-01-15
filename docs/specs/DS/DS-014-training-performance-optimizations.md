@@ -81,25 +81,23 @@ BSP training is online and CPU-first, but the current hot-path can be slower tha
 5. **Optional subsampling of very frequent tokens**
    - `BSPEngine` supports Mikolov-style subsampling using document frequency as a proxy (via DS-012).
 
+Sections 5.2–5.4 document the above implemented items in more detail. Section 5.5 is primarily a planning item (some parts may already exist, but the goal is to make budgets explicit and configurable).
+
 ### 5.2 Sparse Fast-Path for Input Bitsets
 
-Introduce an optional sparse representation for bitsets created from token IDs:
+The current codebase implements an optional sparse representation for bitsets created from token IDs:
 
-- When a `SimpleBitset` is built from a sparse array, store the array internally as `sparseBits`.
-- Use `sparseBits` for:
+- When a `SimpleBitset` is built from a sparse array, store the array internally as `_sparseBits`.
+- Use `_sparseBits` for:
   - iteration (`for (const bit of input)`)
   - `andCardinality()` by iterating the smaller sparse side and calling `has()`
-- Invalidate `sparseBits` on mutating operations (`add/remove/orInPlace`).
+- Invalidate `_sparseBits` on mutating operations (`add/remove/orInPlace`).
 
 Expected impact: intersection-based scoring becomes O(|input|) instead of scanning word arrays.
 
 ### 5.3 Greedy Selection Without Temporary Bitsets
 
-Replace:
-
-- `newBits = group.members.andNot(explained); marginal = newBits.andCardinality(input)`
-
-With:
+The current `Learner.activate()` avoids temporary bitset allocations by using this pattern:
 
 - Maintain a `Set` of *explained input bits* only.
 - Compute marginal by iterating input bits and checking membership in the group.
@@ -108,7 +106,7 @@ Expected impact: removes per-candidate allocations and reduces CPU time.
 
 ### 5.4 Candidate Caps for High-Degree Identities
 
-When an identity maps to too many groups:
+The current `GroupStore` caps per-identity candidate fan-out:
 
 - Cap per-identity contributions to candidates (e.g., max 256 group IDs per identity).
 - Optionally bias selection toward groups with higher `usageCount` or `salience`.

@@ -1,6 +1,6 @@
 # DS-015: Conversational Training Data & Feedback Loop
 
-**Version**: 1.0  
+**Version**: 1.1  
 **Status**: Draft  
 **Author**: BSP Team  
 **Date**: 2026-01-15
@@ -9,15 +9,12 @@
 
 ## 1. Overview
 
-General language-modeling corpora help BSP bootstrap language patterns, but a usable chat system requires additional structure:
-- role conditioning (user vs assistant)
-- instruction following under constraints (format, style, “do X, not Y”)
-- preference learning from explicit and implicit feedback
+General language-modeling corpora help BSP bootstrap language patterns, but a usable chat system requires additional structure around turn-taking, constraints, and feedback.
 
 This DS defines practical data formats and a training loop that connects:
-- `engine.process(...)` (online learning)
-- `DeductionGraph` (cross-turn transitions)
-- RL/importance signals (DS-005)
+- `engine.process(...)` (online learning and reward ingestion)
+- `DeductionGraph` (cross-turn transition learning)
+- reward/importance modulation (DS-005)
 
 ---
 
@@ -50,9 +47,23 @@ To build a usable conversational system, we need targeted conversational data an
 
 ---
 
-## 4. Data Formats
+## 4. Definitions
 
-### 2.1 Dialogue JSONL (recommended)
+- **Conversation**: an ordered list of turns sharing a `conversation_id`.
+- **Turn**: `{ role, content }`, where `role ∈ {user, assistant}`.
+- **Episode**: a training unit. In this DS, an episode is typically one conversation (but could be a window of turns).
+- **Feedback event**: a record that attaches a preference signal to a specific assistant turn (rating, reward, comment).
+- **Reward**: numeric scalar passed as `reward` into `engine.process(...)`. Recommended range: `[-1, +1]`.
+- **Role marker**: a deterministic token inserted into the text stream to make role conditioning learnable (see §7).
+- **Correction turn**: a user message indicating the assistant response was wrong, followed by a corrected assistant response.
+
+---
+
+## 5. Data Formats
+
+The recommended storage format is JSONL to support streaming and easy splitting/versioning.
+
+### 5.1 Dialogue JSONL (recommended)
 
 One JSON object per line:
 
@@ -68,76 +79,140 @@ One JSON object per line:
 }
 ```
 
-### 2.2 Feedback/Preference Events (optional)
+Notes:
+- Keep `turns` as the canonical source of text.
+- Keep `tags` and `quality` optional; they are useful for filtering and curriculum sampling.
+
+### 5.2 Feedback/Preference Events (optional)
 
 ```json
 {"conversation_id":"c_001","turn_index":1,"rating":1,"reward":0.8,"comment":"Helpful"}
 ```
 
+Interpretation:
+- `turn_index` references the index within `turns` (0-based or 1-based, but pick one and keep it consistent).
+- `rating` is a discrete preference label (e.g. `-1/0/+1`) suitable for UI ingestion.
+- `reward` is an optional continuous value. If present, it should be used directly as the engine reward.
+
+### 5.3 Joining Feedback to Turns
+
+To feed feedback into training:
+
+1. Load a conversation episode.
+2. Join feedback events by `(conversation_id, turn_index)`.
+3. For assistant turns:
+   - if `reward` exists, use it
+   - else map `rating` → `reward` using a fixed mapping (example below)
+
+A simple mapping:
+
+```
+rating = +1 → reward = +0.8
+rating =  0 → reward =  0.0
+rating = -1 → reward = -0.8
+```
+
+The absolute scale should be kept small and stable because reward influences importance modulation and salience updates in `BSPEngine`.
+
 ---
 
-## 5. Training Policy
+## 6. Training Policy
 
-### 3.1 Two-Stage Bootstrap
+### 6.1 How to Feed Turns Into BSP (Core Loop)
 
-1. **Conversation SFT-style pass (no reward):**
-   - Learn stable patterns of role-conditioned language and task structure.
-2. **RL shaping (with reward):**
-   - Use explicit/implicit feedback (DS-005) to update salience and prioritize replay consolidation.
+Recommended processing order:
 
-### 3.2 How to Feed Turns Into BSP
+1. Reset context between conversations to avoid cross-conversation leakage.
+2. Process turns in order, using `learn=true`.
+3. Apply reward primarily on assistant turns.
 
-For each conversation turn:
+Minimal pseudocode:
 
-- `process(user_turn, learn=true, reward=0)`
-- `process(assistant_turn, learn=true, reward=+0.1 default)` (or reward from feedback)
-- Update inter-turn deductions:
-  - previous active groups → current active groups
+```js
+engine.resetContext();
+for (const turn of episode.turns) {
+  const reward = turn.role === "assistant" ? rewardForTurn(turn) : 0;
+  engine.process(turnTextWithRoleMarker(turn), { learn: true, reward });
+}
+```
 
-This creates stable conversational chains in the DeductionGraph.
+Notes:
+- Keeping context across turns is essential: it is the mechanism by which `Learner.updateDeductions(...)` learns cross-turn transitions (DS-004).
+- If you process a *window* of turns as an episode, reset context at the window boundary.
+
+### 6.2 Two-Stage Bootstrap (Practical Curriculum)
+
+1. **Conversation pass (no reward, or small uniform reward)**
+   - Teach stable role-conditioned patterns: asking questions, giving answers, formatting responses.
+2. **Feedback shaping (reward-driven)**
+   - Use explicit feedback events to increase learning pressure on helpful behaviors (DS-005).
+
+This is not “full RL”: it is a pragmatic way to exploit `reward` and replay/consolidation to bias the online learner.
+
+### 6.3 RL Pressure and Importance
+
+`BSPEngine` supports a tunable RL pressure parameter (`engine.setRLPressure(rho)`, where `rho ∈ [0, 1]`) that changes how strongly reward affects the effective importance.
+
+Practical guidance:
+- `rho ≈ 0.0` during early bootstrap (learn mostly from novelty)
+- `rho ≈ 0.3–0.7` during feedback shaping (reward matters)
+
+If needed, training scripts may set `importanceOverride` to stabilize learning rate across datasets, but this should be done intentionally because it bypasses novelty-driven adaptation.
 
 ---
 
-## 6. Making Roles Explicit (Recommended)
+## 7. Role Conditioning (Recommended)
 
-BSP’s core `process(text)` does not currently encode role explicitly. For role conditioning we should introduce a deterministic role marker so the engine can learn different patterns for user vs assistant turns.
+`engine.process(text)` learns from tokenized text. If “user” and “assistant” turns are indistinguishable at the token level, the system must infer roles implicitly, which is unnecessarily hard and unstable.
 
 Recommended approaches (planning):
 
-1. **Prefix tokens (string-level)**
-   - Add a reserved marker token at the beginning of each turn:
-     - `bsp_user` for user turns
-     - `bsp_assistant` for assistant turns
-   - Then encode from tokens:
-     - `encodeFromTokens([roleToken, ...tokenizeWords(content)])`
+### 7.1 Preferred: Marker Tokens (String-Level)
 
-2. **Text prefix (lowest effort, less clean)**
-   - Prepend `User:` / `Assistant:` to the raw text and rely on tokenization.
-   - This is less robust because punctuation is stripped and the markers can collide with natural text.
+Prefix a reserved marker token to every turn:
+- `bsp_user` for user turns
+- `bsp_assistant` for assistant turns
+
+The simplest implementation is to prefix the raw text:
+
+```text
+bsp_user Explain binary search.
+bsp_assistant Binary search works on sorted arrays...
+```
+
+This ensures the role marker appears as a distinct token under `Tokenizer.tokenizeWords(...)`, allowing role-dependent patterns and deductions to form.
+
+### 7.2 Alternative: Natural Prefixes (Lower Effort, Less Clean)
+
+Prepend `User:` / `Assistant:` to the raw text and rely on tokenization.
+
+This is less robust because:
+- punctuation is normalized/stripped
+- tokens like `user` and `assistant` can collide with normal content
 
 For now, datasets should store `role` explicitly, even if the training script chooses a simpler encoding.
 
 ---
 
-## 7. What Data to Add
+## 8. What Data to Add (High-Value Categories)
 
-### 4.1 Instruction Following
+### 8.1 Instruction Following with Constraints
 
 - short instructions with constraints: “return JSON”, “list steps”, “write an email”
 - correction turns: “No, you must output valid JSON” + corrected assistant answer
 
-### 4.2 Tool-like Dialogues (simulated)
+### 8.2 Tool-like Dialogues (Simulated)
 
 - structured “command → output” patterns
 - helps reliability of formatted outputs and multi-step tasks
 
-### 4.3 Mixed Romanian/English Inputs (if desired)
+### 8.3 Multilingual Inputs (Optional)
 
-If the system must operate in Romanian, add conversational examples in Romanian as *user inputs* while keeping stored artifacts in English.
+If the system must operate in multiple languages (e.g., Romanian + English), add conversational examples in the target language(s) as *user inputs*. Keep datasets and metadata consistently structured; do not mix languages inside schema keys or control tokens.
 
 ---
 
-## 8. Evaluation
+## 9. Evaluation
 
 Recommended evaluation should cover both coherence and controllability.
 
@@ -152,7 +227,7 @@ Additional concrete checks:
 
 ---
 
-## 9. Implementation Plan (For Development Planning)
+## 10. Implementation Plan (For Development Planning)
 
 1. Add a training script mode for JSONL dialogues:
    - stream turns
