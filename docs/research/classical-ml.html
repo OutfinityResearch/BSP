@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classical ML Integration - BSP Research</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="../theory/index.html">Theory</a></li>
+            <li><a href="index.html" class="active">Research</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Research</h3>
+            <ul>
+                <li><a href="index.html">Overview</a></li>
+                <li><a href="classical-ml.html" class="active">Classical ML Integration</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Classical ML Integration</h1>
+            <p>This page details specific opportunities to integrate classical Machine Learning techniques into the BSP architecture.</p>
+
+            <h2 id="lsh">1. Locality Sensitive Hashing (LSH) for "Fuzzy" Attention</h2>
+            <p><strong>The Problem:</strong> Currently, BSP uses exact intersection or inverted indices. If a concept is slightly different (e.g., "puppy" vs "dog" features), the strict set overlap might miss the connection.</p>
+            <p><strong>The Solution:</strong> LSH (e.g., MinHash) allows us to hash a bitset such that similar sets have the same hash with high probability.</p>
+            <pre><code>// Pseudocode Idea
+hash_signature = MinHash(input_bitset)
+candidate_groups = LSH_Buckets[hash_signature]
+// Now we have candidates that are *semantically* similar, 
+// even if they don't share exact token IDs.</code></pre>
+
+            <h2 id="ensembles">2. Ensemble Methods (Random Forests / Bagging)</h2>
+            <p><strong>The Problem:</strong> A single <code>GroupStore</code> might become biased or noisy, leading to hallucinations.</p>
+            <p><strong>The Solution:</strong> Implement a "Council of Experts" approach. Run 3 lightweight BSP instances in parallel:</p>
+            <ul>
+                <li><strong>Expert A:</strong> Trained on Grammar/Structure.</li>
+                <li><strong>Expert B:</strong> Trained on Factual Data.</li>
+                <li><strong>Expert C:</strong> Trained on Dialogue/Personality.</li>
+            </ul>
+            <p>The final prediction is a weighted vote (Ensemble). This mimics <strong>Random Forests</strong> or <strong>Bagging</strong>.</p>
+
+            <h2 id="hmm">3. Markov Chains & Viterbi Algorithm</h2>
+            <p><strong>The Problem:</strong> Our generation is currently Greedy (picking the best next token). This often leads to local optima ("garden path sentences").</p>
+            <p><strong>The Solution:</strong> Treat the <code>DeductionGraph</code> as a probabilistic state machine (Hidden Markov Model). Instead of picking the best <em>next</em> step, use the <strong>Viterbi Algorithm</strong> to find the most probable <em>sequence</em> of length N.</p>
+            <div class="callout">
+                <h4>Impact</h4>
+                <p>This would rigorously solve the "Word Salad" problem by ensuring the global path is optimal, not just the local step.</p>
+            </div>
+
+            <h2 id="clustering">4. Online Clustering for Sleep Consolidation</h2>
+            <p><strong>The Problem:</strong> The system creates too many groups. "Red Car", "Crimson Car", "Fast Red Car" might be 3 separate groups.</p>
+            <p><strong>The Solution:</strong> Implement a "Sleep Phase". When the system is idle, run a clustering algorithm (like Hierarchical Agglomerative Clustering) on the GroupStore.</p>
+            <ul>
+                <li>Compute Jaccard similarity between groups.</li>
+                <li>If <code>Similarity(A, B) > Threshold</code>, merge them into a single, more robust group.</li>
+                <li>This creates higher-level abstractions and reduces memory footprint.</li>
+            </ul>
+
+            <h2 id="bayes">5. Bayesian Updating</h2>
+            <p><strong>The Problem:</strong> Link weights are updated additively (+1). This is susceptible to outliers/noise.</p>
+            <p><strong>The Solution:</strong> Treat edge weights as probabilities and update them using <strong>Bayes' Theorem</strong>.</p>
+            <code style="display:block; padding:1rem; background:#f1f5f9; margin:1rem 0;">P(Link|Evidence) = P(Evidence|Link) * P(Link) / P(Evidence)</code>
+            <p>This dampens the effect of one-off anomalies and strengthens repeated, reliable patterns faster.</p>
+
+        </main>
+    </div>
+</body>
+</html>

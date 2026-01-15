@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention Mechanism - BSP Theory</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="index.html" class="active">Theory</a></li>
+            <li><a href="../research/index.html">Research</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Theory</h3>
+            <ul>
+                <li><a href="index.html">Predictive Coding</a></li>
+                <li><a href="attention.html" class="active">Attention Mechanism</a></li>
+                <li><a href="learning-loop.html">The Learning Loop</a></li>
+                <li><a href="mdl.html">MDL Principle</a></li>
+                <li><a href="rl.html">Reinforcement Learning</a></li>
+                <li><a href="importance.html">Importance & Salience</a></li>
+                <li><a href="generation.html">Sequence Generation</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>The "Hard" Attention Mechanism</h1>
+            <p>
+                In the Deep Learning era, the "Attention Mechanism" (specifically Self-Attention in Transformers) has become the dominant paradigm. BSP utilizes a parallel concept, but implements it as <strong>Sparse, Hard Attention</strong> rather than Dense, Soft Attention.
+            </p>
+
+            <h2>Mapping Q, K, V to BSP</h2>
+            <p>The standard attention formula is <code>Attention(Q, K, V) = softmax(Q·K)·V</code>. Here is how BSP implements this primitive:</p>
+
+            <table style="width:100%; border-collapse: collapse; margin: 2rem 0;">
+                <thead>
+                    <tr style="background: #f1f5f9; text-align: left;">
+                        <th style="padding: 1rem;">Component</th>
+                        <th style="padding: 1rem;">Transformer (Dense)</th>
+                        <th style="padding: 1rem;">BSP (Sparse)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Query (Q)</strong></td>
+                        <td style="padding: 1rem;">The current token embedding vector.</td>
+                        <td style="padding: 1rem;">The current <strong>Input Bitset</strong>.</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Key (K)</strong></td>
+                        <td style="padding: 1rem;">All previous token vectors in the context window.</td>
+                        <td style="padding: 1rem;">The <strong>Members</strong> of all Groups in the GroupStore (indexed via BitmapIndex).</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Value (V)</strong></td>
+                        <td style="padding: 1rem;">The vectors to be weighted and summed.</td>
+                        <td style="padding: 1rem;">The <strong>Group</strong> ID and its associated deductions.</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Scoring</strong></td>
+                        <td style="padding: 1rem;"><code>Softmax(DotProduct)</code>. Assigns a non-zero weight to everything.</td>
+                        <td style="padding: 1rem;"><code>Jaccard(Q, K) + Salience</code>. Assigns score only to intersections.</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Result</strong></td>
+                        <td style="padding: 1rem;"><strong>Soft Attention:</strong> A weighted average of all inputs ("peripheral vision").</td>
+                        <td style="padding: 1rem;"><strong>Hard Attention:</strong> Selection of Top-K active groups ("selective focus").</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Philosophical Difference</h2>
+            <p><strong>Transformers</strong> operate on the philosophy of "infinite peripheral vision". Every token looks at every other token, even if the relevance is 0.0001%. This is computationally expensive ($O(N^2)$) but captures subtle, global correlations.</p>
+            
+            <p><strong>BSP</strong> operates on the philosophy of "selective focus". It ignores 99.9% of the memory universe and "Attends" (Activates) only the concepts that strictly resonate with the input features. This is computationally efficient ($O(1)$ or $O(K)$) but requires robust mechanisms to handle ambiguity.</p>
+
+            <div class="callout">
+                <h4>Spatial vs. Temporal</h4>
+                <p>In BSP, the <strong>Activator</strong> provides <em>Spatial Attention</em> (what concepts are relevant <em>now</em>?). The <strong>Deduction Graph</strong> provides <em>Temporal Attention</em> (how does the past affect the future?). In Transformers, Self-Attention handles both simultaneously.</p>
+            </div>
+
+            <div class="pager">
+                <a href="index.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">Predictive Coding</span>
+                </a>
+                <a href="learning-loop.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">The Learning Loop</span>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

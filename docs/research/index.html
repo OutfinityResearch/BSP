@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research & Future Work - BSP</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="../theory/index.html">Theory</a></li>
+            <li><a href="index.html" class="active">Research</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Research</h3>
+            <ul>
+                <li><a href="index.html" class="active">Overview</a></li>
+                <li><a href="classical-ml.html">Classical ML Integration</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Research & Future Directions</h1>
+            <p>
+                BSP represents a divergence from the current Deep Learning orthodoxy (Backpropagation + Dense Matrices). Because BSP relies on discrete, sparse data structures (Bitsets, Graphs), it opens the door to integrating highly efficient algorithms from the pre-Deep Learning era of Machine Learning.
+            </p>
+
+            <div class="callout">
+                <h4>Why Look Back?</h4>
+                <p>Algorithms from the 2000s (LSH, HMMs, Random Forests) were designed for CPUs and limited memory. They are often $O(1)$ or $O(N \log N)$ and mathematically rigorous. By combining these with modern compute density and the "Predictive Coding" framework, we can achieve high efficiency and interpretability.</p>
+            </div>
+
+            <h2>Key Areas of Investigation</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Sparse Optimization</h3>
+                    <p>Techniques like <strong>Locality Sensitive Hashing (LSH)</strong> can upgrade our "Hard Attention" to be fuzzy and approximate, allowing for better generalization without sacrificing speed.</p>
+                    <a href="classical-ml.html#lsh">Read more →</a>
+                </div>
+                <div class="card">
+                    <h3>Probabilistic Graphs</h3>
+                    <p>The Deduction Graph is essentially a Markov Chain. We can apply <strong>Hidden Markov Models (HMM)</strong> and the <strong>Viterbi Algorithm</strong> to solve the sequence decoding problem optimally.</p>
+                    <a href="classical-ml.html#hmm">Read more →</a>
+                </div>
+                <div class="card">
+                    <h3>Memory Consolidation</h3>
+                    <p>Using <strong>Online Clustering</strong> algorithms (like Hierarchical Clustering or DBSCAN) to merge redundant groups during "sleep" cycles, effectively creating higher-level abstractions.</p>
+                    <a href="classical-ml.html#clustering">Read more →</a>
+                </div>
+                <div class="card">
+                    <h3>Ensemble Methods</h3>
+                    <p>Using <strong>Mixture of Experts</strong> or Bagging approaches to reduce hallucination. Multiple specialized BSP instances voting on the next prediction.</p>
+                    <a href="classical-ml.html#ensembles">Read more →</a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>
