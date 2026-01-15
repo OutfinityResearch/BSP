@@ -1,8 +1,8 @@
-# BPCM - Bitset Predictive Coding Memory
+# BSP - Bitset System for Prediction
 
 > CPU-friendly continuous learning without transformers
 
-BPCM is an experimental approach to building LLM-like capabilities using **bitsets** as representations and a **compression/surprise minimization** objective. It runs entirely on CPU without large matrix operations.
+BSP is an experimental approach to building LLM-like capabilities using **bitsets** as representations and a **compression/surprise minimization** objective. It runs entirely on CPU without large matrix operations.
 
 **Zero external dependencies** - Pure Node.js implementation (~3,800 lines of code).
 
@@ -15,7 +15,7 @@ BPCM is an experimental approach to building LLM-like capabilities using **bitse
 
 ## Key Differentiators
 
-| Aspect | Traditional LLM | BPCM |
+| Aspect | Traditional LLM | BSP |
 |--------|-----------------|------|
 | Representations | Float embeddings + attention | Bitsets + discrete sets |
 | Memory | Network weights | Explicit groups + counters |
@@ -59,7 +59,7 @@ open http://localhost:3000
 
 ## Benchmarks Target
 
-| Metric | GPT-2 Medium | BPCM Target |
+| Metric | GPT-2 Medium | BSP Target |
 |--------|--------------|-------------|
 | WikiText-2 Perplexity | 29.41 | <100 |
 | LAMBADA Accuracy | 55.48% | >20% |
@@ -80,16 +80,16 @@ The system includes an HTTP server for interactive chat:
 
 ```
 User: Explain machine learning
-BPCM: [activates relevant groups, predicts next concepts]
+BSP: [activates relevant groups, predicts next concepts]
 
 User: +++ /important
-BPCM: [increases importance weight for consolidation]
+BSP: [increases importance weight for consolidation]
 
 User: /stats
-BPCM: Groups: 1,234 | Deductions: 5,678 | Surprise: 0.23
+BSP: Groups: 1,234 | Deductions: 5,678 | Surprise: 0.23
 
 User: /save mysession
-BPCM: Session saved to ./sessions/mysession.bpcm
+BSP: Session saved to ./sessions/mysession.bpcm
 ```
 
 ## RL Pressure

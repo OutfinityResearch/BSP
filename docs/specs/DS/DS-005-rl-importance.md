@@ -2,18 +2,18 @@
 
 **Version**: 1.0  
 **Status**: Draft  
-**Author**: BPCM Team  
+**Author**: BSP Team  
 **Date**: 2026-01-15
 
 ---
 
 ## 1. Overview
 
-Acest document descrie integrarea Reinforcement Learning în BPCM și mecanismul de "importanță" care modulează viteza de învățare și consolidare.
+Acest document descrie integrarea Reinforcement Learning în BSP și mecanismul de "importanță" care modulează viteza de învățare și consolidare.
 
 ---
 
-## 2. Filosofia RL în BPCM
+## 2. Filosofia RL în BSP
 
 ### 2.1 Principii
 
@@ -327,7 +327,7 @@ function propagateValue(
 async function trainStepWithRL(
   input: string,
   explicitReward: number | null,
-  engine: BPCMEngine,
+  engine: BSPEngine,
   rlController: RLPressureController
 ): Promise<TrainResult> {
   // 1. Parse reward explicit

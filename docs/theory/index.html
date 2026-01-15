@@ -3,100 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BPCM Theory</title>
+    <title>BSP Theory</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <nav>
-        <a href="../index.html" class="logo">BPCM Docs</a>
+        <a href="../index.html" class="logo">BSP Docs</a>
         <ul>
             <li><a href="../architecture/index.html">Architecture</a></li>
-            <li><a href="../theory/index.html" class="active">Theory</a></li>
+            <li><a href="index.html" class="active">Theory</a></li>
             <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <aside class="sidebar">
-            <h3>Fundamentals</h3>
+            <h3>Concepts</h3>
             <ul>
                 <li><a href="#predictive-coding">Predictive Coding</a></li>
-                <li><a href="#minimizing-surprise">Minimizing Surprise</a></li>
-                <li><a href="#sdr-theory">SDR Theory</a></li>
-                <li><a href="#rl-theory">RL & Homeostasis</a></li>
+                <li><a href="#learning-loop">The Learning Loop</a></li>
+                <li><a href="#mdl">MDL Principle</a></li>
+                <li><a href="#rl-integration">Reinforcement Learning</a></li>
+                <li><a href="#importance">Importance & Salience</a></li>
             </ul>
         </aside>
 
         <main class="content">
-            <h1>Theoretical Foundation</h1>
-            <p class="lead">BPCM is not a Neural Network. It is a "Predictive Processing System" built on set theory.</p>
+            <h1 id="predictive-coding">Theory of Operation</h1>
+            <p>
+                BSP is grounded in the <strong>Predictive Coding</strong> theory of cognition, which postulates that the brain is constantly generating predictions about sensory input and only processing (learning from) the "surprise" or prediction error.
+            </p>
 
-            <section id="predictive-coding">
-                <h2>Predictive Coding</h2>
-                <p>The core philosophy comes from Neuroscience (Karl Friston's Free Energy Principle). The brain is not a passive receiver of information; it is an active prediction machine.</p>
-                
-                <div class="diagram-container">
-                    <svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
-                        <!-- World -->
-                        <rect x="50" y="200" width="100" height="60" rx="4" fill="#f1f5f9" stroke="#94a3b8"/>
-                        <text x="100" y="235" text-anchor="middle" font-weight="bold">The World</text>
+            <h2 id="learning-loop">The Learning Loop</h2>
+            <p>Unlike backpropagation which minimizes a global loss function across a fixed network, BSP performs local, incremental updates based on how well existing "Groups" (concepts) can explain the current input.</p>
 
-                        <!-- Agent -->
-                        <rect x="300" y="50" width="200" height="210" rx="8" fill="#fff" stroke="#333" stroke-dasharray="5,5"/>
-                        <text x="400" y="40" text-anchor="middle" font-weight="bold" fill="#333">The Agent (BPCM)</text>
+            <div class="diagram-container">
+                <svg width="700" height="300" viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Nodes -->
+                    <circle cx="100" cy="150" r="40" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+                    <text x="100" y="155" text-anchor="middle" font-weight="bold">Input</text>
 
-                        <!-- Internal Model -->
-                        <rect x="350" y="80" width="100" height="50" rx="4" fill="#e0e7ff" stroke="#3730a3"/>
-                        <text x="400" y="110" text-anchor="middle" font-size="12">Internal Model</text>
+                    <circle cx="350" cy="50" r="40" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                    <text x="350" y="55" text-anchor="middle" font-weight="bold">Prediction</text>
 
-                        <!-- Arrows -->
-                        <!-- Sensory Input -->
-                        <path d="M 150 220 L 300 220" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-green)"/>
-                        <text x="225" y="210" text-anchor="middle" font-size="10" fill="#059669">Sensory Input</text>
+                    <circle cx="350" cy="250" r="40" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+                    <text x="350" y="255" text-anchor="middle" font-weight="bold">Reconstruction</text>
 
-                        <!-- Prediction -->
-                        <path d="M 350 105 L 100 105 L 100 200" stroke="#f59e0b" stroke-width="2" fill="none" marker-end="url(#arrow-orange)"/>
-                        <text x="225" y="95" text-anchor="middle" font-size="10" fill="#d97706">Top-Down Prediction</text>
+                    <circle cx="600" cy="150" r="40" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+                    <text x="600" y="155" text-anchor="middle" font-weight="bold">Surprise</text>
 
-                        <!-- Error/Surprise -->
-                        <path d="M 300 240 L 350 240 L 350 140" stroke="#ef4444" stroke-width="2" fill="none" marker-end="url(#arrow-red)"/>
-                        <text x="320" y="190" text-anchor="middle" font-size="10" fill="#b91c1c" transform="rotate(-90, 320, 190)">Prediction Error (Surprise)</text>
+                    <!-- Arrows -->
+                    <path d="M140 150 L310 250" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+                    <text x="200" y="220" font-size="12" fill="#64748b">Activate Groups</text>
 
-                        <defs>
-                            <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#10b981" /></marker>
-                            <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#f59e0b" /></marker>
-                            <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#ef4444" /></marker>
-                        </defs>
-                    </svg>
-                </div>
-                <div class="diagram-caption">The Prediction Loop: The agent only learns when its Top-Down prediction fails to match the Sensory Input (Surprise).</div>
-            </section>
+                    <path d="M390 50 L560 130" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+                    <text x="480" y="80" font-size="12" fill="#64748b">Compare</text>
 
-            <section id="minimizing-surprise">
-                <h2>Minimizing Surprise</h2>
-                <p>Standard AI minimizes "Loss". BPCM minimizes "Surprise". While similar, the implementation is different.</p>
-                <div class="callout">
-                    <h4>The Mathematical Goal</h4>
-                    <p>We want to minimize the set difference: <code>| Input \ Predicted_Groups |</code>.</p>
-                    <p>If this value is high, it means the world is chaotic to the agent. By creating new groups to "explain" these unexplained bits, the agent reduces future surprise.</p>
-                </div>
-            </section>
+                    <path d="M390 250 L560 170" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+                    <text x="480" y="230" font-size="12" fill="#64748b">Compare</text>
 
-            <section id="sdr-theory">
-                <h2>SDR (Sparse Distributed Representations)</h2>
-                <p>Theory from <strong>Numenta (Jeff Hawkins)</strong> states that the brain uses sparse codes. </p>
+                    <path d="M600 110 L390 50" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow-red)"/>
+                    <text x="500" y="40" font-size="12" fill="#ef4444">Update Model</text>
+
+                    <!-- Defs -->
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
+                        </marker>
+                        <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#ef4444" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <h2 id="mdl">Minimum Description Length (MDL)</h2>
+            <p>The core objective function is inspired by MDL. The goal is to transmit the input <code>x</code> using a set of active groups <code>A</code> with minimum cost.</p>
+            
+            <div class="callout">
+                <h4>The Objective Function</h4>
+                <code>L(x, A) = |Surprise| + β * |Hallucination| + γ * |A|</code>
                 <ul>
-                    <li><strong>Sparse:</strong> Most neurons are silent at any given time.</li>
-                    <li><strong>Distributed:</strong> A concept is not one neuron, but a set of neurons.</li>
+                    <li><strong>Surprise:</strong> Bits in input NOT covered by groups (<code>x \ reconstruct(A)</code>). Must be transmitted raw.</li>
+                    <li><strong>Hallucination:</strong> Bits in groups NOT in input (<code>reconstruct(A) \ x</code>). Represents error/noise.</li>
+                    <li><strong>|A|:</strong> Model cost. Using fewer groups is better (Occam's razor).</li>
                 </ul>
-                <p>BPCM implements this via Bitsets. A concept is a set of active bits (1s) in a sea of inactive bits (0s). This allows us to perform "Semantic Union" efficiently (OR operations).</p>
-            </section>
+            </div>
 
-            <section id="rl-theory">
-                <h2>RL & Homeostasis</h2>
-                <p>Why does the agent learn? In BPCM, learning is driven by <strong>Homeostasis</strong> - the desire to keep internal parameters stable.</p>
-                <p>If Surprise is high, the system is unstable. Learning restores stability. We add an external signal (Reward) to steer this stability towards useful tasks (like answering questions correctly).</p>
-            </section>
+            <h2 id="rl-integration">Reinforcement Learning (RL)</h2>
+            <p>BSP integrates RL not as a separate fine-tuning step, but as a continuous modulation of the learning process. The "Importance" of a signal determines how aggressively the system updates its internal state.</p>
+
+            <div class="diagram-container">
+                <svg width="700" height="250" viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Boxes -->
+                    <rect x="50" y="50" width="120" height="60" rx="4" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                    <text x="110" y="85" text-anchor="middle">User Feedback</text>
+
+                    <rect x="250" y="50" width="120" height="60" rx="4" fill="white" stroke="#f59e0b" stroke-width="2"/>
+                    <text x="310" y="85" text-anchor="middle">Importance</text>
+
+                    <rect x="450" y="50" width="120" height="60" rx="4" fill="white" stroke="#10b981" stroke-width="2"/>
+                    <text x="510" y="85" text-anchor="middle">Learning Rate</text>
+
+                    <rect x="250" y="150" width="320" height="50" rx="4" fill="#f8fafc" stroke="#64748b"/>
+                    <text x="410" y="180" text-anchor="middle">Group & Deduction Updates</text>
+
+                    <!-- Connections -->
+                    <line x1="170" y1="80" x2="250" y2="80" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="370" y1="80" x2="450" y2="80" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="510" y1="110" x2="510" y2="150" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
+                    
+                    <!-- Labels -->
+                    <text x="210" y="70" font-size="11" fill="#64748b">Reward</text>
+                    <text x="410" y="70" font-size="11" fill="#64748b">Modulates</text>
+                </svg>
+            </div>
+
+            <h2 id="importance">Importance & Salience</h2>
+            <p>Two key metrics drive the "value" system of BSP:</p>
+            <ul>
+                <li><strong>Importance (Episodic):</strong> Calculated per interaction. Combines <em>Novelty</em> (how surprising), <em>Utility</em> (reward), and <em>Stability</em>. High importance events trigger stronger learning updates and are prioritized in the Replay Buffer.</li>
+                <li><strong>Salience (Structural):</strong> A property of a Group. Represents the long-term utility of a concept. Groups that frequently lead to high rewards accumulate Salience, making them more likely to be activated in ambiguous situations.</li>
+            </ul>
+
+            <p>For detailed algorithms, see <a href="../specs/DS/DS-003-learning-algorithms.md">DS-003: Learning Algorithms</a> and <a href="../specs/DS/DS-005-rl-importance.md">DS-005: RL & Importance</a>.</p>
 
         </main>
     </div>

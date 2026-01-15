@@ -1,8 +1,8 @@
-# BPCM Implementation Roadmap
+# BSP Implementation Roadmap
 
 ## Overview
 
-This document outlines the complete implementation plan for BPCM (Bitset Predictive Coding Memory), 
+This document outlines the complete implementation plan for BSP (Bitset System for Prediction), 
 a CPU-friendly continuous learning system that provides LLM-like capabilities using bitsets and 
 compression-based learning.
 
@@ -213,7 +213,7 @@ compression-based learning.
 
 ### Deliverables
 - Working chat server on localhost
-- Interactive conversation with BPCM
+- Interactive conversation with BSP
 - Session management
 
 ---
@@ -228,7 +228,7 @@ compression-based learning.
 ### Tasks
 
 - [ ] **Serialization**
-  - Implement `BPCMSerializer` (MessagePack + gzip)
+  - Implement `BSPSerializer` (MessagePack + gzip)
   - Implement `JSONSerializer` for debugging
   - Add header with version and checksum
 

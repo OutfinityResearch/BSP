@@ -2,14 +2,14 @@
 
 **Version**: 1.0  
 **Status**: Draft  
-**Author**: BPCM Team  
+**Author**: BSP Team  
 **Date**: 2026-01-15
 
 ---
 
 ## 1. Overview
 
-Acest document descrie mecanismele de serializare pentru starea BPCM și managementul sesiunilor pentru continuitate și persistență.
+Acest document descrie mecanismele de serializare pentru starea BSP și managementul sesiunilor pentru continuitate și persistență.
 
 ---
 
@@ -37,9 +37,9 @@ Acest document descrie mecanismele de serializare pentru starea BPCM și managem
 ### 3.1 Top-Level Format
 
 ```typescript
-interface SerializedBPCMState {
+interface SerializedBSPState {
   // Header
-  magic: string;              // "BPCM"
+  magic: string;              // "BSP"
   version: string;            // "1.0.0"
   timestamp: number;
   checksum: string;
@@ -160,9 +160,9 @@ Preferabil pentru performanță și compactitate.
 import * as msgpack from 'msgpack-lite';
 import * as zlib from 'zlib';
 
-class BPCMSerializer {
+class BSPSerializer {
   // Serializare
-  async serialize(state: BPCMState): Promise<Buffer> {
+  async serialize(state: BSPState): Promise<Buffer> {
     // Convert la format serializabil
     const serializable = this.toSerializable(state);
     
@@ -177,7 +177,7 @@ class BPCMSerializer {
   }
   
   // Deserializare
-  async deserialize(buffer: Buffer): Promise<BPCMState> {
+  async deserialize(buffer: Buffer): Promise<BSPState> {
     // Verify și strip header
     const data = this.verifyAndStripHeader(buffer);
     
@@ -193,7 +193,7 @@ class BPCMSerializer {
   
   private addHeader(data: Buffer): Buffer {
     const header = Buffer.alloc(16);
-    header.write('BPCM', 0);           // Magic bytes
+    header.write('BSP', 0);           // Magic bytes
     header.writeUInt8(1, 4);           // Major version
     header.writeUInt8(0, 5);           // Minor version
     header.writeUInt16LE(0, 6);        // Flags
@@ -203,8 +203,8 @@ class BPCMSerializer {
   }
   
   private verifyAndStripHeader(buffer: Buffer): Buffer {
-    if (buffer.toString('utf8', 0, 4) !== 'BPCM') {
-      throw new Error('Invalid BPCM file');
+    if (buffer.toString('utf8', 0, 4) !== 'BSP') {
+      throw new Error('Invalid BSP file');
     }
     
     const version = `${buffer.readUInt8(4)}.${buffer.readUInt8(5)}`;
@@ -241,19 +241,19 @@ Pentru debugging și interoperabilitate.
 
 ```typescript
 class JSONSerializer {
-  async serialize(state: BPCMState): Promise<string> {
+  async serialize(state: BSPState): Promise<string> {
     const serializable = this.toSerializable(state);
     return JSON.stringify(serializable, null, 2);
   }
   
-  async deserialize(json: string): Promise<BPCMState> {
+  async deserialize(json: string): Promise<BSPState> {
     const parsed = JSON.parse(json);
     return this.fromSerializable(parsed);
   }
   
-  private toSerializable(state: BPCMState): SerializedBPCMState {
+  private toSerializable(state: BSPState): SerializedBSPState {
     return {
-      magic: 'BPCM',
+      magic: 'BSP',
       version: '1.0.0',
       timestamp: Date.now(),
       checksum: this.computeChecksum(state),
@@ -297,12 +297,12 @@ class JSONSerializer {
 class SessionManager {
   private sessions: Map<string, Session>;
   private config: SessionConfig;
-  private serializer: BPCMSerializer;
+  private serializer: BSPSerializer;
   
   constructor(config: SessionConfig) {
     this.sessions = new Map();
     this.config = config;
-    this.serializer = new BPCMSerializer();
+    this.serializer = new BSPSerializer();
     
     // Auto-cleanup expired sessions
     setInterval(() => this.cleanup(), 60000);
@@ -481,15 +481,15 @@ interface GroupDelta {
 
 ```typescript
 class DeltaWriter {
-  private baseState: SerializedBPCMState | null = null;
+  private baseState: SerializedBSPState | null = null;
   private baseVersion: string | null = null;
   
-  setBase(state: SerializedBPCMState, version: string): void {
+  setBase(state: SerializedBSPState, version: string): void {
     this.baseState = state;
     this.baseVersion = version;
   }
   
-  computeDelta(currentState: BPCMState): DeltaState {
+  computeDelta(currentState: BSPState): DeltaState {
     if (!this.baseState || !this.baseVersion) {
       throw new Error('No base state set');
     }
@@ -541,7 +541,7 @@ class DeltaWriter {
     return delta;
   }
   
-  applyDelta(baseState: SerializedBPCMState, delta: DeltaState): SerializedBPCMState {
+  applyDelta(baseState: SerializedBSPState, delta: DeltaState): SerializedBSPState {
     const result = structuredClone(baseState);
     
     // Apply group changes
@@ -584,13 +584,13 @@ class SnapshotManager {
   
   async createSnapshot(
     sessionId: string,
-    state: BPCMState,
+    state: BSPState,
     label?: string
   ): Promise<string> {
     const snapshotId = `${sessionId}_${Date.now()}`;
     const path = `${this.snapshotsDir}/${snapshotId}.bpcm`;
     
-    const serializer = new BPCMSerializer();
+    const serializer = new BSPSerializer();
     const buffer = await serializer.serialize(state);
     
     await fs.writeFile(path, buffer);
@@ -632,11 +632,11 @@ class SnapshotManager {
     return snapshots.sort((a, b) => b.created - a.created);
   }
   
-  async restoreSnapshot(snapshotId: string): Promise<BPCMState> {
+  async restoreSnapshot(snapshotId: string): Promise<BSPState> {
     const path = `${this.snapshotsDir}/${snapshotId}.bpcm`;
     const buffer = await fs.readFile(path);
     
-    const serializer = new BPCMSerializer();
+    const serializer = new BSPSerializer();
     return serializer.deserialize(buffer);
   }
   
@@ -668,7 +668,7 @@ interface PortableExport {
   exported: number;
   
   // Full state (JSON-compatible)
-  state: SerializedBPCMState;
+  state: SerializedBSPState;
   
   // Optional: full message history
   history?: SerializedMessage[];
@@ -690,7 +690,7 @@ class Exporter {
     return JSON.stringify(portable, null, 2);
   }
   
-  async importFromJSON(json: string): Promise<BPCMState> {
+  async importFromJSON(json: string): Promise<BSPState> {
     const portable = JSON.parse(json) as PortableExport;
     
     if (portable.format !== 'bpcm-export') {
@@ -740,7 +740,7 @@ class LazyGroupStore {
 }
 
 // Streaming serialization pentru fișiere mari
-async function* serializeStream(state: BPCMState): AsyncGenerator<Buffer> {
+async function* serializeStream(state: BSPState): AsyncGenerator<Buffer> {
   // Header
   yield createHeader(state);
   
@@ -781,7 +781,7 @@ class IntegrityChecker {
       }
       
       // Try to deserialize
-      const serializer = new BPCMSerializer();
+      const serializer = new BSPSerializer();
       await serializer.deserialize(buffer);
       
       return { valid: true };

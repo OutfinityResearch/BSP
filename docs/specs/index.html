@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSP Specifications</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="../theory/index.html">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="index.html" class="active">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <main class="content">
+            <h1>Technical Specifications</h1>
+            <p>Detailed design documents for the Bitset System for Prediction (BSP) system.</p>
+
+            <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                
+                <div class="card" style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">DS-001</div>
+                    <h3 style="margin: 0 0 0.5rem 0;">Core Architecture</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">System overview, fundamental principles, and main data flow.</p>
+                    <a href="DS/DS-001-core-architecture.md">Read Spec &rarr;</a>
+                </div>
+
+                <div class="card" style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">DS-002</div>
+                    <h3 style="margin: 0 0 0.5rem 0;">Data Structures</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Bitsets, Groups, Inverted Indexes, and memory estimations.</p>
+                    <a href="DS/DS-002-data-structures.md">Read Spec &rarr;</a>
+                </div>
+
+                <div class="card" style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">DS-003</div>
+                    <h3 style="margin: 0 0 0.5rem 0;">Learning Algorithms</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Online learning, activation, membership updates, and pruning.</p>
+                    <a href="DS/DS-003-learning-algorithms.md">Read Spec &rarr;</a>
+                </div>
+
+                <div class="card" style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">DS-004</div>
+                    <h3 style="margin: 0 0 0.5rem 0;">Deduction Engine</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Temporal learning, causal links, and multi-hop reasoning.</p>
+                    <a href="DS/DS-004-deduction-engine.md">Read Spec &rarr;</a>
+                </div>
+
+                <div class="card" style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">DS-005</div>
+                    <h3 style="margin: 0 0 0.5rem 0;">RL & Importance</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Reinforcement Learning integration, rewards, and salience.</p>
+                    <a href="DS/DS-005-rl-importance.md">Read Spec &rarr;</a>
+                </div>
+
+                <div class="card" style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">DS-006</div>
+                    <h3 style="margin: 0 0 0.5rem 0;">HTTP Server & Chat</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">API endpoints, WebSocket protocol, and session handling.</p>
+                    <a href="DS/DS-006-http-server-chat.md">Read Spec &rarr;</a>
+                </div>
+
+                <div class="card" style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">DS-007</div>
+                    <h3 style="margin: 0 0 0.5rem 0;">Serialization</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Save/Load formats, snapshots, and incremental state.</p>
+                    <a href="DS/DS-007-serialization-sessions.md">Read Spec &rarr;</a>
+                </div>
+
+                <div class="card" style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="color: var(--secondary-color); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">DS-008</div>
+                    <h3 style="margin: 0 0 0.5rem 0;">Benchmarks</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Evaluation plans, datasets (PTB, WikiText-2), and metrics.</p>
+                    <a href="DS/DS-008-benchmarks-comparison.md">Read Spec &rarr;</a>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>

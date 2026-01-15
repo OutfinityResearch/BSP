@@ -3,56 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BPCM Documentation</title>
+    <title>BSP Documentation</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         .hero {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
             color: white;
             padding: 4rem 2rem;
             text-align: center;
             border-radius: 8px;
             margin-bottom: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-        .hero h1 { color: white; margin: 0; }
+        .hero h1 { color: white; margin: 0; font-size: 3rem; }
+        .hero p { color: #bfdbfe; font-size: 1.2rem; max-width: 600px; margin: 1rem auto 0; }
+        
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
-        .card h3 { margin-top: 0; }
+        
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h3 { margin-top: 0; display: flex; align-items: center; gap: 0.5rem; }
         .card a {
             display: inline-block;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             color: var(--primary-color);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
         }
+        .card a:hover { text-decoration: underline; }
+
+        .terminal {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Menlo', monospace;
+            margin-top: 1rem;
+        }
+        .terminal-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ef4444; }
+        .yellow { background: #f59e0b; }
+        .green { background: #10b981; }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html" class="logo">BPCM Docs</a>
+        <a href="index.html" class="logo">BSP Docs</a>
         <ul>
             <li><a href="architecture/index.html">Architecture</a></li>
             <li><a href="theory/index.html">Theory</a></li>
             <li><a href="wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="specs/index.html">Specs</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <main class="content" style="max-width: 1200px;">
             <div class="hero">
-                <h1>BPCM Project</h1>
-                <p>Bitset Predictive Coding Memory</p>
-                <p>A CPU-first approach to continuous learning and artificial intelligence.</p>
+                <h1>BSP Project</h1>
+                <p>Bitset System for Prediction</p>
+                <p style="font-size: 1rem; margin-top: 0.5rem;">A CPU-first approach to continuous learning and artificial intelligence, avoiding the complexity of Transformers.</p>
             </div>
 
             <div class="grid">
                 <div class="card">
                     <h3>🏗️ Architecture</h3>
-                    <p>Understand how BPCM works under the hood. Learn about the Tokenizer, GroupStore, and DeductionGraph components.</p>
+                    <p>Understand how BSP works under the hood. Learn about the Tokenizer, GroupStore, and DeductionGraph components.</p>
                     <a href="architecture/index.html">Explore Architecture &rarr;</a>
                 </div>
 
@@ -69,21 +105,30 @@
                 </div>
 
                 <div class="card">
-                    <h3>📋 Specs & Roadmap</h3>
-                    <p>Technical specifications and future plans for the project.</p>
-                    <a href="ROADMAP.md">View Roadmap &rarr;</a>
+                    <h3>📋 Specifications</h3>
+                    <p>Detailed technical specifications (DS-001 to DS-008) and the implementation roadmap.</p>
+                    <a href="specs/index.html">View Specs &rarr;</a>
                 </div>
             </div>
             
-            <h2 style="margin-top: 4rem;">Quick Start</h2>
-            <pre><code># Install dependencies
+            <h2 style="margin-top: 4rem; border-bottom: none;">Quick Start</h2>
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+<pre style="background: transparent; padding: 0; margin: 0; border: none; color: inherit;">
+<span style="color: #64748b;"># 1. Install dependencies</span>
 npm install
 
-# Run tests
-npm test
+<span style="color: #64748b;"># 2. Run the demo script</span>
+npm run demo
 
-# Start the server
-npm run server</code></pre>
+<span style="color: #64748b;"># 3. Start the chat server</span>
+npm run server
+</pre>
+            </div>
 
         </main>
     </div>

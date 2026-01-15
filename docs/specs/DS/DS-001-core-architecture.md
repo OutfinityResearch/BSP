@@ -1,15 +1,15 @@
-# DS-001: Core Architecture - BPCM (Bitset Predictive Coding Memory)
+# DS-001: Core Architecture - BSP (Bitset System for Prediction)
 
 **Version**: 1.0  
 **Status**: Draft  
-**Author**: BPCM Team  
+**Author**: BSP Team  
 **Date**: 2026-01-15
 
 ---
 
 ## 1. Overview
 
-BPCM este un sistem de învățare continuă bazat pe CPU care folosește bitset-uri ca reprezentări și un obiectiv de compresie/minimizare surpriză, fără dependență de arhitecturi Transformer.
+BSP este un sistem de învățare continuă bazat pe CPU care folosește bitset-uri ca reprezentări și un obiectiv de compresie/minimizare surpriză, fără dependență de arhitecturi Transformer.
 
 ### 1.1 Principii Fundamentale
 
@@ -20,7 +20,7 @@ BPCM este un sistem de învățare continuă bazat pe CPU care folosește bitset
 
 ### 1.2 Diferențe față de LLM-uri Tradiționale
 
-| Aspect | LLM Tradițional | BPCM |
+| Aspect | LLM Tradițional | BSP |
 |--------|-----------------|------|
 | Reprezentări | Embeddings float + attention | Bitset-uri + seturi discrete |
 | Memorie | Ponderile rețelei | Grupuri explicite + contori |

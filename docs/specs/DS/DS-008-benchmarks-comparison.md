@@ -2,14 +2,14 @@
 
 **Version**: 1.0  
 **Status**: Draft  
-**Author**: BPCM Team  
+**Author**: BSP Team  
 **Date**: 2026-01-15
 
 ---
 
 ## 1. Overview
 
-Acest document definește planul de benchmarking pentru BPCM, incluzând seturi de date pentru antrenare/evaluare, metrici de comparație cu GPT-2, și metodologia de testare.
+Acest document definește planul de benchmarking pentru BSP, incluzând seturi de date pentru antrenare/evaluare, metrici de comparație cu GPT-2, și metodologia de testare.
 
 ---
 
@@ -28,7 +28,7 @@ Acest document definește planul de benchmarking pentru BPCM, incluzând seturi 
 |-------|-----------|---------|-----------|
 | GPT-2 Small | 124M | 1024 | ~40GB text |
 | GPT-2 Medium | 355M | 1024 | ~40GB text |
-| BPCM (MVP) | ~100K groups | Illimitat | Online |
+| BSP (MVP) | ~100K groups | Illimitat | Online |
 
 ---
 
@@ -97,14 +97,14 @@ interface PTBConfig {
 
 ---
 
-## 5. Metrici BPCM Echivalente
+## 5. Metrici BSP Echivalente
 
 ### 5.1 Surprise Metrics
 
 Definim metrici care aproximează perplexity:
 
 ```typescript
-interface BPCMMetrics {
+interface BSPMetrics {
   // Surprise rate: proporția de biți neexplicați
   surpriseRate: number;  // |surprise| / |input|
   
@@ -126,7 +126,7 @@ interface BPCMMetrics {
 
 ```typescript
 // Aproximare: perplexity ≈ 2^(bits_per_token)
-function approximatePerplexity(metrics: BPCMMetrics): number {
+function approximatePerplexity(metrics: BSPMetrics): number {
   // surpriseRate → bits neexplicate per bit
   // Presupunem că biții neexplicați au distribuție uniformă
   const bitsPerUnexplained = 10;  // log2(vocab_size) aproximativ
@@ -163,7 +163,7 @@ interface DeductionMetrics {
 
 ```typescript
 class EvaluationPipeline {
-  private engine: BPCMEngine;
+  private engine: BSPEngine;
   private datasets: Map<string, Dataset>;
   
   async evaluate(datasetName: string): Promise<EvaluationResult> {
@@ -185,7 +185,7 @@ class EvaluationPipeline {
   private async evaluateLanguageModeling(
     dataset: Dataset
   ): Promise<LanguageModelingResult> {
-    const results: BPCMMetrics[] = [];
+    const results: BSPMetrics[] = [];
     
     for await (const batch of dataset.iterate(BATCH_SIZE)) {
       // Encode
@@ -257,7 +257,7 @@ class EvaluationPipeline {
 
 ```typescript
 class TrainingPipeline {
-  private engine: BPCMEngine;
+  private engine: BSPEngine;
   
   async train(
     dataset: Dataset,
@@ -319,7 +319,7 @@ class TrainingPipeline {
 ### 7.1 Experimente de Bază
 
 #### Experiment 1: Convergență pe PTB
-- **Obiectiv**: Verifică că BPCM învață și converge
+- **Obiectiv**: Verifică că BSP învață și converge
 - **Setup**: 
   - Train pe PTB train
   - Evaluare pe PTB valid la fiecare 1K steps
@@ -494,19 +494,19 @@ interface BenchmarkReport {
 
 function generateReport(results: EvaluationResult[]): string {
   const markdown = `
-# BPCM Benchmark Report
+# BSP Benchmark Report
 Generated: ${new Date().toISOString()}
 
 ## Language Modeling (WikiText-2)
 
-| Metric | BPCM | GPT-2 Medium | Ratio |
+| Metric | BSP | GPT-2 Medium | Ratio |
 |--------|------|--------------|-------|
 | Perplexity (approx) | ${results.wikitext2.perplexity} | 29.41 | ${(results.wikitext2.perplexity / 29.41).toFixed(2)}x |
 | Surprise Rate | ${results.wikitext2.surpriseRate} | - | - |
 
 ## Deduction (LAMBADA)
 
-| Metric | BPCM | GPT-2 Medium | Ratio |
+| Metric | BSP | GPT-2 Medium | Ratio |
 |--------|------|--------------|-------|
 | Top-1 Accuracy | ${results.lambada.top1} | 55.48% | ${(results.lambada.top1 / 0.5548).toFixed(2)}x |
 | Top-10 Accuracy | ${results.lambada.top10} | - | - |

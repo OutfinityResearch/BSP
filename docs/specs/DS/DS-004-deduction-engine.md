@@ -2,14 +2,14 @@
 
 **Version**: 1.0  
 **Status**: Draft  
-**Author**: BPCM Team  
+**Author**: BSP Team  
 **Date**: 2026-01-15
 
 ---
 
 ## 1. Overview
 
-Deduction Engine-ul BPCM gestionează legăturile cauzale/temporale între grupuri, permițând predicție și raționament multi-hop fără forward pass neuronal.
+Deduction Engine-ul BSP gestionează legăturile cauzale/temporale între grupuri, permițând predicție și raționament multi-hop fără forward pass neuronal.
 
 ---
 

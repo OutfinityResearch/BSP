@@ -2,14 +2,14 @@
 
 **Version**: 1.1  
 **Status**: Draft  
-**Author**: BPCM Team  
+**Author**: BSP Team  
 **Date**: 2026-01-15
 
 ---
 
 ## 1. Overview
 
-Acest document descrie serverul HTTP care expune BPCM ca un serviciu de chat interactiv, cu suport pentru sesiuni, RL implicit, și control din conversație.
+Acest document descrie serverul HTTP care expune BSP ca un serviciu de chat interactiv, cu suport pentru sesiuni, RL implicit, și control din conversație.
 
 ---
 
@@ -149,7 +149,7 @@ Sistemul generează răspunsuri în **limbaj natural**, nu doar metrici tehnice:
 │         └────────┬────────┘                                    │
 │                  │                                             │
 │         ┌────────▼────────┐                                    │
-│         │ BPCM Engine     │                                    │
+│         │ BSP Engine     │                                    │
 │         │ (per session)   │                                    │
 │         └─────────────────┘                                    │
 │                                                                │
@@ -435,7 +435,7 @@ function handleWebSocket(ws: WebSocket, session: Session) {
 }
 
 server.listen(PORT, () => {
-  console.log(`BPCM Server running on http://localhost:${PORT}`);
+  console.log(`BSP Server running on http://localhost:${PORT}`);
 });
 ```
 
@@ -444,7 +444,7 @@ server.listen(PORT, () => {
 ```typescript
 class Session {
   readonly id: string;
-  private engine: BPCMEngine;
+  private engine: BSPEngine;
   private context: Group[] = [];
   private messageHistory: Message[] = [];
   private created: number;
@@ -452,7 +452,7 @@ class Session {
   
   constructor(id: string, config?: SessionConfig) {
     this.id = id;
-    this.engine = new BPCMEngine(config?.engineConfig);
+    this.engine = new BSPEngine(config?.engineConfig);
     this.created = Date.now();
     this.lastActive = Date.now();
     
@@ -697,13 +697,13 @@ public/
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>BPCM Chat</title>
+  <title>BSP Chat</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="app">
     <header>
-      <h1>BPCM Chat</h1>
+      <h1>BSP Chat</h1>
       <div id="session-info"></div>
     </header>
     

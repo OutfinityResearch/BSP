@@ -2,14 +2,14 @@
 
 **Version**: 1.0  
 **Status**: Draft  
-**Author**: BPCM Team  
+**Author**: BSP Team  
 **Date**: 2026-01-15
 
 ---
 
 ## 1. Overview
 
-Acest document descrie algoritmii de învățare online și incrementală ai BPCM, concentrați pe minimizarea surprizei și adaptare continuă.
+Acest document descrie algoritmii de învățare online și incrementală ai BSP, concentrați pe minimizarea surprizei și adaptare continuă.
 
 ---
 
@@ -498,7 +498,7 @@ function trainStep(
   input: string,
   context: Group[],
   reward: number | null,
-  engine: BPCMEngine
+  engine: BSPEngine
 ): TrainResult {
   // 1. Encode
   const x = engine.encode(input);

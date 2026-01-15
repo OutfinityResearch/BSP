@@ -2,14 +2,14 @@
 
 **Version**: 1.0  
 **Status**: Draft  
-**Author**: BPCM Team  
+**Author**: BSP Team  
 **Date**: 2026-01-15
 
 ---
 
 ## 1. Overview
 
-Acest document descrie structurile de date fundamentale ale BPCM, optimizate pentru operații pe CPU cu seturi mari și sparse.
+Acest document descrie structurile de date fundamentale ale BSP, optimizate pentru operații pe CPU cu seturi mari și sparse.
 
 ---
 
