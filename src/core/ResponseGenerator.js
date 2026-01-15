@@ -1,6 +1,7 @@
 /**
- * Response Generator - Generates text from learned patterns
- * NO HARDCODED TEMPLATES - everything comes from the learned groups and predictions
+ * Response Generator - Generates coherent text from learned patterns
+ * Implements DS-009 (Sequences), DS-010 (Semantic), DS-011 (Context)
+ * NO HARDCODED TEMPLATES - everything from learned patterns
  */
 
 class ResponseGenerator {
@@ -9,46 +10,42 @@ class ResponseGenerator {
   }
 
   /**
-   * Generate a response purely from learned patterns
+   * Generate a response from learned patterns
    * @param {object} result - Processing result from engine
    * @param {object} options - Additional context
+   * @param {ConversationContext} context - Conversation context (DS-011)
    * @returns {object} Response with text and metadata
    */
-  generate(result, options = {}) {
+  generate(result, options = {}, context = null) {
     const { input } = options;
     
-    // Get predictions from the deduction graph
     const predictions = result.predictions || [];
     const activeGroups = result.activeGroups || [];
     
-    // Extract input tokens for filtering common words
-    const inputTokens = new Set(
-      this.engine.tokenizer.tokenizeWords(input || '')
-    );
+    // Get input tokens for filtering
+    const inputTokens = new Set(result.wordTokens || 
+      this.engine.tokenizer.tokenizeWords(input || ''));
     
-    // Build response from what the system actually learned
-    const generatedTokens = this._generateFromPredictions(
-      predictions, 
-      activeGroups,
-      inputTokens
-    );
+    // Collect candidate tokens from groups and predictions
+    const candidates = this._collectCandidates(predictions, activeGroups, inputTokens, context);
     
-    // If we have generated content, use it
+    // Generate sequence using SequenceModel (DS-009)
+    const sequence = this._generateSequence(candidates, context);
+    
     let text = '';
-    
-    if (generatedTokens.length > 0) {
-      text = generatedTokens.join(' ');
-    } else if (activeGroups.length > 0) {
-      // Fall back to describing active groups
-      text = this._describeActiveGroups(activeGroups, inputTokens);
+    if (sequence.length > 0) {
+      text = sequence.join(' ');
+    } else if (candidates.length > 0) {
+      // Fallback: just use top candidates
+      text = candidates.slice(0, 8).map(c => c.token).join(' ');
     } else {
-      // Nothing learned yet - output the raw state
-      text = this._describeRawState(result);
+      text = '[learning]';
     }
     
     return {
-      text: text,
-      generated: generatedTokens,
+      text,
+      generated: sequence,
+      candidates: candidates.slice(0, 10),
       fromPredictions: predictions.length > 0,
       groupCount: activeGroups.length,
       surprise: result.surprise,
@@ -56,109 +53,175 @@ class ResponseGenerator {
   }
 
   /**
-   * Generate tokens from predictions
-   * Prioritizes content words over stopwords
+   * Collect and score candidate tokens
+   * @private
    */
-  _generateFromPredictions(predictions, activeGroups, inputTokens) {
-    const tokens = [];
-    const seen = new Set();
+  _collectCandidates(predictions, activeGroups, inputTokens, context) {
+    const candidates = new Map();  // token -> {score, groupId, isContent}
     
-    // Common stopwords to deprioritize
-    const stopwords = new Set([
-      'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
-      'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'been',
-      'be', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could',
-      'should', 'may', 'might', 'must', 'shall', 'can', 'need', 'it', 'its',
-      'i', 'you', 'he', 'she', 'we', 'they', 'my', 'your', 'his', 'her', 'our',
-      'their', 'this', 'that', 'these', 'those', 'which', 'what', 'who', 'whom',
-      'not', 'no', 'so', 'if', 'then', 'than', 'when', 'where', 'how', 'all',
-      'each', 'every', 'both', 'few', 'more', 'most', 'other', 'some', 'such',
-      'only', 'own', 'same', 'just', 'also', 'very', 'too', 'up', 'down', 'out',
-      'him', 'me', 'us', 'them', 'there', 'here', 'now', 'one', 'two'
-    ]);
+    const idf = this.engine.idfTracker;
+    const hasIDF = idf.documentCount > 0;
     
-    // Content words (interesting words)
-    const contentWords = [];
-    // Context words (common but relevant)
-    const contextWords = [];
-    
-    // Get tokens from predictions first (what comes next)
+    // Get tokens from predictions
     for (const pred of predictions.slice(0, 15)) {
       const group = this.engine.store.get(pred.groupId);
       if (!group || !group.members) continue;
       
-      const groupTokens = this._extractTokensFromGroup(group);
-      for (const token of groupTokens) {
-        if (seen.has(token)) continue;
+      const tokens = this._extractTokens(group);
+      for (const token of tokens) {
+        if (inputTokens.has(token)) continue;  // Skip input echo
         if (token.length < 2) continue;
         
-        seen.add(token);
+        let score = pred.score;
         
-        // Skip tokens from input (we want predictions, not echoes)
-        if (inputTokens.has(token)) continue;
+        // IDF boost for content words (DS-010)
+        const isContent = hasIDF ? idf.isContentWord(token) : token.length > 3;
+        if (isContent) {
+          score *= 2.0;
+        }
         
-        if (stopwords.has(token)) {
-          contextWords.push(token);
-        } else {
-          contentWords.push(token);
+        // Context boost (DS-011)
+        if (context) {
+          score *= context.scoreCandidate(token, pred.groupId);
+        }
+        
+        const existing = candidates.get(token);
+        if (!existing || existing.score < score) {
+          candidates.set(token, { 
+            token, 
+            score, 
+            groupId: pred.groupId,
+            isContent 
+          });
         }
       }
     }
     
-    // Also get tokens from active groups
+    // Get tokens from active groups
     for (const group of activeGroups.slice(0, 5)) {
-      const groupTokens = this._extractTokensFromGroup(group);
-      for (const token of groupTokens) {
-        if (seen.has(token)) continue;
+      const tokens = this._extractTokens(group);
+      for (const token of tokens) {
+        if (inputTokens.has(token)) continue;
         if (token.length < 2) continue;
         
-        seen.add(token);
+        let score = group.salience || 0.5;
         
-        if (stopwords.has(token)) {
-          contextWords.push(token);
-        } else {
-          contentWords.push(token);
+        const isContent = hasIDF ? idf.isContentWord(token) : token.length > 3;
+        if (isContent) {
+          score *= 1.5;
+        }
+        
+        if (context) {
+          score *= context.scoreCandidate(token, group.id);
+        }
+        
+        const existing = candidates.get(token);
+        if (!existing || existing.score < score) {
+          candidates.set(token, { 
+            token, 
+            score, 
+            groupId: group.id,
+            isContent 
+          });
         }
       }
     }
     
-    // Prioritize content words, limit context words
-    const maxContent = 12;
-    const maxContext = 4;
+    // Sort by score
+    return [...candidates.values()]
+      .sort((a, b) => b.score - a.score);
+  }
+
+  /**
+   * Generate a coherent sequence using SequenceModel
+   * @private
+   */
+  _generateSequence(candidates, context) {
+    const seq = this.engine.sequenceModel;
+    
+    // If no sequence data learned yet, fall back to scored candidates
+    if (seq.totalSentences < 10) {
+      return this._fallbackGeneration(candidates);
+    }
+    
+    // Get seed tokens (prefer content words)
+    const seedTokens = candidates
+      .filter(c => c.isContent)
+      .slice(0, 10)
+      .map(c => c.token);
+    
+    if (seedTokens.length === 0) {
+      seedTokens.push(...candidates.slice(0, 5).map(c => c.token));
+    }
+    
+    // Generate sequence
+    const sequence = seq.generate(seedTokens, {
+      maxLength: 12,
+      temperature: 0.8,
+      preferSeeds: true
+    });
+    
+    // If sequence is too short, add more candidates
+    if (sequence.length < 4) {
+      const existing = new Set(sequence);
+      for (const c of candidates) {
+        if (!existing.has(c.token) && c.isContent) {
+          sequence.push(c.token);
+          if (sequence.length >= 8) break;
+        }
+      }
+    }
+    
+    return sequence;
+  }
+
+  /**
+   * Fallback generation when SequenceModel has insufficient data
+   * @private
+   */
+  _fallbackGeneration(candidates) {
+    const sequence = [];
+    const used = new Set();
     
     // Take content words first
-    for (const w of contentWords.slice(0, maxContent)) {
-      tokens.push(w);
+    for (const c of candidates) {
+      if (c.isContent && !used.has(c.token)) {
+        sequence.push(c.token);
+        used.add(c.token);
+        if (sequence.length >= 10) break;
+      }
     }
     
-    // Add some context words if we don't have enough
-    if (tokens.length < 5) {
-      for (const w of contextWords.slice(0, maxContext)) {
-        if (!tokens.includes(w)) {
-          tokens.push(w);
+    // Add some context words if needed
+    if (sequence.length < 4) {
+      for (const c of candidates) {
+        if (!used.has(c.token)) {
+          sequence.push(c.token);
+          used.add(c.token);
+          if (sequence.length >= 6) break;
         }
       }
     }
     
-    return tokens;
+    return sequence;
   }
 
   /**
    * Extract readable tokens from a group
+   * @private
    */
-  _extractTokensFromGroup(group) {
+  _extractTokens(group) {
     if (!group || !group.members) return [];
     
     const bits = group.members.toArray();
     const decoded = this.engine.tokenizer.decode(bits);
     
-    // Filter and clean tokens
     const tokens = [];
     for (const t of decoded) {
       if (!t || t.length < 2) continue;
-      if (t.startsWith('#')) continue;  // Skip hash tokens
+      if (t.startsWith('#')) continue;
       
-      // If it's an n-gram, split it
+      // Split n-grams
       if (t.includes('_')) {
         const parts = t.split('_');
         for (const p of parts) {
@@ -174,48 +237,6 @@ class ResponseGenerator {
     }
     
     return tokens;
-  }
-
-  /**
-   * Describe active groups (what patterns matched)
-   */
-  _describeActiveGroups(activeGroups, inputTokens) {
-    const allTokens = [];
-    
-    for (const group of activeGroups.slice(0, 5)) {
-      const tokens = this._extractTokensFromGroup(group);
-      for (const t of tokens.slice(0, 5)) {
-        if (!allTokens.includes(t) && !inputTokens.has(t)) {
-          allTokens.push(t);
-        }
-      }
-    }
-    
-    if (allTokens.length === 0) {
-      return '[learning]';
-    }
-    
-    return allTokens.slice(0, 10).join(' ');
-  }
-
-  /**
-   * Describe raw state when nothing is learned
-   */
-  _describeRawState(result) {
-    const parts = [];
-    
-    if (result.surprise !== undefined) {
-      parts.push(`surprise:${result.surprise}`);
-    }
-    if (result.inputSize !== undefined) {
-      parts.push(`input:${result.inputSize}`);
-    }
-    
-    const stats = this.engine.getStats();
-    parts.push(`groups:${stats.groupCount}`);
-    parts.push(`edges:${stats.edgeCount}`);
-    
-    return parts.join(' ');
   }
 }
 

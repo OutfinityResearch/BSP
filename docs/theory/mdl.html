@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDL Principle - BSP Theory</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="index.html" class="active">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Theory</h3>
+            <ul>
+                <li><a href="index.html">Predictive Coding</a></li>
+                <li><a href="learning-loop.html">The Learning Loop</a></li>
+                <li><a href="mdl.html" class="active">MDL Principle</a></li>
+                <li><a href="rl.html">Reinforcement Learning</a></li>
+                <li><a href="importance.html">Importance & Salience</a></li>
+                <li><a href="generation.html">Sequence Generation</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Minimum Description Length (MDL)</h1>
+            <p>The core objective function of BSP is inspired by the <strong>Minimum Description Length</strong> principle. The goal is to "compress" the reality (input) into a set of concepts (groups) as efficiently as possible.</p>
+
+            <div class="callout">
+                <h4>Occam's Razor</h4>
+                <p>MDL is a mathematical formalization of Occam's Razor: <em>"The simplest explanation is usually the best one."</em></p>
+            </div>
+
+            <h2>The Loss Function</h2>
+            <p>In standard ML, we minimize Cross-Entropy. In BSP, we minimize the coding cost:</p>
+
+            <code style="display:block; padding: 1rem; background: #f1f5f9; margin: 1rem 0;">L(x, A) = |Surprise| + β * |Hallucination| + γ * |A|</code>
+
+            <h3>Components</h3>
+            <ul>
+                <li><strong>Surprise (<code>x \ reconstruct(A)</code>):</strong> The information in the input that our active groups (A) failed to explain. This is "pure novelty" and must be encoded raw.</li>
+                <li><strong>Hallucination (<code>reconstruct(A) \ x</code>):</strong> The information our groups predicted that <em>wasn't</em> in the input. This is "error" or "noise". We penalize this to prevent activating huge, generic groups.</li>
+                <li><strong>Model Cost (<code>|A|</code>):</strong> The number of groups used. We want to explain the input using as few concepts as possible (sparse coding).</li>
+            </ul>
+
+            <h2>Why is this better?</h2>
+            <p>This approach naturally balances <strong>Generalization</strong> (using broad groups) vs <strong>Specificity</strong> (using precise groups).
+            <ul>
+                <li>If we use too many small groups, <code>|A|</code> is high (Overfitting).</li>
+                <li>If we use one giant group, <code>Hallucination</code> is high (Underfitting).</li>
+            </ul>
+            </p>
+
+            <div class="pager">
+                <a href="learning-loop.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">The Learning Loop</span>
+                </a>
+                <a href="rl.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">Reinforcement Learning</span>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

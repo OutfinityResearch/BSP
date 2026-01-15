@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reinforcement Learning - BSP Theory</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="index.html" class="active">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Theory</h3>
+            <ul>
+                <li><a href="index.html">Predictive Coding</a></li>
+                <li><a href="learning-loop.html">The Learning Loop</a></li>
+                <li><a href="mdl.html">MDL Principle</a></li>
+                <li><a href="rl.html" class="active">Reinforcement Learning</a></li>
+                <li><a href="importance.html">Importance & Salience</a></li>
+                <li><a href="generation.html">Sequence Generation</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Reinforcement Learning Integration</h1>
+            <p>In modern LLMs (like ChatGPT), Reinforcement Learning from Human Feedback (RLHF) is a separate phase. In BSP, RL is <strong>intrinsic</strong> and <strong>continuous</strong>.</p>
+
+            <h2>Every Interaction is Feedback</h2>
+            <p>The system treats every user interaction as a potential reward signal.</p>
+            <ul>
+                <li><strong>Explicit Reward:</strong> User types "Good job", "Wrong", "👍".</li>
+                <li><strong>Implicit Reward:</strong> User continues the conversation (interest) vs User changes topic abruptly (boredom/error).</li>
+            </ul>
+
+            <h2>Modulating Plasticity</h2>
+            <p>In the brain, neurotransmitters like Dopamine signal "pay attention, this is important!". In BSP, we calculate an <strong>Importance</strong> score.</p>
+            
+            <p>If <code>Importance</code> is high (e.g., strong negative feedback or highly novel information):</p>
+            <ol>
+                <li>The <strong>Learning Rate</strong> increases.</li>
+                <li>The event is prioritized in the <strong>Replay Buffer</strong> (for future consolidation).</li>
+                <li>The "Salience" of involved groups is updated.</li>
+            </ol>
+
+            <div class="diagram-container">
+                <svg width="700" height="250" viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Boxes -->
+                    <rect x="50" y="50" width="120" height="60" rx="4" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                    <text x="110" y="85" text-anchor="middle">User Feedback</text>
+
+                    <rect x="250" y="50" width="120" height="60" rx="4" fill="white" stroke="#f59e0b" stroke-width="2"/>
+                    <text x="310" y="85" text-anchor="middle">Importance</text>
+
+                    <rect x="450" y="50" width="120" height="60" rx="4" fill="white" stroke="#10b981" stroke-width="2"/>
+                    <text x="510" y="85" text-anchor="middle">Learning Rate</text>
+
+                    <rect x="250" y="150" width="320" height="50" rx="4" fill="#f8fafc" stroke="#64748b"/>
+                    <text x="410" y="180" text-anchor="middle">Group & Deduction Updates</text>
+
+                    <!-- Connections -->
+                    <line x1="170" y1="80" x2="250" y2="80" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="370" y1="80" x2="450" y2="80" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="510" y1="110" x2="510" y2="150" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
+                    
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="pager">
+                <a href="mdl.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">MDL Principle</span>
+                </a>
+                <a href="importance.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">Importance & Salience</span>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BSP Theory</title>
+    <title>Predictive Coding - BSP Theory</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -19,24 +19,37 @@
 
     <div class="container">
         <aside class="sidebar">
-            <h3>Concepts</h3>
+            <h3>Theory</h3>
             <ul>
-                <li><a href="#predictive-coding">Predictive Coding</a></li>
-                <li><a href="#learning-loop">The Learning Loop</a></li>
-                <li><a href="#mdl">MDL Principle</a></li>
-                <li><a href="#rl-integration">Reinforcement Learning</a></li>
-                <li><a href="#importance">Importance & Salience</a></li>
+                <li><a href="index.html" class="active">Predictive Coding</a></li>
+                <li><a href="learning-loop.html">The Learning Loop</a></li>
+                <li><a href="mdl.html">MDL Principle</a></li>
+                <li><a href="rl.html">Reinforcement Learning</a></li>
+                <li><a href="importance.html">Importance & Salience</a></li>
+                <li><a href="generation.html">Sequence Generation</a></li>
             </ul>
         </aside>
 
         <main class="content">
-            <h1 id="predictive-coding">Theory of Operation</h1>
+            <h1>Predictive Coding Theory</h1>
             <p>
-                BSP is grounded in the <strong>Predictive Coding</strong> theory of cognition, which postulates that the brain is constantly generating predictions about sensory input and only processing (learning from) the "surprise" or prediction error.
+                BSP is grounded in the <strong>Predictive Coding</strong> theory of cognition, popularized by neuroscientists like Karl Friston. This theory postulates that the brain is not a passive processor of inputs, but an active prediction machine.
             </p>
 
-            <h2 id="learning-loop">The Learning Loop</h2>
-            <p>Unlike backpropagation which minimizes a global loss function across a fixed network, BSP performs local, incremental updates based on how well existing "Groups" (concepts) can explain the current input.</p>
+            <div class="callout">
+                <h4>Core Premise</h4>
+                <p>The brain constantly generates top-down predictions about sensory input. It only processes (and learns from) the <strong>Prediction Error</strong> (or "Surprise"). If the input is perfectly predicted, no learning occurs.</p>
+            </div>
+
+            <h2>From Brain to Software</h2>
+            <p>In BSP, we model this explicitly:</p>
+            <ul>
+                <li><strong>Prediction:</strong> The system uses its current context (active groups) to guess what comes next.</li>
+                <li><strong>Input:</strong> The actual text sequence arrives.</li>
+                <li><strong>Surprise:</strong> We calculate the difference. <code>Surprise = Input - Prediction</code>.</li>
+            </ul>
+
+            <p>This differs from standard Language Models (LLMs) which are trained to minimize cross-entropy loss over a massive dataset offline. BSP minimizes "Surprise" in real-time, online.</p>
 
             <div class="diagram-container">
                 <svg width="700" height="300" viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
@@ -65,9 +78,8 @@
 
                     <path d="M600 110 L390 50" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow-red)"/>
                     <text x="500" y="40" font-size="12" fill="#ef4444">Update Model</text>
-
-                    <!-- Defs -->
-                    <defs>
+                    
+                     <defs>
                         <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
                             <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
                         </marker>
@@ -78,57 +90,13 @@
                 </svg>
             </div>
 
-            <h2 id="mdl">Minimum Description Length (MDL)</h2>
-            <p>The core objective function is inspired by MDL. The goal is to transmit the input <code>x</code> using a set of active groups <code>A</code> with minimum cost.</p>
-            
-            <div class="callout">
-                <h4>The Objective Function</h4>
-                <code>L(x, A) = |Surprise| + β * |Hallucination| + γ * |A|</code>
-                <ul>
-                    <li><strong>Surprise:</strong> Bits in input NOT covered by groups (<code>x \ reconstruct(A)</code>). Must be transmitted raw.</li>
-                    <li><strong>Hallucination:</strong> Bits in groups NOT in input (<code>reconstruct(A) \ x</code>). Represents error/noise.</li>
-                    <li><strong>|A|:</strong> Model cost. Using fewer groups is better (Occam's razor).</li>
-                </ul>
+            <div class="pager">
+                <span class="pager-link prev disabled"></span>
+                <a href="learning-loop.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">The Learning Loop</span>
+                </a>
             </div>
-
-            <h2 id="rl-integration">Reinforcement Learning (RL)</h2>
-            <p>BSP integrates RL not as a separate fine-tuning step, but as a continuous modulation of the learning process. The "Importance" of a signal determines how aggressively the system updates its internal state.</p>
-
-            <div class="diagram-container">
-                <svg width="700" height="250" viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Boxes -->
-                    <rect x="50" y="50" width="120" height="60" rx="4" fill="white" stroke="#3b82f6" stroke-width="2"/>
-                    <text x="110" y="85" text-anchor="middle">User Feedback</text>
-
-                    <rect x="250" y="50" width="120" height="60" rx="4" fill="white" stroke="#f59e0b" stroke-width="2"/>
-                    <text x="310" y="85" text-anchor="middle">Importance</text>
-
-                    <rect x="450" y="50" width="120" height="60" rx="4" fill="white" stroke="#10b981" stroke-width="2"/>
-                    <text x="510" y="85" text-anchor="middle">Learning Rate</text>
-
-                    <rect x="250" y="150" width="320" height="50" rx="4" fill="#f8fafc" stroke="#64748b"/>
-                    <text x="410" y="180" text-anchor="middle">Group & Deduction Updates</text>
-
-                    <!-- Connections -->
-                    <line x1="170" y1="80" x2="250" y2="80" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
-                    <line x1="370" y1="80" x2="450" y2="80" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
-                    <line x1="510" y1="110" x2="510" y2="150" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow)"/>
-                    
-                    <!-- Labels -->
-                    <text x="210" y="70" font-size="11" fill="#64748b">Reward</text>
-                    <text x="410" y="70" font-size="11" fill="#64748b">Modulates</text>
-                </svg>
-            </div>
-
-            <h2 id="importance">Importance & Salience</h2>
-            <p>Two key metrics drive the "value" system of BSP:</p>
-            <ul>
-                <li><strong>Importance (Episodic):</strong> Calculated per interaction. Combines <em>Novelty</em> (how surprising), <em>Utility</em> (reward), and <em>Stability</em>. High importance events trigger stronger learning updates and are prioritized in the Replay Buffer.</li>
-                <li><strong>Salience (Structural):</strong> A property of a Group. Represents the long-term utility of a concept. Groups that frequently lead to high rewards accumulate Salience, making them more likely to be activated in ambiguous situations.</li>
-            </ul>
-
-            <p>For detailed algorithms, see <a href="../specs/DS/DS-003-learning-algorithms.md">DS-003: Learning Algorithms</a> and <a href="../specs/DS/DS-005-rl-importance.md">DS-005: RL & Importance</a>.</p>
-
         </main>
     </div>
 </body>

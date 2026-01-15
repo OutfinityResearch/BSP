@@ -8,6 +8,8 @@ const { GroupStore } = require('./GroupStore');
 const { DeductionGraph } = require('./DeductionGraph');
 const { Learner } = require('./Learner');
 const { ReplayBuffer } = require('./ReplayBuffer');
+const { SequenceModel } = require('./SequenceModel');
+const { IDFTracker } = require('./IDFTracker');
 
 class BPCMEngine {
   /**
@@ -42,6 +44,12 @@ class BPCMEngine {
     this.buffer = new ReplayBuffer({
       maxSize: options.replayBufferSize || 50000,
     });
+    
+    // NEW: Sequence model for word order (DS-009)
+    this.sequenceModel = new SequenceModel();
+    
+    // NEW: IDF tracker for semantic weighting (DS-010)
+    this.idfTracker = new IDFTracker();
     
     // State
     this.step = 0;
@@ -140,6 +148,9 @@ class BPCMEngine {
     // 1. Encode
     const input = this.encode(text);
     
+    // 1b. Get word tokens for sequence learning
+    const wordTokens = this.tokenizer.tokenizeWords(text);
+    
     // 2. Activate
     const activeGroups = this.activate(input);
     const activeGroupIds = activeGroups.map(g => g.id);
@@ -187,15 +198,23 @@ class BPCMEngine {
         importance: effectiveImportance,
       });
       
-      // 10. Periodic maintenance
+      // 10. Learn sequence patterns (DS-009)
+      if (wordTokens.length >= 2) {
+        this.sequenceModel.learn(wordTokens);
+      }
+      
+      // 11. Update IDF statistics (DS-010)
+      this.idfTracker.update(new Set(wordTokens));
+      
+      // 12. Periodic maintenance
       this.step++;
       this._periodicMaintenance();
     }
     
-    // 11. Update context
+    // 13. Update context
     this.context = activeGroupIds;
     
-    // 12. Track reward
+    // 14. Track reward
     if (reward !== 0) {
       this.recentRewards.push(reward);
       if (this.recentRewards.length > this.maxRecentRewards) {
@@ -203,10 +222,10 @@ class BPCMEngine {
       }
     }
     
-    // 13. Update salience
+    // 15. Update salience
     this._updateSalience(activeGroups, reward);
     
-    // 14. Update metrics
+    // 16. Update metrics
     this._updateMetrics(surprise.size, reward);
     
     return {
@@ -217,6 +236,7 @@ class BPCMEngine {
       inputSize: input.size,
       importance: effectiveImportance,
       predictions: this.predictNext(activeGroupIds, 5),
+      wordTokens,  // Include for response generation
     };
   }
 
@@ -417,7 +437,7 @@ class BPCMEngine {
    */
   toJSON() {
     return {
-      version: '1.0.0',
+      version: '1.1.0',  // Updated version for new components
       timestamp: Date.now(),
       config: this.config,
       tokenizer: this.tokenizer.toJSON(),
@@ -425,6 +445,8 @@ class BPCMEngine {
       graph: this.graph.toJSON(),
       learner: this.learner.toJSON(),
       buffer: this.buffer.toJSON(),
+      sequenceModel: this.sequenceModel.toJSON(),  // DS-009
+      idfTracker: this.idfTracker.toJSON(),        // DS-010
       state: {
         step: this.step,
         context: this.context,
@@ -448,6 +470,14 @@ class BPCMEngine {
     engine.graph = DeductionGraph.fromJSON(json.graph);
     engine.learner = Learner.fromJSON(json.learner);
     engine.buffer = ReplayBuffer.fromJSON(json.buffer);
+    
+    // Load new components if present
+    if (json.sequenceModel) {
+      engine.sequenceModel = SequenceModel.fromJSON(json.sequenceModel);
+    }
+    if (json.idfTracker) {
+      engine.idfTracker = IDFTracker.fromJSON(json.idfTracker);
+    }
     
     engine.step = json.state.step;
     engine.context = json.state.context;

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importance & Salience - BSP Theory</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="index.html" class="active">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Theory</h3>
+            <ul>
+                <li><a href="index.html">Predictive Coding</a></li>
+                <li><a href="learning-loop.html">The Learning Loop</a></li>
+                <li><a href="mdl.html">MDL Principle</a></li>
+                <li><a href="rl.html">Reinforcement Learning</a></li>
+                <li><a href="importance.html" class="active">Importance & Salience</a></li>
+                <li><a href="generation.html">Sequence Generation</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Importance & Salience</h1>
+            <p>BSP differentiates between the value of an <em>Event</em> and the value of a <em>Concept</em>.</p>
+
+            <h2>Importance (Episodic Value)</h2>
+            <p><strong>Importance</strong> is a property of a specific moment in time (an interaction). It determines "how much we should learn from this".</p>
+            <p><code>Importance = f(Novelty, Utility, Stability)</code></p>
+            <ul>
+                <li><strong>Novelty:</strong> How surprised was the system? (High Surprise = High Learning Opportunity)</li>
+                <li><strong>Utility:</strong> Did this lead to a reward?</li>
+                <li><strong>Stability:</strong> Is this pattern consistent over time?</li>
+            </ul>
+
+            <h2>Salience (Structural Value)</h2>
+            <p><strong>Salience</strong> is a property of a Group (Concept). It represents the long-term usefulness of that concept.</p>
+            <p>Groups with high Salience:</p>
+            <ul>
+                <li>Are activated more easily (lower threshold).</li>
+                <li>Are less likely to be pruned/forgotten.</li>
+                <li>Are prioritized during prediction.</li>
+            </ul>
+
+            <div class="callout">
+                <h4>Dynamic Memory Management</h4>
+                <p>Because BSP runs on constrained memory (unlike static LLM weights), it must constantly decide what to keep and what to forget. <strong>Salience</strong> provides the metric for this "Garbage Collection". Low-salience, rarely used groups are pruned to make space for new learning.</p>
+            </div>
+
+            <div class="pager">
+                <a href="rl.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">Reinforcement Learning</span>
+                </a>
+                <a href="generation.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">Sequence Generation</span>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

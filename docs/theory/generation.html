@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence Generation - BSP Theory</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="index.html" class="active">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Theory</h3>
+            <ul>
+                <li><a href="index.html">Predictive Coding</a></li>
+                <li><a href="learning-loop.html">The Learning Loop</a></li>
+                <li><a href="mdl.html">MDL Principle</a></li>
+                <li><a href="rl.html">Reinforcement Learning</a></li>
+                <li><a href="importance.html">Importance & Salience</a></li>
+                <li><a href="generation.html" class="active">Sequence Generation</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Sequence Generation & Decoding</h1>
+            <p>One challenge with "Bag of Words" (Bitset) models is that they lose order information. "Dog bites man" and "Man bites dog" look identical in a pure bitset.</p>
+            <p>BSP solves this by maintaining a lightweight <strong>Transition Matrix</strong> alongside the heavy Concept Memory.</p>
+
+            <h2>The Generation Process</h2>
+            <p>When the system wants to "speak" (generate Natural Language from its internal prediction), it follows this pipeline:</p>
+
+            <ol>
+                <li><strong>Prediction:</strong> The Core Engine predicts a set of active groups (Concepts). e.g., <code>{Cat, Jump, Table}</code>.</li>
+                <li><strong>Token Pool:</strong> These groups are "decoded" into a pool of potential tokens.</li>
+                <li><strong>Sequence Assembly:</strong> A Markov-like chain (Bigram/Trigram) arranges these tokens into a valid grammatical sequence.</li>
+            </ol>
+
+            <div class="callout">
+                <h4>Hybrid Approach</h4>
+                <p>
+                    <strong>High Level:</strong> Concepts (Groups) determine <em>what</em> to say.<br>
+                    <strong>Low Level:</strong> Sequence Model determines <em>how</em> to say it (word order).
+                </p>
+            </div>
+
+            <h2>Decoding Algorithm</h2>
+            <pre><code>function generate_text(predicted_groups):
+  pool = get_tokens(predicted_groups)
+  current_word = START_TOKEN
+  output = []
+  
+  while current_word != END_TOKEN:
+    # Find next candidates that are BOTH:
+    # 1. In our Concept Pool (semantic fit)
+    # 2. Grammatically valid followers of current_word
+    candidates = intersection(pool, next_tokens[current_word])
+    
+    current_word = select_best(candidates)
+    output.append(current_word)
+    
+  return output.join(" ")</code></pre>
+
+            <div class="pager">
+                <a href="importance.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">Importance & Salience</span>
+                </a>
+                <span class="pager-link next disabled"></span>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

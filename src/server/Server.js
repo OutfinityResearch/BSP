@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const { BPCMEngine } = require('../core/BPCMEngine');
 const { ResponseGenerator } = require('../core/ResponseGenerator');
+const { ConversationContext } = require('../core/ConversationContext');
 
 // Path to pretrained model
 const PRETRAINED_MODEL_PATH = path.join(__dirname, '../../data/pretrained.json');
@@ -37,6 +38,7 @@ class Session {
     this.id = id;
     this.engine = engine;
     this.responseGenerator = new ResponseGenerator(engine);
+    this.context = new ConversationContext();  // DS-011: Conversation context
     this.created = Date.now();
     this.lastActive = Date.now();
     this.messageHistory = [];
@@ -523,7 +525,13 @@ class BPCMServer {
       importanceOverride: isImportant ? 1.0 : null,
     });
     
-    // Generate response - pass current input directly
+    // Update conversation context (DS-011)
+    const wordTokens = result.wordTokens || session.engine.tokenizer.tokenizeWords(content);
+    session.context.addTurn(wordTokens, result.activeGroups, {
+      importance: result.importance
+    });
+    
+    // Generate response with context
     const response = this.generateResponse(session, result, content, effectiveReward);
     
     // Store messages
@@ -542,15 +550,16 @@ class BPCMServer {
       importance: result.importance,
       predictions: result.predictions,
       groupDescriptions: result.activeGroups.map(g => session.engine.describeGroup(g.id)),
+      contextStats: session.context.getStats(),  // Include context info
     };
   }
 
   generateResponse(session, result, input, reward = 0) {
-    // Use the natural language response generator
+    // Use the natural language response generator with conversation context
     return session.responseGenerator.generate(result, {
-      input: input,  // Pass the current input directly
+      input: input,
       reward: reward,
-    });
+    }, session.context);  // Pass conversation context (DS-011)
   }
 
   async serveStatic(req, res, pathname) {

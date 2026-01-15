@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BSP Architecture</title>
+    <title>Overview - BSP Architecture</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -19,18 +19,18 @@
 
     <div class="container">
         <aside class="sidebar">
-            <h3>Components</h3>
+            <h3>Architecture</h3>
             <ul>
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#system-diagram">System Diagram</a></li>
-                <li><a href="#core-engine">Core Engine</a></li>
-                <li><a href="#data-flow">Data Flow</a></li>
-                <li><a href="#data-structures">Data Structures</a></li>
+                <li><a href="index.html" class="active">Overview</a></li>
+                <li><a href="core-engine.html">Core Engine</a></li>
+                <li><a href="data-flow.html">Data Flow</a></li>
+                <li><a href="data-structures.html">Data Structures</a></li>
+                <li><a href="server-sessions.html">Server & Sessions</a></li>
             </ul>
         </aside>
 
         <main class="content">
-            <h1 id="overview">System Architecture</h1>
+            <h1>System Architecture</h1>
             <p>
                 BSP (Bitset System for Prediction) is a CPU-first continuous learning system that uses bitsets for representations and a compression/surprise minimization objective. Unlike Transformer-based LLMs that rely on dense matrix multiplications and fixed weights, BSP uses sparse set operations and dynamic, growing memory structures.
             </p>
@@ -42,7 +42,42 @@
                 <strong>CPU Efficiency:</strong> Optimized for modern CPUs using Roaring Bitmaps and SIMD operations.</p>
             </div>
 
-            <h2 id="system-diagram">System Components</h2>
+            <h2>Comparison with Classic ML</h2>
+            <p>In classical Machine Learning and Deep Learning, the model is typically a static artifact produced after a long "training" phase. In contrast, BSP is designed for <strong>Continuous Learning</strong>.</p>
+            
+            <table style="width:100%; border-collapse: collapse; margin: 2rem 0;">
+                <thead>
+                    <tr style="background: #f1f5f9; text-align: left;">
+                        <th style="padding: 1rem;">Feature</th>
+                        <th style="padding: 1rem;">Deep Learning (LLMs)</th>
+                        <th style="padding: 1rem;">BSP Architecture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Representation</strong></td>
+                        <td style="padding: 1rem;">Dense Vectors (Embeddings)</td>
+                        <td style="padding: 1rem;">Sparse Bitsets (Sets of IDs)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Memory</strong></td>
+                        <td style="padding: 1rem;">Fixed Weights (Matrices)</td>
+                        <td style="padding: 1rem;">Dynamic "Groups" (Expandable)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Learning</strong></td>
+                        <td style="padding: 1rem;">Offline (Backpropagation)</td>
+                        <td style="padding: 1rem;">Online (Hebbian/Surprise)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Hardware</strong></td>
+                        <td style="padding: 1rem;">GPU / TPU Required</td>
+                        <td style="padding: 1rem;">Standard CPU (SIMD)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>System Components</h2>
             <p>The architecture is modular, separating the interface (Server) from the cognitive core (Engine).</p>
 
             <div class="diagram-container">
@@ -60,13 +95,13 @@
                     <text x="190" y="230" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#15803d" font-weight="bold">Input Pipeline</text>
                     
                     <rect x="120" y="250" width="140" height="40" rx="3" fill="white" stroke="#22c55e"/>
-                    <text x="190" y="275" font-family="sans-serif" font-size="12" text-anchor="middle">Tokenizer (Text → IDs)</text>
+                    <text x="190" y="275" font-family="sans-serif" font-size="12" text-anchor="middle">Tokenizer</text>
 
                     <rect x="120" y="300" width="140" height="40" rx="3" fill="white" stroke="#22c55e"/>
-                    <text x="190" y="325" font-family="sans-serif" font-size="12" text-anchor="middle">Encoder (IDs → Bitset)</text>
+                    <text x="190" y="325" font-family="sans-serif" font-size="12" text-anchor="middle">Encoder</text>
 
                     <rect x="120" y="350" width="140" height="40" rx="3" fill="white" stroke="#22c55e"/>
-                    <text x="190" y="375" font-family="sans-serif" font-size="12" text-anchor="middle">Activator (Bitset → Groups)</text>
+                    <text x="190" y="375" font-family="sans-serif" font-size="12" text-anchor="middle">Activator</text>
 
                     <!-- Core Engine -->
                     <rect x="320" y="200" width="380" height="200" rx="5" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
@@ -88,7 +123,6 @@
                     <line x1="400" y1="160" x2="400" y2="190" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
                     <line x1="280" y1="300" x2="310" y2="300" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
                     
-                    <!-- Defs -->
                     <defs>
                         <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
                             <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
@@ -97,109 +131,13 @@
                 </svg>
             </div>
 
-            <h2 id="core-engine">The Core Engine</h2>
-            <p>The brain of BSP consists of three primary data structures that work in unison:</p>
-            
-            <div class="grid">
-                <div class="card">
-                    <h3>GroupStore</h3>
-                    <p>Stores "Concepts" or "Groups". A Group is a collection of features (represented as a bitset) that frequently appear together. This is equivalent to a neuron or a stable embedding vector in neural networks, but explicit and editable.</p>
-                </div>
-                <div class="card">
-                    <h3>DeductionGraph</h3>
-                    <p>Manages temporal and causal relationships. If Group A is followed by Group B often, a weighted link is created. This allows the system to predict future states based on current context.</p>
-                </div>
-                <div class="card">
-                    <h3>BitmapIndex</h3>
-                    <p>An inverted index that allows for O(1) retrieval of candidate groups given an input bitset. It maps atomic features (like token IDs) back to the groups that contain them.</p>
-                </div>
+            <div class="pager">
+                <span class="pager-link prev disabled"></span>
+                <a href="core-engine.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">Core Engine</span>
+                </a>
             </div>
-
-            <h2 id="data-flow">Processing Flow</h2>
-            <p>When text enters the system, it goes through a transformation pipeline that converts it from discrete symbols to active concepts, and finally into learning updates.</p>
-
-            <div class="diagram-container">
-                <svg width="800" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Steps -->
-                    <g transform="translate(50, 80)">
-                        <circle cx="0" cy="0" r="30" fill="#3b82f6"/>
-                        <text x="0" y="5" text-anchor="middle" fill="white" font-weight="bold">1</text>
-                        <text x="0" y="50" text-anchor="middle" font-size="12">Input Text</text>
-                    </g>
-                    
-                    <line x1="90" y1="80" x2="150" y2="80" stroke="#cbd5e1" stroke-width="3" />
-
-                    <g transform="translate(190, 80)">
-                        <circle cx="0" cy="0" r="30" fill="#3b82f6"/>
-                        <text x="0" y="5" text-anchor="middle" fill="white" font-weight="bold">2</text>
-                        <text x="0" y="50" text-anchor="middle" font-size="12">Bitset Encoding</text>
-                    </g>
-
-                    <line x1="230" y1="80" x2="290" y2="80" stroke="#cbd5e1" stroke-width="3" />
-
-                    <g transform="translate(330, 80)">
-                        <circle cx="0" cy="0" r="30" fill="#8b5cf6"/>
-                        <text x="0" y="5" text-anchor="middle" fill="white" font-weight="bold">3</text>
-                        <text x="0" y="50" text-anchor="middle" font-size="12">Activation</text>
-                    </g>
-
-                    <line x1="370" y1="80" x2="430" y2="80" stroke="#cbd5e1" stroke-width="3" />
-
-                    <g transform="translate(470, 80)">
-                        <circle cx="0" cy="0" r="30" fill="#ec4899"/>
-                        <text x="0" y="5" text-anchor="middle" fill="white" font-weight="bold">4</text>
-                        <text x="0" y="50" text-anchor="middle" font-size="12">Prediction</text>
-                    </g>
-
-                    <line x1="510" y1="80" x2="570" y2="80" stroke="#cbd5e1" stroke-width="3" />
-
-                    <g transform="translate(610, 80)">
-                        <circle cx="0" cy="0" r="30" fill="#f59e0b"/>
-                        <text x="0" y="5" text-anchor="middle" fill="white" font-weight="bold">5</text>
-                        <text x="0" y="50" text-anchor="middle" font-size="12">Surprise Calc</text>
-                    </g>
-
-                    <line x1="650" y1="80" x2="710" y2="80" stroke="#cbd5e1" stroke-width="3" />
-
-                    <g transform="translate(750, 80)">
-                        <circle cx="0" cy="0" r="30" fill="#10b981"/>
-                        <text x="0" y="5" text-anchor="middle" fill="white" font-weight="bold">6</text>
-                        <text x="0" y="50" text-anchor="middle" font-size="12">Learning Update</text>
-                    </g>
-                </svg>
-            </div>
-
-            <ol>
-                <li><strong>Tokenization:</strong> Text is split into tokens and hashed into a large identity space (e.g., 0..1M).</li>
-                <li><strong>Encoding:</strong> A Roaring Bitmap is created representing the input set.</li>
-                <li><strong>Activation:</strong> The system finds the top-K groups that best "cover" the input bitset.</li>
-                <li><strong>Prediction:</strong> Based on previous context, the Deduction Engine predicts what groups should come next.</li>
-                <li><strong>Surprise:</strong> The system compares the Input vs. Reconstruction (from active groups) vs. Prediction.
-                    <ul>
-                        <li><code>Surprise = Input \ Reconstruction</code> (Unexplained bits)</li>
-                        <li><code>Hallucination = Reconstruction \ Input</code> (Excess bits)</li>
-                    </ul>
-                </li>
-                <li><strong>Learning:</strong>
-                    <ul>
-                        <li>Adjust memberships of active groups to better fit the input.</li>
-                        <li>Create new groups if surprise is too high.</li>
-                        <li>Strengthen temporal links between context and current groups.</li>
-                    </ul>
-                </li>
-            </ol>
-
-            <h2 id="data-structures">Key Data Structures</h2>
-            <p>For a deep dive into the specific implementations and memory layout, see <a href="../specs/DS/DS-002-data-structures.md">DS-002: Data Structures</a>.</p>
-            
-            <pre><code>interface Group {
-  id: number;
-  members: RoaringBitmap;      // The "concept" definition
-  memberCounts: Map<number, number>; // Weights
-  salience: number;            // Importance (RL value)
-  deduce: RoaringBitmap;       // Forward links
-}</code></pre>
-
         </main>
     </div>
 </body>

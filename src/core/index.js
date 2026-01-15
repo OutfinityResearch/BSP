@@ -10,6 +10,9 @@ const { Learner } = require('./Learner');
 const { ReplayBuffer } = require('./ReplayBuffer');
 const { BPCMEngine } = require('./BPCMEngine');
 const { ResponseGenerator } = require('./ResponseGenerator');
+const { SequenceModel } = require('./SequenceModel');
+const { IDFTracker } = require('./IDFTracker');
+const { ConversationContext } = require('./ConversationContext');
 
 module.exports = {
   SimpleBitset,
@@ -21,4 +24,7 @@ module.exports = {
   ReplayBuffer,
   BPCMEngine,
   ResponseGenerator,
+  SequenceModel,
+  IDFTracker,
+  ConversationContext,
 };

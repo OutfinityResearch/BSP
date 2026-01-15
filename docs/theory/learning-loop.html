@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Loop - BSP Theory</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="index.html" class="active">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Theory</h3>
+            <ul>
+                <li><a href="index.html">Predictive Coding</a></li>
+                <li><a href="learning-loop.html" class="active">The Learning Loop</a></li>
+                <li><a href="mdl.html">MDL Principle</a></li>
+                <li><a href="rl.html">Reinforcement Learning</a></li>
+                <li><a href="importance.html">Importance & Salience</a></li>
+                <li><a href="generation.html">Sequence Generation</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>The Learning Loop</h1>
+            <p>Unlike Backpropagation which minimizes a global loss function across a fixed network using calculus (gradients), BSP performs <strong>local, incremental updates</strong> using set operations.</p>
+
+            <h2>Hebb's Rule Revisited</h2>
+            <p>Donald Hebb famously said: <em>"Neurons that fire together, wire together."</em></p>
+            <p>BSP implements this literally:</p>
+            <ol>
+                <li><strong>Group Creation:</strong> If features A, B, and C appear together often, they form a Group.</li>
+                <li><strong>Link Strengthening:</strong> If Group X is active at time T, and Group Y is active at time T+1, the link X->Y is strengthened.</li>
+            </ol>
+
+            <h2>Comparison with Backpropagation</h2>
+            <table style="width:100%; border-collapse: collapse; margin: 2rem 0;">
+                <thead>
+                    <tr style="background: #f1f5f9; text-align: left;">
+                        <th style="padding: 1rem;">Aspect</th>
+                        <th style="padding: 1rem;">Backpropagation (NN)</th>
+                        <th style="padding: 1rem;">BSP Learning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Scope</strong></td>
+                        <td style="padding: 1rem;">Global (Updates all weights)</td>
+                        <td style="padding: 1rem;">Local (Updates active groups only)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Mechanism</strong></td>
+                        <td style="padding: 1rem;">Chain Rule (Calculus)</td>
+                        <td style="padding: 1rem;">Set Union/Intersection</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Speed</strong></td>
+                        <td style="padding: 1rem;">Slow (Matrix Multiplications)</td>
+                        <td style="padding: 1rem;">Fast (Bitwise Ops)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 1rem;"><strong>Catastrophic Forgetting</strong></td>
+                        <td style="padding: 1rem;">Major Issue</td>
+                        <td style="padding: 1rem;">Mitigated (Local interference only)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>The Update Cycle</h2>
+            <p>For every step in a chat session:</p>
+            <pre><code>1. Calculate Surprise (Input \ Predicted)
+2. If Surprise > Threshold:
+   a. Update existing active groups (add new members)
+   b. If no group fits, create a new Group from Surprise
+3. Strengthen deduction links (Context -> Current)
+4. Decay links that predicted incorrectly</code></pre>
+
+            <div class="pager">
+                <a href="index.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">Predictive Coding</span>
+                </a>
+                <a href="mdl.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">MDL Principle</span>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
