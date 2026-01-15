@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BPCM Manual - Training & Testing Guide</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-secondary: #161b22;
+      --text: #e6edf3;
+      --text-dim: #8b949e;
+      --accent: #58a6ff;
+      --border: #30363d;
+      --success: #3fb950;
+      --warning: #d29922;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent); }
+    h2 { font-size: 1.75rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+    h3 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; color: var(--accent); }
+    
+    p { margin-bottom: 1rem; }
+    
+    code {
+      background: var(--bg-secondary);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+    }
+    
+    pre {
+      background: var(--bg-secondary);
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--border);
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    
+    .note {
+      background: rgba(88, 166, 255, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .warning {
+      background: rgba(210, 153, 34, 0.1);
+      border-left: 4px solid var(--warning);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .success {
+      background: rgba(63, 185, 80, 0.1);
+      border-left: 4px solid var(--success);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: left;
+    }
+    
+    th { background: var(--bg-secondary); }
+    
+    ul, ol { margin: 1rem 0; padding-left: 2rem; }
+    li { margin: 0.5rem 0; }
+    
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    
+    .toc {
+      background: var(--bg-secondary);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+    
+    .toc h3 { margin-top: 0; }
+    .toc ul { list-style: none; padding-left: 1rem; }
+    .toc a { color: var(--text); }
+    .toc a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <h1>BPCM Manual</h1>
+  <p>Complete guide to training and testing Bitset Predictive Coding Memory models</p>
+  
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ul>
+      <li><a href="#quick-start">1. Quick Start</a></li>
+      <li><a href="#concepts">2. Core Concepts</a></li>
+      <li><a href="#training">3. Training a Model</a></li>
+      <li><a href="#interactive">4. Interactive Learning</a></li>
+      <li><a href="#testing">5. Testing & Evaluation</a></li>
+      <li><a href="#api">6. API Reference</a></li>
+      <li><a href="#advanced">7. Advanced Configuration</a></li>
+    </ul>
+  </div>
+
+  <h2 id="quick-start">1. Quick Start</h2>
+  
+  <h3>Installation</h3>
+  <p>BPCM has zero external dependencies. Just clone and run:</p>
+  
+  <pre><code># Clone the repository
+git clone &lt;repository-url&gt;
+cd BSP
+
+# Start the server
+node src/index.js
+
+# Or run training script
+node scripts/train.js</code></pre>
+  
+  <h3>Start Chat Interface</h3>
+  <pre><code>node src/index.js
+
+# Output:
+# BPCM Server running at http://localhost:3000
+# Open http://localhost:3000 in your browser to start</code></pre>
+  
+  <p>Open <code>http://localhost:3000</code> in your browser and start chatting!</p>
+
+  <h2 id="concepts">2. Core Concepts</h2>
+  
+  <h3>What is BPCM?</h3>
+  <p>BPCM (Bitset Predictive Coding Memory) is a continuous learning system that:</p>
+  <ul>
+    <li><strong>Uses bitsets</strong> instead of neural network embeddings</li>
+    <li><strong>Learns online</strong> from every interaction (no batch training)</li>
+    <li><strong>Runs on CPU</strong> with minimal memory</li>
+    <li><strong>Is interpretable</strong> - you can see what concepts it has learned</li>
+  </ul>
+  
+  <h3>Key Components</h3>
+  <table>
+    <tr><th>Component</th><th>Description</th></tr>
+    <tr><td><strong>Groups</strong></td><td>Clusters of co-occurring features (concepts)</td></tr>
+    <tr><td><strong>Deductions</strong></td><td>Temporal links between groups (if A then B)</td></tr>
+    <tr><td><strong>Surprise</strong></td><td>Bits not explained by active groups</td></tr>
+    <tr><td><strong>Salience</strong></td><td>Importance score for each group</td></tr>
+    <tr><td><strong>RL Pressure (ρ)</strong></td><td>Balance between stable learning and adaptation</td></tr>
+  </table>
+  
+  <h3>Learning Objective</h3>
+  <p>BPCM minimizes:</p>
+  <pre><code>Loss = |surprise| + β × |hallucination| + γ × |active_groups|</code></pre>
+  <p>This is similar to MDL (Minimum Description Length) - compress the input using as few groups as possible.</p>
+
+  <h2 id="training">3. Training a Model</h2>
+  
+  <h3>Method 1: Training Script</h3>
+  <p>Create a training script for your data:</p>
+  
+  <pre><code>// scripts/train.js
+const { BPCMEngine } = require('../src/core');
+const fs = require('fs');
+
+// Create engine
+const engine = new BPCMEngine({
+  universeSize: 100000,
+  maxGroups: 10000,
+  rlPressure: 0.3,
+});
+
+// Load training data
+const text = fs.readFileSync('data/train.txt', 'utf8');
+const lines = text.split('\n').filter(l => l.trim());
+
+console.log(`Training on ${lines.length} lines...`);
+
+// Training loop
+for (let epoch = 0; epoch < 3; epoch++) {
+  let totalSurprise = 0;
+  
+  for (let i = 0; i < lines.length; i++) {
+    const result = engine.process(lines[i]);
+    totalSurprise += result.surprise;
+    
+    // Progress
+    if (i % 100 === 0) {
+      console.log(`Epoch ${epoch+1}, Line ${i}/${lines.length}, Surprise: ${result.surprise}`);
+    }
+  }
+  
+  console.log(`Epoch ${epoch+1} complete. Avg surprise: ${(totalSurprise/lines.length).toFixed(2)}`);
+  console.log(`Groups: ${engine.store.size}, Edges: ${engine.graph.edgeCount}`);
+}
+
+// Save model
+const state = engine.toJSON();
+fs.writeFileSync('data/model.json', JSON.stringify(state));
+console.log('Model saved to data/model.json');</code></pre>
+  
+  <h3>Method 2: Programmatic Training</h3>
+  
+  <pre><code>const { BPCMEngine } = require('./src/core');
+
+const engine = new BPCMEngine();
+
+// Train on individual texts
+const trainingData = [
+  "The cat sat on the mat",
+  "Dogs are loyal pets",
+  "Cats and dogs are popular pets",
+  // ... more data
+];
+
+for (const text of trainingData) {
+  const result = engine.process(text);
+  console.log(`Processed: "${text.substring(0,30)}..." Surprise: ${result.surprise}`);
+}
+
+// Check what was learned
+console.log('\nTop groups:');
+for (const group of engine.getTopGroups(5)) {
+  console.log(`  ${group.description}`);
+}</code></pre>
+  
+  <h3>Method 3: Interactive Training via Chat</h3>
+  <p>Every message you send through the chat interface trains the model!</p>
+  
+  <div class="note">
+    <strong>Tip:</strong> Use feedback (👍/👎) to guide learning. The model will prioritize patterns associated with positive feedback.
+  </div>
+
+  <h2 id="interactive">4. Interactive Learning</h2>
+  
+  <h3>Chat Commands</h3>
+  <table>
+    <tr><th>Command</th><th>Description</th></tr>
+    <tr><td><code>/help</code></td><td>Show all commands</td></tr>
+    <tr><td><code>/stats</code></td><td>Display current statistics</td></tr>
+    <tr><td><code>/groups [n]</code></td><td>Show top n groups by salience</td></tr>
+    <tr><td><code>/rl &lt;0-1&gt;</code></td><td>Set RL pressure</td></tr>
+    <tr><td><code>/save [name]</code></td><td>Save session state</td></tr>
+    <tr><td><code>/load &lt;name&gt;</code></td><td>Load saved session</td></tr>
+    <tr><td><code>/reset</code></td><td>Reset conversation context</td></tr>
+    <tr><td><code>/consolidate [n]</code></td><td>Replay n episodes from buffer</td></tr>
+  </table>
+  
+  <h3>Providing Feedback</h3>
+  <p>The model learns from your feedback:</p>
+  <ul>
+    <li><code>+++</code> or <code>👍</code> - Positive feedback (reward = +0.5)</li>
+    <li><code>---</code> or <code>👎</code> - Negative feedback (reward = -0.5)</li>
+    <li><code>important!</code> - Mark content as important (importance = 1.0)</li>
+  </ul>
+  
+  <pre><code>You: Explain how photosynthesis works
+BPCM: [concepts: plants, energy, sunlight...]
+
+You: +++ That's a good explanation!
+BPCM: Feedback recorded (reward: 0.5)</code></pre>
+  
+  <h3>RL Pressure (ρ)</h3>
+  <p>Control the learning balance:</p>
+  <ul>
+    <li><code>ρ = 0</code>: Pure language modeling (stable, compression-focused)</li>
+    <li><code>ρ = 0.3</code>: Default (balanced)</li>
+    <li><code>ρ = 1</code>: Maximum RL adaptation (fast adaptation to feedback)</li>
+  </ul>
+  
+  <pre><code>/rl 0.7   # Increase adaptation speed</code></pre>
+
+  <h2 id="testing">5. Testing & Evaluation</h2>
+  
+  <h3>Evaluation Script</h3>
+  
+  <pre><code>// scripts/evaluate.js
+const { BPCMEngine } = require('../src/core');
+const fs = require('fs');
+
+// Load trained model
+const state = JSON.parse(fs.readFileSync('data/model.json', 'utf8'));
+const engine = BPCMEngine.fromJSON(state);
+
+// Load test data
+const testLines = fs.readFileSync('data/test.txt', 'utf8')
+  .split('\n')
+  .filter(l => l.trim());
+
+console.log(`Evaluating on ${testLines.length} test lines...`);
+
+let totalSurprise = 0;
+let totalInput = 0;
+
+for (const line of testLines) {
+  const result = engine.process(line, { learn: false }); // Don't learn during eval
+  totalSurprise += result.surprise;
+  totalInput += result.inputSize;
+}
+
+const avgSurpriseRate = totalSurprise / totalInput;
+const approximatePPL = Math.pow(2, avgSurpriseRate * 10); // Rough approximation
+
+console.log('\n=== Evaluation Results ===');
+console.log(`Total test samples: ${testLines.length}`);
+console.log(`Average surprise rate: ${avgSurpriseRate.toFixed(4)}`);
+console.log(`Approximate perplexity: ${approximatePPL.toFixed(2)}`);
+console.log(`Total groups: ${engine.store.size}`);
+console.log(`Total edges: ${engine.graph.edgeCount}`);</code></pre>
+  
+  <h3>Metrics Explained</h3>
+  <table>
+    <tr><th>Metric</th><th>Description</th><th>Good Value</th></tr>
+    <tr><td>Surprise Rate</td><td>% of bits not explained</td><td>&lt; 0.3</td></tr>
+    <tr><td>Hallucination Rate</td><td>% of predicted bits that are wrong</td><td>&lt; 0.2</td></tr>
+    <tr><td>Compression Ratio</td><td>input bits / active groups</td><td>&gt; 5</td></tr>
+    <tr><td>Group Count</td><td>Total learned concepts</td><td>Depends on data</td></tr>
+  </table>
+  
+  <h3>Prediction Testing</h3>
+  
+  <pre><code>// Test predictions
+const context = engine.process("The cat sat on");
+const predictions = engine.predictNext(context.activeGroupIds, 5);
+
+console.log('Predictions:');
+for (const pred of predictions) {
+  console.log(`  ${engine.describeGroup(pred.groupId)} (score: ${pred.score.toFixed(3)})`);
+}</code></pre>
+  
+  <h3>Comparing with GPT-2</h3>
+  <p>See <a href="specs/DS/DS-008-benchmarks-comparison.md">DS-008</a> for full benchmark methodology.</p>
+  
+  <div class="note">
+    <strong>Target metrics for MVP:</strong>
+    <ul>
+      <li>WikiText-2 perplexity proxy: &lt;100 (GPT-2 Medium: 29.41)</li>
+      <li>LAMBADA top-10 accuracy: &gt;20% (GPT-2 Medium: 55.48%)</li>
+    </ul>
+  </div>
+
+  <h2 id="api">6. API Reference</h2>
+  
+  <h3>BPCMEngine</h3>
+  
+  <pre><code>const { BPCMEngine } = require('./src/core');
+
+// Create engine
+const engine = new BPCMEngine({
+  universeSize: 100000,    // Identity space size
+  maxGroups: 10000,        // Maximum groups
+  rlPressure: 0.3,         // RL vs LM balance
+  useVocab: false,         // Use vocabulary (for interpretability)
+});
+
+// Process input (encode, activate, learn)
+const result = engine.process(text, {
+  reward: 0,              // Explicit reward (-1 to 1)
+  importanceOverride: null, // Override importance (0-1)
+  learn: true,            // Whether to learn from this input
+});
+
+// Result structure:
+// {
+//   activeGroups: Group[],
+//   activeGroupIds: number[],
+//   surprise: number,
+//   hallucination: number,
+//   inputSize: number,
+//   importance: number,
+//   predictions: {groupId, score}[],
+// }
+
+// Predict next
+const predictions = engine.predictNext(groupIds, topK);
+
+// Describe a group
+const description = engine.describeGroup(groupId);
+
+// Get statistics
+const stats = engine.getStats();
+
+// Save/Load
+const state = engine.toJSON();
+fs.writeFileSync('model.json', JSON.stringify(state));
+
+const loaded = BPCMEngine.fromJSON(JSON.parse(fs.readFileSync('model.json')));
+</code></pre>
+  
+  <h3>REST API</h3>
+  
+  <pre><code># Create session
+POST /api/sessions
+Response: { "sessionId": "...", "created": ... }
+
+# Send message
+POST /api/sessions/:id/messages
+Body: { "content": "Hello", "reward": 0.5, "importance": 0.8 }
+Response: { "response": "...", "surprise": 5, "activeGroups": [...] }
+
+# Get session info
+GET /api/sessions/:id
+Response: { "id": "...", "stats": {...}, "messageCount": ... }
+
+# Save session
+POST /api/sessions/:id/save
+Response: { "saved": true, "path": "..." }
+
+# List saved sessions
+GET /api/sessions/saved
+Response: { "sessions": [...] }</code></pre>
+
+  <h2 id="advanced">7. Advanced Configuration</h2>
+  
+  <h3>Engine Parameters</h3>
+  <table>
+    <tr><th>Parameter</th><th>Default</th><th>Description</th></tr>
+    <tr><td>universeSize</td><td>100000</td><td>Size of identity space</td></tr>
+    <tr><td>maxGroups</td><td>10000</td><td>Maximum number of groups</td></tr>
+    <tr><td>rlPressure</td><td>0.3</td><td>RL vs LM balance</td></tr>
+    <tr><td>topK</td><td>16</td><td>Max active groups per input</td></tr>
+    <tr><td>activationThreshold</td><td>0.2</td><td>Min score for activation</td></tr>
+    <tr><td>membershipThreshold</td><td>3</td><td>Count to become member</td></tr>
+    <tr><td>alpha</td><td>0.1</td><td>Learning rate</td></tr>
+    <tr><td>alphaDeduction</td><td>0.15</td><td>Deduction learning rate</td></tr>
+    <tr><td>newGroupThreshold</td><td>0.5</td><td>Surprise to create new group</td></tr>
+    <tr><td>mergeThreshold</td><td>0.8</td><td>Jaccard to merge groups</td></tr>
+  </table>
+  
+  <h3>Memory Optimization</h3>
+  <p>For large datasets, reduce memory usage:</p>
+  <pre><code>const engine = new BPCMEngine({
+  maxGroups: 5000,        // Fewer groups
+  universeSize: 50000,    // Smaller identity space
+  replayBufferSize: 10000, // Smaller buffer
+});</code></pre>
+  
+  <h3>Performance Tips</h3>
+  <ul>
+    <li>Use <code>useVocab: false</code> (default) for faster hashing</li>
+    <li>Run <code>/consolidate</code> periodically for offline learning</li>
+    <li>Lower <code>topK</code> for faster activation</li>
+    <li>Increase <code>decayInterval</code> for less maintenance overhead</li>
+  </ul>
+  
+  <div class="success">
+    <strong>You're ready!</strong> Start the server with <code>node src/index.js</code> and begin training your BPCM model.
+  </div>
+  
+  <hr style="margin: 3rem 0; border-color: var(--border);">
+  <p style="text-align: center; color: var(--text-dim);">
+    BPCM - Bitset Predictive Coding Memory | 2026
+  </p>
+</body>
+</html>

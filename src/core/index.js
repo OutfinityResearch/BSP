@@ -1,0 +1,24 @@
+/**
+ * Core module exports
+ */
+
+const { SimpleBitset } = require('./Bitset');
+const { Tokenizer, CharTokenizer } = require('./Tokenizer');
+const { GroupStore } = require('./GroupStore');
+const { DeductionGraph } = require('./DeductionGraph');
+const { Learner } = require('./Learner');
+const { ReplayBuffer } = require('./ReplayBuffer');
+const { BPCMEngine } = require('./BPCMEngine');
+const { ResponseGenerator } = require('./ResponseGenerator');
+
+module.exports = {
+  SimpleBitset,
+  Tokenizer,
+  CharTokenizer,
+  GroupStore,
+  DeductionGraph,
+  Learner,
+  ReplayBuffer,
+  BPCMEngine,
+  ResponseGenerator,
+};

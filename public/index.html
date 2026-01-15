@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BPCM Chat Interface</title>
+  <style>
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --accent: #58a6ff;
+      --accent-dim: #1f6feb;
+      --border: #30363d;
+      --success: #3fb950;
+      --warning: #d29922;
+      --error: #f85149;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #58a6ff 0%, #a371f7 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .logo h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .session-info {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .session-id {
+      font-family: monospace;
+      background: var(--bg-tertiary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--bg-secondary);
+      border-color: var(--accent);
+    }
+
+    .btn-primary {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+    }
+
+    /* Main Layout */
+    main {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Chat Container */
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border);
+    }
+
+    /* Messages */
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 1rem;
+      border-radius: 12px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.user {
+      background: var(--accent-dim);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.assistant {
+      background: var(--bg-tertiary);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message-content {
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.5;
+    }
+
+    .message-meta {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 1rem;
+    }
+
+    .message-groups {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    /* Input Area */
+    .input-area {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    #message-input {
+      flex: 1;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text-primary);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #message-input:focus {
+      border-color: var(--accent);
+    }
+
+    #message-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .send-btn {
+      background: var(--accent);
+      border: none;
+      color: var(--bg-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .send-btn:hover {
+      opacity: 0.9;
+    }
+
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .feedback-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .feedback-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .feedback-btn:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .feedback-btn.positive:hover {
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    .feedback-btn.negative:hover {
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 320px;
+      background: var(--bg-secondary);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-section {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-section h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .stat {
+      background: var(--bg-tertiary);
+      padding: 0.75rem;
+      border-radius: 6px;
+    }
+
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .rl-control {
+      margin-top: 0.75rem;
+    }
+
+    .rl-slider {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .rl-value {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .group-list {
+      list-style: none;
+    }
+
+    .group-item {
+      padding: 0.5rem;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .group-item .salience {
+      float: right;
+      color: var(--accent);
+    }
+
+    /* Commands Helper */
+    .commands-list {
+      font-size: 0.85rem;
+    }
+
+    .command {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.25rem 0;
+    }
+
+    .command code {
+      background: var(--bg-tertiary);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-family: monospace;
+      color: var(--accent);
+    }
+
+    /* Loading indicator */
+    .loading {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      padding: 0.5rem 0;
+    }
+
+    .loading.visible {
+      display: flex;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Welcome screen */
+    .welcome {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .welcome h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .welcome p {
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="logo-icon">B</div>
+      <div>
+        <h1>BPCM Chat</h1>
+      </div>
+    </div>
+    <div class="session-info">
+      Session: <span id="session-id" class="session-id">-</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn" onclick="newSession()">New Session</button>
+      <button class="btn" onclick="saveSession()">Save</button>
+      <button class="btn" onclick="showHelp()">Help</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="chat-container">
+      <div class="messages" id="messages">
+        <div class="welcome" id="welcome">
+          <h2>Welcome to BPCM</h2>
+          <p>
+            Bitset Predictive Coding Memory - A CPU-friendly continuous learning system.
+            Start typing to interact with the engine and watch it learn!
+          </p>
+          <button class="btn btn-primary" onclick="startChat()">Start Chat</button>
+        </div>
+      </div>
+      
+      <div class="input-area">
+        <div class="input-row">
+          <input type="text" id="message-input" placeholder="Type a message or /help for commands..." autocomplete="off" disabled>
+          <button class="send-btn" id="send-btn" onclick="sendMessage()" disabled>Send</button>
+        </div>
+        <div class="feedback-row">
+          <button class="feedback-btn positive" onclick="sendFeedback(1)">👍 Good</button>
+          <button class="feedback-btn negative" onclick="sendFeedback(-1)">👎 Bad</button>
+          <button class="feedback-btn" onclick="markImportant()">⭐ Important</button>
+          <span class="loading" id="loading">
+            <span class="spinner"></span>
+            <span>Processing...</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <h3>Statistics</h3>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value" id="stat-groups">0</div>
+            <div class="stat-label">Groups</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="stat-edges">0</div>
+            <div class="stat-label">Edges</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="stat-surprise">0</div>
+            <div class="stat-label">Avg Surprise</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="stat-messages">0</div>
+            <div class="stat-label">Messages</div>
+          </div>
+        </div>
+        
+        <div class="rl-control">
+          <label>RL Pressure (ρ)</label>
+          <input type="range" class="rl-slider" id="rl-slider" min="0" max="100" value="30" onchange="updateRL()">
+          <div class="rl-value">
+            <span>LM (stable)</span>
+            <span id="rl-value">0.30</span>
+            <span>RL (adaptive)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Top Groups</h3>
+        <ul class="group-list" id="group-list">
+          <li class="group-item">No groups yet</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Quick Commands</h3>
+        <div class="commands-list">
+          <div class="command"><code>/help</code> <span>Show all commands</span></div>
+          <div class="command"><code>/stats</code> <span>View statistics</span></div>
+          <div class="command"><code>/groups</code> <span>List top groups</span></div>
+          <div class="command"><code>/save</code> <span>Save session</span></div>
+          <div class="command"><code>/reset</code> <span>Reset context</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let sessionId = null;
+    let messageCount = 0;
+    const API_BASE = '';
+
+    // Initialize
+    async function init() {
+      // Check for existing session in URL or localStorage
+      const urlParams = new URLSearchParams(window.location.search);
+      const savedSession = urlParams.get('session') || localStorage.getItem('bpcm_session');
+      
+      if (savedSession) {
+        try {
+          await loadSession(savedSession);
+        } catch (e) {
+          console.log('Could not load saved session:', e);
+        }
+      }
+    }
+
+    async function startChat() {
+      await newSession();
+    }
+
+    async function newSession() {
+      try {
+        const res = await fetch(`${API_BASE}/api/sessions`, { method: 'POST' });
+        const data = await res.json();
+        
+        sessionId = data.sessionId;
+        localStorage.setItem('bpcm_session', sessionId);
+        
+        document.getElementById('session-id').textContent = sessionId.split('_').pop();
+        document.getElementById('message-input').disabled = false;
+        document.getElementById('send-btn').disabled = false;
+        document.getElementById('welcome').style.display = 'none';
+        
+        addMessage('assistant', 'Session started! Type a message to begin learning, or /help for commands.');
+        updateStats();
+      } catch (e) {
+        console.error('Failed to create session:', e);
+        alert('Failed to connect to server. Make sure the server is running.');
+      }
+    }
+
+    async function loadSession(id) {
+      const res = await fetch(`${API_BASE}/api/sessions/${id}`);
+      if (!res.ok) throw new Error('Session not found');
+      
+      const data = await res.json();
+      sessionId = id;
+      localStorage.setItem('bpcm_session', sessionId);
+      
+      document.getElementById('session-id').textContent = id.split('_').pop();
+      document.getElementById('message-input').disabled = false;
+      document.getElementById('send-btn').disabled = false;
+      document.getElementById('welcome').style.display = 'none';
+      
+      // Load message history
+      const historyRes = await fetch(`${API_BASE}/api/sessions/${id}/messages`);
+      const historyData = await historyRes.json();
+      
+      for (const msg of historyData.messages) {
+        addMessage(msg.role, msg.content, msg.metadata, false);
+      }
+      
+      updateStats();
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('message-input');
+      const content = input.value.trim();
+      
+      if (!content || !sessionId) return;
+      
+      input.value = '';
+      addMessage('user', content);
+      setLoading(true);
+      
+      try {
+        const res = await fetch(`${API_BASE}/api/sessions/${sessionId}/messages`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content }),
+        });
+        
+        const data = await res.json();
+        addMessage('assistant', data.response, data);
+        updateStats();
+        
+        if (data.groupDescriptions) {
+          updateGroupList(data.groupDescriptions);
+        }
+      } catch (e) {
+        console.error('Failed to send message:', e);
+        addMessage('assistant', 'Error: Failed to process message');
+      }
+      
+      setLoading(false);
+    }
+
+    async function sendFeedback(value) {
+      if (!sessionId) return;
+      
+      const content = value > 0 ? '+++' : '---';
+      
+      try {
+        const res = await fetch(`${API_BASE}/api/sessions/${sessionId}/messages`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content, reward: value }),
+        });
+        
+        const data = await res.json();
+        addMessage('user', value > 0 ? '👍' : '👎');
+        addMessage('assistant', `Feedback recorded (reward: ${value})`);
+        updateStats();
+      } catch (e) {
+        console.error('Failed to send feedback:', e);
+      }
+    }
+
+    async function markImportant() {
+      if (!sessionId) return;
+      
+      try {
+        await fetch(`${API_BASE}/api/sessions/${sessionId}/messages`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: '/important marked', importance: 1 }),
+        });
+        
+        addMessage('user', '⭐ Important');
+        updateStats();
+      } catch (e) {
+        console.error('Failed to mark important:', e);
+      }
+    }
+
+    async function saveSession() {
+      if (!sessionId) return;
+      
+      try {
+        await fetch(`${API_BASE}/api/sessions/${sessionId}/save`, { method: 'POST' });
+        addMessage('assistant', 'Session saved!');
+      } catch (e) {
+        console.error('Failed to save:', e);
+        alert('Failed to save session');
+      }
+    }
+
+    async function updateRL() {
+      const slider = document.getElementById('rl-slider');
+      const value = slider.value / 100;
+      document.getElementById('rl-value').textContent = value.toFixed(2);
+      
+      if (!sessionId) return;
+      
+      try {
+        await fetch(`${API_BASE}/api/sessions/${sessionId}/messages`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: `/rl ${value}` }),
+        });
+      } catch (e) {
+        console.error('Failed to update RL:', e);
+      }
+    }
+
+    async function updateStats() {
+      if (!sessionId) return;
+      
+      try {
+        const res = await fetch(`${API_BASE}/api/sessions/${sessionId}`);
+        const data = await res.json();
+        
+        document.getElementById('stat-groups').textContent = data.stats.groupCount;
+        document.getElementById('stat-edges').textContent = data.stats.edgeCount;
+        document.getElementById('stat-surprise').textContent = data.stats.metrics.avgSurprise.toFixed(2);
+        document.getElementById('stat-messages').textContent = data.messageCount;
+        
+        // Update RL slider
+        document.getElementById('rl-slider').value = data.stats.rlPressure * 100;
+        document.getElementById('rl-value').textContent = data.stats.rlPressure.toFixed(2);
+      } catch (e) {
+        console.error('Failed to update stats:', e);
+      }
+    }
+
+    function updateGroupList(descriptions) {
+      const list = document.getElementById('group-list');
+      
+      if (!descriptions || descriptions.length === 0) {
+        list.innerHTML = '<li class="group-item">No groups yet</li>';
+        return;
+      }
+      
+      list.innerHTML = descriptions.slice(0, 5).map(d => 
+        `<li class="group-item">${escapeHtml(d)}</li>`
+      ).join('');
+    }
+
+    function addMessage(role, content, metadata = {}, scroll = true) {
+      const container = document.getElementById('messages');
+      
+      const msg = document.createElement('div');
+      msg.className = `message ${role}`;
+      
+      let html = `<div class="message-content">${escapeHtml(content)}</div>`;
+      
+      if (metadata.surprise !== undefined) {
+        html += `<div class="message-meta">
+          <span>Surprise: ${metadata.surprise}</span>
+          <span>Importance: ${(metadata.importance || 0).toFixed(2)}</span>
+        </div>`;
+      }
+      
+      if (metadata.groupDescriptions && metadata.groupDescriptions.length > 0) {
+        html += `<div class="message-groups">${metadata.groupDescriptions.slice(0, 3).join(', ')}</div>`;
+      }
+      
+      msg.innerHTML = html;
+      container.appendChild(msg);
+      
+      if (scroll) {
+        container.scrollTop = container.scrollHeight;
+      }
+      
+      messageCount++;
+    }
+
+    function setLoading(visible) {
+      document.getElementById('loading').classList.toggle('visible', visible);
+      document.getElementById('send-btn').disabled = visible;
+    }
+
+    function showHelp() {
+      addMessage('assistant', `
+BPCM Help
+
+Commands:
+  /help        - Show this help
+  /stats       - Show statistics
+  /groups [n]  - Show top n groups
+  /rl <0-1>    - Set RL pressure
+  /save        - Save session
+  /load <name> - Load session
+  /reset       - Reset context
+  /consolidate - Run consolidation
+
+Feedback:
+  👍 or +++    - Positive feedback
+  👎 or ---    - Negative feedback
+  ⭐ Important - Mark as important
+
+The system learns from every interaction!
+      `);
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Event listeners
+    document.getElementById('message-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>

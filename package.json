@@ -1,0 +1,27 @@
+{
+  "name": "bpcm",
+  "version": "1.0.0",
+  "description": "Bitset Predictive Coding Memory - CPU-friendly continuous learning",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "server": "node src/index.js",
+    "train": "node scripts/train.js",
+    "evaluate": "node scripts/evaluate.js",
+    "test": "node scripts/test.js",
+    "demo": "node scripts/demo.js"
+  },
+  "keywords": [
+    "machine-learning",
+    "nlp",
+    "bitset",
+    "continuous-learning",
+    "cpu",
+    "predictive-coding"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
