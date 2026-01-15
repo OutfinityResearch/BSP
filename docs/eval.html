@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation - BSP</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="architecture/index.html">Architecture</a></li>
+            <li><a href="theory/index.html">Theory</a></li>
+            <li><a href="research/index.html">Research</a></li>
+            <li><a href="wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="specs/index.html">Specs</a></li>
+            <li><a href="training.html">Training</a></li>
+            <li><a href="eval.html" class="active">Evaluation</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <main class="content">
+            <h1>Evaluation & Benchmarks</h1>
+            <p>
+                BSP is not a Transformer LM, so standard LLM metrics are only comparable through
+                proxies. We still evaluate on classic datasets to track progress and compare against
+                small LMs (e.g. GPT-2).
+            </p>
+
+            <div class="callout">
+                <h4>What We Measure</h4>
+                <p>
+                    <strong>Compression / Language Modeling:</strong> bits-per-character proxy (BPC), surprise rate.<br>
+                    <strong>Reasoning / Deduction:</strong> LAMBADA-style cloze accuracy via group prediction.<br>
+                    <strong>Efficiency:</strong> throughput (lines/sec), memory growth (groups/edges).
+                </p>
+            </div>
+
+            <h2>Run the Evaluation Suite</h2>
+            <pre><code># Evaluate a trained model (model path is configurable)
+node scripts/evaluate.js --model data/model_wiki.json
+
+# Evaluate only LAMBADA (if present)
+node scripts/evaluate.js --type lambada --model data/model_wiki.json
+</code></pre>
+
+            <h2>Compare Against GPT-2 (Small) and Baselines</h2>
+            <p>
+                The comparative benchmark reports BSP vs Shannon entropy, Gzip, and GPT-2 (Small) reference values.
+            </p>
+            <pre><code>node scripts/benchmark_comparative.js</code></pre>
+
+            <h3>Reference Benchmarks</h3>
+            <ul>
+                <li><strong>WikiText-2</strong>: common LM benchmark (perplexity for LMs, BPC proxy for BSP).</li>
+                <li><strong>LAMBADA</strong>: long-range dependency / cloze reasoning.</li>
+            </ul>
+
+            <p>
+                For the full benchmarking plan and GPT-2 reference targets, see
+                <a href="specs/DS/DS-008-benchmarks-comparison.md">DS-008</a>.
+            </p>
+
+            <h2>Future Benchmark Extensions (Small-LLM Style)</h2>
+            <p>
+                To compare BSP with “small LLM” suites more directly, we can add:
+            </p>
+            <ul>
+                <li>More cloze and multi-hop reasoning tasks (see <a href="specs/DS/DS-016-reasoning-curriculum-and-data.md">DS-016</a>).</li>
+                <li>Task-format and instruction-following evaluation sets (see <a href="specs/DS/DS-015-conversational-training-data.md">DS-015</a>).</li>
+                <li>Report generation dashboards (planned in <a href="specs/DS/DS-008-benchmarks-comparison.md">DS-008</a>).</li>
+            </ul>
+        </main>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training - BSP</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="architecture/index.html">Architecture</a></li>
+            <li><a href="theory/index.html">Theory</a></li>
+            <li><a href="research/index.html">Research</a></li>
+            <li><a href="wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="specs/index.html">Specs</a></li>
+            <li><a href="training.html" class="active">Training</a></li>
+            <li><a href="eval.html">Evaluation</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <main class="content">
+            <h1>Training BSP</h1>
+            <p>
+                BSP is an <strong>online</strong> system: training happens through repeated calls to
+                <code>BSPEngine.process()</code>. There is no separate offline gradient descent loop.
+                The main goal is to bootstrap a useful base model (pretraining) and then adapt online
+                during chat sessions.
+            </p>
+
+            <div class="callout">
+                <h4>Recommended Flow</h4>
+                <p>
+                    <strong>1) Pretrain</strong> on a corpus to learn core concepts and transitions.<br>
+                    <strong>2) Start the server</strong> and continue learning online via chat.<br>
+                    <strong>3) Use feedback</strong> (reward/importance) to steer learning.
+                </p>
+            </div>
+
+            <h2>1) Pretraining</h2>
+            <p>
+                Pretraining builds <code>data/pretrained.json</code>, used as the base for new chat sessions.
+            </p>
+            <pre><code># Pretrain (sample up to 200k lines, with dedup + filters)
+node scripts/pretrain.js --epochs 5 --batch 200 --max 200000 --dedup --minLen 20 --maxLen 500
+
+# Control adaptation strength during pretraining
+node scripts/pretrain.js --epochs 5 --rho 0.1
+</code></pre>
+
+            <h3>Scaling Tips</h3>
+            <ul>
+                <li><strong>Streaming:</strong> omit <code>--max</code> to stream the full corpus without loading it into RAM.</li>
+                <li><strong>Dedup:</strong> use <code>--dedup</code> to avoid wasting work on repeated lines.</li>
+                <li><strong>Hot token subsampling:</strong> enable with <code>--subsample</code> (default) and tune <code>--subsampleT</code>.</li>
+            </ul>
+
+            <h2>2) Training via a Script</h2>
+            <p>
+                For small datasets or quick experiments, train a model and save it to disk:
+            </p>
+            <pre><code># Train on a text file (defaults to data/train.txt)
+node scripts/train.js data/train.txt data/model.json 3
+</code></pre>
+
+            <h2>3) Interactive Training via Chat</h2>
+            <pre><code># Start the server (loads data/pretrained.json if present)
+node src/index.js
+
+# Then open:
+http://localhost:3000
+</code></pre>
+
+            <h3>Feedback Signals</h3>
+            <ul>
+                <li><code>+++</code> / <code>---</code> or 👍/👎: explicit reward signals</li>
+                <li>⭐ Important: marks the next message as high-importance (stronger updates)</li>
+                <li><code>/rl 0.0..1.0</code>: shifts between stable compression vs fast adaptation</li>
+            </ul>
+
+            <h2>Key Configuration Knobs</h2>
+            <ul>
+                <li><strong>Candidate control:</strong> <code>index.maxGroupsPerIdentity</code> prevents candidate explosion.</li>
+                <li><strong>Semantics:</strong> IDF statistics steer content-word selection and can drive token subsampling.</li>
+                <li><strong>Decoding quality:</strong> <code>sequenceModel.smoothing</code> improves early coherence.</li>
+            </ul>
+
+            <p>
+                For a full list of proposed flags and scaling techniques, see
+                <a href="specs/DS/DS-017-optimization-ideas-and-configuration-flags.md">DS-017</a>.
+            </p>
+        </main>
+    </div>
+</body>
+</html>
+
