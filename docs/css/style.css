@@ -217,3 +217,50 @@ pre code {
     font-weight: 600;
     text-transform: uppercase;
 }
+
+/* Pagination / Pager */
+.pager {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.pager-link {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+}
+
+.pager-link:hover {
+    border-color: var(--primary-color);
+    background: #eff6ff;
+}
+
+.pager-link .label {
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.pager-link .title {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.pager-link.prev {
+    text-align: left;
+}
+
+.pager-link.next {
+    text-align: right;
+    margin-left: auto;
+}

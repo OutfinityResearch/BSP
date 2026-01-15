@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Engine - BSP Architecture</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="index.html" class="active">Architecture</a></li>
+            <li><a href="../theory/index.html">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Architecture</h3>
+            <ul>
+                <li><a href="index.html">Overview</a></li>
+                <li><a href="core-engine.html" class="active">Core Engine</a></li>
+                <li><a href="data-flow.html">Data Flow</a></li>
+                <li><a href="server-sessions.html">Server & Sessions</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>The Core Engine</h1>
+            <p>The BSP Core Engine is the cognitive center of the system. Unlike neural networks which are often monolithic matrices, the BSP Engine is composed of distinct, explicit data structures that interact to form memory and prediction.</p>
+
+            <h2 id="group-store">1. GroupStore</h2>
+            <p>The <strong>GroupStore</strong> is the long-term memory of the system. It stores "Groups" (or Concepts).</p>
+            
+            <div class="callout">
+                <h4>Analogy: Neural Networks vs. BSP</h4>
+                <p>In a standard Neural Network (NN), a concept like "Cat" is distributed across thousands of floating-point weights in a dense matrix. It is implicit and hard to isolate.</p>
+                <p>In BSP, "Cat" is an explicit <strong>Group</strong> entry. It has a unique ID and a set of member features (whiskers, meow, tail) stored as a compressed bitset. This makes the memory <strong>editable</strong> and <strong>interpretable</strong>.</p>
+            </div>
+
+            <h3>Structure of a Group</h3>
+            <pre><code>interface Group {
+    id: number;              // Unique identifier (e.g., 42)
+    members: RoaringBitmap;  // The features (tokens) that define this group
+    salience: number;        // How useful/important this group is (0.0 - 1.0)
+    
+    // Metadata
+    usageCount: number;      // How often it has been activated
+    lastUsed: number;        // Timestamp for decay/pruning
+}</code></pre>
+
+            <h2 id="deduction-graph">2. DeductionGraph</h2>
+            <p>The <strong>DeductionGraph</strong> manages the temporal and causal relationships between groups. It answers the question: <em>"If I am currently thinking about [Context], what usually comes next?"</em></p>
+
+            <ul>
+                <li><strong>Nodes:</strong> Group IDs.</li>
+                <li><strong>Edges:</strong> Weighted transitions (probabilities).</li>
+                <li><strong>Optimized Storage:</strong> Uses adjacency lists for sparse connections and bitsets for fast "next-step" lookups.</li>
+            </ul>
+
+            <p>When the system learns <code>A -> B</code>, it increments the weight of the edge between Group A and Group B. Unlike Backpropagation which adjusts weights to minimize a global error, this is a local Hebbian-like update: "Neurons that fire together (in sequence), wire together."</p>
+
+            <h2 id="predictor">3. Predictor</h2>
+            <p>The <strong>Predictor</strong> uses the DeductionGraph to generate expectations about the future.</p>
+
+            <h3>The Prediction Process</h3>
+            <ol>
+                <li><strong>Context Identification:</strong> Identify the currently active groups (<code>ActiveSet</code>).</li>
+                <li><strong>Expansion:</strong> Look up all forward links from the <code>ActiveSet</code> in the DeductionGraph.</li>
+                <li><strong>Scoring:</strong> Calculate a score for each candidate next group based on link weights and the salience of the current groups.</li>
+                <li><strong>Union:</strong> Combine the member bits of the top predicted groups to form a <code>PredictedBitset</code>.</li>
+            </ol>
+            
+            <p>This <code>PredictedBitset</code> is then compared against the actual next input to calculate <strong>Surprise</strong>.</p>
+
+            <div class="pager">
+                <a href="index.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">Overview</span>
+                </a>
+                <a href="data-flow.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">Data Flow</span>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

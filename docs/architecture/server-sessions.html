@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server & Sessions - BSP Architecture</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="index.html" class="active">Architecture</a></li>
+            <li><a href="../theory/index.html">Theory</a></li>
+            <li><a href="../wiki/index.html">Wiki & Glossary</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Architecture</h3>
+            <ul>
+                <li><a href="index.html">Overview</a></li>
+                <li><a href="core-engine.html">Core Engine</a></li>
+                <li><a href="data-flow.html">Data Flow</a></li>
+                <li><a href="server-sessions.html" class="active">Server & Sessions</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Server, Sessions & Generation</h1>
+            <p>BSP is designed to interact with users in real-time. This section explains how chat sessions function, how on-the-fly training happens, and how the system converts its internal bitsets back into natural language.</p>
+
+            <h2 id="chat-sessions">1. Chat Sessions</h2>
+            <p>A <strong>Session</strong> acts as a container for the short-term memory (Context) and the user-specific learning state.</p>
+            
+            <div class="callout">
+                <h4>Session State</h4>
+                <ul>
+                    <li><strong>Context:</strong> The list of Active Groups from the <em>previous</em> turn. Used for prediction.</li>
+                    <li><strong>Engine Instance:</strong> A copy (or reference) to the BSP Engine.</li>
+                    <li><strong>History:</strong> The log of messages.</li>
+                </ul>
+            </div>
+
+            <p>When you start a chat:</p>
+            <ol>
+                <li>The server loads the <strong>Pre-trained Model</strong> (common knowledge).</li>
+                <li>It creates a <strong>Session</strong> object.</li>
+                <li>User inputs are processed sequentially. The "Context" is updated after every message.</li>
+            </ol>
+
+            <h2 id="training">2. Continuous Training</h2>
+            <p>Unlike GPT-4 which is static after training, <strong>BSP trains on every message</strong>.</p>
+            
+            <h3>The Training Cycle per Message</h3>
+            <ol>
+                <li><strong>Receive User Message:</strong> "I love huge red cats."</li>
+                <li><strong>Process:</strong> The system identifies groups for [love], [huge], [red], [cats].</li>
+                <li><strong>Predict:</strong> It checks if it <em>expected</em> these groups based on previous context.</li>
+                <li><strong>Surprise:</strong> If it didn't expect "red" with "cats", it calculates a surprise value.</li>
+                <li><strong>Update:</strong>
+                    <ul>
+                        <li>It strengthens the link <code>Context -> [red]</code>.</li>
+                        <li>It might add "red" to a new "Red Cat" group if this combination appears often.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>This happens in milliseconds, allowing the system to adapt to your vocabulary and preferences instantly.</p>
+
+            <h2 id="generation">3. Generation & Decoding</h2>
+            <p>Generating text from bitsets is the reverse of understanding. Since BSP stores concepts (Groups), not just words, generation is a two-step process.</p>
+
+            <h3>Step A: Prediction (What comes next?)</h3>
+            <p>The system looks at the current context and queries the <strong>DeductionGraph</strong>.</p>
+            <pre><code>Context: [User Greeting]
+Predictions:
+  - Group 42 (Salience: 0.9) -> "Hello"
+  - Group 105 (Salience: 0.8) -> "Help"
+  - Group 88 (Salience: 0.1) -> "Cat"</code></pre>
+
+            <h3>Step B: Decoding (Bitset -> Text)</h3>
+            <p>We have a set of predicted groups. How do we get text?</p>
+            <ol>
+                <li><strong>Union:</strong> Combine members of predicted groups into a single `PredictedBitset`.</li>
+                <li><strong>Token Lookup:</strong> The system has a reverse mapping from `Feature ID` to `Token String`.</li>
+                <li><strong>Reassembly:</strong> It retrieves the tokens (e.g., "How", "can", "I", "help").</li>
+                <li><strong>Ordering:</strong> Since bitsets are unordered sets, we rely on the <strong>DeductionGraph</strong> chains or a lightweight n-gram language model to sequence these tokens correctly into a sentence.</li>
+            </ol>
+
+            <div class="diagram-container">
+                <svg width="700" height="200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="50" y="80" width="100" height="40" fill="#dbeafe" stroke="#3b82f6"/>
+                    <text x="100" y="105" text-anchor="middle">Context</text>
+                    
+                    <line x1="150" y1="100" x2="200" y2="100" stroke="#94a3b8" marker-end="url(#arrow)"/>
+
+                    <rect x="200" y="80" width="120" height="40" fill="#f3e8ff" stroke="#a855f7"/>
+                    <text x="260" y="105" text-anchor="middle">Predict Groups</text>
+
+                    <line x1="320" y1="100" x2="370" y2="100" stroke="#94a3b8" marker-end="url(#arrow)"/>
+
+                    <rect x="370" y="80" width="120" height="40" fill="#dcfce7" stroke="#22c55e"/>
+                    <text x="430" y="105" text-anchor="middle">Extract Tokens</text>
+
+                    <line x1="490" y1="100" x2="540" y2="100" stroke="#94a3b8" marker-end="url(#arrow)"/>
+
+                    <rect x="540" y="80" width="100" height="40" fill="#f1f5f9" stroke="#cbd5e1"/>
+                    <text x="590" y="105" text-anchor="middle">Sequence</text>
+
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="pager">
+                <a href="data-flow.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">Data Flow</span>
+                </a>
+                <span class="pager-link next disabled" style="opacity: 0.5; border-color: transparent;">
+                    <span class="label">Next</span>
+                    <span class="title">End of Section</span>
+                </span>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
