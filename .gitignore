@@ -26,3 +26,4 @@ npm-debug.log*
 # Coverage
 coverage/
 .nyc_output/
+/evals/abstract_primitives/results/

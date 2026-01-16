@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizations - BSP</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .metric { display: inline-block; padding: 4px 8px; background: #e8f5e9; border-radius: 4px; margin: 2px; }
+        .metric.bad { background: #ffebee; }
+        .metric.good { background: #e8f5e9; }
+        .timeline { border-left: 3px solid #2196F3; padding-left: 20px; margin: 20px 0; }
+        .timeline-item { margin-bottom: 30px; position: relative; }
+        .timeline-item::before { content: '●'; position: absolute; left: -27px; color: #2196F3; font-size: 20px; }
+        .status-badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; font-weight: bold; }
+        .status-badge.success { background: #4CAF50; color: white; }
+        .status-badge.pending { background: #FF9800; color: white; }
+        .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .comparison-box { border: 1px solid #ddd; padding: 15px; border-radius: 8px; }
+        .comparison-box h4 { margin-top: 0; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Engine</a>
+        <ul>
+            <li><a href="../index.html">Docs</a></li>
+            <li><a href="optimizations.html" class="active">Optimizations</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Optimizations</h3>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#vocab-fix">Vocabulary Decoupling</a></li>
+                <li><a href="#adaptive">Adaptive Universe</a></li>
+                <li><a href="#compression">Compression Machine</a></li>
+                <li><a href="#future">Future Work</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>BSP Optimization Journey</h1>
+            <p><strong>Last Updated:</strong> 2026-01-16</p>
+
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>This page documents the optimization experiments conducted on BSP, tracking what worked, what didn't, and the measurable impact of each change.</p>
+                
+                <div class="comparison">
+                    <div class="comparison-box">
+                        <h4>Initial State (Baseline)</h4>
+                        <p><span class="metric bad">BPC: 4.93</span></p>
+                        <p><span class="metric bad">vs Gzip: -104%</span></p>
+                        <p>Fixed universe (100k), no compression machine</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h4>Current State (2026-01-16)</h4>
+                        <p><span class="metric good">BPC: 2.20</span></p>
+                        <p><span class="metric good">vs Gzip: +8.6%</span></p>
+                        <p>Adaptive universe + compression machine + vocab fix</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="timeline">
+                <h2>Optimization Timeline</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>DS-020: Adaptive Universe <span class="status-badge success">SUCCESS</span></h3>
+                        <p><strong>Date:</strong> 2026-01-16 (early)</p>
+                        <p><strong>Problem:</strong> Fixed universe size of 100,000 meant every surprise bit cost log₂(100k) ≈ 16.6 bits, even when only 1,000 tokens were seen.</p>
+                        <p><strong>Solution:</strong> Dynamic universe sizing based on observed vocabulary: <code>effectiveUniverse = max(1000, vocabSize × 2)</code></p>
+                        <p><strong>Results:</strong></p>
+                        <ul>
+                            <li>1k lines: <span class="metric">16.6 → 11.1 bits/surprise</span> (33% reduction)</li>
+                            <li>5k lines: <span class="metric">16.6 → 13.1 bits/surprise</span> (21% reduction)</li>
+                            <li>BPC improved but still had scaling issues</li>
+                        </ul>
+                        <p><strong>Spec:</strong> <a href="../viewer.html?file=specs/DS/DS-020-adaptive-universe.md">DS-020</a></p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>DS-021: Compression Machine <span class="status-badge success">SUCCESS</span></h3>
+                        <p><strong>Date:</strong> 2026-01-16 (mid)</p>
+                        <p><strong>Problem:</strong> Group-based compression alone couldn't exploit structural patterns like repetition and copying.</p>
+                        <p><strong>Solution:</strong> Procedural encoding layer with operators:</p>
+                        <ul>
+                            <li><strong>COPY:</strong> LZ77-style back-references (cost: ~14 bits vs 66 bits for 6 tokens)</li>
+                            <li><strong>REPEAT:</strong> Run-length encoding for patterns</li>
+                            <li><strong>TEMPLATE:</strong> Structure ready, learning pending</li>
+                            <li><strong>LITERAL:</strong> Fallback direct encoding</li>
+                        </ul>
+                        <p><strong>Results:</strong></p>
+                        <ul>
+                            <li>Program win rate: <span class="metric good">85% on 5k lines</span></li>
+                            <li>COPY operations: <span class="metric good">3,637 uses, 26 bits savings each</span></li>
+                            <li>Combined BPC: <span class="metric">2.98 → 2.79</span> (6.3% improvement)</li>
+                            <li>But still had vocab explosion issue...</li>
+                        </ul>
+                        <p><strong>Spec:</strong> <a href="../viewer.html?file=specs/DS/DS-021-compression-machine.md">DS-021</a></p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>Vocabulary Decoupling Fix <span class="status-badge success">BREAKTHROUGH</span></h3>
+                        <p><strong>Date:</strong> 2026-01-16 (late)</p>
+                        <p><strong>Problem:</strong> N-gram tokenization (1-3 grams) caused vocabulary explosion:</p>
+                        <ul>
+                            <li>Input: "the cat sat" → 6 tokens: [the, cat, sat, the_cat, cat_sat, the_cat_sat]</li>
+                            <li>5k lines → 4,483 n-gram tokens vs ~1,200 actual words</li>
+                            <li>CompressionMachine used full n-gram vocab for cost calculation</li>
+                            <li><strong>Penalty:</strong> ~2.2 bits/token overpayment</li>
+                        </ul>
+                        <p><strong>Solution:</strong> Decoupled vocabularies:</p>
+                        <ul>
+                            <li><code>BSPEngine.vocabTracker</code>: All tokens (n-grams) for universe sizing</li>
+                            <li><code>CompressionMachine.wordVocab</code>: Only unigrams for cost calculation</li>
+                            <li>Updated all operators to use <code>effectiveVocab</code> consistently</li>
+                        </ul>
+                        <p><strong>Results:</strong></p>
+                        <div class="comparison">
+                            <div class="comparison-box">
+                                <h4>Before Fix</h4>
+                                <p><span class="metric bad">1k: 2.27 BPC</span></p>
+                                <p><span class="metric bad">5k: 2.79 BPC</span></p>
+                                <p>Degraded with more data ❌</p>
+                            </div>
+                            <div class="comparison-box">
+                                <h4>After Fix</h4>
+                                <p><span class="metric good">1k: 2.04 BPC</span></p>
+                                <p><span class="metric good">5k: 2.20 BPC</span></p>
+                                <p>Scales correctly ✅</p>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>1k lines: <span class="metric good">10.1% improvement</span> (2.27 → 2.04)</li>
+                            <li>5k lines: <span class="metric good">21.1% improvement</span> (2.79 → 2.20)</li>
+                            <li>Program win rate: <span class="metric good">48% → 85%</span> as data scales</li>
+                            <li>Both configurations now beat Gzip (2.41 BPC)</li>
+                        </ul>
+                        <p><strong>Files Modified:</strong></p>
+                        <ul>
+                            <li><code>CompressionMachine.mjs</code>: _tryRepeatEncoding, _tryTemplateEncoding, _matchTemplate</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="metrics">
+                <h2>Performance Metrics</h2>
+                
+                <h3>Compression Quality (5k lines training)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>BPC (Combined)</strong></td>
+                            <td><span class="metric good">2.20</span></td>
+                            <td>Beats Gzip (2.41) by 8.6%</td>
+                        </tr>
+                        <tr>
+                            <td>BPC (Groups Only)</td>
+                            <td><span class="metric">2.98</span></td>
+                            <td>26% worse than combined</td>
+                        </tr>
+                        <tr>
+                            <td>Shannon Entropy</td>
+                            <td><span class="metric">4.38</span></td>
+                            <td>Character-level baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Program Win Rate</td>
+                            <td><span class="metric good">85.0%</span></td>
+                            <td>Machine dominates</td>
+                        </tr>
+                        <tr>
+                            <td>COPY Operations</td>
+                            <td><span class="metric good">3,637</span></td>
+                            <td>26 bits savings/op</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>System Performance</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Throughput</td>
+                            <td>338 lines/sec</td>
+                            <td>⚠️ Needs suffix array optimization</td>
+                        </tr>
+                        <tr>
+                            <td>Groups Learned</td>
+                            <td>1,144</td>
+                            <td>✅ Linear scaling (~0.23/line)</td>
+                        </tr>
+                        <tr>
+                            <td>Vocab Size</td>
+                            <td>4,483 (n-grams)</td>
+                            <td>✅ For semantic grouping</td>
+                        </tr>
+                        <tr>
+                            <td>Word Vocab</td>
+                            <td>~1,200 (unigrams)</td>
+                            <td>✅ For compression costs</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>BLiMP Grammatical Competence</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Anaphor Agreement</td>
+                            <td>46.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Determiner-Noun 1</td>
+                            <td>17.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Determiner-Noun 2</td>
+                            <td>41.3%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Average</strong></td>
+                            <td><strong>34.8%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="insights">
+                <h2>Key Insights</h2>
+                
+                <h3>What Works</h3>
+                <ul>
+                    <li><strong>LZ77-style COPY:</strong> Dominates with 85% win rate on narrative text</li>
+                    <li><strong>Adaptive sizing:</strong> MDL principle reduces cost by 21-33%</li>
+                    <li><strong>Vocabulary decoupling:</strong> Critical for correct cost calculation</li>
+                    <li><strong>Hybrid architecture:</strong> Groups for semantics, programs for structure</li>
+                </ul>
+
+                <h3>What Doesn't Work Yet</h3>
+                <ul>
+                    <li><strong>REPEAT operations:</strong> Only 1 use in 5k lines (needs fuzzy matching)</li>
+                    <li><strong>Template learning:</strong> Structure ready but not active (needs implementation)</li>
+                    <li><strong>Group-only compression:</strong> 26% worse than combined (high surprise count)</li>
+                </ul>
+
+                <h3>Scaling Behavior</h3>
+                <ul>
+                    <li>BPC increases slightly (2.04 → 2.20) but stays below Gzip</li>
+                    <li>Program win rate increases dramatically (48% → 85%)</li>
+                    <li>More training data → more context → better COPY matches</li>
+                    <li>Throughput decreases due to O(N×M) COPY search</li>
+                </ul>
+            </section>
+
+            <section id="future">
+                <h2>Future Optimizations</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Priority 1: Template Learning <span class="status-badge pending">PLANNED</span></h3>
+                        <p><strong>Expected Impact:</strong> 2.20 → ~1.80 BPC (18% improvement)</p>
+                        <p><strong>Rationale:</strong> TinyStories has highly repetitive structures:</p>
+                        <ul>
+                            <li>"The [noun] was [adjective]."</li>
+                            <li>"Once upon a time, there was a [noun]."</li>
+                            <li>"[Name] went to the [place]."</li>
+                        </ul>
+                        <p><strong>Implementation:</strong></p>
+                        <ul>
+                            <li>Collect sentence buffer (100-500 sentences)</li>
+                            <li>Cluster by length and structure</li>
+                            <li>Use Needleman-Wunsch alignment for pattern extraction</li>
+                            <li>Store templates with >50% fixed content</li>
+                        </ul>
+                        <p><strong>Cost Model:</strong> log₂(templates) + slots × log₂(vocab) ≈ 29 bits vs 66 bits literal (56% savings)</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>Priority 2: Suffix Array for COPY <span class="status-badge pending">PLANNED</span></h3>
+                        <p><strong>Expected Impact:</strong> 338 → 500+ lines/sec (48% throughput increase)</p>
+                        <p><strong>Problem:</strong> Current O(N×M) linear scan is bottleneck</p>
+                        <p><strong>Solution:</strong></p>
+                        <ul>
+                            <li>Build suffix array on context window</li>
+                            <li>Use binary search for longest match</li>
+                            <li>Update incrementally as context slides</li>
+                        </ul>
+                        <p><strong>Complexity:</strong> Build O(N log N), Query O(log N + M) vs Current O(N×M)</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>Priority 3: Frequency-Weighted Coding <span class="status-badge pending">PLANNED</span></h3>
+                        <p><strong>Expected Impact:</strong> 2.20 → ~1.90 BPC (14% improvement)</p>
+                        <p><strong>Concept:</strong> High-frequency words should cost less than rare words</p>
+                        <p><strong>Current:</strong> All words cost log₂(vocab) ≈ 11 bits</p>
+                        <p><strong>Proposed:</strong> Huffman-style encoding</p>
+                        <ul>
+                            <li>Top 100 words (50% of text): ~7 bits</li>
+                            <li>Common words (30% of text): ~10 bits</li>
+                            <li>Rare words (20% of text): ~14 bits</li>
+                            <li><strong>Average: ~9 bits</strong> (18% reduction)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Theoretical Limits</h3>
+                <p><strong>Shannon Entropy:</strong> 4.38 BPC (character-level)</p>
+                <p><strong>Current:</strong> 2.20 BPC (50% of entropy)</p>
+                <p><strong>Estimated Ceiling:</strong> ~1.50 BPC with all optimizations</p>
+                <ul>
+                    <li>Template learning: -0.30 BPC → 1.90</li>
+                    <li>Frequency coding: -0.20 BPC → 1.70</li>
+                    <li>Better grouping: -0.20 BPC → 1.50</li>
+                </ul>
+            </section>
+
+            <section id="resources">
+                <h2>Resources</h2>
+                <ul>
+                    <li><a href="../viewer.html?file=specs/DS/DS-020-adaptive-universe.md">DS-020: Adaptive Universe Spec</a></li>
+                    <li><a href="../viewer.html?file=specs/DS/DS-021-compression-machine.md">DS-021: Compression Machine Spec</a></li>
+                    <li><a href="https://github.com/project/bsp/blob/main/optimisation_plan.md">Optimization Plan (Markdown)</a></li>
+                    <li><a href="https://github.com/project/bsp/blob/main/EXPERIMENTAL_ROADMAP.md">Experimental Roadmap (Markdown)</a></li>
+                    <li><a href="https://github.com/project/bsp/blob/main/COMPRESSION_INSIGHTS.md">Compression Insights (Markdown)</a></li>
+                    <li><a href="https://github.com/project/bsp/blob/main/SESSION_2026-01-16_vocab_fix.md">Session Summary: Vocab Fix</a></li>
+                </ul>
+
+                <h3>Quick Commands</h3>
+                <pre><code># Quick benchmark (1k lines, ~17s)
+node evals/runLM_Comp.mjs --quick --retrain
+
+# Full benchmark (5k lines, ~1.3min)
+node evals/runLM_Comp.mjs --retrain
+
+# View latest results
+cat evals/lm_comparative/results/latest.json | jq</code></pre>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

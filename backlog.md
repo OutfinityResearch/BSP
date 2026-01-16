@@ -22,30 +22,6 @@ Each task includes:
 
 ## Chapter 3 — Experimentation (Ablations, Optimization, Learning-Speed Engineering)
 
-### EXP-002 — Add instrumentation for “why learning is slow” (fan-out, churn, drift)
-Chapter: Experimentation
-
-Description:
-To optimize sample efficiency, we need diagnostics beyond final scores: candidate fan-out distribution, group churn, edge churn, and stability signals.
-
-Proposal:
-- Add lightweight counters/metrics:
-  - candidate fan-out per input (size of `GroupStore.getCandidates`)
-  - group churn: created/merged/pruned per N steps
-  - edge churn: strengthens/weaken/prunes per N steps
-  - average active groups per input, surprise/hallucination rates
-- Expose via `BSPEngine.getStats()` extensions and have the Discovery eval runner persist the returned stats in result JSON.
-
-Expected file changes:
-- `src/core/BSPEngine.mjs`
-- `evals/abstract_primitives/*` (persist stats to discovery results)
-
-Check:
-- Metrics are stable and bounded in overhead (no large per-step allocations).
-- Run a perf smoke test to ensure throughput does not regress significantly.
-
----
-
 ### EXP-003 — RL adaptation micro-benchmarks (custom, but standardized internally)
 Chapter: Experimentation
 
