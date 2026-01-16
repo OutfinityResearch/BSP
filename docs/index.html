@@ -3,72 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BSP - Bitset System for Prediction</title>
+    <title>BSP Documentation Portal</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <nav>
-        <a href="index.html" class="logo">BSP Docs</a>
+        <a href="index.html" class="logo">BSP Engine</a>
         <ul>
-            <li><a href="architecture/index.html">Architecture</a></li>
-            <li><a href="theory/index.html">Theory</a></li>
-            <li><a href="research/index.html">Research</a></li>
-            <li><a href="wiki/index.html">Wiki & Glossary</a></li>
-            <li><a href="specs/index.html">Specs</a></li>
-            <li><a href="training.html">Training</a></li>
-            <li><a href="eval.html">Evaluation</a></li>
+            <li><a href="index.html" class="active">Docs</a></li>
+            <li><a href="manual.html">Manual</a></li>
+            <li><a href="https://github.com/project/bsp">GitHub</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <main class="content">
-            <h1 style="font-size: 3.5rem; text-align: center; margin: 4rem 0 2rem 0; background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                Bitset System for Prediction
-            </h1>
+        <!-- Sidebar for main navigation (optional on index, but good for consistency) -->
+        <aside class="sidebar">
+            <h3>Concepts</h3>
+            <ul>
+                <li><a href="concepts/anti-transformer.html">Anti-Transformer Manifesto</a></li>
+            </ul>
             
-            <p style="text-align: center; font-size: 1.25rem; max-width: 600px; margin: 0 auto 4rem auto; color: #64748b;">
-                A CPU-first, continuous learning intelligence system built on sparse distributed representations and predictive coding.
-            </p>
+            <h3>Guides</h3>
+            <ul>
+                <li><a href="guides/lifecycle.html">Lifecycle of a Turn</a></li>
+                <li><a href="guides/tuning.html">Tuning Guide</a></li>
+            </ul>
 
-            <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-                
-                <div class="card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: transform 0.2s;">
-                    <h3>Architecture</h3>
-                    <p>Understand the modular design, from the Tokenizer to the Deduction Engine.</p>
-                    <a href="architecture/index.html" style="color: #2563eb; font-weight: 600; text-decoration: none;">Explore Architecture &rarr;</a>
-                </div>
+            <h3>Specs</h3>
+            <ul>
+                <li><a href="viewer.html?file=specs/DS/DS-001-core-architecture.md">Core Architecture</a></li>
+                <li><a href="viewer.html?file=specs/DS/DS-002-data-structures.md">Data Structures</a></li>
+            </ul>
+        </aside>
 
-                <div class="card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: transform 0.2s;">
-                    <h3>Theory</h3>
-                    <p>Dive into the cognitive science principles: Predictive Coding, MDL, and Hebbian Learning.</p>
-                    <a href="theory/index.html" style="color: #2563eb; font-weight: 600; text-decoration: none;">Read Theory &rarr;</a>
-                </div>
+        <main class="content">
+            <h1>BSP Documentation</h1>
+            <p>Bitset System for Prediction: A CPU-friendly approach to continuous learning without Transformers.</p>
 
-                <div class="card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: transform 0.2s;">
-                    <h3>Research</h3>
-                    <p>Explore cutting-edge integrations with classical ML: LSH, Clustering, and HMMs.</p>
-                    <a href="research/index.html" style="color: #2563eb; font-weight: 600; text-decoration: none;">View Research &rarr;</a>
-                </div>
+            <h2>🚀 Start Here</h2>
+            <ul class="doc-list">
+                <li class="doc-card">
+                    <a href="concepts/anti-transformer.html">
+                        <span class="doc-id">CONCEPT-001 <span class="badge">New</span></span>
+                        <span class="doc-title">The Anti-Transformer Manifesto</span>
+                        <span class="doc-desc">Why bitsets? Why CPU? Understanding the philosophy behind the architecture.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="guides/lifecycle.html">
+                        <span class="doc-id">GUIDE-001 <span class="badge">New</span></span>
+                        <span class="doc-title">The Lifecycle of a Turn</span>
+                        <span class="doc-desc">A visual journey of data through the engine, step-by-step.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="manual.html">
+                        <span class="doc-id">QUICKSTART</span>
+                        <span class="doc-title">Running the Demo</span>
+                        <span class="doc-desc">Get the system running on your local machine in minutes.</span>
+                    </a>
+                </li>
+            </ul>
 
-                <div class="card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: transform 0.2s;">
-                    <h3>Specifications</h3>
-                    <p>Technical implementation details, data structures, and algorithms (DS-001 to DS-017).</p>
-                    <a href="specs/index.html" style="color: #2563eb; font-weight: 600; text-decoration: none;">Browse Specs &rarr;</a>
-                </div>
+            <h2>🧠 Core Specs (The Engine)</h2>
+            <ul class="doc-list">
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-001-core-architecture.md">
+                        <span class="doc-id">DS-001</span>
+                        <span class="doc-title">Core Architecture</span>
+                        <span class="doc-desc">System design, components, and high-level data flow.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-002-data-structures.md">
+                        <span class="doc-id">DS-002</span>
+                        <span class="doc-title">Data Structures</span>
+                        <span class="doc-desc">Bitsets, groups, inverted indexes, and memory layout.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-003-learning-algorithms.md">
+                        <span class="doc-id">DS-003</span>
+                        <span class="doc-title">Learning Algorithms</span>
+                        <span class="doc-desc">Online learning mechanics, surprise minimization, and updates.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-004-deduction-engine.md">
+                        <span class="doc-id">DS-004</span>
+                        <span class="doc-title">Deduction Engine</span>
+                        <span class="doc-desc">Temporal links and multi-hop reasoning logic.</span>
+                    </a>
+                </li>
+            </ul>
 
-                <div class="card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: transform 0.2s;">
-                    <h3>Training</h3>
-                    <p>How BSP learns online: pretraining, chat sessions, and configuration knobs.</p>
-                    <a href="training.html" style="color: #2563eb; font-weight: 600; text-decoration: none;">Read Training Guide &rarr;</a>
-                </div>
+            <h2>✨ Features & Behaviors</h2>
+            <ul class="doc-list">
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-009-sequence-generation.md">
+                        <span class="doc-id">DS-009</span>
+                        <span class="doc-title">Sequence Generation</span>
+                        <span class="doc-desc">From abstract groups to ordered text output.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-013-context-coherence.md">
+                        <span class="doc-id">DS-013</span>
+                        <span class="doc-title">Context & Memory</span>
+                        <span class="doc-desc">Maintaining coherence across conversation turns.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-005-rl-importance.md">
+                        <span class="doc-id">DS-005</span>
+                        <span class="doc-title">RL & Feedback</span>
+                        <span class="doc-desc">Modulating learning with rewards and importance signals.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-010-memory-consolidation.md">
+                        <span class="doc-id">DS-010</span>
+                        <span class="doc-title">Sleep & Consolidation</span>
+                        <span class="doc-desc">Merging redundant concepts during idle time.</span>
+                    </a>
+                </li>
+            </ul>
 
-                <div class="card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: transform 0.2s;">
-                    <h3>Evaluation</h3>
-                    <p>Run benchmarks and compare against GPT-2 and classic baselines.</p>
-                    <a href="eval.html" style="color: #2563eb; font-weight: 600; text-decoration: none;">View Evaluation &rarr;</a>
-                </div>
+            <h2>🛠️ Operations & Dev</h2>
+            <ul class="doc-list">
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-006-http-server-chat.md">
+                        <span class="doc-id">DS-006</span>
+                        <span class="doc-title">Server API</span>
+                        <span class="doc-desc">HTTP/WebSocket interface specifications.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-007-serialization-sessions.md">
+                        <span class="doc-id">DS-007</span>
+                        <span class="doc-title">Serialization</span>
+                        <span class="doc-desc">Saving and loading session states efficiently.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="guides/tuning.html">
+                        <span class="doc-id">DEV-001 <span class="badge">New</span></span>
+                        <span class="doc-title">Tuning & Debugging</span>
+                        <span class="doc-desc">Practical guide to configuration flags and troubleshooting.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-017-optimization-ideas-and-configuration-flags.md">
+                        <span class="doc-id">DS-017</span>
+                        <span class="doc-title">Optimization & Flags</span>
+                        <span class="doc-desc">Performance tuning and system configuration options.</span>
+                    </a>
+                </li>
+            </ul>
 
-            </div>
+            <h2>🔬 Evaluation & Science</h2>
+            <ul class="doc-list">
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-008-benchmarks-comparison.md">
+                        <span class="doc-id">DS-008</span>
+                        <span class="doc-title">Comparative Benchmarks</span>
+                        <span class="doc-desc">Measuring efficiency and viability against Baselines.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-019-synthetic-evaluation.md">
+                        <span class="doc-id">DS-019</span>
+                        <span class="doc-title">Abstract Primitives</span>
+                        <span class="doc-desc">Diagnostic suite for reasoning capabilities.</span>
+                    </a>
+                </li>
+                <li class="doc-card">
+                    <a href="viewer.html?file=specs/DS/DS-016-reasoning-curriculum-and-data.md">
+                        <span class="doc-id">DS-016</span>
+                        <span class="doc-title">Reasoning Curriculum</span>
+                        <span class="doc-desc">Synthetic data generation and training strategies.</span>
+                    </a>
+                </li>
+            </ul>
         </main>
     </div>
 </body>

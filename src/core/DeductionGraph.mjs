@@ -32,6 +32,48 @@ class DeductionGraph {
   }
 
   /**
+   * Remove an edge while preserving forward/backward invariants.
+   * Treat the forward map as the source of truth for edge count.
+   * @param {number} from
+   * @param {number} to
+   * @returns {boolean} True if a forward edge existed and was removed.
+   * @private
+   */
+  _removeEdge(from, to) {
+    const fwdMap = this.forward.get(from);
+    if (!fwdMap) {
+      const backMap = this.backward.get(to);
+      if (backMap) {
+        backMap.delete(from);
+        if (backMap.size === 0) this.backward.delete(to);
+      }
+      return false;
+    }
+
+    const hadForward = fwdMap.has(to);
+    if (!hadForward) {
+      const backMap = this.backward.get(to);
+      if (backMap) {
+        backMap.delete(from);
+        if (backMap.size === 0) this.backward.delete(to);
+      }
+      return false;
+    }
+
+    fwdMap.delete(to);
+    if (fwdMap.size === 0) this.forward.delete(from);
+
+    const backMap = this.backward.get(to);
+    if (backMap) {
+      backMap.delete(from);
+      if (backMap.size === 0) this.backward.delete(to);
+    }
+
+    this.stats.edgeCount--;
+    return true;
+  }
+
+  /**
    * Strengthen a deduction link
    * @param {number} from - Source group ID
    * @param {number} to - Target group ID
@@ -47,15 +89,11 @@ class DeductionGraph {
     const fwdMap = this.forward.get(from);
     
     // Update weight
+    const hadEdge = fwdMap.has(to);
     const currentWeight = fwdMap.get(to) || 0;
     const newWeight = currentWeight + delta;
     fwdMap.set(to, newWeight);
-    
-    // Limit edges per node
-    if (fwdMap.size > this.maxEdgesPerNode) {
-      this._pruneWeakest(fwdMap);
-    }
-    
+
     // Update backward
     if (!this.backward.has(to)) {
       this.backward.set(to, new Map());
@@ -63,8 +101,13 @@ class DeductionGraph {
     this.backward.get(to).set(from, newWeight);
     
     // Track if new edge
-    if (currentWeight === 0) {
+    if (!hadEdge) {
       this.stats.edgeCount++;
+    }
+
+    // Limit edges per node
+    if (fwdMap.size > this.maxEdgesPerNode) {
+      this._pruneWeakest(from, fwdMap);
     }
     
     this.stats.strengthenOps++;
@@ -86,9 +129,7 @@ class DeductionGraph {
     const newWeight = Math.max(0, currentWeight - delta);
     
     if (newWeight <= 0) {
-      fwdMap.delete(to);
-      this.backward.get(to)?.delete(from);
-      this.stats.edgeCount--;
+      this._removeEdge(from, to);
     } else {
       fwdMap.set(to, newWeight);
       this.backward.get(to)?.set(from, newWeight);
@@ -258,13 +299,13 @@ class DeductionGraph {
    * Apply decay to all edges
    */
   applyDecay() {
-    for (const [from, targets] of this.forward) {
+    for (const from of [...this.forward.keys()]) {
+      const targets = this.forward.get(from);
+      if (!targets) continue;
       for (const [to, weight] of targets) {
         const newWeight = weight * this.decayFactor;
         if (newWeight < 0.01) {
-          targets.delete(to);
-          this.backward.get(to)?.delete(from);
-          this.stats.edgeCount--;
+          this._removeEdge(from, to);
         } else {
           targets.set(to, newWeight);
           this.backward.get(to)?.set(from, newWeight);
@@ -282,13 +323,15 @@ class DeductionGraph {
    * Prune weakest edges from a map
    * @private
    */
-  _pruneWeakest(edgeMap) {
+  _pruneWeakest(from, edgeMap) {
+    const toRemoveCount = edgeMap.size - this.maxEdgesPerNode;
+    if (toRemoveCount <= 0) return;
+
     const sorted = [...edgeMap.entries()]
-      .sort((a, b) => a[1] - b[1]);
-    
-    const toRemove = sorted.slice(0, Math.floor(sorted.length * 0.2));
-    for (const [target] of toRemove) {
-      edgeMap.delete(target);
+      .sort((a, b) => (a[1] - b[1]) || (a[0] - b[0]));
+
+    for (const [target] of sorted.slice(0, toRemoveCount)) {
+      this._removeEdge(from, target);
     }
   }
 
@@ -329,24 +372,18 @@ class DeductionGraph {
    * @param {number} groupId
    */
   removeGroup(groupId) {
-    // Remove forward edges
-    const forward = this.forward.get(groupId);
-    if (forward) {
-      for (const [target] of forward) {
-        this.backward.get(target)?.delete(groupId);
+    const outgoing = this.forward.get(groupId);
+    if (outgoing) {
+      for (const target of [...outgoing.keys()]) {
+        this._removeEdge(groupId, target);
       }
-      this.stats.edgeCount -= forward.size;
-      this.forward.delete(groupId);
     }
-    
-    // Remove backward edges
-    const backward = this.backward.get(groupId);
-    if (backward) {
-      for (const [source] of backward) {
-        this.forward.get(source)?.delete(groupId);
+
+    const incoming = this.backward.get(groupId);
+    if (incoming) {
+      for (const source of [...incoming.keys()]) {
+        this._removeEdge(source, groupId);
       }
-      this.stats.edgeCount -= backward.size;
-      this.backward.delete(groupId);
     }
   }
 

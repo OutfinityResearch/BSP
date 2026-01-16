@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifecycle of a Turn | BSP Docs</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Engine</a>
+        <ul>
+            <li><a href="../index.html">Docs</a></li>
+            <li><a href="../manual.html">Manual</a></li>
+            <li><a href="https://github.com/project/bsp">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Concepts</h3>
+            <ul>
+                <li><a href="../concepts/anti-transformer.html">Anti-Transformer Manifesto</a></li>
+            </ul>
+            
+            <h3>Guides</h3>
+            <ul>
+                <li><a href="lifecycle.html" class="active">Lifecycle of a Turn</a></li>
+                <li><a href="tuning.html">Tuning Guide</a></li>
+            </ul>
+
+            <h3>Specs</h3>
+            <ul>
+                <li><a href="../viewer.html?file=specs/DS/DS-001-core-architecture.md">Core Architecture</a></li>
+                <li><a href="../viewer.html?file=specs/DS/DS-003-learning-algorithms.md">Learning Algorithms</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>The Lifecycle of a Turn</h1>
+            <p class="subtitle">A visual journey of data through the engine, step-by-step.</p>
+
+            <p>This guide traces the journey of a single user input (e.g., "The cat eats") through the BSP engine, from raw text to the final response and state update.</p>
+
+            <h2>The Flow at a Glance</h2>
+
+            <div class="diagram-container">
+                <div class="mermaid">
+                sequenceDiagram
+                    participant U as User
+                    participant T as Tokenizer
+                    participant L as Learner
+                    participant GS as GroupStore
+                    participant DG as DeductionGraph
+                    participant SM as SequenceModel
+                    
+                    U->>T: "The cat eats"
+                    T->>L: Token IDs: [12, 45, 99]
+                    
+                    rect rgb(240, 248, 255)
+                        note right of L: 1. ACTIVATION
+                        L->>GS: Query Index([12, 45, 99])
+                        GS-->>L: Candidates Groups
+                        L->>L: Score & Select (Top-K)
+                        L-->>GS: Update "Active Groups"
+                    end
+                    
+                    rect rgb(255, 240, 245)
+                        note right of L: 2. PREDICTION
+                        L->>DG: Predict Next(Active Groups)
+                        DG-->>L: Predicted Concept IDs
+                    end
+                    
+                    rect rgb(240, 255, 240)
+                        note right of L: 3. GENERATION
+                        L->>SM: Generate(Predicted Concepts)
+                        SM-->>U: "fish" (Response)
+                    end
+                    
+                    rect rgb(255, 250, 205)
+                        note right of L: 4. LEARNING
+                        L->>L: Compute Surprise
+                        L->>GS: Update Memberships
+                        L->>DG: Update Deduction Links
+                    end
+                </div>
+            </div>
+
+            <h2>Step-by-Step Walkthrough</h2>
+
+            <h3>Step 1: Input & Tokenization (The Eyes)</h3>
+            <p><strong>Input:</strong> <code>"The cat eats"</code></p>
+            <p>The <code>Tokenizer</code> breaks this down. It doesn't use embeddings. It maps strings to deterministic Integers.</p>
+            <ul>
+                <li><code>"the"</code> → <code>12</code></li>
+                <li><code>"cat"</code> → <code>45</code></li>
+                <li><code>"eats"</code> → <code>99</code></li>
+            </ul>
+            <p><strong>Result:</strong> A Bitset representing <code>{12, 45, 99}</code>.</p>
+
+            <h3>Step 2: Activation (The Recognition)</h3>
+            <p>The <code>Learner</code> asks the <code>GroupStore</code>: "Who cares about these tokens?"</p>
+            <ol>
+                <li>It checks the <strong>Inverted Index</strong>.</li>
+                <li>It finds <code>Group #5</code> (which contains <code>{cat, dog, pet}</code>) and <code>Group #20</code> (which contains <code>{eats, drinks}</code>).</li>
+                <li>It calculates <strong>Jaccard Similarity</strong>. <code>Group #5</code> has 1 match ("cat") out of 3 members. Score: 0.33.</li>
+            </ol>
+            <p><strong>Result:</strong> <code>Active Groups</code> = <code>[Group #5, Group #20]</code>.</p>
+
+            <h3>Step 3: Deduction (The Thought)</h3>
+            <p>The <code>DeductionGraph</code> looks at the active groups. It contains learned temporal links.</p>
+            <ul>
+                <li>It sees <code>Group #5</code> (Pet) and <code>Group #20</code> (Action).</li>
+                <li>It finds a strong link: <code>Group #5 + Group #20 → Group #99 (Food)</code>.</li>
+                <li>It "activates" <code>Group #99</code> as a prediction.</li>
+            </ul>
+
+            <h3>Step 4: Sequence Generation (The Speech)</h3>
+            <p>The engine now has a bag of predicted concepts (from <code>Group #99</code>: <code>{food, fish, dry, bowl}</code>).</p>
+            <p>The <code>SequenceModel</code> (a smart n-gram graph) constructs a sentence.</p>
+            <ol>
+                <li>It sees the user ended with "eats".</li>
+                <li>It knows "eats" is often followed by "food" or "fish".</li>
+                <li>It selects "fish" because <code>Group #99</code> boosted its score.</li>
+            </ol>
+            <p><strong>Output:</strong> <code>"fish"</code></p>
+
+            <h3>Step 5: Learning (The Update)</h3>
+            <p>Once the turn is done (or if we have ground truth), the system learns.</p>
+            <ul>
+                <li><strong>Surprise:</strong> Did the user say what we expected? If the user actually said "The cat eats <strong>lasagna</strong>", and we predicted "fish", the surprise is high.</li>
+                <li><strong>Update:</strong>
+                    <ul>
+                        <li>The link <code>Cat → Fish</code> is weakened slightly.</li>
+                        <li>The link <code>Cat → Lasagna</code> is strengthened.</li>
+                        <li>If "Lasagna" appears often enough, a new Group might form.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="pager">
+                <a href="../concepts/anti-transformer.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">Anti-Transformer Manifesto</span>
+                </a>
+                <a href="tuning.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">Tuning & Debugging</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+</body>
+</html>

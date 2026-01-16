@@ -10,6 +10,7 @@ import { Learner } from './Learner.mjs';
 import { ReplayBuffer } from './ReplayBuffer.mjs';
 import { SequenceModel } from './SequenceModel.mjs';
 import { IDFTracker } from './IDFTracker.mjs';
+import { CompressionMachine } from './CompressionMachine.mjs';
 
 class BSPEngine {
   /**
@@ -23,7 +24,21 @@ class BSPEngine {
       rlPressure: options.rlPressure || 0.3,
       decayInterval: options.decayInterval || 1000,
       consolidateInterval: options.consolidateInterval || 100,
+      adaptiveUniverse: options.adaptiveUniverse !== false, // NEW: enabled by default
       ...options,
+    };
+
+    // NEW: Vocabulary tracker for adaptive universe sizing
+    this.vocabTracker = {
+      seen: new Set(),
+      totalTokens: 0,
+      observe(tokens) {
+        for (const t of tokens) {
+          this.seen.add(t);
+          this.totalTokens++;
+        }
+      },
+      get size() { return this.seen.size; },
     };
     
     const tokenizerConfig = options.tokenizerConfig || options.tokenizer || {};
@@ -88,6 +103,52 @@ class BSPEngine {
       avgReward: 0,
       groupsCreated: 0,
     };
+
+    // Context window for compression machine (token sequences)
+    this.contextTokens = [];
+    this.maxContextTokens = options.maxContextTokens || 256;
+
+    // DS-021: Compression Machine for procedural encoding
+    const compressionConfig = options.compressionMachine || options.compression || {};
+    this.compressionMachine = new CompressionMachine({
+      vocabSize: this.config.universeSize,
+      maxContextLen: this.maxContextTokens,
+      minCopyLen: compressionConfig.minCopyLen || 3,
+      maxCopyLen: compressionConfig.maxCopyLen || 64,
+      maxRepeat: compressionConfig.maxRepeat || 16,
+      ...compressionConfig,
+    });
+
+    // Flag to enable/disable compression machine
+    this.useCompressionMachine = options.useCompressionMachine !== false;
+  }
+
+  /**
+   * Get effective universe size based on observed vocabulary
+   * This implements DS-020: Adaptive Universe
+   * @returns {number}
+   */
+  get effectiveUniverseSize() {
+    if (!this.config.adaptiveUniverse) {
+      return this.config.universeSize;
+    }
+
+    // Use vocabulary size with 2x headroom, capped at config.universeSize
+    // Minimum of 1000 to avoid extreme costs for very small vocabularies
+    const vocabSize = this.vocabTracker.size || 1000;
+    return Math.min(
+      Math.max(1000, vocabSize * 2),
+      this.config.universeSize
+    );
+  }
+
+  /**
+   * Compute MDL cost in bits for a given surprise count
+   * @param {number} surpriseBits - Number of unexpected bits
+   * @returns {number} Cost in bits
+   */
+  computeMDLCost(surpriseBits) {
+    return surpriseBits * Math.log2(this.effectiveUniverseSize);
   }
 
   /**
@@ -213,6 +274,11 @@ class BSPEngine {
     // 1. Tokenize once (shared across encoding, sequence learning, and IDF stats)
     const wordTokens = this.tokenizer.tokenizeWords(text);
 
+    // NEW: Track vocabulary for adaptive universe (DS-020)
+    if (learn) {
+      this.vocabTracker.observe(wordTokens);
+    }
+
     // 2. Encode (optionally subsample hot tokens for feature extraction)
     // Never mutate model state when learn=false.
     if (learn) {
@@ -296,6 +362,27 @@ class BSPEngine {
     
     // 16. Update metrics
     this._updateMetrics(surprise.size, reward);
+
+    // 17. NEW: Update token context for compression machine
+    this.contextTokens = [...this.contextTokens, ...wordTokens].slice(-this.maxContextTokens);
+
+    // DS-020: Compute MDL cost with adaptive universe (group-based)
+    const groupMdlCost = this.computeMDLCost(surprise.size);
+
+    // DS-021: Compute compression machine cost (program-based)
+    let programCost = Infinity;
+    let compressionProgram = null;
+    
+    if (this.useCompressionMachine && wordTokens.length > 0) {
+      // Use previous context (before adding current tokens)
+      const prevContext = this.contextTokens.slice(0, -wordTokens.length);
+      compressionProgram = this.compressionMachine.encode(wordTokens, prevContext);
+      programCost = compressionProgram.cost;
+    }
+
+    // Best cost is minimum of group-based and program-based
+    const bestCost = Math.min(groupMdlCost, programCost);
+    const compressionMethod = programCost < groupMdlCost ? 'program' : 'group';
     
     return {
       activeGroups,
@@ -306,6 +393,14 @@ class BSPEngine {
       importance: effectiveImportance,
       predictions: this.predictNext(activeGroupIds, 5),
       wordTokens,  // Include for response generation
+      // MDL compression metrics
+      mdlCost: bestCost,                    // Best of both methods
+      groupMdlCost,                          // Group-based cost
+      programCost: programCost === Infinity ? null : programCost,  // Program-based cost
+      compressionMethod,                     // Which method was better
+      compressionProgram: compressionProgram ? compressionProgram.toString() : null,
+      effectiveUniverseSize: this.effectiveUniverseSize,
+      vocabSize: this.vocabTracker.size,
     };
   }
 
@@ -514,7 +609,7 @@ class BSPEngine {
    */
   toJSON() {
     return {
-      version: '1.1.0',  // Updated version for new components
+      version: '1.3.0',  // Updated for compression machine integration
       timestamp: Date.now(),
       config: this.config,
       tokenizer: this.tokenizer.toJSON(),
@@ -524,12 +619,20 @@ class BSPEngine {
       buffer: this.buffer.toJSON(),
       sequenceModel: this.sequenceModel.toJSON(),  // DS-009
       idfTracker: this.idfTracker.toJSON(),        // DS-012
+      compressionMachine: this.compressionMachine.toJSON(),  // DS-021
+      // DS-020: Vocabulary tracker for adaptive universe
+      vocabTracker: {
+        seen: [...this.vocabTracker.seen],
+        totalTokens: this.vocabTracker.totalTokens,
+      },
       state: {
         step: this.step,
         context: this.context,
+        contextTokens: this.contextTokens,
         recentRewards: this.recentRewards,
         rlPressure: this.rlPressure,
         metrics: this.metrics,
+        useCompressionMachine: this.useCompressionMachine,
       },
     };
   }
@@ -555,12 +658,24 @@ class BSPEngine {
     if (json.idfTracker) {
       engine.idfTracker = IDFTracker.fromJSON(json.idfTracker);
     }
+    // DS-021: Load compression machine
+    if (json.compressionMachine) {
+      engine.compressionMachine = CompressionMachine.fromJSON(json.compressionMachine);
+    }
+    
+    // DS-020: Load vocabulary tracker
+    if (json.vocabTracker) {
+      engine.vocabTracker.seen = new Set(json.vocabTracker.seen);
+      engine.vocabTracker.totalTokens = json.vocabTracker.totalTokens || 0;
+    }
     
     engine.step = json.state.step;
     engine.context = json.state.context;
+    engine.contextTokens = json.state.contextTokens || [];
     engine.recentRewards = json.state.recentRewards;
     engine.rlPressure = json.state.rlPressure;
     engine.metrics = json.state.metrics;
+    engine.useCompressionMachine = json.state.useCompressionMachine !== false;
     
     return engine;
   }

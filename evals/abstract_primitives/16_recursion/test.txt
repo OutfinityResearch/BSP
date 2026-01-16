@@ -1,0 +1,1000 @@
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3	["cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1	["cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin begin begin	["end","end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":5,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin begin begin	["end","end","end"]	{"difficulty":2,"family":"recursion","depth":3,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2	["cl2","cl2"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0	["cl0"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3	["cl3","cl3"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op3","close":"cl3"}
+begin begin begin begin	["end","end","end","end"]	{"difficulty":2,"family":"recursion","depth":4,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1	["cl1","cl1"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2	["cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}
+op0 op0 op0 op0	["cl0","cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op2","close":"cl2"}
+op3	["cl3"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0 op0	["cl0","cl0","cl0"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op0","close":"cl0"}
+op1	["cl1"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op1","close":"cl1"}
+op2 op2 op2	["cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin begin	["end","end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":8,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":8,"open":"op3","close":"cl3"}
+begin	["end"]	{"difficulty":1,"family":"recursion","depth":1,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2","cl2"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3","cl3","cl3"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op3","close":"cl3"}
+begin begin	["end","end"]	{"difficulty":1,"family":"recursion","depth":2,"open":"begin","close":"end"}
+op0 op0 op0 op0 op0 op0 op0	["cl0","cl0","cl0","cl0","cl0","cl0","cl0"]	{"difficulty":3,"family":"recursion","depth":7,"open":"op0","close":"cl0"}
+op1 op1 op1 op1 op1 op1	["cl1","cl1","cl1","cl1","cl1","cl1"]	{"difficulty":3,"family":"recursion","depth":6,"open":"op1","close":"cl1"}
+op2 op2 op2 op2 op2	["cl2","cl2","cl2","cl2","cl2"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op2","close":"cl2"}
+op3 op3 op3 op3 op3	["cl3","cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":5,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin	["end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":6,"open":"begin","close":"end"}
+op0 op0	["cl0","cl0"]	{"difficulty":1,"family":"recursion","depth":2,"open":"op0","close":"cl0"}
+op1 op1 op1	["cl1","cl1","cl1"]	{"difficulty":2,"family":"recursion","depth":3,"open":"op1","close":"cl1"}
+op2	["cl2"]	{"difficulty":1,"family":"recursion","depth":1,"open":"op2","close":"cl2"}
+op3 op3 op3 op3	["cl3","cl3","cl3","cl3"]	{"difficulty":2,"family":"recursion","depth":4,"open":"op3","close":"cl3"}
+begin begin begin begin begin begin begin	["end","end","end","end","end","end","end"]	{"difficulty":3,"family":"recursion","depth":7,"open":"begin","close":"end"}

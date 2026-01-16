@@ -1,4 +1,4 @@
-# DS-019: Synthetic Cognitive Benchmarks
+# DS-019: Synthetic Abstract Primitives Benchmarks
 
 **Version**: 3.0  
 **Status**: Proposal  
@@ -9,16 +9,16 @@
 
 ## 1. Overview
 
-This specification defines a suite of **20 synthetic benchmarks** designed to evaluate BSP's ability to model fundamental "shapes" of information found in the real world. Unlike natural language, these use formal grammars with known ground truth to isolate specific cognitive capabilities.
+This specification defines a suite of **20 synthetic benchmarks** designed to evaluate BSP's ability to model fundamental "shapes" of information found in the real world. Unlike natural language, these use formal grammars with known ground truth to isolate specific reasoning capabilities.
 
 The benchmarks are organized into three tiers:
 - **Tier 1 (I-V):** Core primitives — fundamental building blocks
 - **Tier 2 (VI-XV):** Extended primitives — advanced reasoning patterns  
-- **Tier 3 (XVI-XX):** Meta-cognitive primitives — learning and robustness
+- **Tier 3 (XVI-XX):** Learning & robustness primitives — learning dynamics and stability
 
 ---
 
-## 2. Tier 1: Core Cognitive Primitives (I-V)
+## 2. Tier 1: Core Abstract Primitives (I-V)
 
 ### 2.1 System I: Convergence (Diagnostics)
 **Logic:** Many distinct paths lead to a single, stable conclusion.
@@ -56,12 +56,12 @@ The benchmarks are organized into three tiers:
     *   $Red, Square \to RedSquare$.
     *   $Blue, Square \to BlueSquare$.
 *   **Real-World Analogue:** Grammar (Adjective + Noun), Chemistry (Elements -> Compound), Arithmetic ($2 + 2 = 4$).
-*   **Task:** Zero-shot combination. Train on ($Red, Circle$) and ($Blue, Square$). Test on ($Red, Square$).
+*   **Task:** Zero-shot combination. Train on ($Red, Circle$) and ($Blue, Square$). Test on ($Red, Square$). 
 *   **Key Metric:** Compositional Generalization.
 
 ---
 
-## 3. Tier 2: Extended Cognitive Primitives (VI-XV)
+## 3. Tier 2: Extended Abstract Primitives (VI-XV)
 
 ### 3.1 System VI: Negation (Mutual Exclusion)
 **Logic:** If A is true, then B cannot be true. Groups are mutually exclusive.
@@ -77,7 +77,7 @@ The benchmarks are organized into three tiers:
     *   $(A \land \neg B) \to D$  
     *   $(\neg A \land B) \to E$
     *   $(\neg A \land \neg B) \to F$
-*   **Real-World Analogue:** Digital circuits, Access control rules (user + password → access), Feature flags.
+*   **Real-World Analogue:** Digital circuits, Access control rules (user + password $\to$ access), Feature flags.
 *   **Task:** Given premises, predict the correct conclusion based on the logical gate.
 *   **Key Metric:** Logic Gate Accuracy (per operator: AND, OR, XOR, NAND, etc.).
 
@@ -110,16 +110,16 @@ The benchmarks are organized into three tiers:
 *   **Key Metric:** Chunk Discovery Rate + Compression Ratio improvement.
 
 ### 3.6 System XI: Reversibility (Bidirectional Inference)
-**Logic:** If forward mapping A→B is learned, can the system infer B→A?
+**Logic:** If forward mapping A$	o$B is learned, can the system infer B$	o$A?
 *   **Grammar:** 
     *   $encode(X) \to Y$
     *   $decode(Y) \to X$ (implicit, not trained)
-*   **Real-World Analogue:** Encryption/Decryption, Translation (EN→FR, FR→EN), Cause-Effect reversal.
-*   **Task:** Train on A→B mappings, test on B→A queries.
+*   **Real-World Analogue:** Encryption/Decryption, Translation (EN$	o$FR, FR$	o$EN), Cause-Effect reversal.
+*   **Task:** Train on A$	o$B mappings, test on B$	o$A queries.
 *   **Key Metric:** Inverse Recall.
 
 ### 3.7 System XII: Temporal Order (Sequence Sensitivity)
-**Logic:** Order matters: [A, B] ≠ [B, A].
+**Logic:** Order matters: [A, B] $\neq$ [B, A].
 *   **Grammar:** 
     *   $[A, B] \to X$
     *   $[B, A] \to Y$ (where $X \neq Y$)
@@ -156,7 +156,7 @@ The benchmarks are organized into three tiers:
 
 ---
 
-## 4. Tier 3: Meta-Cognitive Primitives (XVI-XX)
+## 4. Tier 3: Learning & Robustness Primitives (XVI-XX)
 
 ### 4.1 System XVI: Recursion (Self-Similar Structures)
 **Logic:** Structures that contain smaller versions of themselves.
@@ -208,10 +208,10 @@ The benchmarks are organized into three tiers:
 
 ## 5. Summary Table
 
-| # | System | Cognitive Capability | BSP Component Tested |
+| # | System | Capability | BSP Component Tested |
 |---|--------|---------------------|---------------------|
-| I | Convergence | Multi-path → single conclusion | Deduction graph (forward chaining) |
-| II | Divergence | Single → multiple (probabilistic) | Probabilistic deductions |
+| I | Convergence | Multi-path $\to$ single conclusion | Deduction graph (forward chaining) |
+| II | Divergence | Single $\to$ multiple (probabilistic) | Probabilistic deductions |
 | III | Cycles | Temporal loops | Cycle detection in deductions |
 | IV | Hierarchy | Inheritance/taxonomy | Group nesting, salience |
 | V | Composition | Zero-shot combination | Feature binding across groups |
@@ -237,38 +237,18 @@ The benchmarks are organized into three tiers:
 
 ### 6.1 Directory Structure
 ```
-evals/cognitive/                    # Renamed from "synthetic"
-├── systems/                        # Grammar definitions (20 systems)
-│   ├── 01_convergence.mjs
-│   ├── 02_divergence.mjs
-│   ├── 03_cycles.mjs
-│   ├── 04_hierarchy.mjs
-│   ├── 05_composition.mjs
-│   ├── 06_negation.mjs
-│   ├── 07_conditional_gates.mjs
-│   ├── 08_analogy.mjs
-│   ├── 09_context_switching.mjs
-│   ├── 10_chunking.mjs
-│   ├── 11_reversibility.mjs
-│   ├── 12_temporal_order.mjs
-│   ├── 13_exceptions.mjs
-│   ├── 14_interpolation.mjs
-│   ├── 15_counting.mjs
-│   ├── 16_recursion.mjs
-│   ├── 17_inhibition.mjs
-│   ├── 18_noise_robustness.mjs
-│   ├── 19_memory_decay.mjs
-│   └── 20_transfer.mjs
+evals/abstract_primitives/          # Synthetic diagnostic suite
+├── 01_convergence/
+│   ├── generator.mjs
+│   ├── train.txt
+│   ├── test.txt
+│   └── metadata.json
+├── 02_divergence/
+│   └── ...
+├── ...                             # (all 20 systems)
 ├── generate.mjs                    # Unified generator
 ├── evaluate.mjs                    # Unified evaluator
-├── data/                           # Generated datasets
-│   ├── 01_convergence/
-│   │   ├── train.txt
-│   │   ├── test.txt
-│   │   └── metadata.json
-│   ├── 02_divergence/
-│   │   └── ...
-│   └── ...                         # (all 20 systems)
+├── generation_summary.json
 └── README.md
 ```
 
@@ -276,15 +256,15 @@ evals/cognitive/                    # Renamed from "synthetic"
 
 Each system will produce:
 1.  `train.txt`: Sequences exposing the structure.
-2.  `test.txt`: Prompts requiring the specific cognitive deduction.
+2.  `test.txt`: Prompts requiring the specific deduction.
 
-The `evaluate.mjs` script will run them sequentially and report a **Cognitive Profile** scorecard for the engine.
+The `evaluate.mjs` script will run them sequentially and report an **Abstract Primitives Profile** scorecard for the engine.
 
-### 6.3 Cognitive Profile Output
+### 6.3 Abstract Primitives Profile Output
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
-║                    BSP COGNITIVE PROFILE                       ║
+║              BSP ABSTRACT PRIMITIVES PROFILE                   ║
 ╠═══════════════════════════════════════════════════════════════╣
 ║ TIER 1: CORE PRIMITIVES                                        ║
 ║   I.   Convergence ............ 94.2%  ████████████████████░   ║
@@ -305,7 +285,7 @@ The `evaluate.mjs` script will run them sequentially and report a **Cognitive Pr
 ║   XIV. Interpolation .......... 81.9%  ████████████████░░░░░   ║
 ║   XV.  Counting ............... 67.8%  █████████████░░░░░░░░   ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ TIER 3: META-COGNITIVE                                         ║
+║ TIER 3: LEARNING & ROBUSTNESS                                  ║
 ║   XVI. Recursion .............. 45.2%  █████████░░░░░░░░░░░░   ║
 ║   XVII.Inhibition ............. 89.5%  █████████████████░░░░   ║
 ║   XVIII.Noise Robustness ...... 72.4%  ██████████████░░░░░░░   ║

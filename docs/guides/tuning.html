@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuning & Debugging | BSP Docs</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Engine</a>
+        <ul>
+            <li><a href="../index.html">Docs</a></li>
+            <li><a href="../manual.html">Manual</a></li>
+            <li><a href="https://github.com/project/bsp">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Concepts</h3>
+            <ul>
+                <li><a href="../concepts/anti-transformer.html">Anti-Transformer Manifesto</a></li>
+            </ul>
+            
+            <h3>Guides</h3>
+            <ul>
+                <li><a href="lifecycle.html">Lifecycle of a Turn</a></li>
+                <li><a href="tuning.html" class="active">Tuning Guide</a></li>
+            </ul>
+
+            <h3>Specs</h3>
+            <ul>
+                <li><a href="../viewer.html?file=specs/DS/DS-001-core-architecture.md">Core Architecture</a></li>
+                <li><a href="../viewer.html?file=specs/DS/DS-017-optimization-ideas-and-configuration-flags.md">Config Flags</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Practical Tuning Guide</h1>
+            <p class="subtitle">So, the model is hallucinating? Or maybe it's repeating "and the and the" forever? Here's how to fix it.</p>
+
+            <p>BSP is highly configurable. Unlike training a Transformer where you mostly tweak Learning Rate, here you tweak structural parameters of the graph and memory.</p>
+
+            <h2>Symptom Checker</h2>
+
+            <div class="callout">
+                <h4>🤒 Symptom: "Word Salad" / Incoherent Output</h4>
+                <p><strong>Diagnosis:</strong> The system is activating too many irrelevant groups, mixing concepts that shouldn't mix.</p>
+                <p><strong>Fix:</strong></p>
+                <ul>
+                    <li><strong>Increase <code>learner.activationThreshold</code></strong> (Default: <code>0.2</code> → Try <code>0.3</code>). This forces the system to only activate groups that strongly match the input.</li>
+                    <li><strong>Check <code>learner.mergeThreshold</code></strong>: If groups are too broad (merging "Dog" and "Car"), increase this (e.g., <code>0.85</code>) to keep concepts distinct.</li>
+                </ul>
+            </div>
+
+            <div class="callout">
+                <h4>🤒 Symptom: Repetitive Loops ("and then and then")</h4>
+                <p><strong>Diagnosis:</strong> The <code>SequenceModel</code> is stuck in a local probability maximum.</p>
+                <p><strong>Fix:</strong></p>
+                <ul>
+                    <li><strong>Increase <code>sequence.repeatPenalty</code></strong>: This penalizes reusing tokens in the same sentence.</li>
+                    <li><strong>Decrease <code>deduction.decayFactor</code></strong>: The system might be holding onto the previous context too strongly, re-predicting the same concept.</li>
+                </ul>
+            </div>
+
+            <div class="callout">
+                <h4>🤒 Symptom: Amnesia (Forgets context immediately)</h4>
+                <p><strong>Diagnosis:</strong> The <code>ConversationContext</code> or <code>DeductionGraph</code> decays too fast.</p>
+                <p><strong>Fix:</strong></p>
+                <ul>
+                    <li><strong>Increase <code>deduction.decayFactor</code></strong> (Default: <code>0.9</code> → Try <code>0.99</code>). This keeps predicted groups active longer.</li>
+                    <li><strong>Check <code>context.maxHistory</code></strong>: Ensure you are actually keeping enough tokens in the short-term memory.</li>
+                </ul>
+            </div>
+
+            <h2>The "Safe" vs. "Experimental" Configs</h2>
+
+            <h3>✅ The Safe Baseline (Stability)</h3>
+            <p>Use this for demos and standard chat.</p>
+            <pre><code>{
+  "learner": {
+    "activationThreshold": 0.25,
+    "newGroupThreshold": 0.6
+  },
+  "deduction": {
+    "beamWidth": 5,
+    "maxDepth": 2
+  }
+}</code></pre>
+
+            <h3>🧪 The Creative/Loose Mode (Brainstorming)</h3>
+            <p>Use this if you want the model to make wild associations (high temperature equivalent).</p>
+            <pre><code>{
+  "learner": {
+    "activationThreshold": 0.1,  // Activate everything remotely related
+    "newGroupThreshold": 0.4     // Create groups easily
+  },
+  "deduction": {
+    "beamWidth": 20,             // Explore many paths
+    "maxDepth": 4                // Deep reasoning chains
+  }
+}</code></pre>
+
+            <h2>Debugging Tools</h2>
+            <p>Use the <code>/debug</code> command in the chat interface to see "Under the Hood":</p>
+            <ul>
+                <li><strong><code>activeGroups</code></strong>: What concepts triggered?</li>
+                <li><strong><code>surprise</code></strong>: How unexpected was your input? (High surprise = Learning moment).</li>
+                <li><strong><code>deductionPath</code></strong>: Why did it predict X? (Trace the graph links).</li>
+            </ul>
+
+            <div class="pager">
+                <a href="lifecycle.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">Lifecycle of a Turn</span>
+                </a>
+                <a href="../specs/DS/DS-017-optimization-ideas-and-configuration-flags.md" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">Config Flags</span>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

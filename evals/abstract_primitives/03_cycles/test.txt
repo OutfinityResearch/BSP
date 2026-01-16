@@ -1,0 +1,1000 @@
+c13x03 c13x04	"c13x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c11x05 c11x06	"c11x00"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c11x00 c11x01	"c11x02"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c15x02 c15x03 c15x04	"c15x05"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c03x02 c03x03 c03x04 c03x00	"c03x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c04x01 c04x02	"c04x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c19x00 c19x01 c19x02	"c19x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c04x04 c04x00 c04x01 c04x02	"c04x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c19x02 c19x03 c19x04 c19x00 c19x01	"c19x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c05x01 c05x02	"c05x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c12x05 c12x06 c12x00 c12x01 c12x02 c12x03 c12x04	"c12x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c12x01 c12x02 c12x03 c12x04 c12x05 c12x06	"c12x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c07x01 c07x02 c07x00	"c07x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x02 c00x03 c00x04	"c00x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c17x01 c17x02 c17x03 c17x00	"c17x01"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c04x01 c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c00x01 c00x02 c00x03	"c00x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c02x02 c02x03 c02x04 c02x05 c02x06 c02x07	"c02x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c18x05 c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c18x00 c18x01 c18x02 c18x03 c18x04	"c18x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c15x06 c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c18x00 c18x01 c18x02 c18x03 c18x04 c18x05	"c18x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c12x05 c12x06	"c12x00"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c17x00 c17x01 c17x02 c17x03	"c17x00"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c15x01 c15x02 c15x03 c15x04 c15x05	"c15x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c15x04 c15x05 c15x06	"c15x00"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c19x02 c19x03 c19x04 c19x00 c19x01	"c19x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c13x03 c13x04	"c13x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c07x00 c07x01	"c07x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x04 c04x00	"c04x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c03x04 c03x00 c03x01 c03x02 c03x03	"c03x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c09x01 c09x02	"c09x03"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c11x03 c11x04	"c11x05"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c14x06 c14x07 c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c17x01 c17x02 c17x03	"c17x00"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c11x01 c11x02 c11x03 c11x04 c11x05 c11x06 c11x00	"c11x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c19x03 c19x04	"c19x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c10x00 c10x01 c10x02	"c10x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c04x01 c04x02 c04x03	"c04x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c13x03 c13x04 c13x00	"c13x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c00x01 c00x02	"c00x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c08x01 c08x02	"c08x03"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c14x05 c14x06 c14x07 c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c02x06 c02x07 c02x00 c02x01 c02x02 c02x03	"c02x04"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x00 c00x01 c00x02 c00x03 c00x04	"c00x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c15x00 c15x01	"c15x02"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c06x02 c06x03	"c06x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c09x05 c09x00	"c09x01"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c12x03 c12x04 c12x05 c12x06 c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c18x04 c18x05 c18x00 c18x01	"c18x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c11x05 c11x06 c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c12x00 c12x01 c12x02	"c12x03"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c00x00 c00x01	"c00x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x01 c10x02	"c10x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c17x02 c17x03 c17x00	"c17x01"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c11x02 c11x03 c11x04 c11x05 c11x06 c11x00	"c11x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c09x01 c09x02 c09x03	"c09x04"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c11x01 c11x02 c11x03 c11x04 c11x05 c11x06 c11x00	"c11x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c15x04 c15x05 c15x06 c15x00	"c15x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c15x02 c15x03	"c15x04"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c07x00 c07x01 c07x02	"c07x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c12x04 c12x05 c12x06 c12x00 c12x01 c12x02	"c12x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c12x04 c12x05 c12x06 c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c06x03 c06x04	"c06x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c00x02 c00x03 c00x04 c00x00	"c00x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c04x01 c04x02	"c04x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c13x01 c13x02 c13x03	"c13x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c15x04 c15x05 c15x06	"c15x00"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c17x00 c17x01	"c17x02"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c11x03 c11x04 c11x05 c11x06	"c11x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c13x01 c13x02 c13x03	"c13x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c08x00 c08x01 c08x02	"c08x03"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c02x01 c02x02 c02x03 c02x04	"c02x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c12x05 c12x06 c12x00 c12x01 c12x02 c12x03	"c12x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c03x01 c03x02	"c03x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c19x04 c19x00	"c19x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x02 c10x00 c10x01	"c10x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c09x04 c09x05 c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c02x07 c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c09x01 c09x02 c09x03 c09x04	"c09x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c14x07 c14x00 c14x01 c14x02	"c14x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c07x01 c07x02 c07x00	"c07x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c02x04 c02x05 c02x06 c02x07 c02x00	"c02x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c13x04 c13x00 c13x01 c13x02 c13x03	"c13x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c06x00 c06x01 c06x02 c06x03	"c06x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c04x04 c04x00	"c04x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c07x02 c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c09x05 c09x00 c09x01 c09x02 c09x03 c09x04	"c09x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c02x06 c02x07 c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c18x02 c18x03	"c18x04"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c09x01 c09x02 c09x03 c09x04 c09x05	"c09x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c02x07 c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x03 c14x04 c14x05 c14x06 c14x07 c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c09x05 c09x00	"c09x01"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c06x00 c06x01 c06x02 c06x03 c06x04	"c06x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c01x02 c01x00	"c01x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x05 c14x06 c14x07 c14x00 c14x01 c14x02 c14x03 c14x04	"c14x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c11x00 c11x01 c11x02 c11x03 c11x04 c11x05	"c11x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c14x03 c14x04 c14x05 c14x06 c14x07	"c14x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c12x03 c12x04 c12x05 c12x06 c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c18x02 c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c11x04 c11x05	"c11x06"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c14x03 c14x04 c14x05 c14x06 c14x07 c14x00	"c14x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c09x04 c09x05 c09x00	"c09x01"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c15x00 c15x01 c15x02 c15x03 c15x04 c15x05 c15x06	"c15x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c14x00 c14x01 c14x02 c14x03 c14x04 c14x05	"c14x06"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c05x01 c05x02	"c05x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c14x05 c14x06 c14x07	"c14x00"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c04x04 c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c11x01 c11x02 c11x03 c11x04 c11x05 c11x06 c11x00	"c11x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c13x03 c13x04	"c13x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x04 c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c13x03 c13x04	"c13x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c03x03 c03x04	"c03x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c03x01 c03x02 c03x03 c03x04	"c03x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c08x00 c08x01 c08x02	"c08x03"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c09x01 c09x02 c09x03 c09x04	"c09x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c17x00 c17x01 c17x02	"c17x03"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c02x01 c02x02 c02x03	"c02x04"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c08x01 c08x02 c08x03 c08x04 c08x05 c08x00	"c08x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c00x03 c00x04	"c00x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c18x04 c18x05 c18x00 c18x01	"c18x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c14x02 c14x03 c14x04 c14x05 c14x06	"c14x07"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c19x01 c19x02 c19x03 c19x04	"c19x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c09x02 c09x03 c09x04	"c09x05"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c13x03 c13x04 c13x00 c13x01 c13x02	"c13x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c08x05 c08x00 c08x01 c08x02 c08x03	"c08x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c03x04 c03x00 c03x01 c03x02 c03x03	"c03x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c15x00 c15x01 c15x02 c15x03 c15x04 c15x05 c15x06	"c15x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c02x02 c02x03 c02x04 c02x05	"c02x06"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c04x04 c04x00 c04x01	"c04x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c00x04 c00x00	"c00x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c11x04 c11x05 c11x06 c11x00 c11x01 c11x02 c11x03	"c11x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c15x02 c15x03 c15x04 c15x05 c15x06	"c15x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c04x01 c04x02	"c04x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c04x01 c04x02	"c04x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c19x02 c19x03	"c19x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c11x03 c11x04	"c11x05"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c13x04 c13x00	"c13x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c00x03 c00x04	"c00x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c14x06 c14x07 c14x00	"c14x01"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c14x04 c14x05 c14x06 c14x07 c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c14x00 c14x01 c14x02 c14x03 c14x04 c14x05	"c14x06"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c09x04 c09x05 c09x00	"c09x01"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c12x04 c12x05 c12x06 c12x00	"c12x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c15x04 c15x05 c15x06 c15x00	"c15x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c13x00 c13x01 c13x02 c13x03	"c13x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c06x03 c06x04 c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c19x01 c19x02 c19x03 c19x04	"c19x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c07x01 c07x02 c07x00	"c07x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c08x03 c08x04 c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c12x01 c12x02	"c12x03"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c06x04 c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c04x03 c04x04	"c04x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c02x06 c02x07 c02x00 c02x01 c02x02 c02x03 c02x04	"c02x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c13x03 c13x04 c13x00	"c13x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c09x05 c09x00 c09x01 c09x02	"c09x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c19x00 c19x01 c19x02 c19x03	"c19x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c17x01 c17x02	"c17x03"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c17x00 c17x01 c17x02	"c17x03"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c07x02 c07x00	"c07x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c13x01 c13x02	"c13x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x02 c06x03 c06x04	"c06x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c09x01 c09x02 c09x03 c09x04	"c09x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c09x05 c09x00	"c09x01"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c04x01 c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c17x00 c17x01 c17x02 c17x03	"c17x00"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c06x02 c06x03 c06x04	"c06x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c10x01 c10x02	"c10x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c11x01 c11x02	"c11x03"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c15x02 c15x03 c15x04 c15x05 c15x06 c15x00	"c15x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c13x01 c13x02	"c13x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c11x04 c11x05 c11x06 c11x00 c11x01 c11x02 c11x03	"c11x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c11x04 c11x05 c11x06 c11x00 c11x01 c11x02 c11x03	"c11x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c00x04 c00x00 c00x01 c00x02	"c00x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c11x02 c11x03 c11x04 c11x05 c11x06 c11x00	"c11x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c18x02 c18x03 c18x04 c18x05	"c18x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c09x05 c09x00 c09x01 c09x02 c09x03	"c09x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c01x01 c01x02 c01x00	"c01x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c11x03 c11x04	"c11x05"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c03x03 c03x04 c03x00 c03x01	"c03x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c13x01 c13x02 c13x03	"c13x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c14x02 c14x03 c14x04 c14x05	"c14x06"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c15x01 c15x02 c15x03 c15x04 c15x05 c15x06 c15x00	"c15x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c17x02 c17x03 c17x00	"c17x01"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c01x00 c01x01 c01x02	"c01x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c03x03 c03x04 c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c04x04 c04x00	"c04x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c18x04 c18x05 c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c02x06 c02x07 c02x00 c02x01 c02x02 c02x03 c02x04	"c02x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c03x04 c03x00 c03x01 c03x02 c03x03	"c03x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c09x01 c09x02	"c09x03"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c02x07 c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c15x04 c15x05 c15x06 c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c17x02 c17x03 c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c08x00 c08x01 c08x02 c08x03 c08x04	"c08x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c00x01 c00x02 c00x03 c00x04	"c00x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c14x07 c14x00 c14x01 c14x02	"c14x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c13x01 c13x02 c13x03	"c13x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c02x05 c02x06 c02x07 c02x00 c02x01	"c02x02"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c00x03 c00x04 c00x00 c00x01	"c00x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c09x01 c09x02 c09x03 c09x04 c09x05 c09x00	"c09x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c00x04 c00x00	"c00x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c04x04 c04x00	"c04x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c03x01 c03x02 c03x03 c03x04 c03x00	"c03x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c17x03 c17x00 c17x01 c17x02	"c17x03"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c13x00 c13x01 c13x02 c13x03	"c13x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c17x00 c17x01 c17x02 c17x03	"c17x00"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c14x03 c14x04 c14x05	"c14x06"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c13x02 c13x03	"c13x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c17x00 c17x01 c17x02 c17x03	"c17x00"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c03x02 c03x03	"c03x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c05x01 c05x02	"c05x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x02 c14x03	"c14x04"	{"difficulty":3,"family":"cycles","period":8,"contextLen":2}
+c04x00 c04x01 c04x02 c04x03 c04x04	"c04x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c02x04 c02x05 c02x06 c02x07 c02x00 c02x01 c02x02 c02x03	"c02x04"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c17x02 c17x03 c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c02x02 c02x03 c02x04 c02x05 c02x06 c02x07 c02x00	"c02x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c09x04 c09x05 c09x00 c09x01 c09x02	"c09x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c03x03 c03x04 c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c08x05 c08x00 c08x01 c08x02 c08x03 c08x04	"c08x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c07x01 c07x02	"c07x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c02x05 c02x06 c02x07 c02x00	"c02x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c11x02 c11x03 c11x04 c11x05	"c11x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c00x02 c00x03 c00x04 c00x00	"c00x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c07x01 c07x02	"c07x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c18x03 c18x04	"c18x05"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c17x02 c17x03 c17x00	"c17x01"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x04 c00x00	"c00x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x02 c10x00 c10x01	"c10x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c15x04 c15x05 c15x06 c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c11x06 c11x00 c11x01 c11x02 c11x03 c11x04 c11x05	"c11x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c11x06 c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c06x03 c06x04 c06x00 c06x01	"c06x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c00x04 c00x00 c00x01	"c00x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c16x01 c16x02	"c16x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c06x00 c06x01	"c06x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x02 c00x03 c00x04 c00x00	"c00x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c19x03 c19x04	"c19x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x00 c06x01	"c06x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x03 c06x04 c06x00 c06x01	"c06x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c07x02 c07x00	"c07x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c08x03 c08x04	"c08x05"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c18x05 c18x00 c18x01 c18x02 c18x03 c18x04	"c18x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c06x02 c06x03 c06x04 c06x00	"c06x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x01 c00x02 c00x03	"c00x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c07x01 c07x02	"c07x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c17x02 c17x03 c17x00	"c17x01"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c12x03 c12x04 c12x05 c12x06	"c12x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c01x02 c01x00	"c01x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c03x03 c03x04 c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c04x01 c04x02 c04x03 c04x04	"c04x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c18x01 c18x02 c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x04 c14x05 c14x06 c14x07	"c14x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x01 c00x02 c00x03	"c00x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c13x00 c13x01 c13x02	"c13x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c06x04 c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c08x03 c08x04 c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c03x02 c03x03 c03x04	"c03x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c14x03 c14x04 c14x05 c14x06 c14x07 c14x00 c14x01 c14x02	"c14x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c08x00 c08x01 c08x02 c08x03	"c08x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c14x04 c14x05 c14x06 c14x07	"c14x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c17x00 c17x01 c17x02	"c17x03"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c03x03 c03x04 c03x00 c03x01	"c03x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c06x03 c06x04 c06x00 c06x01	"c06x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c08x05 c08x00 c08x01 c08x02 c08x03 c08x04	"c08x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c13x02 c13x03	"c13x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c14x00 c14x01 c14x02 c14x03 c14x04	"c14x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c12x02 c12x03 c12x04 c12x05 c12x06	"c12x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c04x02 c04x03	"c04x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c19x00 c19x01 c19x02	"c19x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c14x01 c14x02 c14x03 c14x04 c14x05 c14x06	"c14x07"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c00x03 c00x04 c00x00 c00x01 c00x02	"c00x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c00x04 c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c14x01 c14x02 c14x03 c14x04 c14x05 c14x06 c14x07 c14x00	"c14x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c08x02 c08x03 c08x04 c08x05	"c08x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c10x00 c10x01 c10x02	"c10x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c05x00 c05x01	"c05x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x06 c14x07 c14x00 c14x01 c14x02 c14x03 c14x04 c14x05	"c14x06"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c13x03 c13x04 c13x00 c13x01 c13x02	"c13x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c05x02 c05x00	"c05x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c06x03 c06x04	"c06x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c12x01 c12x02 c12x03 c12x04	"c12x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c17x03 c17x00	"c17x01"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c17x03 c17x00 c17x01	"c17x02"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c02x03 c02x04 c02x05 c02x06 c02x07	"c02x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c02x07 c02x00 c02x01 c02x02 c02x03 c02x04 c02x05 c02x06	"c02x07"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c13x00 c13x01	"c13x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c07x02 c07x00	"c07x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c09x05 c09x00 c09x01 c09x02 c09x03 c09x04	"c09x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c12x00 c12x01 c12x02 c12x03 c12x04	"c12x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c12x05 c12x06 c12x00	"c12x01"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c12x03 c12x04 c12x05 c12x06 c12x00	"c12x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c08x04 c08x05 c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c06x04 c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c08x03 c08x04	"c08x05"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c13x03 c13x04 c13x00	"c13x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c02x02 c02x03 c02x04 c02x05	"c02x06"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c14x04 c14x05	"c14x06"	{"difficulty":3,"family":"cycles","period":8,"contextLen":2}
+c06x03 c06x04 c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c14x01 c14x02 c14x03 c14x04 c14x05 c14x06 c14x07 c14x00	"c14x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c14x07 c14x00 c14x01 c14x02	"c14x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c09x01 c09x02 c09x03 c09x04 c09x05	"c09x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c15x02 c15x03	"c15x04"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c17x03 c17x00	"c17x01"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c02x06 c02x07 c02x00 c02x01 c02x02 c02x03 c02x04	"c02x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c10x01 c10x02	"c10x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x03 c04x04 c04x00 c04x01	"c04x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c17x03 c17x00 c17x01	"c17x02"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c02x00 c02x01 c02x02 c02x03	"c02x04"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c11x03 c11x04	"c11x05"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c10x00 c10x01 c10x02	"c10x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c13x04 c13x00 c13x01 c13x02	"c13x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c19x03 c19x04 c19x00 c19x01 c19x02	"c19x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c09x05 c09x00 c09x01 c09x02 c09x03	"c09x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c09x02 c09x03 c09x04 c09x05 c09x00	"c09x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c11x03 c11x04 c11x05 c11x06 c11x00 c11x01	"c11x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c11x01 c11x02	"c11x03"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c00x02 c00x03 c00x04	"c00x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c02x05 c02x06 c02x07 c02x00 c02x01 c02x02 c02x03 c02x04	"c02x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c02x03 c02x04 c02x05 c02x06 c02x07	"c02x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c09x02 c09x03	"c09x04"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c06x03 c06x04	"c06x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c09x05 c09x00 c09x01 c09x02 c09x03	"c09x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c09x05 c09x00 c09x01 c09x02 c09x03 c09x04	"c09x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c05x02 c05x00	"c05x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c08x04 c08x05 c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c01x02 c01x00	"c01x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c07x01 c07x02	"c07x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c02x04 c02x05 c02x06 c02x07 c02x00 c02x01	"c02x02"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c04x01 c04x02	"c04x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c11x00 c11x01 c11x02 c11x03 c11x04 c11x05	"c11x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c09x03 c09x04 c09x05	"c09x00"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c00x01 c00x02	"c00x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c07x01 c07x02	"c07x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c12x06 c12x00 c12x01	"c12x02"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c09x02 c09x03	"c09x04"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c02x05 c02x06 c02x07 c02x00 c02x01	"c02x02"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c01x00 c01x01 c01x02	"c01x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c17x01 c17x02 c17x03	"c17x00"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c12x06 c12x00 c12x01	"c12x02"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c04x02 c04x03	"c04x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c05x02 c05x00	"c05x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x04 c14x05 c14x06 c14x07 c14x00 c14x01 c14x02 c14x03	"c14x04"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c15x06 c15x00 c15x01 c15x02 c15x03 c15x04 c15x05	"c15x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c09x03 c09x04 c09x05 c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c15x00 c15x01 c15x02 c15x03 c15x04 c15x05	"c15x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c08x01 c08x02 c08x03	"c08x04"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c08x01 c08x02 c08x03 c08x04 c08x05	"c08x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c03x02 c03x03	"c03x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c13x04 c13x00 c13x01	"c13x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c14x04 c14x05 c14x06 c14x07 c14x00 c14x01 c14x02 c14x03	"c14x04"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c09x05 c09x00 c09x01 c09x02 c09x03	"c09x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c02x07 c02x00 c02x01 c02x02 c02x03 c02x04	"c02x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c12x05 c12x06	"c12x00"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c13x01 c13x02 c13x03 c13x04 c13x00	"c13x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c13x02 c13x03 c13x04	"c13x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c14x00 c14x01 c14x02 c14x03 c14x04 c14x05 c14x06 c14x07	"c14x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c12x02 c12x03 c12x04 c12x05 c12x06	"c12x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c00x03 c00x04 c00x00	"c00x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c12x06 c12x00 c12x01	"c12x02"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c13x00 c13x01 c13x02	"c13x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c13x01 c13x02 c13x03 c13x04 c13x00	"c13x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c13x02 c13x03 c13x04 c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c06x01 c06x02 c06x03	"c06x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c18x04 c18x05 c18x00	"c18x01"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c00x04 c00x00 c00x01 c00x02	"c00x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c08x03 c08x04 c08x05 c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c13x01 c13x02 c13x03	"c13x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c04x04 c04x00	"c04x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c11x06 c11x00 c11x01 c11x02 c11x03 c11x04 c11x05	"c11x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c03x04 c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c17x02 c17x03 c17x00	"c17x01"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c15x05 c15x06 c15x00 c15x01	"c15x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c09x03 c09x04	"c09x05"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c05x02 c05x00	"c05x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x04 c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c01x00 c01x01 c01x02	"c01x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c03x02 c03x03 c03x04 c03x00 c03x01	"c03x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c11x04 c11x05 c11x06 c11x00 c11x01	"c11x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c12x01 c12x02 c12x03 c12x04 c12x05 c12x06	"c12x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c18x02 c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c02x00 c02x01 c02x02 c02x03 c02x04	"c02x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c15x05 c15x06 c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c13x04 c13x00 c13x01 c13x02	"c13x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c03x00 c03x01 c03x02 c03x03 c03x04	"c03x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c02x04 c02x05 c02x06 c02x07	"c02x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c12x05 c12x06 c12x00 c12x01 c12x02 c12x03	"c12x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c18x00 c18x01 c18x02 c18x03 c18x04	"c18x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x05 c14x06	"c14x07"	{"difficulty":3,"family":"cycles","period":8,"contextLen":2}
+c12x03 c12x04 c12x05 c12x06 c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c02x01 c02x02 c02x03 c02x04 c02x05 c02x06	"c02x07"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c08x02 c08x03 c08x04 c08x05 c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c04x04 c04x00	"c04x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c02x01 c02x02 c02x03	"c02x04"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c13x02 c13x03 c13x04	"c13x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x01 c00x02 c00x03 c00x04 c00x00	"c00x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c17x00 c17x01	"c17x02"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c15x05 c15x06 c15x00 c15x01 c15x02 c15x03 c15x04	"c15x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c08x03 c08x04 c08x05 c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c01x01 c01x02 c01x00	"c01x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c15x05 c15x06 c15x00 c15x01 c15x02 c15x03 c15x04	"c15x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c12x01 c12x02 c12x03 c12x04 c12x05 c12x06	"c12x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c05x02 c05x00	"c05x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c09x05 c09x00 c09x01 c09x02 c09x03 c09x04	"c09x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c18x00 c18x01 c18x02 c18x03	"c18x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c18x05 c18x00 c18x01 c18x02 c18x03	"c18x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c12x00 c12x01 c12x02 c12x03 c12x04 c12x05	"c12x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c08x03 c08x04 c08x05 c08x00	"c08x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c02x03 c02x04 c02x05 c02x06 c02x07 c02x00	"c02x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c05x01 c05x02	"c05x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c02x02 c02x03	"c02x04"	{"difficulty":3,"family":"cycles","period":8,"contextLen":2}
+c04x01 c04x02 c04x03	"c04x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c11x02 c11x03	"c11x04"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c13x00 c13x01 c13x02	"c13x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c19x01 c19x02 c19x03 c19x04 c19x00	"c19x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c19x03 c19x04 c19x00	"c19x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c02x00 c02x01 c02x02 c02x03 c02x04 c02x05 c02x06	"c02x07"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c02x01 c02x02 c02x03 c02x04 c02x05 c02x06 c02x07	"c02x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c10x02 c10x00 c10x01	"c10x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c08x02 c08x03	"c08x04"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c19x04 c19x00 c19x01 c19x02 c19x03	"c19x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c12x04 c12x05 c12x06 c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c06x03 c06x04	"c06x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c05x02 c05x00	"c05x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c08x01 c08x02	"c08x03"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c04x03 c04x04	"c04x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c03x02 c03x03 c03x04	"c03x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c17x03 c17x00	"c17x01"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c00x03 c00x04	"c00x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x03 c06x04	"c06x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x02 c10x00 c10x01	"c10x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c18x03 c18x04 c18x05 c18x00 c18x01	"c18x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c04x01 c04x02 c04x03	"c04x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c07x00 c07x01	"c07x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c18x03 c18x04	"c18x05"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c00x04 c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c09x00 c09x01 c09x02 c09x03	"c09x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c09x05 c09x00 c09x01	"c09x02"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c19x04 c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c16x01 c16x02	"c16x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c08x03 c08x04 c08x05	"c08x00"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c12x04 c12x05 c12x06 c12x00 c12x01 c12x02	"c12x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c02x01 c02x02 c02x03 c02x04 c02x05 c02x06 c02x07 c02x00	"c02x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c14x05 c14x06 c14x07 c14x00	"c14x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":4}
+c13x03 c13x04 c13x00	"c13x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c15x02 c15x03	"c15x04"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c07x02 c07x00	"c07x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c09x05 c09x00	"c09x01"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c13x02 c13x03 c13x04 c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c03x04 c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c02x06 c02x07 c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c13x02 c13x03 c13x04	"c13x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c18x00 c18x01 c18x02 c18x03 c18x04	"c18x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c06x03 c06x04	"c06x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c03x03 c03x04 c03x00	"c03x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c02x06 c02x07 c02x00 c02x01 c02x02 c02x03 c02x04	"c02x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x03 c14x04 c14x05 c14x06 c14x07 c14x00 c14x01 c14x02	"c14x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c00x04 c00x00 c00x01 c00x02	"c00x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c09x05 c09x00	"c09x01"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c11x04 c11x05 c11x06 c11x00 c11x01	"c11x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c08x05 c08x00 c08x01 c08x02 c08x03 c08x04	"c08x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c17x03 c17x00 c17x01 c17x02	"c17x03"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c18x02 c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c19x00 c19x01	"c19x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c12x05 c12x06 c12x00 c12x01 c12x02 c12x03	"c12x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c18x00 c18x01 c18x02 c18x03 c18x04	"c18x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c19x03 c19x04 c19x00 c19x01 c19x02	"c19x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c11x01 c11x02 c11x03 c11x04 c11x05 c11x06 c11x00	"c11x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c09x00 c09x01 c09x02 c09x03 c09x04	"c09x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c09x02 c09x03 c09x04	"c09x05"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c05x01 c05x02	"c05x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c13x04 c13x00 c13x01	"c13x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c07x00 c07x01 c07x02	"c07x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c18x03 c18x04 c18x05	"c18x00"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c18x01 c18x02 c18x03 c18x04 c18x05	"c18x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c07x01 c07x02	"c07x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c08x03 c08x04 c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c00x03 c00x04 c00x00 c00x01	"c00x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c12x06 c12x00 c12x01 c12x02 c12x03 c12x04 c12x05	"c12x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c00x02 c00x03	"c00x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c05x01 c05x02	"c05x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c13x01 c13x02 c13x03 c13x04	"c13x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c05x00 c05x01	"c05x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x03 c14x04	"c14x05"	{"difficulty":3,"family":"cycles","period":8,"contextLen":2}
+c12x04 c12x05 c12x06 c12x00 c12x01 c12x02 c12x03	"c12x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c11x03 c11x04 c11x05 c11x06 c11x00 c11x01	"c11x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c15x02 c15x03 c15x04	"c15x05"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c02x02 c02x03 c02x04 c02x05 c02x06 c02x07 c02x00	"c02x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c00x03 c00x04 c00x00 c00x01 c00x02	"c00x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c17x01 c17x02 c17x03 c17x00	"c17x01"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c17x00 c17x01	"c17x02"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c07x00 c07x01	"c07x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c06x01 c06x02	"c06x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c11x01 c11x02 c11x03 c11x04 c11x05 c11x06	"c11x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c18x04 c18x05 c18x00	"c18x01"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c03x00 c03x01	"c03x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c02x01 c02x02 c02x03 c02x04 c02x05 c02x06 c02x07 c02x00	"c02x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c17x02 c17x03 c17x00	"c17x01"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c01x01 c01x02 c01x00	"c01x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c11x05 c11x06 c11x00 c11x01	"c11x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c08x04 c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c01x02 c01x00	"c01x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c13x01 c13x02	"c13x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c13x03 c13x04 c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c10x01 c10x02	"c10x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c08x03 c08x04 c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c07x02 c07x00	"c07x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c06x00 c06x01 c06x02 c06x03 c06x04	"c06x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c06x01 c06x02 c06x03	"c06x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c00x02 c00x03 c00x04 c00x00 c00x01	"c00x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c07x00 c07x01	"c07x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c07x02 c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c15x02 c15x03 c15x04 c15x05	"c15x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c12x02 c12x03 c12x04 c12x05 c12x06 c12x00	"c12x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c19x00 c19x01	"c19x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x04 c06x00	"c06x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c05x02 c05x00	"c05x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x01 c04x02 c04x03	"c04x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c08x03 c08x04	"c08x05"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c00x00 c00x01 c00x02 c00x03 c00x04	"c00x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c01x01 c01x02 c01x00	"c01x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c18x04 c18x05 c18x00 c18x01 c18x02 c18x03	"c18x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c04x01 c04x02 c04x03 c04x04	"c04x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c18x01 c18x02 c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c17x02 c17x03 c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c10x00 c10x01 c10x02	"c10x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c02x04 c02x05 c02x06 c02x07 c02x00 c02x01 c02x02 c02x03	"c02x04"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c04x02 c04x03 c04x04	"c04x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c07x01 c07x02 c07x00	"c07x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c07x02 c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c14x02 c14x03 c14x04	"c14x05"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x04 c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c12x06 c12x00	"c12x01"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c17x02 c17x03 c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c17x03 c17x00	"c17x01"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c02x02 c02x03 c02x04	"c02x05"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c00x04 c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c08x04 c08x05 c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c06x01 c06x02 c06x03 c06x04 c06x00	"c06x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c17x02 c17x03 c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c17x03 c17x00	"c17x01"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c07x00 c07x01 c07x02	"c07x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c17x02 c17x03	"c17x00"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c18x03 c18x04 c18x05	"c18x00"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c01x00 c01x01 c01x02	"c01x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c17x00 c17x01 c17x02	"c17x03"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c09x03 c09x04 c09x05 c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c09x00 c09x01	"c09x02"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c12x03 c12x04 c12x05 c12x06	"c12x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c17x00 c17x01 c17x02 c17x03	"c17x00"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c18x04 c18x05	"c18x00"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c18x01 c18x02 c18x03	"c18x04"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c01x02 c01x00	"c01x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c15x00 c15x01 c15x02 c15x03 c15x04 c15x05 c15x06	"c15x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c02x02 c02x03 c02x04 c02x05 c02x06 c02x07 c02x00 c02x01	"c02x02"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c02x05 c02x06 c02x07	"c02x00"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c18x01 c18x02 c18x03	"c18x04"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c09x00 c09x01 c09x02 c09x03	"c09x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c00x04 c00x00 c00x01 c00x02	"c00x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c18x04 c18x05 c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c17x03 c17x00	"c17x01"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c15x05 c15x06 c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c12x00 c12x01 c12x02	"c12x03"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c01x01 c01x02 c01x00	"c01x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c12x06 c12x00 c12x01 c12x02 c12x03 c12x04	"c12x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c17x03 c17x00 c17x01 c17x02	"c17x03"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c07x01 c07x02	"c07x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c09x05 c09x00 c09x01	"c09x02"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c13x01 c13x02	"c13x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c13x02 c13x03	"c13x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c15x02 c15x03 c15x04 c15x05 c15x06 c15x00	"c15x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c03x00 c03x01 c03x02 c03x03	"c03x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c06x02 c06x03	"c06x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c18x03 c18x04 c18x05 c18x00 c18x01	"c18x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c07x02 c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c17x02 c17x03 c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c06x02 c06x03	"c06x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c07x01 c07x02	"c07x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x00 c04x01	"c04x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c08x04 c08x05	"c08x00"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c11x04 c11x05 c11x06 c11x00	"c11x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c17x02 c17x03 c17x00	"c17x01"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c15x05 c15x06 c15x00 c15x01 c15x02 c15x03 c15x04	"c15x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c18x01 c18x02 c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c19x02 c19x03 c19x04 c19x00	"c19x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c12x02 c12x03 c12x04 c12x05 c12x06 c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c03x02 c03x03 c03x04 c03x00	"c03x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c08x01 c08x02 c08x03 c08x04 c08x05	"c08x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c18x01 c18x02	"c18x03"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c17x03 c17x00 c17x01	"c17x02"	{"difficulty":2,"family":"cycles","period":4,"contextLen":3}
+c19x01 c19x02	"c19x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x01 c06x02 c06x03 c06x04	"c06x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c07x02 c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c07x01 c07x02 c07x00	"c07x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c19x04 c19x00	"c19x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c08x03 c08x04 c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c07x01 c07x02 c07x00	"c07x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c10x02 c10x00 c10x01	"c10x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c12x04 c12x05 c12x06 c12x00 c12x01 c12x02 c12x03	"c12x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c19x03 c19x04	"c19x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c18x02 c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c03x00 c03x01 c03x02 c03x03	"c03x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c02x07 c02x00 c02x01 c02x02 c02x03	"c02x04"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c06x04 c06x00	"c06x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c15x01 c15x02 c15x03 c15x04 c15x05	"c15x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c15x05 c15x06 c15x00 c15x01 c15x02 c15x03 c15x04	"c15x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c08x04 c08x05 c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c06x00 c06x01 c06x02 c06x03	"c06x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c04x01 c04x02 c04x03 c04x04	"c04x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c02x05 c02x06 c02x07 c02x00 c02x01 c02x02 c02x03	"c02x04"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c01x02 c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c14x07 c14x00	"c14x01"	{"difficulty":3,"family":"cycles","period":8,"contextLen":2}
+c17x01 c17x02	"c17x03"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c19x01 c19x02	"c19x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c03x04 c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c08x01 c08x02	"c08x03"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c05x01 c05x02	"c05x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c05x00 c05x01	"c05x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c12x03 c12x04	"c12x05"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c03x04 c03x00	"c03x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x01 c10x02	"c10x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x02 c04x03 c04x04 c04x00 c04x01	"c04x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c09x03 c09x04 c09x05 c09x00	"c09x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c19x01 c19x02	"c19x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c02x07 c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c03x04 c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c18x03 c18x04 c18x05	"c18x00"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c12x02 c12x03 c12x04	"c12x05"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c03x02 c03x03	"c03x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c14x05 c14x06 c14x07 c14x00 c14x01 c14x02 c14x03 c14x04	"c14x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c13x01 c13x02 c13x03 c13x04 c13x00	"c13x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c11x02 c11x03 c11x04 c11x05 c11x06 c11x00	"c11x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c02x02 c02x03 c02x04	"c02x05"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c11x00 c11x01 c11x02 c11x03 c11x04 c11x05	"c11x06"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c09x01 c09x02 c09x03 c09x04	"c09x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c11x02 c11x03 c11x04 c11x05 c11x06 c11x00 c11x01	"c11x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c08x04 c08x05 c08x00	"c08x01"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c08x02 c08x03	"c08x04"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c07x01 c07x02	"c07x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c12x01 c12x02	"c12x03"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c10x02 c10x00 c10x01	"c10x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c17x02 c17x03 c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c05x02 c05x00	"c05x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c15x03 c15x04 c15x05 c15x06 c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c04x02 c04x03	"c04x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c12x01 c12x02 c12x03 c12x04 c12x05 c12x06	"c12x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c03x03 c03x04 c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c19x01 c19x02 c19x03 c19x04	"c19x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c09x01 c09x02	"c09x03"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x01 c14x02 c14x03 c14x04 c14x05	"c14x06"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c12x04 c12x05 c12x06 c12x00 c12x01 c12x02	"c12x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c00x00 c00x01	"c00x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c08x03 c08x04 c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c06x01 c06x02	"c06x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c08x04 c08x05 c08x00	"c08x01"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c06x03 c06x04 c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c03x03 c03x04	"c03x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c18x05 c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c07x02 c07x00	"c07x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x00 c04x01	"c04x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x07 c14x00 c14x01 c14x02 c14x03	"c14x04"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c04x03 c04x04 c04x00	"c04x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c10x02 c10x00	"c10x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c07x02 c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c03x02 c03x03 c03x04 c03x00	"c03x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c09x04 c09x05 c09x00 c09x01 c09x02	"c09x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c19x03 c19x04	"c19x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x02 c10x00 c10x01	"c10x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c05x02 c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c09x01 c09x02 c09x03 c09x04 c09x05 c09x00	"c09x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c19x03 c19x04 c19x00 c19x01	"c19x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c19x04 c19x00 c19x01 c19x02	"c19x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c04x01 c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c06x00 c06x01 c06x02 c06x03 c06x04	"c06x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c07x01 c07x02 c07x00	"c07x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x01 c00x02	"c00x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x00 c10x01 c10x02	"c10x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c03x00 c03x01 c03x02 c03x03	"c03x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c12x05 c12x06 c12x00	"c12x01"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c17x03 c17x00	"c17x01"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c13x04 c13x00	"c13x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x00 c06x01	"c06x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c11x05 c11x06 c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c18x05 c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c06x04 c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c01x00 c01x01 c01x02	"c01x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c07x02 c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c19x00 c19x01 c19x02	"c19x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c08x01 c08x02 c08x03 c08x04	"c08x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c15x03 c15x04 c15x05	"c15x06"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c19x03 c19x04 c19x00 c19x01	"c19x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c17x02 c17x03 c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c14x00 c14x01 c14x02 c14x03 c14x04 c14x05	"c14x06"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c17x02 c17x03	"c17x00"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c12x00 c12x01	"c12x02"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c08x05 c08x00 c08x01 c08x02 c08x03 c08x04	"c08x05"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c15x05 c15x06 c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c14x05 c14x06 c14x07	"c14x00"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c01x02 c01x00	"c01x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x06 c14x07 c14x00	"c14x01"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c19x03 c19x04 c19x00 c19x01 c19x02	"c19x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c13x03 c13x04 c13x00	"c13x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c15x06 c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c02x07 c02x00 c02x01 c02x02 c02x03 c02x04 c02x05	"c02x06"	{"difficulty":1,"family":"cycles","period":8,"contextLen":7}
+c06x04 c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c11x00 c11x01	"c11x02"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c02x04 c02x05 c02x06 c02x07 c02x00	"c02x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":5}
+c04x03 c04x04 c04x00 c04x01 c04x02	"c04x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c14x03 c14x04 c14x05 c14x06 c14x07 c14x00 c14x01 c14x02	"c14x03"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c03x00 c03x01	"c03x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c13x02 c13x03	"c13x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c12x02 c12x03 c12x04 c12x05 c12x06	"c12x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c06x02 c06x03 c06x04 c06x00 c06x01	"c06x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c14x04 c14x05	"c14x06"	{"difficulty":3,"family":"cycles","period":8,"contextLen":2}
+c06x04 c06x00	"c06x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c08x03 c08x04	"c08x05"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c18x04 c18x05 c18x00	"c18x01"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c07x00 c07x01	"c07x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c18x01 c18x02 c18x03 c18x04 c18x05	"c18x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c11x02 c11x03 c11x04 c11x05 c11x06	"c11x00"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c02x05 c02x06 c02x07	"c02x00"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c03x00 c03x01 c03x02 c03x03	"c03x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c11x01 c11x02 c11x03	"c11x04"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c06x01 c06x02	"c06x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c03x04 c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c07x01 c07x02 c07x00	"c07x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c02x07 c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"cycles","period":8,"contextLen":3}
+c18x03 c18x04 c18x05 c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c08x05 c08x00 c08x01	"c08x02"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c18x02 c18x03 c18x04 c18x05 c18x00	"c18x01"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c12x04 c12x05 c12x06 c12x00	"c12x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c08x03 c08x04 c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c02x01 c02x02 c02x03 c02x04 c02x05 c02x06 c02x07 c02x00	"c02x01"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c05x02 c05x00	"c05x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c15x00 c15x01 c15x02 c15x03 c15x04	"c15x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c09x05 c09x00 c09x01 c09x02 c09x03	"c09x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c03x03 c03x04 c03x00 c03x01	"c03x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c07x02 c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c07x02 c07x00	"c07x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c13x01 c13x02 c13x03	"c13x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c12x04 c12x05 c12x06	"c12x00"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c07x02 c07x00	"c07x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c14x07 c14x00 c14x01 c14x02 c14x03 c14x04	"c14x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":6}
+c05x01 c05x02	"c05x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c12x05 c12x06	"c12x00"	{"difficulty":3,"family":"cycles","period":7,"contextLen":2}
+c06x01 c06x02 c06x03 c06x04	"c06x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c07x00 c07x01 c07x02	"c07x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c04x03 c04x04 c04x00 c04x01	"c04x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c19x02 c19x03 c19x04 c19x00	"c19x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c00x04 c00x00	"c00x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c08x00 c08x01	"c08x02"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c03x03 c03x04 c03x00	"c03x01"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c10x01 c10x02	"c10x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c08x00 c08x01 c08x02 c08x03 c08x04 c08x05	"c08x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c12x00 c12x01 c12x02 c12x03 c12x04	"c12x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c01x00 c01x01	"c01x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c15x04 c15x05 c15x06 c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c08x03 c08x04 c08x05 c08x00 c08x01 c08x02	"c08x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":6}
+c17x02 c17x03	"c17x00"	{"difficulty":3,"family":"cycles","period":4,"contextLen":2}
+c09x05 c09x00 c09x01	"c09x02"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c19x01 c19x02 c19x03	"c19x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c17x00 c17x01 c17x02 c17x03	"c17x00"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c14x07 c14x00 c14x01 c14x02 c14x03 c14x04 c14x05 c14x06	"c14x07"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c00x04 c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c14x00 c14x01 c14x02 c14x03 c14x04 c14x05 c14x06 c14x07	"c14x00"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c10x01 c10x02 c10x00	"c10x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c15x00 c15x01 c15x02 c15x03 c15x04	"c15x05"	{"difficulty":1,"family":"cycles","period":7,"contextLen":5}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c13x01 c13x02	"c13x03"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c00x04 c00x00	"c00x01"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x04 c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c02x02 c02x03	"c02x04"	{"difficulty":3,"family":"cycles","period":8,"contextLen":2}
+c09x04 c09x05 c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c18x01 c18x02 c18x03 c18x04 c18x05	"c18x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c05x01 c05x02	"c05x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c06x03 c06x04 c06x00 c06x01	"c06x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c18x02 c18x03	"c18x04"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c19x00 c19x01 c19x02 c19x03 c19x04	"c19x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c11x06 c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c03x00 c03x01	"c03x02"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c13x03 c13x04 c13x00 c13x01 c13x02	"c13x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c10x02 c10x00 c10x01	"c10x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x02 c16x00	"c16x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c10x00 c10x01 c10x02	"c10x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c06x04 c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c08x04 c08x05	"c08x00"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c18x01 c18x02	"c18x03"	{"difficulty":3,"family":"cycles","period":6,"contextLen":2}
+c13x01 c13x02 c13x03	"c13x04"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c11x06 c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c17x02 c17x03 c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"cycles","period":4,"contextLen":4}
+c00x02 c00x03 c00x04	"c00x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c18x00 c18x01 c18x02	"c18x03"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c12x02 c12x03 c12x04 c12x05 c12x06 c12x00	"c12x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":6}
+c09x05 c09x00 c09x01 c09x02	"c09x03"	{"difficulty":1,"family":"cycles","period":6,"contextLen":4}
+c12x01 c12x02 c12x03	"c12x04"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}
+c16x00 c16x01	"c16x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c00x02 c00x03 c00x04	"c00x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c15x01 c15x02 c15x03 c15x04 c15x05 c15x06 c15x00	"c15x01"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c05x00 c05x01 c05x02	"c05x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c00x01 c00x02 c00x03 c00x04 c00x00	"c00x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c08x05 c08x00 c08x01 c08x02 c08x03	"c08x04"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c16x02 c16x00 c16x01	"c16x02"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c12x06 c12x00 c12x01 c12x02	"c12x03"	{"difficulty":1,"family":"cycles","period":7,"contextLen":4}
+c04x02 c04x03 c04x04 c04x00	"c04x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c05x01 c05x02 c05x00	"c05x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c03x02 c03x03 c03x04 c03x00	"c03x01"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c02x05 c02x06 c02x07 c02x00 c02x01 c02x02 c02x03 c02x04	"c02x05"	{"difficulty":1,"family":"cycles","period":8,"contextLen":8}
+c16x00 c16x01 c16x02	"c16x00"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c16x01 c16x02 c16x00	"c16x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c01x01 c01x02 c01x00	"c01x01"	{"difficulty":2,"family":"cycles","period":3,"contextLen":3}
+c12x02 c12x03 c12x04 c12x05 c12x06 c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"cycles","period":7,"contextLen":7}
+c09x04 c09x05 c09x00	"c09x01"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c03x02 c03x03	"c03x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c06x02 c06x03	"c06x04"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c01x01 c01x02	"c01x00"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c00x02 c00x03 c00x04	"c00x00"	{"difficulty":2,"family":"cycles","period":5,"contextLen":3}
+c08x04 c08x05 c08x00	"c08x01"	{"difficulty":2,"family":"cycles","period":6,"contextLen":3}
+c09x01 c09x02 c09x03 c09x04 c09x05	"c09x00"	{"difficulty":1,"family":"cycles","period":6,"contextLen":5}
+c13x03 c13x04	"c13x00"	{"difficulty":3,"family":"cycles","period":5,"contextLen":2}
+c10x00 c10x01	"c10x02"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c04x01 c04x02 c04x03 c04x04	"c04x00"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c19x02 c19x03 c19x04 c19x00 c19x01	"c19x02"	{"difficulty":1,"family":"cycles","period":5,"contextLen":5}
+c01x02 c01x00	"c01x01"	{"difficulty":3,"family":"cycles","period":3,"contextLen":2}
+c06x04 c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"cycles","period":5,"contextLen":4}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":2,"family":"cycles","period":7,"contextLen":3}

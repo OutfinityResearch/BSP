@@ -1,0 +1,1000 @@
+c00x00	"c00x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk00","cutPoint":1,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":4,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00 c07x01 c07x02	"c07x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":3,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":3,"chunkSize":5}
+c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":2,"chunkSize":6}
+c20x00	"c20x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk20","cutPoint":1,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00 c22x01	"c22x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk22","cutPoint":2,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03 c28x04	"c28x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":5,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00 c01x01 c01x02 c01x03	"c01x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":4,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03	"c07x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":4,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":3,"chunkSize":5}
+c19x00	"c19x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk19","cutPoint":1,"chunkSize":6}
+c20x00	"c20x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk20","cutPoint":1,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01	"c27x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk27","cutPoint":2,"chunkSize":5}
+c28x00 c28x01	"c28x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":2,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01	"c00x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":2,"chunkSize":6}
+c01x00	"c01x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk01","cutPoint":1,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":4,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03 c07x04	"c07x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":5,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00	"c11x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk11","cutPoint":1,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00	"c19x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk19","cutPoint":1,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03 c20x04	"c20x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":5,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00	"c23x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk23","cutPoint":1,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03	"c28x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":4,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":3,"chunkSize":6}
+c01x00 c01x01 c01x02	"c01x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":3,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03 c07x04	"c07x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":5,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":4,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":3,"chunkSize":5}
+c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":2,"chunkSize":6}
+c20x00 c20x01 c20x02	"c20x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":3,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00	"c27x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk27","cutPoint":1,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03 c28x04	"c28x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":5,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00	"c00x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk00","cutPoint":1,"chunkSize":6}
+c01x00	"c01x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk01","cutPoint":1,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk05","cutPoint":2,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03 c07x04	"c07x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":5,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00	"c18x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk18","cutPoint":1,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03	"c19x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":4,"chunkSize":6}
+c20x00 c20x01	"c20x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":2,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00	"c22x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk22","cutPoint":1,"chunkSize":5}
+c23x00	"c23x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk23","cutPoint":1,"chunkSize":4}
+c24x00 c24x01	"c24x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk24","cutPoint":2,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01	"c27x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk27","cutPoint":2,"chunkSize":5}
+c28x00 c28x01 c28x02	"c28x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":3,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00	"c01x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk01","cutPoint":1,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk05","cutPoint":2,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":2,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01 c18x02 c18x03	"c18x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":4,"chunkSize":5}
+c19x00	"c19x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk19","cutPoint":1,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03	"c20x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":4,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02 c22x03	"c22x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":4,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01 c27x02 c27x03	"c27x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":4,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03	"c28x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":4,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00 c01x01 c01x02	"c01x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":3,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03 c07x04	"c07x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":5,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00	"c19x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk19","cutPoint":1,"chunkSize":6}
+c20x00 c20x01 c20x02	"c20x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":3,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00	"c27x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk27","cutPoint":1,"chunkSize":5}
+c28x00 c28x01 c28x02	"c28x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":3,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00 c01x01 c01x02	"c01x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":3,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk05","cutPoint":2,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":2,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00	"c11x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk11","cutPoint":1,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00	"c18x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk18","cutPoint":1,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03 c19x04	"c19x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":5,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03	"c20x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":4,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00	"c22x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk22","cutPoint":1,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00 c24x01	"c24x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk24","cutPoint":2,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01 c28x02	"c28x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":3,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01	"c00x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":2,"chunkSize":6}
+c01x00 c01x01 c01x02	"c01x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":3,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00 c04x01	"c04x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":2,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03 c07x04	"c07x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":5,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00	"c11x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk11","cutPoint":1,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03	"c19x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":4,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03	"c20x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":4,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01	"c22x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk22","cutPoint":2,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01	"c27x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk27","cutPoint":2,"chunkSize":5}
+c28x00 c28x01	"c28x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":2,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":3,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01	"c04x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":2,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03	"c07x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":4,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00	"c11x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk11","cutPoint":1,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01	"c15x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk15","cutPoint":2,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00	"c19x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk19","cutPoint":1,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03 c20x04	"c20x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":5,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02 c22x03	"c22x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":4,"chunkSize":5}
+c23x00	"c23x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk23","cutPoint":1,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00	"c28x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk28","cutPoint":1,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03 c00x04	"c00x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":5,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03	"c07x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":4,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":3,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03	"c19x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":4,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03	"c20x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":4,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00	"c22x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk22","cutPoint":1,"chunkSize":5}
+c23x00	"c23x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk23","cutPoint":1,"chunkSize":4}
+c24x00 c24x01	"c24x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk24","cutPoint":2,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00	"c27x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk27","cutPoint":1,"chunkSize":5}
+c28x00 c28x01	"c28x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":2,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01	"c00x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":2,"chunkSize":6}
+c01x00 c01x01 c01x02 c01x03	"c01x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":4,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00	"c03x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk03","cutPoint":1,"chunkSize":4}
+c04x00 c04x01	"c04x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":2,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03	"c07x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":4,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00	"c18x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk18","cutPoint":1,"chunkSize":5}
+c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":2,"chunkSize":6}
+c20x00 c20x01	"c20x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":2,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01	"c22x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk22","cutPoint":2,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00	"c27x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk27","cutPoint":1,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03	"c28x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":4,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00	"c00x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk00","cutPoint":1,"chunkSize":6}
+c01x00 c01x01 c01x02 c01x03	"c01x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":4,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00	"c07x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk07","cutPoint":1,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01 c19x02	"c19x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":3,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03 c20x04	"c20x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":5,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00	"c28x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk28","cutPoint":1,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00	"c00x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk00","cutPoint":1,"chunkSize":6}
+c01x00 c01x01 c01x02	"c01x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":3,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk05","cutPoint":2,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00	"c07x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk07","cutPoint":1,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":4,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03	"c19x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":4,"chunkSize":6}
+c20x00 c20x01 c20x02	"c20x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":3,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00 c22x01	"c22x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk22","cutPoint":2,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03 c28x04	"c28x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":5,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":3,"chunkSize":6}
+c01x00 c01x01 c01x02	"c01x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":3,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03 c04x04	"c04x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":5,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03 c07x04	"c07x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":5,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01	"c15x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk15","cutPoint":2,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03 c19x04	"c19x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":5,"chunkSize":6}
+c20x00 c20x01	"c20x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":2,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00 c22x01 c22x02 c22x03	"c22x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":4,"chunkSize":5}
+c23x00	"c23x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk23","cutPoint":1,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00	"c27x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk27","cutPoint":1,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03 c28x04	"c28x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":5,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01	"c04x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":2,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":2,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":2,"chunkSize":6}
+c20x00 c20x01	"c20x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":2,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00 c22x01 c22x02 c22x03	"c22x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":4,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00 c24x01	"c24x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk24","cutPoint":2,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01	"c27x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk27","cutPoint":2,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03	"c28x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":4,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01	"c00x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":2,"chunkSize":6}
+c01x00	"c01x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk01","cutPoint":1,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00	"c03x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk03","cutPoint":1,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":2,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01 c18x02 c18x03	"c18x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":4,"chunkSize":5}
+c19x00	"c19x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk19","cutPoint":1,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03 c20x04	"c20x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":5,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01	"c22x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk22","cutPoint":2,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01	"c27x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk27","cutPoint":2,"chunkSize":5}
+c28x00 c28x01	"c28x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":2,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00 c01x01 c01x02	"c01x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":3,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":4,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00	"c07x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk07","cutPoint":1,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":3,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03 c19x04	"c19x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":5,"chunkSize":6}
+c20x00 c20x01	"c20x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":2,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00 c24x01	"c24x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk24","cutPoint":2,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01	"c28x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":2,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00 c01x01 c01x02 c01x03	"c01x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":4,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":4,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01 c07x02	"c07x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":3,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00	"c11x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk11","cutPoint":1,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":2,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03 c20x04	"c20x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":5,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00	"c22x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk22","cutPoint":1,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01 c27x02 c27x03	"c27x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":4,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03 c28x04	"c28x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":5,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00	"c00x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk00","cutPoint":1,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03	"c07x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":4,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00	"c11x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk11","cutPoint":1,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00	"c18x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk18","cutPoint":1,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03 c19x04	"c19x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":5,"chunkSize":6}
+c20x00 c20x01	"c20x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":2,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01	"c22x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk22","cutPoint":2,"chunkSize":5}
+c23x00	"c23x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk23","cutPoint":1,"chunkSize":4}
+c24x00 c24x01	"c24x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk24","cutPoint":2,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01 c27x02 c27x03	"c27x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":4,"chunkSize":5}
+c28x00 c28x01 c28x02	"c28x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":3,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00 c01x01 c01x02 c01x03	"c01x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":4,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":4,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":2,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01 c18x02 c18x03	"c18x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":4,"chunkSize":5}
+c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":2,"chunkSize":6}
+c20x00 c20x01 c20x02	"c20x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":3,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02 c22x03	"c22x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":4,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03 c28x04	"c28x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":5,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":3,"chunkSize":6}
+c01x00	"c01x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk01","cutPoint":1,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00	"c03x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk03","cutPoint":1,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":4,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":2,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00	"c11x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk11","cutPoint":1,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03	"c19x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":4,"chunkSize":6}
+c20x00 c20x01 c20x02	"c20x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":3,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02 c22x03	"c22x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":4,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00 c24x01	"c24x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk24","cutPoint":2,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01 c27x02 c27x03	"c27x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":4,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03	"c28x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":4,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":3,"chunkSize":6}
+c01x00 c01x01 c01x02 c01x03	"c01x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":4,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00	"c03x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk03","cutPoint":1,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00	"c07x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk07","cutPoint":1,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03	"c19x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":4,"chunkSize":6}
+c20x00 c20x01	"c20x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":2,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00	"c22x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk22","cutPoint":1,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00	"c27x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk27","cutPoint":1,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03 c28x04	"c28x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":5,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01	"c00x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":2,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00 c07x01	"c07x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":2,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00	"c11x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk11","cutPoint":1,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00 c15x01	"c15x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk15","cutPoint":2,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01 c19x02	"c19x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":3,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03	"c20x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":4,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01	"c27x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk27","cutPoint":2,"chunkSize":5}
+c28x00	"c28x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk28","cutPoint":1,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00 c01x01 c01x02	"c01x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":3,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00	"c07x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk07","cutPoint":1,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":4,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":2,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03	"c20x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":4,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01 c28x02	"c28x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":3,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00	"c01x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk01","cutPoint":1,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":4,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01 c07x02	"c07x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":3,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00	"c11x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk11","cutPoint":1,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01	"c18x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk18","cutPoint":2,"chunkSize":5}
+c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":2,"chunkSize":6}
+c20x00	"c20x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk20","cutPoint":1,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00	"c22x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk22","cutPoint":1,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01	"c27x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk27","cutPoint":2,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03	"c28x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":4,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03 c00x04	"c00x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":5,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00	"c04x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk04","cutPoint":1,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03 c07x04	"c07x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":5,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":4,"chunkSize":5}
+c16x00 c16x01	"c16x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk16","cutPoint":2,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00	"c18x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk18","cutPoint":1,"chunkSize":5}
+c19x00 c19x01	"c19x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":2,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03	"c20x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":4,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02 c22x03	"c22x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":4,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00 c24x01	"c24x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk24","cutPoint":2,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03	"c28x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":4,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03	"c00x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":4,"chunkSize":6}
+c01x00 c01x01 c01x02 c01x03	"c01x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":4,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00 c05x01 c05x02	"c05x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk05","cutPoint":3,"chunkSize":4}
+c06x00 c06x01	"c06x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk06","cutPoint":2,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03 c07x04	"c07x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":5,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01 c18x02 c18x03	"c18x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":4,"chunkSize":5}
+c19x00 c19x01 c19x02	"c19x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":3,"chunkSize":6}
+c20x00	"c20x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk20","cutPoint":1,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00	"c22x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk22","cutPoint":1,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00	"c27x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk27","cutPoint":1,"chunkSize":5}
+c28x00 c28x01 c28x02 c28x03 c28x04	"c28x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk28","cutPoint":5,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":3,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00	"c02x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk02","cutPoint":1,"chunkSize":4}
+c03x00	"c03x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk03","cutPoint":1,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03 c04x04	"c04x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":5,"chunkSize":6}
+c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk05","cutPoint":2,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03	"c07x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":4,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00 c15x01 c15x02 c15x03	"c15x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":4,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":3,"chunkSize":5}
+c19x00 c19x01 c19x02	"c19x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk19","cutPoint":3,"chunkSize":6}
+c20x00	"c20x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk20","cutPoint":1,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00 c22x01 c22x02 c22x03	"c22x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":4,"chunkSize":5}
+c23x00	"c23x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk23","cutPoint":1,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01 c27x02 c27x03	"c27x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":4,"chunkSize":5}
+c28x00	"c28x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk28","cutPoint":1,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01 c00x02 c00x03 c00x04	"c00x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk00","cutPoint":5,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03	"c07x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":4,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00 c13x01	"c13x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk13","cutPoint":2,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00 c18x01 c18x02 c18x03	"c18x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":4,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03 c19x04	"c19x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":5,"chunkSize":6}
+c20x00 c20x01 c20x02	"c20x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":3,"chunkSize":6}
+c21x00	"c21x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk21","cutPoint":1,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00 c24x01	"c24x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk24","cutPoint":2,"chunkSize":3}
+c25x00 c25x01	"c25x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk25","cutPoint":2,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01 c27x02 c27x03	"c27x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":4,"chunkSize":5}
+c28x00	"c28x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk28","cutPoint":1,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01	"c00x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":2,"chunkSize":6}
+c01x00 c01x01 c01x02	"c01x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":3,"chunkSize":5}
+c02x00 c02x01 c02x02	"c02x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk02","cutPoint":3,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk05","cutPoint":2,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00 c07x01 c07x02	"c07x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":3,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00 c10x01	"c10x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk10","cutPoint":2,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00 c15x01 c15x02	"c15x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk15","cutPoint":3,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00	"c18x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk18","cutPoint":1,"chunkSize":5}
+c19x00	"c19x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk19","cutPoint":1,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03 c20x04	"c20x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":5,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01	"c22x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk22","cutPoint":2,"chunkSize":5}
+c23x00	"c23x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk23","cutPoint":1,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01 c28x02	"c28x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":3,"chunkSize":6}
+c29x00	"c29x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk29","cutPoint":1,"chunkSize":3}
+c00x00 c00x01 c00x02	"c00x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":3,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01 c04x02 c04x03	"c04x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk04","cutPoint":4,"chunkSize":6}
+c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk05","cutPoint":2,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00	"c07x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk07","cutPoint":1,"chunkSize":6}
+c08x00 c08x01	"c08x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk08","cutPoint":2,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01	"c11x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk11","cutPoint":2,"chunkSize":4}
+c12x00	"c12x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk12","cutPoint":1,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00 c14x01	"c14x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk14","cutPoint":2,"chunkSize":3}
+c15x00 c15x01	"c15x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk15","cutPoint":2,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00	"c17x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk17","cutPoint":1,"chunkSize":3}
+c18x00 c18x01 c18x02	"c18x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk18","cutPoint":3,"chunkSize":5}
+c19x00 c19x01 c19x02 c19x03 c19x04	"c19x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk19","cutPoint":5,"chunkSize":6}
+c20x00 c20x01 c20x02	"c20x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk20","cutPoint":3,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02 c22x03	"c22x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":4,"chunkSize":5}
+c23x00 c23x01	"c23x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk23","cutPoint":2,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00	"c26x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk26","cutPoint":1,"chunkSize":3}
+c27x00 c27x01	"c27x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk27","cutPoint":2,"chunkSize":5}
+c28x00	"c28x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk28","cutPoint":1,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01	"c00x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":2,"chunkSize":6}
+c01x00 c01x01 c01x02 c01x03	"c01x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk01","cutPoint":4,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01 c03x02	"c03x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk03","cutPoint":3,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00 c05x01	"c05x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk05","cutPoint":2,"chunkSize":4}
+c06x00	"c06x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk06","cutPoint":1,"chunkSize":4}
+c07x00 c07x01 c07x02	"c07x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk07","cutPoint":3,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00	"c09x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk09","cutPoint":1,"chunkSize":3}
+c10x00	"c10x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk10","cutPoint":1,"chunkSize":3}
+c11x00 c11x01 c11x02	"c11x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk11","cutPoint":3,"chunkSize":4}
+c12x00 c12x01	"c12x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk12","cutPoint":2,"chunkSize":3}
+c13x00	"c13x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk13","cutPoint":1,"chunkSize":3}
+c14x00	"c14x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk14","cutPoint":1,"chunkSize":3}
+c15x00	"c15x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk15","cutPoint":1,"chunkSize":5}
+c16x00	"c16x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk16","cutPoint":1,"chunkSize":3}
+c17x00 c17x01	"c17x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk17","cutPoint":2,"chunkSize":3}
+c18x00	"c18x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk18","cutPoint":1,"chunkSize":5}
+c19x00	"c19x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk19","cutPoint":1,"chunkSize":6}
+c20x00 c20x01 c20x02 c20x03	"c20x04"	{"difficulty":1,"family":"chunking","chunkId":"chunk20","cutPoint":4,"chunkSize":6}
+c21x00 c21x01	"c21x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk21","cutPoint":2,"chunkSize":3}
+c22x00 c22x01 c22x02	"c22x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk22","cutPoint":3,"chunkSize":5}
+c23x00 c23x01 c23x02	"c23x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk23","cutPoint":3,"chunkSize":4}
+c24x00	"c24x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk24","cutPoint":1,"chunkSize":3}
+c25x00	"c25x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk25","cutPoint":1,"chunkSize":3}
+c26x00 c26x01	"c26x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk26","cutPoint":2,"chunkSize":3}
+c27x00 c27x01 c27x02	"c27x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk27","cutPoint":3,"chunkSize":5}
+c28x00 c28x01	"c28x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk28","cutPoint":2,"chunkSize":6}
+c29x00 c29x01	"c29x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk29","cutPoint":2,"chunkSize":3}
+c00x00 c00x01	"c00x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk00","cutPoint":2,"chunkSize":6}
+c01x00 c01x01	"c01x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk01","cutPoint":2,"chunkSize":5}
+c02x00 c02x01	"c02x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk02","cutPoint":2,"chunkSize":4}
+c03x00 c03x01	"c03x02"	{"difficulty":2,"family":"chunking","chunkId":"chunk03","cutPoint":2,"chunkSize":4}
+c04x00 c04x01 c04x02	"c04x03"	{"difficulty":2,"family":"chunking","chunkId":"chunk04","cutPoint":3,"chunkSize":6}
+c05x00	"c05x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk05","cutPoint":1,"chunkSize":4}
+c06x00 c06x01 c06x02	"c06x03"	{"difficulty":1,"family":"chunking","chunkId":"chunk06","cutPoint":3,"chunkSize":4}
+c07x00 c07x01 c07x02 c07x03 c07x04	"c07x05"	{"difficulty":1,"family":"chunking","chunkId":"chunk07","cutPoint":5,"chunkSize":6}
+c08x00	"c08x01"	{"difficulty":3,"family":"chunking","chunkId":"chunk08","cutPoint":1,"chunkSize":3}
+c09x00 c09x01	"c09x02"	{"difficulty":1,"family":"chunking","chunkId":"chunk09","cutPoint":2,"chunkSize":3}

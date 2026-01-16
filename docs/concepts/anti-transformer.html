@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Anti-Transformer Manifesto | BSP Docs</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Engine</a>
+        <ul>
+            <li><a href="../index.html">Docs</a></li>
+            <li><a href="../manual.html">Manual</a></li>
+            <li><a href="https://github.com/project/bsp">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Concepts</h3>
+            <ul>
+                <li><a href="anti-transformer.html" class="active">Anti-Transformer Manifesto</a></li>
+            </ul>
+            
+            <h3>Guides</h3>
+            <ul>
+                <li><a href="../guides/lifecycle.html">Lifecycle of a Turn</a></li>
+                <li><a href="../guides/tuning.html">Tuning Guide</a></li>
+            </ul>
+
+            <h3>Specs</h3>
+            <ul>
+                <li><a href="../viewer.html?file=specs/DS/DS-001-core-architecture.md">Core Architecture</a></li>
+                <li><a href="../viewer.html?file=specs/DS/DS-003-learning-algorithms.md">Learning Algorithms</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>The Anti-Transformer Manifesto</h1>
+            <p class="subtitle">Why Bitsets? Why CPU? Understanding the philosophy behind the architecture.</p>
+
+            <div class="callout">
+                <h4>The Elephant in the Room</h4>
+                <p>Modern AI is dominated by the <strong>Transformer</strong> architecture. It's designed for <strong>GPUs</strong>, relying on massive dense matrix multiplications (O(N²)). This makes them heavy, static, and opaque.</p>
+            </div>
+
+            <h2>The Core Bet: Sparsity by Design</h2>
+            <p>BSP starts from a simple premise: <strong>Real-world concepts are sparse.</strong></p>
+            
+            <p>Out of 100,000 possible words, a sentence only uses ~10. Out of 1,000,000 visual features, a scene only contains ~50.</p>
+            
+            <p>Transformers represent this by taking a vector of 100,000 zeros and putting non-zero floats in 10 slots. Then they multiply this mostly-zero vector by a dense matrix. This is mathematically correct but computationally wasteful.</p>
+
+            <p><strong>BSP represents this as a Set (Bitset).</strong></p>
+            <ul>
+                <li>Input: <code>{ "cat", "eats", "fish" }</code> → IDs <code>[42, 105, 88]</code></li>
+                <li>Representation: A list of 3 integers.</li>
+                <li>Operation: <code>Intersection</code>, <code>Union</code>, <code>Difference</code>.</li>
+            </ul>
+
+            <h3>Visual Comparison</h3>
+            
+            <div class="diagram-container">
+                <div class="mermaid">
+                graph TD
+                    subgraph Transformer [Transformer World (Dense)]
+                        T1[Input Vector] -->|MatMul| T2[Dense Layer]
+                        T2 -->|Attention| T3[Context Matrix]
+                        style T1 fill:#f9f,stroke:#333
+                        style T2 fill:#f9f,stroke:#333
+                        style T3 fill:#f9f,stroke:#333
+                    end
+                
+                    subgraph BSP [BSP World (Sparse)]
+                        B1[Input Bitset] -->|Lookup| B2[Inverted Index]
+                        B2 -->|Intersection| B3[Active Groups]
+                        style B1 fill:#9f9,stroke:#333
+                        style B2 fill:#9f9,stroke:#333
+                        style B3 fill:#9f9,stroke:#333
+                    end
+                </div>
+            </div>
+            <p class="diagram-caption">Figure 1: Dense Matrix Multiplication vs. Sparse Set Intersection</p>
+
+            <h2>The "Learner" Philosophy (MDL)</h2>
+            <p>How does it "learn" without Backpropagation? BSP relies on <strong>Minimum Description Length (MDL)</strong>.</p>
+            
+            <p>The brain is essentially a compression engine.</p>
+            <ul>
+                <li>If I see "The cat eats" and I predict "fish", and the next word is indeed "fish", I am <strong>not surprised</strong>. My internal model already "compressed" that pattern.</li>
+                <li>If the next word is "lasagna", I am <strong>surprised</strong>.</li>
+            </ul>
+
+            <h3>The Online Learning Loop</h3>
+            <ol>
+                <li><strong>Predict</strong> what comes next based on current Groups.</li>
+                <li><strong>Measure Surprise</strong>: <code>Input \ Predicted</code>.</li>
+                <li><strong>Minimize Future Surprise</strong>:
+                    <ul>
+                        <li>If the pattern repeats, create a new Group combining these elements.</li>
+                        <li>If a Group predicted wrongly, weaken its link.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p>This is <strong>Online Learning</strong>. There is no "Training Run". Every interaction updates the model instantly.</p>
+
+            <h2>Why This Matters</h2>
+            <p>By shifting from Dense/Float/GPU to Sparse/Int/CPU, we unlock:</p>
+            <ul>
+                <li><strong>Run Anywhere</strong>: Raspberry Pi, Browser, Old Laptop.</li>
+                <li><strong>Continuous Adaptation</strong>: The model learns your name in the first sentence and remembers it in the second.</li>
+                <li><strong>Interpretability</strong>: You can look at <code>Group #402</code> and see exactly: <code>Members: {cat, dog, pet}, Salience: 0.8</code>. No magic numbers.</li>
+            </ul>
+
+            <div class="pager">
+                <a href="../index.html" class="pager-link prev">
+                    <span class="label">Back</span>
+                    <span class="title">Home</span>
+                </a>
+                <a href="../guides/lifecycle.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">Lifecycle of a Turn</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+</body>
+</html>

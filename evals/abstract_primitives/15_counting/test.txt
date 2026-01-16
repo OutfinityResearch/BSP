@@ -1,0 +1,1000 @@
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p00	"below00"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p01 p01	"below01"	{"difficulty":1,"family":"counting","count":2,"threshold":4}
+p02 p02 p02	"below02"	{"difficulty":2,"family":"counting","count":3,"threshold":4}
+p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":4,"threshold":2}
+p04 p04 p04 p04 p04	"above04"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p05 p05 p05 p05 p05 p05	"above05"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p06 p06 p06 p06 p06 p06 p06	"above06"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p07 p07 p07 p07 p07 p07 p07 p07	"above07"	{"difficulty":1,"family":"counting","count":8,"threshold":5}
+p08	"below08"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p09 p09	"below09"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p10 p10 p10	"above10"	{"difficulty":2,"family":"counting","count":3,"threshold":2}
+p11 p11 p11 p11	"above11"	{"difficulty":2,"family":"counting","count":4,"threshold":3}
+p12 p12 p12 p12 p12	"above12"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p13 p13 p13 p13 p13 p13	"above13"	{"difficulty":1,"family":"counting","count":6,"threshold":3}
+p14 p14 p14 p14 p14 p14 p14	"above14"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p15 p15 p15 p15 p15 p15 p15 p15	"above15"	{"difficulty":1,"family":"counting","count":8,"threshold":4}
+p16	"below16"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p17 p17	"above17"	{"difficulty":3,"family":"counting","count":2,"threshold":2}
+p18 p18 p18	"below18"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p19 p19 p19 p19	"below19"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p00 p00 p00 p00 p00	"above00"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p01 p01 p01 p01 p01 p01	"above01"	{"difficulty":1,"family":"counting","count":6,"threshold":4}
+p02 p02 p02 p02 p02 p02 p02	"above02"	{"difficulty":1,"family":"counting","count":7,"threshold":4}
+p03 p03 p03 p03 p03 p03 p03 p03	"above03"	{"difficulty":1,"family":"counting","count":8,"threshold":2}
+p04	"below04"	{"difficulty":1,"family":"counting","count":1,"threshold":4}
+p05 p05	"below05"	{"difficulty":1,"family":"counting","count":2,"threshold":6}
+p06 p06 p06	"below06"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p07 p07 p07 p07	"below07"	{"difficulty":2,"family":"counting","count":4,"threshold":5}
+p08 p08 p08 p08 p08	"above08"	{"difficulty":2,"family":"counting","count":5,"threshold":4}
+p09 p09 p09 p09 p09 p09	"above09"	{"difficulty":3,"family":"counting","count":6,"threshold":6}
+p10 p10 p10 p10 p10 p10 p10	"above10"	{"difficulty":1,"family":"counting","count":7,"threshold":2}
+p11 p11 p11 p11 p11 p11 p11 p11	"above11"	{"difficulty":1,"family":"counting","count":8,"threshold":3}
+p12	"below12"	{"difficulty":1,"family":"counting","count":1,"threshold":5}
+p13 p13	"below13"	{"difficulty":2,"family":"counting","count":2,"threshold":3}
+p14 p14 p14	"below14"	{"difficulty":1,"family":"counting","count":3,"threshold":6}
+p15 p15 p15 p15	"above15"	{"difficulty":3,"family":"counting","count":4,"threshold":4}
+p16 p16 p16 p16 p16	"above16"	{"difficulty":3,"family":"counting","count":5,"threshold":5}
+p17 p17 p17 p17 p17 p17	"above17"	{"difficulty":1,"family":"counting","count":6,"threshold":2}
+p18 p18 p18 p18 p18 p18 p18	"above18"	{"difficulty":2,"family":"counting","count":7,"threshold":6}
+p19 p19 p19 p19 p19 p19 p19 p19	"above19"	{"difficulty":1,"family":"counting","count":8,"threshold":5}

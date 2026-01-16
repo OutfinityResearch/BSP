@@ -143,6 +143,7 @@ li { margin-bottom: 0.5rem; color: #4b5563; }
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
 }
 
 .diagram-caption {
@@ -225,6 +226,7 @@ pre code {
     margin-top: 4rem;
     padding-top: 2rem;
     border-top: 1px solid var(--border-color);
+    gap: 1rem;
 }
 
 .pager-link {
@@ -235,7 +237,8 @@ pre code {
     transition: all 0.2s;
     display: flex;
     flex-direction: column;
-    min-width: 150px;
+    flex: 1;
+    min-width: 0; /* Prevents overflow */
 }
 
 .pager-link:hover {
@@ -263,4 +266,165 @@ pre code {
 .pager-link.next {
     text-align: right;
     margin-left: auto;
+}
+
+/* Home Page Cards */
+.doc-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.doc-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.doc-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.doc-card a {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.doc-id {
+    color: var(--secondary-color);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+}
+
+.doc-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+.doc-desc {
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    line-height: 1.5;
+}
+
+.badge {
+    background: var(--success-color);
+    color: white;
+    padding: 0.15em 0.5em;
+    border-radius: 4px;
+    font-size: 0.75em;
+    margin-left: 0.5rem;
+    font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .content {
+        padding: 3rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 0 1rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem;
+        position: static;
+        overflow-y: visible;
+    }
+    
+    .sidebar h3 {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0;
+    }
+    
+    /* Simple JS toggle would be better, but pure CSS solution for now: */
+    /* Hide links by default on mobile unless we add JS, for now keep them visible but compact */
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .sidebar li {
+        width: calc(50% - 0.5rem);
+        margin-bottom: 0;
+    }
+    
+    .sidebar a {
+        background: white;
+        border: 1px solid var(--border-color);
+    }
+
+    .content {
+        padding: 2rem 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .doc-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        display: none; /* Hide nav links on very small screens or use hamburger */
+    }
+    
+    .sidebar li {
+        width: 100%;
+    }
+    
+    .pager {
+        flex-direction: column;
+    }
+    
+    .pager-link {
+        width: 100%;
+        text-align: left !important;
+    }
+    
+    .pager-link.next {
+        margin-left: 0;
+    }
 }

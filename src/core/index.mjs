@@ -13,3 +13,12 @@ export { ResponseGenerator } from './ResponseGenerator.mjs';
 export { SequenceModel } from './SequenceModel.mjs';
 export { IDFTracker } from './IDFTracker.mjs';
 export { ConversationContext } from './ConversationContext.mjs';
+// DS-021: Compression Machine
+export { 
+  CompressionMachine, 
+  Program, 
+  LiteralOp, 
+  CopyOp, 
+  RepeatOp, 
+  TemplateOp 
+} from './CompressionMachine.mjs';
