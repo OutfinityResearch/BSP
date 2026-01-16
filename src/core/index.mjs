@@ -22,3 +22,4 @@ export {
   RepeatOp, 
   TemplateOp 
 } from './CompressionMachine.mjs';
+export { SuffixArray } from './utils/SuffixArray.mjs';

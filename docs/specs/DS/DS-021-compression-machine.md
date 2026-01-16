@@ -252,29 +252,43 @@ Instances:
   - "The bird is hungry." → slots = [bird, hungry]
 ```
 
-### 7.2 Learning Algorithm
+### 7.2 Experiment Results (2026-01-16)
 
-```javascript
-learnTemplates(sequences) {
-  // Find recurring patterns with differences
-  for (const [seq1, seq2] of pairs(sequences)) {
-    const diff = align(seq1, seq2);
-    if (diff.fixedRatio > 0.5 && diff.slots.length > 0) {
-      this.templates.add({
-        fixed: diff.fixed,
-        slots: diff.slotPositions,
-      });
-    }
-  }
-}
-```
+**Status**: ❌ NOT EFFECTIVE - Disabled
 
-### 7.3 Status
+**Implementation**: Complete (BSPEngine + CompressionMachine)
+- Sentence buffer (500 max)
+- Learning every 100 lines
+- Length-based clustering
+- Exact matching algorithm
 
-Template learning is **prepared but not active** because:
-1. Requires enough training data to find recurring patterns
-2. TinyStories has varied vocabulary, few exact matches
-3. Need to implement fuzzy matching for templates
+**Results**:
+| Metric | Value | Notes |
+|--------|-------|-------|
+| Templates Learned | 15 | From 5k training lines |
+| Templates Used | **0** | None matched in test |
+| Throughput Impact | **-35%** | 338 → 221 l/s |
+| BPC Impact | +0.01 | Slightly worse |
+
+**Why It Failed**:
+1. **Train/Test Mismatch**: Templates from training don't appear in test
+2. **Too Specific**: Exact length + exact fixed parts required
+3. **No Generalization**: Captures phrases, not structural patterns
+4. **Pure Overhead**: 28,905 failed match attempts
+
+**See**: `EXPERIMENT_TEMPLATE_LEARNING.md` for full analysis
+
+### 7.3 Future Approaches (If Revisited)
+
+Only after Suffix Array optimization, and only if COPY plateaus:
+
+1. **Fuzzy Matching**: Allow 1-2 token differences in fixed parts
+2. **Structural Patterns**: Match "The X is Y" regardless of exact tokens
+3. **Semantic Templates**: Use group activations instead of tokens
+4. **Frequency Filtering**: Only keep templates with >N instances
+5. **Partial Matching**: Match prefix/suffix, not full sequence
+
+**Priority**: LOW (focus on optimizing COPY first)
 
 ---
 

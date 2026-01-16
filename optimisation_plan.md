@@ -66,32 +66,10 @@
 
 ## 3. Next Priorities
 
-### Priority 1: Template Learning (DS-021 Extension) 🎯
-
-**Why**: TinyStories has highly repetitive structures:
-- "The [noun] was [adjective]."
-- "Once upon a time, there was a [noun]."
-- "[Name] went to the [place]."
-
-**Expected Impact**: 
-- 50% compression on template-matching sentences
-- Reduce BPC from 2.20 → ~1.80 (target)
-
-**Implementation Plan**:
-1. Collect sentence buffer (100-500 sentences)
-2. Cluster by length and structure
-3. Use Needleman-Wunsch alignment to find common patterns
-4. Extract high-frequency skeletons as templates
-5. Activate template matching in `encode()`
-
-**Files to Modify**:
-- `src/core/CompressionMachine.mjs`: Flesh out `learnTemplates()`
-- `src/core/BSPEngine.mjs`: Call `compressionMachine.learnTemplates()` every 100 lines
-
-### Priority 2: Optimize COPY Performance 🚀
+### Priority 1: Suffix Array for COPY 🚀
 
 **Current Issue**: `_findCopyMatches` is O(N×M) - linear scan of context
-**Impact**: Throughput drops from 535 → 338 lines/sec as context grows
+**Impact**: Throughput at 305 lines/sec, could be 500+
 
 **Solution**: Implement Suffix Array or Rolling Hash
 - Target: O(log N) or O(1) lookup
@@ -102,13 +80,23 @@
 2. Integrate into `CompressionMachine` context management
 3. Update `_findCopyMatches` to use index
 
-### Priority 3: Frequency-Weighted Coding (DS-020 Level 2)
+### Priority 2: Frequency-Weighted Coding (DS-020 Level 2)
 
 **Concept**: High-frequency words should cost less than rare words
 - Current: All words cost `log₂(vocab)` bits
 - Huffman-style: Frequent words cost ~5 bits, rare words ~15 bits
 
 **Expected Impact**: Additional 10-15% BPC reduction
+
+### ~~Priority 3: Template Learning~~ ❌ FAILED
+
+**Status**: Tested and disabled (2026-01-16)
+- Templates learned: 15
+- Templates used: 0
+- Throughput impact: -35%
+- **Reason**: Train/test mismatch, too specific, no generalization
+
+**See**: `EXPERIMENT_TEMPLATE_LEARNING.md` and `SESSION_2026-01-16_template_experiment.md`
 
 ---
 

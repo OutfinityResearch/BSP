@@ -22,51 +22,7 @@ Each task includes:
 
 ## Chapter 3 — Experimentation (Ablations, Optimization, Learning-Speed Engineering)
 
-### EXP-003 — RL adaptation micro-benchmarks (custom, but standardized internally)
-Chapter: Experimentation
-
-Description:
-DS-005 describes RL pressure and adaptation. We need a repeatable internal benchmark that measures “steps to adapt” and “stability after adaptation”.
-
-Proposal:
-- Create a small synthetic preference/correction dataset:
-  - JSONL episodes with `turns` and expected “preferred answer”
-  - reward shaping rules: +1 correct, -1 incorrect (clamped)
-- Evaluation:
-  - run online training with rewards
-  - measure steps-to-threshold accuracy and post-adaptation drift on a held-out set
-  - sweep `rlPressure`
-
-Expected file changes:
-- NEW: `evals/rl/data/*.jsonl`
-- NEW: `evals/rl/evaluate.mjs`
-
-Check:
-- Running with `rlPressure=0` should show slower adaptation but higher stability; higher `rlPressure` should adapt faster but may drift (expected trade-off).
-
----
-
 ## Chapter 4 — Reporting & Visualization (Non-core, Useful for Review)
-
-### RPT-001 — Learning curve outputs and plotting (no external dependencies)
-Chapter: Reporting & Visualization
-
-Description:
-Discovery runs benefit from learning curve visualization, but external plotting libraries should be avoided.
-
-Proposal:
-- Ensure the Discovery eval runner emits curve JSON (TTC curves).
-- Provide a minimal plotter that outputs:
-  - ASCII sparkline summary in terminal
-  - a static HTML report with inline SVG (vanilla JS)
-
-Expected file changes:
-- NEW: `evals/abstract_primitives/plot.mjs`
-
-Check:
-- Plot scripts run on saved JSON and produce deterministic output.
-
----
 
 ### RPT-002 — Abstract primitives profile dashboard (Discovery-only)
 Chapter: Reporting & Visualization

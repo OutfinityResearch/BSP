@@ -6,6 +6,8 @@
  * simple group-based matching.
  */
 
+import { SuffixArray } from './utils/SuffixArray.mjs';
+
 /**
  * A compression program is a sequence of operations that generate tokens
  */
@@ -226,11 +228,16 @@ class CompressionMachine {
     this.maxRepeat = options.maxRepeat || 16;
     this.minCopyLen = options.minCopyLen || 3;
     this.minRepeatCount = options.minRepeatCount || 2;
+    this.useSuffixArray = options.useSuffixArray !== false; // Enabled by default
 
     // Word-level vocabulary (separate from n-gram vocab)
     // This gives more accurate costs for compression
     this.wordVocab = new Set();
     this.minWordVocab = options.minWordVocab || 500;  // Minimum assumed vocab
+
+    // Suffix array for fast COPY matching
+    this.suffixArray = null;
+    this.contextCache = [];
 
     // Learned templates
     this.templates = new Map();
@@ -298,9 +305,9 @@ class CompressionMachine {
     const repeatProg = this._tryRepeatEncoding(tokens, effectiveVocab);
     if (repeatProg) candidates.push(repeatProg);
 
-    // Option 4: Template-based encoding
-    const templateProg = this._tryTemplateEncoding(tokens, effectiveVocab);
-    if (templateProg) candidates.push(templateProg);
+    // Option 4: Template-based encoding (DISABLED - see EXPERIMENT_TEMPLATE_LEARNING.md)
+    // const templateProg = this._tryTemplateEncoding(tokens, effectiveVocab);
+    // if (templateProg) candidates.push(templateProg);
 
     // Option 5: Hybrid (COPY + LITERAL for residual)
     const hybridProg = this._tryHybridEncoding(tokens, context);
@@ -372,46 +379,78 @@ class CompressionMachine {
 
   /**
    * Find copy matches between tokens and context
+   * Uses suffix array for O(log N) lookup if enabled
    * @private
    */
   _findCopyMatches(tokens, context, vocabSize) {
     const matches = [];
     const effectiveVocab = vocabSize || this.effectiveVocabSize;
 
-    for (let i = 0; i < tokens.length; i++) {
-      // Find longest match starting at position i
-      let bestLen = 0;
-      let bestOffset = -1;
-
-      for (let j = 0; j <= context.length - this.minCopyLen; j++) {
-        let len = 0;
-        while (
-          i + len < tokens.length &&
-          j + len < context.length &&
-          tokens[i + len] === context[j + len] &&
-          len < this.maxCopyLen
-        ) {
-          len++;
-        }
-
-        if (len >= this.minCopyLen && len > bestLen) {
-          bestLen = len;
-          bestOffset = j;
+    // Update suffix array if context changed
+    if (this.useSuffixArray && context.length >= this.minCopyLen) {
+      if (!this.suffixArray || this.contextCache !== context) {
+        this.suffixArray = new SuffixArray(context);
+        this.contextCache = context;
+      }
+      
+      // Use suffix array for fast matching
+      for (let i = 0; i < tokens.length; i++) {
+        const pattern = tokens.slice(i, Math.min(i + this.maxCopyLen, tokens.length));
+        const saMatches = this.suffixArray.findMatches(pattern, this.minCopyLen);
+        
+        for (const match of saMatches) {
+          if (match.length >= this.minCopyLen) {
+            const copyCost = Math.log2(context.length) + Math.log2(this.maxCopyLen);
+            const literalCost = match.length * Math.log2(effectiveVocab);
+            const savings = literalCost - copyCost;
+            
+            if (savings > 0) {
+              matches.push({
+                sourceOffset: match.offset,
+                targetOffset: i,
+                length: match.length,
+                savings,
+              });
+            }
+          }
         }
       }
+    } else {
+      // Fallback to linear search (original algorithm)
+      for (let i = 0; i < tokens.length; i++) {
+        let bestLen = 0;
+        let bestOffset = -1;
 
-      if (bestLen >= this.minCopyLen) {
-        const copyCost = Math.log2(context.length) + Math.log2(this.maxCopyLen);
-        const literalCost = bestLen * Math.log2(effectiveVocab);
-        const savings = literalCost - copyCost;
+        for (let j = 0; j <= context.length - this.minCopyLen; j++) {
+          let len = 0;
+          while (
+            i + len < tokens.length &&
+            j + len < context.length &&
+            tokens[i + len] === context[j + len] &&
+            len < this.maxCopyLen
+          ) {
+            len++;
+          }
 
-        if (savings > 0) {
-          matches.push({
-            sourceOffset: bestOffset,
-            targetOffset: i,
-            length: bestLen,
-            savings,
-          });
+          if (len >= this.minCopyLen && len > bestLen) {
+            bestLen = len;
+            bestOffset = j;
+          }
+        }
+
+        if (bestLen >= this.minCopyLen) {
+          const copyCost = Math.log2(context.length) + Math.log2(this.maxCopyLen);
+          const literalCost = bestLen * Math.log2(effectiveVocab);
+          const savings = literalCost - copyCost;
+
+          if (savings > 0) {
+            matches.push({
+              sourceOffset: bestOffset,
+              targetOffset: i,
+              length: bestLen,
+              savings,
+            });
+          }
         }
       }
     }
@@ -471,15 +510,17 @@ class CompressionMachine {
    * Try to encode using a learned template
    * @private
    */
-  _tryTemplateEncoding(tokens) {
+  _tryTemplateEncoding(tokens, vocabSize) {
     if (this.templates.size === 0) return null;
+
+    const effectiveVocab = vocabSize || this.effectiveVocabSize;
 
     // Find best matching template
     let bestMatch = null;
     let bestCost = Infinity;
 
     for (const [id, template] of this.templates) {
-      const match = this._matchTemplate(tokens, template);
+      const match = this._matchTemplate(tokens, template, effectiveVocab);
       if (match && match.cost < bestCost) {
         bestMatch = { id, template, ...match };
         bestCost = match.cost;
@@ -494,15 +535,15 @@ class CompressionMachine {
       bestMatch.slotValues,
       bestMatch.template,
       this.templates.size,
-      this.vocabSize
+      effectiveVocab
     ));
 
     // Add residual
     if (bestMatch.residual && bestMatch.residual.length > 0) {
-      prog.add(new LiteralOp(bestMatch.residual, this.vocabSize));
+      prog.add(new LiteralOp(bestMatch.residual, effectiveVocab));
     }
 
-    const literalCost = tokens.length * Math.log2(this.vocabSize);
+    const literalCost = tokens.length * Math.log2(effectiveVocab);
     return prog.cost < literalCost ? prog : null;
   }
 
@@ -510,36 +551,36 @@ class CompressionMachine {
    * Match tokens against a template
    * @private
    */
-  _matchTemplate(tokens, template) {
+  _matchTemplate(tokens, template, vocabSize) {
     const { fixed, slotPositions } = template;
+    const effectiveVocab = vocabSize || this.effectiveVocabSize;
     
-    // Check if fixed parts match
-    let tokenIdx = 0;
+    // Template length must match token length
+    if (fixed.length !== tokens.length) return null;
+    
+    // Check if fixed parts match and collect slot values
     const slotValues = [];
     
     for (let i = 0; i < fixed.length; i++) {
-      if (slotPositions.includes(i)) {
-        // This is a slot - consume one token
-        if (tokenIdx >= tokens.length) return null;
-        slotValues.push(tokens[tokenIdx++]);
+      if (fixed[i] === null) {
+        // This is a slot - collect value
+        slotValues.push(tokens[i]);
       } else {
         // This is fixed - must match exactly
-        if (tokenIdx >= tokens.length || tokens[tokenIdx] !== fixed[i]) {
+        if (tokens[i] !== fixed[i]) {
           return null;
         }
-        tokenIdx++;
       }
     }
 
-    const residual = tokens.slice(tokenIdx);
     const templateOp = new TemplateOp(
-      0, slotValues, template, this.templates.size, this.vocabSize
+      0, slotValues, template, this.templates.size, effectiveVocab
     );
 
     return {
       slotValues,
-      residual,
-      cost: templateOp.cost + residual.length * Math.log2(this.vocabSize),
+      residual: [],  // No residual since length matches
+      cost: templateOp.cost,
     };
   }
 

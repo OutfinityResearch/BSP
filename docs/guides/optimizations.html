@@ -284,22 +284,37 @@
                 
                 <div class="timeline">
                     <div class="timeline-item">
-                        <h3>Priority 1: Template Learning <span class="status-badge pending">PLANNED</span></h3>
+                        <h3>Priority 1: Template Learning <span class="status-badge pending">TESTED - FAILED</span></h3>
+                        <p><strong>Date Tested:</strong> 2026-01-16</p>
                         <p><strong>Expected Impact:</strong> 2.20 → ~1.80 BPC (18% improvement)</p>
-                        <p><strong>Rationale:</strong> TinyStories has highly repetitive structures:</p>
+                        <p><strong>Actual Results:</strong></p>
                         <ul>
-                            <li>"The [noun] was [adjective]."</li>
-                            <li>"Once upon a time, there was a [noun]."</li>
-                            <li>"[Name] went to the [place]."</li>
+                            <li>Templates learned: 15</li>
+                            <li>Templates used: <strong>0</strong> ❌</li>
+                            <li>BPC: 2.21 (+0.01, worse)</li>
+                            <li>Throughput: 221 l/s (-35%) ❌</li>
                         </ul>
-                        <p><strong>Implementation:</strong></p>
+                        <p><strong>Why It Failed:</strong></p>
                         <ul>
-                            <li>Collect sentence buffer (100-500 sentences)</li>
-                            <li>Cluster by length and structure</li>
-                            <li>Use Needleman-Wunsch alignment for pattern extraction</li>
-                            <li>Store templates with >50% fixed content</li>
+                            <li>Train/test mismatch - templates don't generalize</li>
+                            <li>Too specific - exact phrase matching</li>
+                            <li>Pure overhead - 28,905 failed match attempts</li>
                         </ul>
-                        <p><strong>Cost Model:</strong> log₂(templates) + slots × log₂(vocab) ≈ 29 bits vs 66 bits literal (56% savings)</p>
+                        <p><strong>Decision:</strong> Feature disabled. See <code>EXPERIMENT_TEMPLATE_LEARNING.md</code></p>
+                        <p><strong>Lesson:</strong> COPY works because it matches recent context (same document). Templates tried to match training data (different documents).</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>Priority 1 (NEW): Suffix Array for COPY <span class="status-badge pending">PLANNED</span></h3>
+                        <p><strong>Expected Impact:</strong> 305 → 500+ lines/sec (64% throughput increase)</p>
+                        <p><strong>Why this first:</strong> COPY operations dominate (85% win rate, 3,637 uses). Current O(N×M) search is bottleneck.</p>
+                        <p><strong>Solution:</strong></p>
+                        <ul>
+                            <li>Build suffix array on context window</li>
+                            <li>Use binary search for longest match</li>
+                            <li>Update incrementally as context slides</li>
+                        </ul>
+                        <p><strong>Complexity:</strong> Build O(N log N), Query O(log N + M) vs Current O(N×M)</p>
                     </div>
 
                     <div class="timeline-item">

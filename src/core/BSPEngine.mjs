@@ -121,6 +121,12 @@ class BSPEngine {
 
     // Flag to enable/disable compression machine
     this.useCompressionMachine = options.useCompressionMachine !== false;
+    
+    // DS-021: Sentence buffer for template learning (DISABLED - see EXPERIMENT_TEMPLATE_LEARNING.md)
+    this.sentenceBuffer = [];
+    this.maxSentenceBuffer = options.maxSentenceBuffer || 500;
+    this.templateLearningInterval = options.templateLearningInterval || Infinity;  // Disabled by default
+    this.processedLines = 0;
   }
 
   /**
@@ -365,6 +371,9 @@ class BSPEngine {
 
     // 17. NEW: Update token context for compression machine
     this.contextTokens = [...this.contextTokens, ...wordTokens].slice(-this.maxContextTokens);
+
+    // DS-021: Template Learning - DISABLED (see EXPERIMENT_TEMPLATE_LEARNING.md)
+    // Sentence buffer collection and learning removed for performance
 
     // DS-020: Compute MDL cost with adaptive universe (group-based)
     const groupMdlCost = this.computeMDLCost(surprise.size);
@@ -633,6 +642,8 @@ class BSPEngine {
         rlPressure: this.rlPressure,
         metrics: this.metrics,
         useCompressionMachine: this.useCompressionMachine,
+        sentenceBuffer: this.sentenceBuffer,
+        processedLines: this.processedLines,
       },
     };
   }
@@ -676,6 +687,8 @@ class BSPEngine {
     engine.rlPressure = json.state.rlPressure;
     engine.metrics = json.state.metrics;
     engine.useCompressionMachine = json.state.useCompressionMachine !== false;
+    engine.sentenceBuffer = json.state.sentenceBuffer || [];
+    engine.processedLines = json.state.processedLines || 0;
     
     return engine;
   }
