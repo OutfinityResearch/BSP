@@ -8,6 +8,8 @@
  * Metric: Gap-Fill Accuracy
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '14_interpolation';
 export const SYSTEM_NAME = 'Interpolation';
 export const SYSTEM_DESCRIPTION = 'Gap filling from context';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Gap filling from context';
 export class InterpolationGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numSequences = config.numSequences || 100;
     this.sequenceLength = config.sequenceLength || 5;
     
@@ -36,6 +39,9 @@ export class InterpolationGrammar {
 
   generateTrainingData(count = 10000) {
     const lines = [];
+
+    // Seed the gap marker used in test prompts so it exists in the vocabulary.
+    lines.push('gap');
     
     for (let i = 0; i < count; i++) {
       const seq = this.sequences[i % this.sequences.length];
@@ -60,7 +66,7 @@ export class InterpolationGrammar {
       const expectedJson = JSON.stringify(missing);
       const isEdge = gapIdx === 1 || gapIdx === masked.length - 2;
       const metaJson = JSON.stringify({
-        difficulty: isEdge ? 3 : 1,
+        difficulty: this.difficultyLevel !== null ? this.difficultyLevel : (isEdge ? 3 : 1),
         family: 'interpolation',
         gapIndex: gapIdx,
         sequenceLength: masked.length
@@ -93,7 +99,14 @@ export class InterpolationGrammar {
 }
 
 export function createGrammar(config) {
-  return new InterpolationGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numSequences: 50, sequenceLength: 4 }
+      : difficulty === 'hard'
+        ? { numSequences: 200, sequenceLength: 8 }
+        : {};
+  return new InterpolationGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

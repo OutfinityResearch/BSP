@@ -11,6 +11,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import { createRng, deriveSeed, normalizeSeed } from './rng.mjs';
+import { normalizeDifficulty } from './difficulty.mjs';
 import { Tokenizer } from '../../src/core/Tokenizer.mjs';
 
 const SAFE_TOKEN_RE = /^[a-z][a-z0-9]*$/;
@@ -153,7 +154,8 @@ async function generateSystem(systemId, config = {}) {
   const systemSeed = deriveSeed(baseSeed, systemId);
   const rng = createRng(systemSeed);
 
-  console.log(`\n=== Generating: ${systemId} (seed=${systemSeed}) ===`);
+  const diffLabel = config.difficulty ? ` difficulty=${config.difficulty}` : '';
+  console.log(`\n=== Generating: ${systemId} (seed=${systemSeed}${diffLabel}) ===`);
   
   const module = await loadSystem(systemId);
   const grammar = module.createGrammar({ ...config, rng });
@@ -186,6 +188,7 @@ async function generateSystem(systemId, config = {}) {
     description: module.SYSTEM_DESCRIPTION,
     metrics: module.metrics,
     config: module.defaultConfig,
+    difficulty: config.difficulty || null,
     baseSeed,
     systemSeed,
     trainCount: trainData.length,
@@ -244,6 +247,7 @@ function parseArgs() {
     trainCount: 10000,
     testCount: 1000,
     seed: 1,
+    difficulty: null,
   };
   
   for (const arg of args) {
@@ -251,6 +255,8 @@ function parseArgs() {
       config.all = true;
     } else if (arg.startsWith('--seed=')) {
       config.seed = normalizeSeed(arg.split('=')[1]);
+    } else if (arg.startsWith('--difficulty=')) {
+      config.difficulty = normalizeDifficulty(arg.split('=')[1]);
     } else if (arg.startsWith('--system=')) {
       config.systems.push(arg.split('=')[1]);
     } else if (arg.startsWith('--train=')) {

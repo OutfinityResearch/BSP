@@ -8,6 +8,8 @@
  * Metric: Winner Selection Accuracy, Suppression Rate
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '17_inhibition';
 export const SYSTEM_NAME = 'Inhibition';
 export const SYSTEM_DESCRIPTION = 'Competitive winner-take-all suppression';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Competitive winner-take-all suppression';
 export class InhibitionGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numInputs = config.numInputs || 50;
     this.numCandidates = config.numCandidates || 5;
     
@@ -90,6 +93,7 @@ export class InhibitionGrammar {
       let difficulty = 1;
       if (margin < 0.1) difficulty = 3;
       else if (margin < 0.3) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(winner);
       const metaJson = JSON.stringify({
@@ -107,7 +111,14 @@ export class InhibitionGrammar {
 }
 
 export function createGrammar(config) {
-  return new InhibitionGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numInputs: 30, numCandidates: 3 }
+      : difficulty === 'hard'
+        ? { numInputs: 80, numCandidates: 8 }
+        : {};
+  return new InhibitionGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

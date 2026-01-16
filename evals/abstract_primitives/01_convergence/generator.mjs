@@ -8,6 +8,8 @@
  * Metric: Transitive Closure Accuracy
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '01_convergence';
 export const SYSTEM_NAME = 'Convergence';
 export const SYSTEM_DESCRIPTION = 'Many paths lead to a single conclusion';
@@ -15,10 +17,13 @@ export const SYSTEM_DESCRIPTION = 'Many paths lead to a single conclusion';
 export class ConvergenceGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numTerminals = config.numTerminals || 50;
     this.numIntermediates = config.numIntermediates || 500;
     this.minPathLength = config.minPathLength || 3;
     this.maxPathLength = config.maxPathLength || 8;
+    this.terminalStepProb = Number.isFinite(config.terminalStepProb) ? config.terminalStepProb : 0.1;
+    this.maxNextStates = Number.isInteger(config.maxNextStates) ? config.maxNextStates : 2;
     
     this.terminals = Array.from(
       { length: this.numTerminals }, 
@@ -44,7 +49,7 @@ export class ConvergenceGrammar {
     // Build transition graph ensuring convergence property
     for (const state of this.intermediates) {
       const myTarget = this.stateTargets.get(state);
-      const isTerminalStep = this.rng() < 0.1;
+      const isTerminalStep = this.rng() < this.terminalStepProb;
       
       if (isTerminalStep) {
         this.transitions.set(state, [myTarget]);
@@ -54,7 +59,7 @@ export class ConvergenceGrammar {
         );
         
         if (potentialNext.length > 0) {
-          const count = 1 + Math.floor(this.rng() * 2);
+          const count = 1 + Math.floor(this.rng() * this.maxNextStates);
           const nextStates = [];
           for (let i = 0; i < count; i++) {
             nextStates.push(potentialNext[Math.floor(this.rng() * potentialNext.length)]);
@@ -129,6 +134,7 @@ export class ConvergenceGrammar {
       let difficulty = 1;
       if (pathLength >= 7) difficulty = 3;
       else if (pathLength >= 4) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(target);
       const metaJson = JSON.stringify({
@@ -153,7 +159,14 @@ export class ConvergenceGrammar {
 }
 
 export function createGrammar(config) {
-  return new ConvergenceGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { maxPathLength: 5, terminalStepProb: 0.25, maxNextStates: 1 }
+      : difficulty === 'hard'
+        ? { maxPathLength: 12, terminalStepProb: 0.05, maxNextStates: 3 }
+        : {};
+  return new ConvergenceGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

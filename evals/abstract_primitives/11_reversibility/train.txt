@@ -1,3 +1,4 @@
+decode
 a0000 b0000
 encode a0000 b0000
 a0001 b0001

@@ -8,6 +8,8 @@
  * Metric: Order Sensitivity Score
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '12_temporal_order';
 export const SYSTEM_NAME = 'Temporal Order';
 export const SYSTEM_DESCRIPTION = 'Sequence order sensitivity';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Sequence order sensitivity';
 export class TemporalOrderGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numElements = config.numElements || 20;
     this.sequenceLength = config.sequenceLength || 3;
     
@@ -79,9 +82,10 @@ export class TemporalOrderGrammar {
       const reversedResult = this.orderMappings.get(reversedKey) || 'none';
 
       const difficulty = reversedResult === 'none' ? 1 : 2;
+      const resolvedDifficulty = this.difficultyLevel !== null ? this.difficultyLevel : difficulty;
       const expectedJson = JSON.stringify(result);
       const metaJson = JSON.stringify({
-        difficulty,
+        difficulty: resolvedDifficulty,
         family: 'temporal_order',
         reversedResult
       });
@@ -94,7 +98,14 @@ export class TemporalOrderGrammar {
 }
 
 export function createGrammar(config) {
-  return new TemporalOrderGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numElements: 10, sequenceLength: 2 }
+      : difficulty === 'hard'
+        ? { numElements: 30, sequenceLength: 4 }
+        : {};
+  return new TemporalOrderGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

@@ -8,6 +8,8 @@
  * Metric: Periodicity Retention
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '03_cycles';
 export const SYSTEM_NAME = 'Cycles';
 export const SYSTEM_DESCRIPTION = 'Deterministic temporal loops';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Deterministic temporal loops';
 export class CyclesGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numCycles = config.numCycles || 20;
     this.minPeriod = config.minPeriod || 3;
     this.maxPeriod = config.maxPeriod || 10;
@@ -87,6 +90,7 @@ export class CyclesGrammar {
       let difficulty = 1;
       if (contextLen <= 2) difficulty = 3;
       else if (contextLen <= 3) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(expectedNext);
       const metaJson = JSON.stringify({
@@ -117,7 +121,14 @@ export class CyclesGrammar {
 }
 
 export function createGrammar(config) {
-  return new CyclesGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numCycles: 10, minPeriod: 3, maxPeriod: 5 }
+      : difficulty === 'hard'
+        ? { numCycles: 30, minPeriod: 8, maxPeriod: 15 }
+        : {};
+  return new CyclesGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

@@ -8,6 +8,8 @@
  * Metric: Analogy Completion Accuracy
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '08_analogy';
 export const SYSTEM_NAME = 'Analogy';
 export const SYSTEM_DESCRIPTION = 'Proportional relational reasoning';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Proportional relational reasoning';
 export class AnalogyGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numDomains = config.numDomains || 10;
     this.numTransforms = config.numTransforms || 5;
     this.itemsPerDomain = config.itemsPerDomain || 8;
@@ -56,6 +59,9 @@ export class AnalogyGrammar {
 
   generateTrainingData(count = 10000) {
     const lines = [];
+
+    // Seed prompt-only marker used in test queries so it exists in the vocabulary.
+    lines.push('as');
     
     for (let i = 0; i < count; i++) {
       const domain = this.domains[Math.floor(this.rng() * this.domains.length)];
@@ -87,9 +93,10 @@ export class AnalogyGrammar {
       const item2 = domain.items[idx2];
       
       const expected = item2.transformed[transform];
+      const difficulty = this.difficultyLevel !== null ? this.difficultyLevel : 2;
       const expectedJson = JSON.stringify(expected);
       const metaJson = JSON.stringify({
-        difficulty: 2,
+        difficulty,
         family: 'analogy',
         transform
       });
@@ -112,7 +119,14 @@ export class AnalogyGrammar {
 }
 
 export function createGrammar(config) {
-  return new AnalogyGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numDomains: 5, numTransforms: 2, itemsPerDomain: 6 }
+      : difficulty === 'hard'
+        ? { numDomains: 20, numTransforms: 8, itemsPerDomain: 10 }
+        : {};
+  return new AnalogyGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

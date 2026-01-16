@@ -8,6 +8,8 @@
  * Metric: KL Divergence, Top-K Coverage
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '02_divergence';
 export const SYSTEM_NAME = 'Divergence';
 export const SYSTEM_DESCRIPTION = 'Single state leads to multiple probabilistic outcomes';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Single state leads to multiple probabilistic 
 export class DivergenceGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numStates = config.numStates || 100;
     this.numOutcomes = config.numOutcomes || 50;
     this.minBranches = config.minBranches || 2;
@@ -111,6 +114,7 @@ export class DivergenceGrammar {
       let difficulty = 1;
       if (branches >= 5) difficulty = 3;
       else if (branches >= 3) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expected = dist.map(({ outcome, probability }) => ({
         outcome,
@@ -135,7 +139,14 @@ export class DivergenceGrammar {
 }
 
 export function createGrammar(config) {
-  return new DivergenceGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { minBranches: 2, maxBranches: 2 }
+      : difficulty === 'hard'
+        ? { minBranches: 3, maxBranches: 7 }
+        : {};
+  return new DivergenceGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

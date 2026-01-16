@@ -8,6 +8,8 @@
  * Metric: Threshold Detection Accuracy
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '15_counting';
 export const SYSTEM_NAME = 'Counting';
 export const SYSTEM_DESCRIPTION = 'Threshold-based counting decisions';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Threshold-based counting decisions';
 export class CountingGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numPatterns = config.numPatterns || 20;
     this.minThreshold = config.minThreshold || 2;
     this.maxThreshold = config.maxThreshold || 6;
@@ -81,6 +84,7 @@ export class CountingGrammar {
       let difficulty = 1;
       if (distance === 0) difficulty = 3;
       else if (distance === 1) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(expected);
       const metaJson = JSON.stringify({
@@ -98,7 +102,14 @@ export class CountingGrammar {
 }
 
 export function createGrammar(config) {
-  return new CountingGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numPatterns: 10, minThreshold: 2, maxThreshold: 3 }
+      : difficulty === 'hard'
+        ? { numPatterns: 30, minThreshold: 3, maxThreshold: 10 }
+        : {};
+  return new CountingGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

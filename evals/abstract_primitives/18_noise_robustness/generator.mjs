@@ -8,6 +8,8 @@
  * Metric: Degradation Curve (accuracy vs noise level)
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '18_noise_robustness';
 export const SYSTEM_NAME = 'Noise Robustness';
 export const SYSTEM_DESCRIPTION = 'Pattern recognition under noise';
@@ -15,9 +17,13 @@ export const SYSTEM_DESCRIPTION = 'Pattern recognition under noise';
 export class NoiseRobustnessGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numPatterns = config.numPatterns || 50;
     this.patternLength = config.patternLength || 6;
     this.numNoiseTokens = config.numNoiseTokens || 20;
+    this.noiseLevels = Array.isArray(config.noiseLevels) && config.noiseLevels.length > 0
+      ? config.noiseLevels.map((v) => Number(v))
+      : [0, 0.1, 0.2, 0.3, 0.4, 0.5];
     
     this.patterns = []; // [{tokens, label}]
     this.noiseTokens = [];
@@ -72,6 +78,12 @@ export class NoiseRobustnessGrammar {
 
   generateTrainingData(count = 10000) {
     const lines = [];
+
+    // Seed tokens that only appear in evaluation prompts so they exist in the vocabulary.
+    lines.push('gap');
+    for (const token of this.noiseTokens) {
+      lines.push(token);
+    }
     
     for (let i = 0; i < count; i++) {
       const pattern = this.patterns[i % this.patterns.length];
@@ -83,17 +95,17 @@ export class NoiseRobustnessGrammar {
 
   generateTestData(count = 1000) {
     const lines = [];
-    const noiseLevels = [0, 0.1, 0.2, 0.3, 0.4, 0.5];
     
     for (let i = 0; i < count; i++) {
       const pattern = this.patterns[i % this.patterns.length];
-      const noiseLevel = noiseLevels[i % noiseLevels.length];
+      const noiseLevel = this.noiseLevels[i % this.noiseLevels.length];
       
       const noisy = this.addNoise(pattern, noiseLevel);
       
       let difficulty = 1;
       if (noiseLevel >= 0.4) difficulty = 3;
       else if (noiseLevel >= 0.2) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(pattern.label);
       const metaJson = JSON.stringify({
@@ -131,7 +143,14 @@ export class NoiseRobustnessGrammar {
 }
 
 export function createGrammar(config) {
-  return new NoiseRobustnessGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numPatterns: 40, patternLength: 4, numNoiseTokens: 10, noiseLevels: [0, 0.1, 0.2] }
+      : difficulty === 'hard'
+        ? { numPatterns: 80, patternLength: 8, numNoiseTokens: 40, noiseLevels: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7] }
+        : {};
+  return new NoiseRobustnessGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

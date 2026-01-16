@@ -8,6 +8,8 @@
  * Metric: Recency Sensitivity Curve
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '19_memory_decay';
 export const SYSTEM_NAME = 'Memory Decay';
 export const SYSTEM_DESCRIPTION = 'Recency effects in context';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Recency effects in context';
 export class MemoryDecayGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numTokens = config.numTokens || 50;
     this.contextLength = config.contextLength || 10;
     
@@ -89,6 +92,7 @@ export class MemoryDecayGrammar {
       let difficulty = 1;
       if (recency >= 6) difficulty = 3;
       else if (recency >= 3) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(expected);
       const metaJson = JSON.stringify({
@@ -112,7 +116,14 @@ export class MemoryDecayGrammar {
 }
 
 export function createGrammar(config) {
-  return new MemoryDecayGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numTokens: 30, contextLength: 6 }
+      : difficulty === 'hard'
+        ? { numTokens: 80, contextLength: 20 }
+        : {};
+  return new MemoryDecayGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

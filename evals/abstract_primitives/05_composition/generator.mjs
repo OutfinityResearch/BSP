@@ -8,6 +8,8 @@
  * Metric: Compositional Generalization
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '05_composition';
 export const SYSTEM_NAME = 'Composition';
 export const SYSTEM_DESCRIPTION = 'Zero-shot combination of features';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Zero-shot combination of features';
 export class CompositionGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numFeatureA = config.numFeatureA || 10; // e.g., colors
     this.numFeatureB = config.numFeatureB || 10; // e.g., shapes
     this.holdoutRatio = config.holdoutRatio || 0.2; // % of combinations for test
@@ -97,9 +100,10 @@ export class CompositionGrammar {
     
     for (let i = 0; i < testCount; i++) {
       const pair = this.testPairs[i % this.testPairs.length];
+      const difficulty = this.difficultyLevel !== null ? this.difficultyLevel : 2;
       const expectedJson = JSON.stringify(pair.result);
       const metaJson = JSON.stringify({
-        difficulty: 2,
+        difficulty,
         family: 'composition',
         novel: true
       });
@@ -115,7 +119,14 @@ export class CompositionGrammar {
 }
 
 export function createGrammar(config) {
-  return new CompositionGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numFeatureA: 6, numFeatureB: 6, holdoutRatio: 0.1 }
+      : difficulty === 'hard'
+        ? { numFeatureA: 14, numFeatureB: 14, holdoutRatio: 0.3 }
+        : {};
+  return new CompositionGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

@@ -8,6 +8,8 @@
  * Metric: Context-Conditional Accuracy
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '09_context_switching';
 export const SYSTEM_NAME = 'Context Switching';
 export const SYSTEM_DESCRIPTION = 'Context-dependent output mapping';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Context-dependent output mapping';
 export class ContextSwitchingGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numContexts = config.numContexts || 5;
     this.numInputs = config.numInputs || 50;
     
@@ -69,9 +72,10 @@ export class ContextSwitchingGrammar {
       const inp = this.inputs[Math.floor(this.rng() * this.inputs.length)];
       const expected = this.getOutput(ctx, inp);
       
+      const difficulty = this.difficultyLevel !== null ? this.difficultyLevel : 1;
       const expectedJson = JSON.stringify(expected);
       const metaJson = JSON.stringify({
-        difficulty: 1,
+        difficulty,
         family: 'context_switching',
         context: ctx
       });
@@ -83,7 +87,14 @@ export class ContextSwitchingGrammar {
 }
 
 export function createGrammar(config) {
-  return new ContextSwitchingGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numContexts: 3, numInputs: 30 }
+      : difficulty === 'hard'
+        ? { numContexts: 10, numInputs: 80 }
+        : {};
+  return new ContextSwitchingGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

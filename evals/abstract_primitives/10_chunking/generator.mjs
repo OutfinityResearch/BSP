@@ -8,6 +8,8 @@
  * Metric: Chunk Discovery Rate, Compression Ratio
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '10_chunking';
 export const SYSTEM_NAME = 'Chunking';
 export const SYSTEM_DESCRIPTION = 'Sub-pattern recognition and reuse';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Sub-pattern recognition and reuse';
 export class ChunkingGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numChunks = config.numChunks || 30;
     this.minChunkSize = config.minChunkSize || 3;
     this.maxChunkSize = config.maxChunkSize || 6;
@@ -93,6 +96,7 @@ export class ChunkingGrammar {
       let difficulty = 1;
       if (cutPoint <= 1) difficulty = 3;
       else if (cutPoint <= Math.floor(chunk.tokens.length / 2)) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(expected);
       const metaJson = JSON.stringify({
@@ -128,7 +132,14 @@ export class ChunkingGrammar {
 }
 
 export function createGrammar(config) {
-  return new ChunkingGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numChunks: 15, minChunkSize: 3, maxChunkSize: 4, numFillers: 10 }
+      : difficulty === 'hard'
+        ? { numChunks: 50, minChunkSize: 4, maxChunkSize: 8, numFillers: 40 }
+        : {};
+  return new ChunkingGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

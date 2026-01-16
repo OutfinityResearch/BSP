@@ -8,6 +8,8 @@
  * Metric: Sample Efficiency Ratio
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '20_transfer';
 export const SYSTEM_NAME = 'Transfer';
 export const SYSTEM_DESCRIPTION = 'Domain adaptation and transfer';
@@ -15,8 +17,10 @@ export const SYSTEM_DESCRIPTION = 'Domain adaptation and transfer';
 export class TransferGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numSymbolsPerDomain = config.numSymbolsPerDomain || 10;
     this.numRules = config.numRules || 20;
+    this.fewShotExamples = Number.isInteger(config.fewShotExamples) ? config.fewShotExamples : 5;
     
     this.domain1 = { name: 'D1', symbols: [], rules: [] };
     this.domain2 = { name: 'D2', symbols: [], rules: [] };
@@ -72,11 +76,24 @@ export class TransferGrammar {
     const lines = [];
     
     // Test on Domain 2 with minimal examples provided
-    const fewShotExamples = 5; // Number of D2 examples shown
+    const fewShotExamples = this.fewShotExamples; // Number of D2 examples shown
+
+    // Seed the Domain 2 vocabulary so query prompts can be encoded in vocab mode.
+    for (const sym of this.domain2.symbols) {
+      const expectedJson = JSON.stringify(sym);
+      const metaJson = JSON.stringify({
+        difficulty: 1,
+        family: 'transfer',
+        domain: 'd2',
+        kind: 'vocab'
+      });
+      lines.push(`${sym}\t${expectedJson}\t${metaJson}`);
+    }
     
     // First, provide few-shot examples
     for (let i = 0; i < fewShotExamples; i++) {
       const rule = this.domain2.rules[i];
+      const prompt = `${rule.input1} ${rule.input2} ${rule.output}`;
       const expectedJson = JSON.stringify(rule.output);
       const metaJson = JSON.stringify({
         difficulty: 1,
@@ -84,7 +101,7 @@ export class TransferGrammar {
         domain: 'd2',
         kind: 'support'
       });
-      lines.push(`${rule.input1} ${rule.input2}\t${expectedJson}\t${metaJson}`);
+      lines.push(`${prompt}\t${expectedJson}\t${metaJson}`);
     }
     
     // Then test on remaining rules
@@ -92,7 +109,7 @@ export class TransferGrammar {
       const rule = this.domain2.rules[i];
       const expectedJson = JSON.stringify(rule.output);
       const metaJson = JSON.stringify({
-        difficulty: 2,
+        difficulty: this.difficultyLevel !== null ? this.difficultyLevel : 2,
         family: 'transfer',
         domain: 'd2',
         kind: 'query'
@@ -114,7 +131,14 @@ export class TransferGrammar {
 }
 
 export function createGrammar(config) {
-  return new TransferGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numSymbolsPerDomain: 6, numRules: 12, fewShotExamples: 10 }
+      : difficulty === 'hard'
+        ? { numSymbolsPerDomain: 20, numRules: 40, fewShotExamples: 2 }
+        : {};
+  return new TransferGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

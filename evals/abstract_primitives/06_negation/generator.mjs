@@ -8,6 +8,8 @@
  * Metric: Exclusion Accuracy
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '06_negation';
 export const SYSTEM_NAME = 'Negation';
 export const SYSTEM_DESCRIPTION = 'Mutual exclusion between groups';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Mutual exclusion between groups';
 export class NegationGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numExclusionPairs = config.numExclusionPairs || 20;
     this.numOutputsPerGroup = config.numOutputsPerGroup || 5;
     
@@ -74,17 +77,19 @@ export class NegationGrammar {
       
       if (useA) {
         // Given groupA, groupB should NOT appear
+        const difficulty = this.difficultyLevel !== null ? this.difficultyLevel : 1;
         const expectedJson = JSON.stringify(pair.groupB);
         const metaJson = JSON.stringify({
-          difficulty: 1,
+          difficulty,
           family: 'negation',
           relation: 'excluded'
         });
         lines.push(`${pair.groupA}\t${expectedJson}\t${metaJson}`);
       } else {
+        const difficulty = this.difficultyLevel !== null ? this.difficultyLevel : 1;
         const expectedJson = JSON.stringify(pair.groupA);
         const metaJson = JSON.stringify({
-          difficulty: 1,
+          difficulty,
           family: 'negation',
           relation: 'excluded'
         });
@@ -105,7 +110,14 @@ export class NegationGrammar {
 }
 
 export function createGrammar(config) {
-  return new NegationGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numExclusionPairs: 10, numOutputsPerGroup: 3 }
+      : difficulty === 'hard'
+        ? { numExclusionPairs: 40, numOutputsPerGroup: 8 }
+        : {};
+  return new NegationGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

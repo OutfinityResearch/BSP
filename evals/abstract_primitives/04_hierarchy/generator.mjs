@@ -8,6 +8,8 @@
  * Metric: Ancestry Recall
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '04_hierarchy';
 export const SYSTEM_NAME = 'Hierarchy';
 export const SYSTEM_DESCRIPTION = 'Inheritance and taxonomic containment';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Inheritance and taxonomic containment';
 export class HierarchyGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.depth = config.depth || 4;
     this.branchingFactor = config.branchingFactor || 3;
     
@@ -131,6 +134,7 @@ export class HierarchyGrammar {
       let difficulty = 1;
       if (depth >= 4) difficulty = 3;
       else if (depth >= 2) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(ancestors[0]);
       const metaJson = JSON.stringify({
@@ -150,7 +154,14 @@ export class HierarchyGrammar {
 }
 
 export function createGrammar(config) {
-  return new HierarchyGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { depth: 3, branchingFactor: 2 }
+      : difficulty === 'hard'
+        ? { depth: 6, branchingFactor: 4 }
+        : {};
+  return new HierarchyGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

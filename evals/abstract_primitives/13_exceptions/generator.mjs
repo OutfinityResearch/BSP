@@ -8,6 +8,8 @@
  * Metric: Exception Handling Accuracy
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '13_exceptions';
 export const SYSTEM_NAME = 'Exceptions';
 export const SYSTEM_DESCRIPTION = 'Default rules with specific overrides';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Default rules with specific overrides';
 export class ExceptionsGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numCategories = config.numCategories || 10;
     this.instancesPerCategory = config.instancesPerCategory || 10;
     this.exceptionRatio = config.exceptionRatio || 0.2;
@@ -102,7 +105,7 @@ export class ExceptionsGrammar {
       const kind = isException ? 'exception' : 'default';
       const expectedJson = JSON.stringify(expected);
       const metaJson = JSON.stringify({
-        difficulty: isException ? 3 : 1,
+        difficulty: this.difficultyLevel !== null ? this.difficultyLevel : (isException ? 3 : 1),
         family: 'exceptions',
         kind
       });
@@ -115,7 +118,14 @@ export class ExceptionsGrammar {
 }
 
 export function createGrammar(config) {
-  return new ExceptionsGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numCategories: 5, instancesPerCategory: 8, exceptionRatio: 0.1 }
+      : difficulty === 'hard'
+        ? { numCategories: 20, instancesPerCategory: 12, exceptionRatio: 0.3 }
+        : {};
+  return new ExceptionsGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

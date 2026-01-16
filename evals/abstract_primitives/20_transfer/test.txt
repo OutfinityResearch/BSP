@@ -1,8 +1,18 @@
-d2x06 d2x03	"d2x00"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
-d2x06 d2x05	"d2x02"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
-d2x05 d2x03	"d2x00"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
-d2x05 d2x05	"d2x00"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
-d2x03 d2x03	"d2x03"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
+d2x00	"d2x00"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x01	"d2x01"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x02	"d2x02"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x03	"d2x03"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x04	"d2x04"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x05	"d2x05"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x06	"d2x06"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x07	"d2x07"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x08	"d2x08"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x09	"d2x09"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"vocab"}
+d2x06 d2x03 d2x00	"d2x00"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
+d2x06 d2x05 d2x02	"d2x02"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
+d2x05 d2x03 d2x00	"d2x00"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
+d2x05 d2x05 d2x00	"d2x00"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
+d2x03 d2x03 d2x03	"d2x03"	{"difficulty":1,"family":"transfer","domain":"d2","kind":"support"}
 d2x02 d2x06	"d2x00"	{"difficulty":2,"family":"transfer","domain":"d2","kind":"query"}
 d2x01 d2x04	"d2x09"	{"difficulty":2,"family":"transfer","domain":"d2","kind":"query"}
 d2x03 d2x01	"d2x02"	{"difficulty":2,"family":"transfer","domain":"d2","kind":"query"}

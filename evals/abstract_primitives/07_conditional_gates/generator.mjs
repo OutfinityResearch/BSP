@@ -8,6 +8,8 @@
  * Metric: Logic Gate Accuracy per operator
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '07_conditional_gates';
 export const SYSTEM_NAME = 'Conditional Gates';
 export const SYSTEM_DESCRIPTION = 'Boolean logic combinations';
@@ -15,8 +17,12 @@ export const SYSTEM_DESCRIPTION = 'Boolean logic combinations';
 export class ConditionalGatesGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numVariables = config.numVariables || 10;
     this.numGatesPerType = config.numGatesPerType || 20;
+    this.gateTypes = Array.isArray(config.gateTypes) && config.gateTypes.length > 0
+      ? [...config.gateTypes]
+      : ['and', 'or', 'xor', 'nand', 'nor'];
     
     this.variables = Array.from(
       { length: this.numVariables },
@@ -28,10 +34,9 @@ export class ConditionalGatesGrammar {
   }
 
   _init() {
-    const gateTypes = ['and', 'or', 'xor', 'nand', 'nor'];
     let outputId = 0;
     
-    for (const type of gateTypes) {
+    for (const type of this.gateTypes) {
       for (let i = 0; i < this.numGatesPerType; i++) {
         const inputA = this.variables[Math.floor(this.rng() * this.variables.length)];
         let inputB;
@@ -91,6 +96,7 @@ export class ConditionalGatesGrammar {
       let difficulty = 1;
       if (gate.type === 'xor') difficulty = 2;
       else if (gate.type === 'nand' || gate.type === 'nor') difficulty = 3;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(expected);
       const metaJson = JSON.stringify({
@@ -111,7 +117,16 @@ export class ConditionalGatesGrammar {
 }
 
 export function createGrammar(config) {
-  return new ConditionalGatesGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  let preset = {};
+  if (difficulty === 'easy') {
+    preset = { gateTypes: ['and', 'or'], numVariables: 8, numGatesPerType: 10 };
+  } else if (difficulty === 'medium') {
+    preset = { gateTypes: ['and', 'or', 'xor'], numVariables: 10, numGatesPerType: 20 };
+  } else if (difficulty === 'hard') {
+    preset = { gateTypes: ['and', 'or', 'xor', 'nand', 'nor'], numVariables: 14, numGatesPerType: 30 };
+  }
+  return new ConditionalGatesGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

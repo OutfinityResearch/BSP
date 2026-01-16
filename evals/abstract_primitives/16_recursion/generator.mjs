@@ -8,6 +8,8 @@
  * Metric: Nesting Depth Accuracy
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '16_recursion';
 export const SYSTEM_NAME = 'Recursion';
 export const SYSTEM_DESCRIPTION = 'Self-similar nested structures';
@@ -15,6 +17,7 @@ export const SYSTEM_DESCRIPTION = 'Self-similar nested structures';
 export class RecursionGrammar {
   constructor(config = {}) {
     this.rng = typeof config.rng === 'function' ? config.rng : Math.random;
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.maxDepth = config.maxDepth || 8;
     this.numPatterns = config.numPatterns || 5;
     
@@ -84,6 +87,7 @@ export class RecursionGrammar {
       let difficulty = 1;
       if (depth >= 6) difficulty = 3;
       else if (depth >= 3) difficulty = 2;
+      if (this.difficultyLevel !== null) difficulty = this.difficultyLevel;
 
       const expectedJson = JSON.stringify(closes);
       const metaJson = JSON.stringify({
@@ -120,7 +124,14 @@ export class RecursionGrammar {
 }
 
 export function createGrammar(config) {
-  return new RecursionGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { maxDepth: 3, numPatterns: 2 }
+      : difficulty === 'hard'
+        ? { maxDepth: 12, numPatterns: 5 }
+        : {};
+  return new RecursionGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {

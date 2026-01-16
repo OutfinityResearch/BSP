@@ -8,12 +8,15 @@
  * Metric: Inverse Recall
  */
 
+import { difficultyToLevel, normalizeDifficulty } from '../difficulty.mjs';
+
 export const SYSTEM_ID = '11_reversibility';
 export const SYSTEM_NAME = 'Reversibility';
 export const SYSTEM_DESCRIPTION = 'Bidirectional inference capability';
 
 export class ReversibilityGrammar {
   constructor(config = {}) {
+    this.difficultyLevel = Number.isInteger(config.difficultyLevel) ? config.difficultyLevel : null;
     this.numPairs = config.numPairs || 200;
     
     this.forwardMap = new Map(); // A -> B
@@ -34,6 +37,9 @@ export class ReversibilityGrammar {
   generateTrainingData(count = 10000) {
     const lines = [];
     const pairs = Array.from(this.forwardMap.entries());
+
+    // Seed the query marker used in test prompts so it exists in the vocabulary.
+    lines.push('decode');
     
     for (let i = 0; i < count; i++) {
       const [a, b] = pairs[i % pairs.length];
@@ -52,9 +58,10 @@ export class ReversibilityGrammar {
     // Test reverse direction (never trained)
     for (let i = 0; i < count; i++) {
       const [b, a] = pairs[i % pairs.length];
+      const difficulty = this.difficultyLevel !== null ? this.difficultyLevel : 2;
       const expectedJson = JSON.stringify(a);
       const metaJson = JSON.stringify({
-        difficulty: 2,
+        difficulty,
         family: 'reversibility',
         direction: 'reverse'
       });
@@ -74,7 +81,14 @@ export class ReversibilityGrammar {
 }
 
 export function createGrammar(config) {
-  return new ReversibilityGrammar(config);
+  const difficulty = normalizeDifficulty(config?.difficulty);
+  const preset =
+    difficulty === 'easy'
+      ? { numPairs: 50 }
+      : difficulty === 'hard'
+        ? { numPairs: 500 }
+        : {};
+  return new ReversibilityGrammar({ ...config, ...preset, difficultyLevel: difficultyToLevel(difficulty) });
 }
 
 export const defaultConfig = {
