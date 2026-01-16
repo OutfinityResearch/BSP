@@ -253,6 +253,12 @@ class CompressionMachine {
     this.templates = new Map();
     this.nextTemplateId = 0;
 
+    // DS-022: Phrase pattern tracking for variable-length grammar
+    // Tracks patterns used in COPY operations to promote to permanent storage
+    this.phrasePatterns = new Map();  // pattern_hash -> { tokens, count, savings, lastSeen }
+    this.maxPhrasePatterns = options.maxPhrasePatterns || 10000;
+    this.minPatternCount = options.minPatternCount || 3;  // Min occurrences to keep
+
     // Statistics
     this.stats = {
       totalEncodes: 0,
@@ -260,6 +266,7 @@ class CompressionMachine {
       repeatOpsUsed: 0,
       templateOpsUsed: 0,
       totalSavings: 0,
+      patternsTracked: 0,
     };
   }
 
@@ -402,6 +409,10 @@ class CompressionMachine {
 
       // Emit copy
       prog.add(new CopyOp(copy.sourceOffset, copy.length, context.length, this.maxCopyLen));
+      
+      // DS-022: Track the copied phrase pattern
+      const copiedTokens = tokens.slice(copy.targetOffset, copy.targetOffset + copy.length);
+      this.trackPhrasePattern(copiedTokens, copy.savings);
       
       usedRanges.push({ start: copy.targetOffset, end: copy.targetOffset + copy.length });
       pos = copy.targetOffset + copy.length;
@@ -716,6 +727,177 @@ class CompressionMachine {
         this.templates.set(this.nextTemplateId++, template);
       }
     }
+  }
+
+  // ============================================================
+  // DS-022: Phrase Pattern Tracking for Variable-Length Grammar
+  // ============================================================
+
+  /**
+   * Track a phrase pattern used in COPY operation
+   * Patterns that appear frequently will be promoted to permanent groups
+   * @param {string[]} tokens - The pattern tokens
+   * @param {number} savings - Bits saved by using this pattern
+   */
+  trackPhrasePattern(tokens, savings) {
+    if (!tokens || tokens.length < 2) return;
+    
+    const key = tokens.join(' ');
+    const existing = this.phrasePatterns.get(key);
+    
+    if (existing) {
+      existing.count++;
+      existing.totalSavings += savings;
+      existing.lastSeen = Date.now();
+    } else {
+      this.phrasePatterns.set(key, {
+        tokens: [...tokens],
+        count: 1,
+        totalSavings: savings,
+        firstSeen: Date.now(),
+        lastSeen: Date.now(),
+      });
+      this.stats.patternsTracked++;
+    }
+    
+    // Prune if over capacity
+    if (this.phrasePatterns.size > this.maxPhrasePatterns) {
+      this._prunePhrasePatterns();
+    }
+  }
+
+  /**
+   * Get top phrase patterns sorted by utility
+   * @param {number} n - Number of patterns to return
+   * @returns {Array<{tokens: string[], count: number, savings: number}>}
+   */
+  getTopPhrasePatterns(n = 100) {
+    return [...this.phrasePatterns.values()]
+      .filter(p => p.count >= this.minPatternCount)
+      .sort((a, b) => {
+        // Sort by utility = count * avgSavings
+        const utilityA = a.count * (a.totalSavings / a.count);
+        const utilityB = b.count * (b.totalSavings / b.count);
+        return utilityB - utilityA;
+      })
+      .slice(0, n)
+      .map((p, i) => ({
+        tokens: p.tokens,
+        count: p.count,
+        avgSavings: p.totalSavings / p.count,
+        rank: i,
+      }));
+  }
+
+  /**
+   * Get cost for a phrase based on learned patterns
+   * Used for BLiMP evaluation - frequent phrases cost less
+   * @param {string[]} tokens
+   * @returns {number} Cost in bits
+   */
+  getPhraseCost(tokens) {
+    if (!tokens || tokens.length === 0) {
+      return 0;
+    }
+    
+    const key = tokens.join(' ');
+    const pattern = this.phrasePatterns.get(key);
+    
+    if (pattern && pattern.count >= this.minPatternCount) {
+      // Frequent pattern: cost = log2(rank + 2)
+      // We estimate rank based on count
+      const allPatterns = [...this.phrasePatterns.values()];
+      const rank = allPatterns
+        .filter(p => p.count > pattern.count)
+        .length;
+      
+      return Math.log2(rank + 2) + 1; // +1 for pattern opcode
+    }
+    
+    // Unknown pattern: full literal cost
+    return this.getTokensCost(tokens);
+  }
+
+  /**
+   * Check if a sequence contains known phrase patterns
+   * Returns total cost based on known patterns vs literals
+   * @param {string[]} tokens
+   * @returns {{cost: number, patterns: Array, coverage: number}}
+   */
+  analyzePhrasePatterns(tokens) {
+    const found = [];
+    let covered = 0;
+    let cost = 0;
+    
+    // Greedy: find longest patterns first
+    const sortedPatterns = [...this.phrasePatterns.entries()]
+      .filter(([_, p]) => p.count >= this.minPatternCount)
+      .sort((a, b) => b[1].tokens.length - a[1].tokens.length);
+    
+    const used = new Array(tokens.length).fill(false);
+    
+    for (const [key, pattern] of sortedPatterns) {
+      const patternTokens = pattern.tokens;
+      
+      // Find all occurrences of this pattern
+      for (let i = 0; i <= tokens.length - patternTokens.length; i++) {
+        if (used[i]) continue;
+        
+        let matches = true;
+        for (let j = 0; j < patternTokens.length; j++) {
+          if (tokens[i + j] !== patternTokens[j] || used[i + j]) {
+            matches = false;
+            break;
+          }
+        }
+        
+        if (matches) {
+          // Mark as used
+          for (let j = 0; j < patternTokens.length; j++) {
+            used[i + j] = true;
+          }
+          
+          found.push({
+            start: i,
+            length: patternTokens.length,
+            pattern: key,
+            count: pattern.count,
+          });
+          
+          covered += patternTokens.length;
+          
+          // Cost for known pattern
+          const rank = sortedPatterns.findIndex(([k]) => k === key);
+          cost += Math.log2(rank + 2) + 1;
+        }
+      }
+    }
+    
+    // Add cost for uncovered tokens
+    for (let i = 0; i < tokens.length; i++) {
+      if (!used[i]) {
+        cost += this.getTokenCost(tokens[i]);
+      }
+    }
+    
+    return {
+      cost,
+      patterns: found,
+      coverage: tokens.length > 0 ? covered / tokens.length : 0,
+    };
+  }
+
+  /**
+   * Prune low-frequency patterns
+   * @private
+   */
+  _prunePhrasePatterns() {
+    // Keep top patterns by count
+    const sorted = [...this.phrasePatterns.entries()]
+      .sort((a, b) => b[1].count - a[1].count);
+    
+    const toKeep = sorted.slice(0, Math.floor(this.maxPhrasePatterns * 0.8));
+    this.phrasePatterns = new Map(toKeep);
   }
 
   /**

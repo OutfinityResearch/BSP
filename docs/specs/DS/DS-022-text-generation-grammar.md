@@ -305,7 +305,167 @@ Grammar should be IN the generation process via cost.
 
 ---
 
-## 10. Summary
+## 10. Boundary Tokens Are IN The Signal
+
+### 10.1 The Key Insight
+
+**We don't ADD boundary tokens - they ALREADY EXIST in the input signal.**
+
+Every structured signal has natural separators:
+
+| Domain | Level 1 | Level 2 | Level 3 | Level 4 |
+|--------|---------|---------|---------|---------|
+| **Text** | space (word) | . ! ? (sentence) | \n\n (paragraph) | === (section) |
+| **Music** | rest (phrase) | bar line (measure) | fermata (section) | movement end |
+| **Code** | ; (statement) | } (block) | blank line (section) | file end |
+| **Video** | cut (shot) | fade (scene) | title card (act) | credits |
+| **DNA** | codon (amino acid) | stop codon (protein) | promoter (gene) | chromosome end |
+
+### 10.2 How To Recognize Separators
+
+A separator is a token with **high transition entropy**:
+
+```javascript
+function isSeparator(token) {
+  // Get all tokens that can follow this one
+  const nextTokens = getNextCandidates(token);
+  
+  // Compute entropy of next-token distribution
+  const entropy = -sum(nextTokens.map(t => t.prob * log2(t.prob)));
+  
+  // High entropy = many possible followers = separator
+  return entropy > SEPARATOR_THRESHOLD;
+}
+
+// Examples:
+// "." → entropy ≈ 8 bits (can be followed by almost any word)
+// "the" → entropy ≈ 3 bits (usually followed by noun/adjective)
+// "of" → entropy ≈ 4 bits (followed by noun phrase)
+```
+
+### 10.3 Hierarchical Structure Emerges
+
+The system automatically discovers:
+1. **Word level**: spaces separate tokens
+2. **Phrase level**: certain words have low transition entropy (tight coupling)
+3. **Sentence level**: . ! ? have high transition entropy (reset context)
+4. **Paragraph level**: \n\n has even higher entropy (topic change)
+
+**No hardcoding required** - just entropy analysis of transitions.
+
+### 10.4 Implementation
+
+```javascript
+class TransitionAnalyzer {
+  // Compute transition entropy for each token
+  computeEntropyMap() {
+    const entropyMap = new Map();
+    
+    for (const [token, nextMap] of this.transitions) {
+      const total = this.tokenCounts.get(token);
+      let entropy = 0;
+      
+      for (const count of nextMap.values()) {
+        const p = count / total;
+        entropy -= p * Math.log2(p);
+      }
+      
+      entropyMap.set(token, entropy);
+    }
+    
+    return entropyMap;
+  }
+  
+  // Find natural separator tokens
+  findSeparators(threshold = 5.0) {
+    const entropyMap = this.computeEntropyMap();
+    return [...entropyMap.entries()]
+      .filter(([_, entropy]) => entropy > threshold)
+      .map(([token, _]) => token);
+  }
+}
+```
+
+### 10.5 Cross-Modal Generalization
+
+The same algorithm works for ANY sequential data:
+- Learn transition probabilities
+- Compute entropy per token
+- High entropy = separator
+- Patterns within separators = structure
+
+**One algorithm, infinite domains.**
+
+---
+
+## 11. Variable-Length Pattern Learning
+
+### 11.1 The Insight
+
+Grammar structures have **variable lengths**:
+- "the cat" (2 tokens)
+- "the big cat" (3 tokens)
+- "the very big cat" (4 tokens)
+- "the extremely very big cat" (5 tokens)
+
+All are valid. The compression system should learn ALL of them, not just fixed-size n-grams.
+
+### 11.2 How It Works
+
+The CompressionMachine already does this via COPY operations:
+1. **Observe**: "the cat is" appears frequently
+2. **Store**: Add to pattern library with usage count
+3. **Compress**: Next time "the cat is" appears, use COPY (cheap) instead of LITERAL (expensive)
+4. **Rank**: Frequent patterns get lower cost (log₂(rank))
+
+### 11.3 Pattern Storage During Sleep
+
+```javascript
+// During sleep consolidation:
+function discoverPhrasePatterns(compressionStats) {
+  // Find patterns that saved the most bits
+  const topPatterns = compressionStats.getTopPatterns();
+  
+  for (const pattern of topPatterns) {
+    if (pattern.frequency >= MIN_FREQUENCY) {
+      // Promote to permanent phrase group
+      const phraseGroup = groupStore.create(
+        encodePhrase(pattern.tokens),
+        0.5,
+        'CONTENT'  // Phrase groups are content, not transforms
+      );
+      phraseGroup.tokens = pattern.tokens;  // Store original tokens
+      phraseGroup.rank = pattern.rank;
+    }
+  }
+}
+```
+
+### 11.4 BLiMP Evaluation Using Compression Cost
+
+The key insight: **grammatical sentences compress better**.
+
+```javascript
+function evaluateBLiMP(goodSentence, badSentence) {
+  // Full compression cost, not just bigram transitions
+  const goodCost = compressionMachine.encode(
+    tokenize(goodSentence), 
+    globalContext
+  ).cost;
+  
+  const badCost = compressionMachine.encode(
+    tokenize(badSentence),
+    globalContext
+  ).cost;
+  
+  // Lower cost = more compressible = more frequent = more grammatical
+  return goodCost < badCost;
+}
+```
+
+---
+
+## 12. Summary
 
 **One sentence**: Grammar emerges from sequence transition costs in the MDL objective.
 

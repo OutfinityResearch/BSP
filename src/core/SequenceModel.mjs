@@ -507,6 +507,114 @@ class SequenceModel {
     };
   }
 
+  // ============================================================
+  // DS-022: Transition Entropy for Separator Detection
+  // ============================================================
+
+  /**
+   * Compute transition entropy for a token.
+   * High entropy = many possible followers = separator token.
+   * Low entropy = few possible followers = tight coupling.
+   * 
+   * @param {string} token
+   * @returns {number} Entropy in bits
+   */
+  getTransitionEntropy(token) {
+    const nextMap = this.transitions.get(token);
+    if (!nextMap || nextMap.size === 0) {
+      return 0;
+    }
+    
+    const total = this.tokenCounts.get(token) || 1;
+    let entropy = 0;
+    
+    for (const count of nextMap.values()) {
+      const p = count / total;
+      if (p > 0) {
+        entropy -= p * Math.log2(p);
+      }
+    }
+    
+    return entropy;
+  }
+
+  /**
+   * Compute entropy map for all tokens
+   * @returns {Map<string, number>} token -> entropy
+   */
+  computeEntropyMap() {
+    const entropyMap = new Map();
+    
+    for (const token of this.transitions.keys()) {
+      entropyMap.set(token, this.getTransitionEntropy(token));
+    }
+    
+    return entropyMap;
+  }
+
+  /**
+   * Find natural separator tokens (high transition entropy)
+   * These are tokens like . ! ? \n that can be followed by many things.
+   * 
+   * @param {number} [threshold=5.0] - Minimum entropy to be considered separator
+   * @returns {Array<{token: string, entropy: number}>}
+   */
+  findSeparators(threshold = 5.0) {
+    const entropyMap = this.computeEntropyMap();
+    
+    return [...entropyMap.entries()]
+      .filter(([_, entropy]) => entropy >= threshold)
+      .map(([token, entropy]) => ({ token, entropy }))
+      .sort((a, b) => b.entropy - a.entropy);
+  }
+
+  /**
+   * Find tightly coupled token pairs (low transition entropy)
+   * These are grammatical patterns like "of the", "in a", etc.
+   * 
+   * @param {number} [threshold=2.0] - Maximum entropy to be considered tight
+   * @returns {Array<{token: string, entropy: number, topNext: string}>}
+   */
+  findTightCouplings(threshold = 2.0) {
+    const results = [];
+    
+    for (const [token, nextMap] of this.transitions) {
+      const entropy = this.getTransitionEntropy(token);
+      
+      if (entropy <= threshold && entropy > 0 && nextMap.size > 0) {
+        // Find most common next token
+        let topNext = null;
+        let topCount = 0;
+        for (const [next, count] of nextMap) {
+          if (count > topCount) {
+            topCount = count;
+            topNext = next;
+          }
+        }
+        
+        results.push({ token, entropy, topNext });
+      }
+    }
+    
+    return results.sort((a, b) => a.entropy - b.entropy);
+  }
+
+  /**
+   * Get hierarchical boundary strength for a token.
+   * Higher = stronger boundary (like sentence end)
+   * Lower = weaker boundary (like within phrase)
+   * 
+   * @param {string} token
+   * @returns {number} 0-1 normalized boundary strength
+   */
+  getBoundaryStrength(token) {
+    const entropy = this.getTransitionEntropy(token);
+    const maxEntropy = Math.log2(this.tokenCounts.size || 1);
+    
+    // Normalize to 0-1
+    return maxEntropy > 0 ? entropy / maxEntropy : 0;
+  }
+
   /**
    * Serialize to JSON
    * @returns {object}
