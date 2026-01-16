@@ -23,3 +23,4 @@ export {
   TemplateOp 
 } from './CompressionMachine.mjs';
 export { SuffixArray } from './utils/SuffixArray.mjs';
+export { RollingHashMap } from './utils/RollingHashMap.mjs';

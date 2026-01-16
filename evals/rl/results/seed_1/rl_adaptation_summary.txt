@@ -1,0 +1,6 @@
+BSP RL Adaptation Results
+dataset=mapping_shift_v1
+seed=1
+
+rho=0.3 baseline=0.0 best=0.0 final=0.0 stepsTo=null drift=0.0 forget=0.0
+

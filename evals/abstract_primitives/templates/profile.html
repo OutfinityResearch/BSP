@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{TITLE}}</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #070b12;
+        --panel: #0b1220;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --border: #1f2a3a;
+        --pill: #0f1a2d;
+        --good: #34d399;
+        --warn: #fbbf24;
+        --bad: #fb7185;
+        --accent: #7dd3fc;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      header {
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--border);
+        background: linear-gradient(180deg, #0b1220 0%, #070b12 100%);
+      }
+      h1 { font-size: 18px; margin: 0 0 6px 0; }
+      .meta { color: var(--muted); font-size: 13px; }
+      main { padding: 16px 18px; max-width: 1200px; margin: 0 auto; }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 10px 0 16px 0;
+      }
+      .controls input, .controls select {
+        background: var(--panel);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+      .controls label { color: var(--muted); font-size: 13px; }
+
+      .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px;
+        background: var(--panel);
+      }
+      .cardHead { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+      .title { font-size: 14px; font-weight: 700; }
+      .muted { color: var(--muted); font-weight: 500; }
+      .metrics { display: flex; flex-wrap: wrap; gap: 8px; }
+      .pill {
+        border: 1px solid var(--border);
+        background: var(--pill);
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .pill b { color: var(--text); font-weight: 700; }
+      .bar {
+        margin-top: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #0f1a2d;
+        border: 1px solid var(--border);
+        overflow: hidden;
+      }
+      .bar > div { height: 100%; width: 0%; background: var(--accent); }
+      .tierTag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 12px;
+      }
+      details { margin-top: 10px; }
+      summary { cursor: pointer; color: var(--muted); }
+      pre {
+        background: #0a1020;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px;
+        overflow: auto;
+        color: #cbd5e1;
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      code { color: #a7f3d0; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    {{BODY}}
+    <script>
+      (function () {
+        const searchEl = document.getElementById('search');
+        const sortEl = document.getElementById('sort');
+        const container = document.getElementById('systems');
+
+        if (!searchEl || !sortEl || !container) return;
+
+        function normalize(s) { return (s || '').toString().toLowerCase(); }
+
+        function apply() {
+          const query = normalize(searchEl.value).trim();
+          const sortKey = sortEl.value;
+          const cards = Array.from(container.querySelectorAll('.systemCard'));
+
+          for (const card of cards) {
+            const hay = normalize(card.dataset.search);
+            card.style.display = query === '' || hay.includes(query) ? '' : 'none';
+          }
+
+          const visible = cards.filter((c) => c.style.display !== 'none');
+          visible.sort((a, b) => {
+            const idA = a.dataset.id || '';
+            const idB = b.dataset.id || '';
+            const tierA = Number(a.dataset.tier || 0);
+            const tierB = Number(b.dataset.tier || 0);
+            const scoreA = Number(a.dataset.score || 0);
+            const scoreB = Number(b.dataset.score || 0);
+
+            if (sortKey === 'score_desc') {
+              if (scoreB !== scoreA) return scoreB - scoreA;
+              return idA.localeCompare(idB);
+            }
+            if (sortKey === 'score_asc') {
+              if (scoreA !== scoreB) return scoreA - scoreB;
+              return idA.localeCompare(idB);
+            }
+            if (sortKey === 'tier_score') {
+              if (tierA !== tierB) return tierA - tierB;
+              if (scoreB !== scoreA) return scoreB - scoreA;
+              return idA.localeCompare(idB);
+            }
+            return idA.localeCompare(idB);
+          });
+
+          for (const card of visible) container.appendChild(card);
+        }
+
+        searchEl.addEventListener('input', apply);
+        sortEl.addEventListener('change', apply);
+        apply();
+      })();
+    </script>
+  </body>
+</html>
+

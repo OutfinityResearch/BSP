@@ -126,9 +126,8 @@ The system generates **natural language** responses, not only technical metrics:
 ### 4.1 Technology Stack
 
 - **Runtime**: Node.js (v18+)
-- **Framework**: Native HTTP or Fastify (lightweight)
-- **WebSocket**: For streaming and real-time
-- **Format**: JSON for API, SSE for streaming
+- **HTTP**: `node:http` (no external framework)
+- **Format**: JSON
 
 ### 4.2 Structure
 
@@ -137,13 +136,12 @@ The system generates **natural language** responses, not only technical metrics:
 │                      HTTP Server                               │
 ├────────────────────────────────────────────────────────────────┤
 │                                                                │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
-│  │ REST API     │  │ WebSocket    │  │ Static Files        │  │
-│  │ /api/*       │  │ /ws          │  │ /chat (HTML UI)     │  │
-│  └──────┬───────┘  └──────┬───────┘  └──────────────────────┘  │
-│         │                 │                                    │
-│         └────────┬────────┘                                    │
-│                  │                                             │
+│  ┌──────────────┐  ┌──────────────────────┐                    │
+│  │ REST API     │  │ Static Files        │                    │
+│  │ /api/*       │  │ /chat (HTML UI)     │                    │
+│  └──────┬───────┘  └──────────────────────┘                    │
+│         │                                                      │
+│         ▼                                                      │
 │         ┌────────▼────────┐                                    │
 │         │ Session Manager │                                    │
 │         └────────┬────────┘                                    │
@@ -232,7 +230,7 @@ GET /api/sessions/:id/stats
 ```
 POST /api/sessions/:id/save
   → Save state
-  Body: { "path"?: string, "format"?: "msgpack" | "json" }
+  Body: { "path"?: string, "format"?: "json" }
   Response: { "path": string, "size": number }
 
 POST /api/sessions/:id/load
@@ -246,124 +244,9 @@ GET /api/snapshots
 
 ---
 
-## 6. WebSocket Protocol
+## 6. Transport
 
-### 6.1 Connection
-
-```javascript
-// Client
-const ws = new WebSocket('ws://localhost:3000/ws?session=SESSION_ID');
-
-// Or create a new session
-const ws = new WebSocket('ws://localhost:3000/ws?new=true');
-```
-
-### 6.2 Message Format
-
-```typescript
-interface WSMessage {
-  type: 'chat' | 'control' | 'feedback' | 'stream' | 'error' | 'status';
-  payload: any;
-  timestamp: number;
-  id?: string;  // For request-response correlation
-}
-```
-
-### 6.3 Chat Messages
-
-```typescript
-// Client → Server
-{
-  type: 'chat',
-  payload: {
-    content: "Hello, what can you help me with?",
-    reward?: 0.5,
-    stream?: true  // Streaming response
-  }
-}
-
-// Server → Client (non-streaming)
-{
-  type: 'chat',
-  payload: {
-    response: "I can help with...",
-    activeGroups: [12, 45, 78],
-    surprise: 0.23,
-    confidence: 0.87
-  }
-}
-
-// Server → Client (streaming)
-{
-  type: 'stream',
-  payload: {
-    chunk: "I can",
-    done: false
-  }
-}
-{
-  type: 'stream',
-  payload: {
-    chunk: " help with...",
-    done: true,
-    stats: { surprise: 0.23, confidence: 0.87 }
-  }
-}
-```
-
-### 6.4 Feedback Messages
-
-```typescript
-// Quick feedback
-{
-  type: 'feedback',
-  payload: {
-    messageId: 'msg_123',
-    rating: 1  // -1, 0, 1
-  }
-}
-
-// Detailed feedback
-{
-  type: 'feedback',
-  payload: {
-    messageId: 'msg_123',
-    reward: 0.8,
-    comment: "Very helpful!",
-    important: true
-  }
-}
-```
-
-### 6.5 Control Messages
-
-```typescript
-// Set RL pressure
-{
-  type: 'control',
-  payload: {
-    command: 'set-rl-pressure',
-    value: 0.5
-  }
-}
-
-// Request consolidation
-{
-  type: 'control',
-  payload: {
-    command: 'consolidate',
-    episodes: 100
-  }
-}
-
-// Get stats
-{
-  type: 'control',
-  payload: {
-    command: 'get-stats'
-  }
-}
-```
+All interaction uses the HTTP endpoints described in Section 5.
 
 ---
 
@@ -372,10 +255,9 @@ interface WSMessage {
 ### 7.1 Main Server
 
 ```typescript
-import { createServer } from 'http';
-import { WebSocketServer } from 'ws';
-import { SessionManager } from './SessionManager';
-import { Router } from './Router';
+import { createServer } from 'node:http';
+import { SessionManager } from './SessionManager.mjs';
+import { Router } from './Router.mjs';
 
 const PORT = process.env.PORT || 3000;
 
@@ -388,52 +270,6 @@ const server = createServer(async (req, res) => {
   await router.handle(req, res);
 });
 
-// WebSocket Server
-const wss = new WebSocketServer({ server });
-
-wss.on('connection', (ws, req) => {
-  const url = new URL(req.url!, `http://localhost`);
-  const sessionId = url.searchParams.get('session');
-  const createNew = url.searchParams.get('new') === 'true';
-  
-  if (createNew) {
-    const session = sessions.create();
-    ws.send(JSON.stringify({
-      type: 'status',
-      payload: { sessionId: session.id, status: 'connected' }
-    }));
-    handleWebSocket(ws, session);
-  } else if (sessionId) {
-    const session = sessions.get(sessionId);
-    if (session) {
-      handleWebSocket(ws, session);
-    } else {
-      ws.close(4004, 'Session not found');
-    }
-  } else {
-    ws.close(4000, 'Session ID required');
-  }
-});
-
-function handleWebSocket(ws: WebSocket, session: Session) {
-  ws.on('message', async (data) => {
-    try {
-      const msg = JSON.parse(data.toString()) as WSMessage;
-      const response = await session.handleMessage(msg);
-      ws.send(JSON.stringify(response));
-    } catch (error) {
-      ws.send(JSON.stringify({
-        type: 'error',
-        payload: { message: error.message }
-      }));
-    }
-  });
-  
-  ws.on('close', () => {
-    session.onDisconnect();
-  });
-}
-
 server.listen(PORT, () => {
   console.log(`BSP Server running on http://localhost:${PORT}`);
 });
@@ -442,6 +278,21 @@ server.listen(PORT, () => {
 ### 7.2 Session Class
 
 ```typescript
+type ChatRequest = {
+  content: string;
+  reward?: number;
+  importance?: number;
+  metadata?: object;
+};
+
+type ChatResponse = {
+  response: string;
+  activeGroups: number[];
+  surprise: number;
+  confidence: number;
+  reasoning?: string[];
+};
+
 class Session {
   readonly id: string;
   private engine: BSPEngine;
@@ -461,22 +312,8 @@ class Session {
     }
   }
   
-  async handleMessage(msg: WSMessage): Promise<WSMessage> {
+  async chat(payload: ChatRequest): Promise<ChatResponse> {
     this.lastActive = Date.now();
-    
-    switch (msg.type) {
-      case 'chat':
-        return this.handleChat(msg.payload);
-      case 'feedback':
-        return this.handleFeedback(msg.payload);
-      case 'control':
-        return this.handleControl(msg.payload);
-      default:
-        throw new Error(`Unknown message type: ${msg.type}`);
-    }
-  }
-  
-  private async handleChat(payload: ChatPayload): Promise<WSMessage> {
     const { content, reward, importance } = payload;
     
     // Parse for special commands
@@ -518,15 +355,11 @@ class Session {
     });
     
     return {
-      type: 'chat',
-      payload: {
-        response: response.text,
-        activeGroups: result.activeGroups.map(g => g.id),
-        surprise: result.surprise,
-        confidence: response.confidence,
-        reasoning: response.reasoning,
-      },
-      timestamp: Date.now(),
+      response: response.text,
+      activeGroups: result.activeGroups.map(g => g.id),
+      surprise: result.surprise,
+      confidence: response.confidence,
+      reasoning: response.reasoning,
     };
   }
   
@@ -600,7 +433,7 @@ class Session {
 class CommandHandler {
   private session: Session;
   
-  async handle(command: Command): Promise<WSMessage> {
+  async handle(command: Command): Promise<ChatResponse> {
     switch (command.name) {
       case 'help':
         return this.help();
@@ -645,7 +478,7 @@ class CommandHandler {
     }
   }
   
-  private help(): WSMessage {
+  private help(): ChatResponse {
     const helpText = `
 Available commands:
   /help           - Show this help
@@ -663,23 +496,16 @@ Available commands:
     return this.message(helpText);
   }
   
-  private stats(): WSMessage {
+  private stats(): ChatResponse {
     const stats = this.session.engine.getStats();
-    return {
-      type: 'chat',
-      payload: {
-        response: formatStats(stats),
-        stats,
-      },
-      timestamp: Date.now(),
-    };
+    return this.message(formatStats(stats));
   }
 }
 ```
 
 ---
 
-## 9. UI HTML (Optional)
+## 9. UI HTML (Reference)
 
 ### 9.1 File Structure
 
@@ -780,7 +606,7 @@ interface ServerConfig {
   persistence: {
     sessionsDir: string;
     snapshotsDir: string;
-    format: 'msgpack' | 'json';
+    format: 'json';
   };
 }
 ```
@@ -842,13 +668,13 @@ function validateSession(sessionId: string): boolean {
 │  Client  │                    │  Server  │                    │  Engine  │
 └────┬─────┘                    └────┬─────┘                    └────┬─────┘
      │                               │                               │
-     │ WS Connect (?session=X)       │                               │
+     │ POST /api/sessions            │                               │
      │──────────────────────────────▶│                               │
-     │                               │                               │
-     │ {type:'status', connected}    │                               │
+     │ {sessionId}                    │                               │
      │◀──────────────────────────────│                               │
      │                               │                               │
-     │ {type:'chat', content:'...'}  │                               │
+     │ POST /api/sessions/:id/messages│                              │
+     │ {content:'...'}               │                               │
      │──────────────────────────────▶│                               │
      │                               │ process(content, context)     │
      │                               │──────────────────────────────▶│
@@ -856,10 +682,11 @@ function validateSession(sessionId: string): boolean {
      │                               │ {activeGroups, surprise, ...} │
      │                               │◀──────────────────────────────│
      │                               │                               │
-     │ {type:'chat', response:'...'} │                               │
+     │ {response:'...'}              │                               │
      │◀──────────────────────────────│                               │
      │                               │                               │
-     │ {type:'feedback', rating:1}   │                               │
+     │ POST /api/sessions/:id/messages│                              │
+     │ {content:'+++', reward:1}     │                               │
      │──────────────────────────────▶│                               │
      │                               │ updateWithReward(1)           │
      │                               │──────────────────────────────▶│

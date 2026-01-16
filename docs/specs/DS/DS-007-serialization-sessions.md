@@ -9,7 +9,7 @@
 
 ## 1. Overview
 
- tradu corect toate in engleThis document describes the serialization mechanisms for BSP state and session management for continuity and persistence.
+This document describes the serialization mechanisms for BSP state and session management for continuity and persistence.
 
 ---
 
@@ -76,11 +76,15 @@ interface SerializedGroups {
   groups: SerializedGroup[];
 }
 
+type SerializedBitset =
+  | { type: 'sparse', bits: number[], maxSize: number }
+  | { type: 'dense', data: string, maxSize: number };
+
 interface SerializedGroup {
   id: number;
   
-  // Members as compressed bitmap
-  members: string;  // Base64 encoded Roaring bitmap
+  // Members as a serialized bitset (aligned with SimpleBitset.toJSON()).
+  members: SerializedBitset;
   
   // Counts - only for active members (sparse)
   counts: [number, number][];  // [id, count][]
@@ -92,7 +96,7 @@ interface SerializedGroup {
   lastUsed: number;
   
   // Outgoing deductions (duplicated for fast access)
-  deduce?: string;  // Base64 Roaring
+  deduce?: SerializedBitset;
 }
 ```
 
@@ -152,85 +156,49 @@ interface SerializedMessage {
 
 ## 4. File Format
 
-### 4.1 Binary Format (MessagePack)
+### 4.1 Gzip-Compressed JSON (Node.js built-ins only)
 
-Preferred for performance and compactness.
+Preferred for portability and zero external runtime dependencies.
 
 ```typescript
-import * as msgpack from 'msgpack-lite';
-import * as zlib from 'zlib';
+import { gzipSync, gunzipSync } from 'node:zlib';
 
 class BSPSerializer {
-  // Serialize
-  async serialize(state: BSPState): Promise<Buffer> {
-    // Convert to a serializable format
+  serialize(state: BSPState): Buffer {
     const serializable = this.toSerializable(state);
-    
-    // Encode with msgpack
-    const packed = msgpack.encode(serializable);
-    
-    // Compress with gzip
-    const compressed = await this.compress(packed);
-    
-    // Add header
+    const json = Buffer.from(JSON.stringify(serializable), 'utf8');
+    const compressed = gzipSync(json);
     return this.addHeader(compressed);
   }
-  
-  // Deserialize
-  async deserialize(buffer: Buffer): Promise<BSPState> {
-    // Verify and strip header
+
+  deserialize(buffer: Buffer): BSPState {
     const data = this.verifyAndStripHeader(buffer);
-    
-    // Decompress
-    const packed = await this.decompress(data);
-    
-    // Decode
-    const serializable = msgpack.decode(packed);
-    
-    // Convert to state
+    const json = gunzipSync(data);
+    const serializable = JSON.parse(json.toString('utf8'));
     return this.fromSerializable(serializable);
   }
-  
+
   private addHeader(data: Buffer): Buffer {
     const header = Buffer.alloc(16);
-    header.write('BSP', 0);           // Magic bytes
+    header.write('BSP', 0);            // Magic bytes
     header.writeUInt8(1, 4);           // Major version
     header.writeUInt8(0, 5);           // Minor version
     header.writeUInt16LE(0, 6);        // Flags
     header.writeBigUInt64LE(BigInt(data.length), 8);  // Data length
-    
     return Buffer.concat([header, data]);
   }
-  
+
   private verifyAndStripHeader(buffer: Buffer): Buffer {
     if (buffer.toString('utf8', 0, 4) !== 'BSP') {
       throw new Error('Invalid BSP file');
     }
-    
+
     const version = `${buffer.readUInt8(4)}.${buffer.readUInt8(5)}`;
     if (!this.isVersionCompatible(version)) {
       throw new Error(`Incompatible version: ${version}`);
     }
-    
+
     return buffer.slice(16);
-  }
-  
-  private async compress(data: Buffer): Promise<Buffer> {
-    return new Promise((resolve, reject) => {
-      zlib.gzip(data, (err, result) => {
-        if (err) reject(err);
-        else resolve(result);
-      });
-    });
-  }
-  
-  private async decompress(data: Buffer): Promise<Buffer> {
-    return new Promise((resolve, reject) => {
-      zlib.gunzip(data, (err, result) => {
-        if (err) reject(err);
-        else resolve(result);
-      });
-    });
   }
 }
 ```
@@ -265,7 +233,7 @@ class JSONSerializer {
         nextId: state.store.nextId,
         groups: Array.from(state.store.getAll()).map(g => ({
           id: g.id,
-          members: g.members.serialize().toString('base64'),
+          members: g.members.toJSON(),
           counts: Array.from(g.memberCounts.entries()),
           salience: g.salience,
           age: g.age,
@@ -818,7 +786,7 @@ class IntegrityChecker {
                     ▼
     ┌─────────────────────────────────┐
     │         .bsp File               │
-    │  [Header][Compressed MsgPack]   │
+    │       [Header][Gzip(JSON)]      │
     └─────────────────────────────────┘
                     │
         ┌───────────┼───────────┐

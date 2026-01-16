@@ -7,6 +7,7 @@
  */
 
 import { SuffixArray } from './utils/SuffixArray.mjs';
+import { RollingHashMap } from './utils/RollingHashMap.mjs';
 
 /**
  * A compression program is a sequence of operations that generate tokens
@@ -228,15 +229,19 @@ class CompressionMachine {
     this.maxRepeat = options.maxRepeat || 16;
     this.minCopyLen = options.minCopyLen || 3;
     this.minRepeatCount = options.minRepeatCount || 2;
-    this.useSuffixArray = options.useSuffixArray !== false; // Enabled by default
+    this.useSuffixArray = options.useSuffixArray === true; // Disabled by default (linear faster for small context)
+    this.useHashMap = options.useHashMap !== false; // Enabled by default
 
     // Word-level vocabulary (separate from n-gram vocab)
     // This gives more accurate costs for compression
     this.wordVocab = new Set();
     this.minWordVocab = options.minWordVocab || 500;  // Minimum assumed vocab
 
-    // Suffix array for fast COPY matching
+    // Suffix array for fast COPY matching (large context)
     this.suffixArray = null;
+    
+    // Rolling hash map for fast COPY matching (small context)
+    this.hashMap = null;
     this.contextCache = [];
 
     // Learned templates
@@ -379,18 +384,58 @@ class CompressionMachine {
 
   /**
    * Find copy matches between tokens and context
-   * Uses suffix array for O(log N) lookup if enabled
+   * Uses hash map for O(1) lookup (default) or suffix array for large context
    * @private
    */
   _findCopyMatches(tokens, context, vocabSize) {
     const matches = [];
     const effectiveVocab = vocabSize || this.effectiveVocabSize;
 
-    // Update suffix array if context changed
-    if (this.useSuffixArray && context.length >= this.minCopyLen) {
-      if (!this.suffixArray || this.contextCache !== context) {
+    // Choose indexing strategy
+    if (this.useHashMap && context.length >= this.minCopyLen) {
+      // Hash map: O(1) lookup, best for small-medium context
+      const contextChanged = !this.hashMap || 
+                            this.contextCache.length !== context.length ||
+                            this.contextCache[0] !== context[0] ||
+                            this.contextCache[context.length - 1] !== context[context.length - 1];
+      
+      if (contextChanged) {
+        this.hashMap = new RollingHashMap(context, this.minCopyLen);
+        this.contextCache = context.slice();
+      }
+      
+      // Find matches using hash map
+      for (let i = 0; i < tokens.length; i++) {
+        const pattern = tokens.slice(i, Math.min(i + this.maxCopyLen, tokens.length));
+        const hmMatches = this.hashMap.findMatches(pattern, this.minCopyLen);
+        
+        for (const match of hmMatches) {
+          if (match.length >= this.minCopyLen) {
+            const copyCost = Math.log2(context.length) + Math.log2(this.maxCopyLen);
+            const literalCost = match.length * Math.log2(effectiveVocab);
+            const savings = literalCost - copyCost;
+            
+            if (savings > 0) {
+              matches.push({
+                sourceOffset: match.offset,
+                targetOffset: i,
+                length: match.length,
+                savings,
+              });
+            }
+          }
+        }
+      }
+    } else if (this.useSuffixArray && context.length >= this.minCopyLen) {
+      // Suffix array: O(log N) lookup, best for large context
+      const contextChanged = !this.suffixArray || 
+                            this.contextCache.length !== context.length ||
+                            this.contextCache[0] !== context[0] ||
+                            this.contextCache[context.length - 1] !== context[context.length - 1];
+      
+      if (contextChanged) {
         this.suffixArray = new SuffixArray(context);
-        this.contextCache = context;
+        this.contextCache = context.slice();
       }
       
       // Use suffix array for fast matching

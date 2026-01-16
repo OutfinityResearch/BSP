@@ -106,7 +106,7 @@ class BSPEngine {
 
     // Context window for compression machine (token sequences)
     this.contextTokens = [];
-    this.maxContextTokens = options.maxContextTokens || 256;
+    this.maxContextTokens = options.maxContextTokens || 1024;  // Increased from 256
 
     // DS-021: Compression Machine for procedural encoding
     const compressionConfig = options.compressionMachine || options.compression || {};

@@ -11,6 +11,9 @@
 
 This document describes BSP's core data structures, optimized for CPU operations over large sparse sets.
 
+Implementation note:
+- The current codebase uses an in-repo bitset implementation (`SimpleBitset`) backed by `Uint32Array` (no external runtime dependencies).
+
 ---
 
 ## 2. Identities (Identity Universe)
@@ -46,14 +49,10 @@ interface FeatureHasher {
 ### 2.3 Encoding Input
 
 ```typescript
-function encode(text: string): RoaringBitmap {
+function encode(text: string): SimpleBitset {
   const tokens = tokenizer.tokenize(text);
   const features = hasher.hash(tokens, 3); // tri-grams
-  const bitmap = new RoaringBitmap();
-  for (const f of features) {
-    bitmap.add(f);
-  }
-  return bitmap;
+  return SimpleBitset.fromArray(features, hasher.universeSize);
 }
 ```
 
@@ -68,7 +67,7 @@ interface Group {
   id: number;                          // Unique identifier
   
   // Membership
-  members: RoaringBitmap;              // The "essential" identities
+  members: SimpleBitset;               // The "essential" identities
   memberCounts: Map<number, number>;   // Counters per identity (sparse)
   
   // Metadata
@@ -76,10 +75,8 @@ interface Group {
   age: number;                         // Epochs since creation
   lastUsed: number;                    // Timestamp last activation
   usageCount: number;                  // Total activations
-  
-  // Deductions (outgoing)
-  deduce: RoaringBitmap;               // Linked/target groups
-  deduceCounts: Map<number, number>;   // Weights per deduction
+
+  // Note: deductions/edges are stored in DeductionGraph (DS-004), not inside the Group object.
 }
 ```
 
@@ -92,12 +89,12 @@ class GroupStore {
   private maxGroups: number;
   
   // CRUD
-  create(initialMembers: RoaringBitmap): Group;
+  create(initialMembers: SimpleBitset): Group;
   get(id: number): Group | undefined;
   delete(id: number): void;
   
   // Queries
-  getByMemberOverlap(x: RoaringBitmap, minOverlap: number): Group[];
+  getCandidates(input: SimpleBitset): Set<number>;
   getTopBySalience(k: number): Group[];
   
   // Maintenance
@@ -114,7 +111,7 @@ class GroupStore {
 
 ```typescript
 // Group-input match score
-function groupScore(group: Group, input: RoaringBitmap): number {
+function groupScore(group: Group, input: SimpleBitset): number {
   const intersection = group.members.andCardinality(input);
   const groupSize = group.members.size;
   
@@ -128,8 +125,8 @@ function groupScore(group: Group, input: RoaringBitmap): number {
 }
 
 // Reconstruction from active groups
-function reconstruct(activeGroups: Group[]): RoaringBitmap {
-  const result = new RoaringBitmap();
+function reconstruct(activeGroups: Group[], maxSize: number): SimpleBitset {
+  const result = new SimpleBitset(maxSize);
   for (const g of activeGroups) {
     result.orInPlace(g.members);
   }
@@ -137,7 +134,7 @@ function reconstruct(activeGroups: Group[]): RoaringBitmap {
 }
 
 // Surprise
-function computeSurprise(input: RoaringBitmap, reconstruction: RoaringBitmap) {
+function computeSurprise(input: SimpleBitset, reconstruction: SimpleBitset) {
   return {
     surprise: input.andNot(reconstruction),       // x \ x_hat
     hallucination: reconstruction.andNot(input),  // x_hat \ x
@@ -153,61 +150,40 @@ function computeSurprise(input: RoaringBitmap, reconstruction: RoaringBitmap) {
 
 With 1M identities and thousands of groups, maintaining a full inverted index can be expensive.
 
-### 4.2 Hybrid Strategy
+### 4.2 BelongsTo Map Strategy
 
 ```typescript
-class BitmapIndex {
-  // For frequent identities: full index
-  private hotIndex: Map<number, RoaringBitmap>;
-  
-  // For rare identities: on-demand index or shingle-based approximation
-  private coldShingles: Map<number, RoaringBitmap>; // shingle hash → groups
-  
-  // Threshold for hot vs cold
-  private hotThreshold: number;
-  private identityUsage: Map<number, number>;
-  
-  // Add a group to the index
+class BelongsToIndex {
+  // identity -> group IDs that contain the identity
+  private belongsTo: Map<number, Set<number>>;
+
   addGroup(group: Group): void {
     for (const identity of group.members) {
-      if (this.isHot(identity)) {
-        this.addToHotIndex(identity, group.id);
+      if (!this.belongsTo.has(identity)) {
+        this.belongsTo.set(identity, new Set());
       }
+      this.belongsTo.get(identity)!.add(group.id);
     }
-    this.addToShingleIndex(group);
   }
-  
-  // Find candidate groups for an input
-  getCandidates(input: RoaringBitmap): RoaringBitmap {
-    const candidates = new RoaringBitmap();
-    
-    // From hot index
+
+  removeGroup(group: Group): void {
+    for (const identity of group.members) {
+      const set = this.belongsTo.get(identity);
+      if (!set) continue;
+      set.delete(group.id);
+      if (set.size === 0) this.belongsTo.delete(identity);
+    }
+  }
+
+  // Find candidate groups for an input (union of all matching identities).
+  getCandidates(input: SimpleBitset): Set<number> {
+    const candidates = new Set<number>();
     for (const identity of input) {
-      const groups = this.hotIndex.get(identity);
-      if (groups) {
-        candidates.orInPlace(groups);
-      }
+      const groups = this.belongsTo.get(identity);
+      if (!groups) continue;
+      for (const groupId of groups) candidates.add(groupId);
     }
-    
-    // From shingle index (for cold identities)
-    const shingles = this.computeShingles(input);
-    for (const sh of shingles) {
-      const groups = this.coldShingles.get(sh);
-      if (groups) {
-        candidates.orInPlace(groups);
-      }
-    }
-    
     return candidates;
-  }
-  
-  private isHot(identity: number): boolean {
-    return (this.identityUsage.get(identity) || 0) >= this.hotThreshold;
-  }
-  
-  private computeShingles(input: RoaringBitmap): number[] {
-    // Min-hash or similar for approximate similarity
-    // ...
   }
 }
 ```
@@ -226,33 +202,15 @@ class DeductionGraph {
   // Backward links for reverse queries
   private backward: Map<number, Map<number, number>>;
   
-  // Bitsets for fast search
-  private forwardBits: Map<number, RoaringBitmap>;
-  
   // Add or strengthen a deduction
   strengthen(from: number, to: number, delta: number): void {
     // Update forward
     const fwdMap = this.forward.get(from) || new Map();
     fwdMap.set(to, (fwdMap.get(to) || 0) + delta);
     this.forward.set(from, fwdMap);
-    
-    // Update bitset when crossing the threshold
-    if (fwdMap.get(to)! >= DEDUCTION_THRESHOLD) {
-      let bits = this.forwardBits.get(from);
-      if (!bits) {
-        bits = new RoaringBitmap();
-        this.forwardBits.set(from, bits);
-      }
-      bits.add(to);
-    }
-    
+
     // Update backward (similar)
     // ...
-  }
-  
-  // Get directly deduced groups
-  getDirectDeductions(groupId: number): RoaringBitmap {
-    return this.forwardBits.get(groupId) || new RoaringBitmap();
   }
   
   // Get weighted deductions
@@ -262,28 +220,31 @@ class DeductionGraph {
   
   // BFS for indirect deductions
   expandDeductions(
-    startGroups: RoaringBitmap, 
+    startGroups: number[],
     maxDepth: number, 
     beamWidth: number
   ): Map<number, number> {
     const scores = new Map<number, number>();
-    let frontier = startGroups;
+    let frontier = new Set<number>(startGroups);
     let decay = 1.0;
     
     for (let depth = 0; depth < maxDepth; depth++) {
-      const nextFrontier = new RoaringBitmap();
+      const nextFrontier = new Map<number, number>(); // node -> accumulated score
       
       for (const g of frontier) {
         const deductions = this.getWeightedDeductions(g);
         for (const [h, weight] of deductions) {
           const score = (scores.get(h) || 0) + weight * decay;
           scores.set(h, score);
-          nextFrontier.add(h);
+          nextFrontier.set(h, (nextFrontier.get(h) || 0) + weight * decay);
         }
       }
       
       // Beam: keep only top-M
-      frontier = this.topK(nextFrontier, scores, beamWidth);
+      const sorted = [...nextFrontier.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, beamWidth);
+      frontier = new Set(sorted.map(([id]) => id));
       decay *= DECAY_FACTOR;
     }
     
@@ -301,8 +262,8 @@ class DeductionGraph {
 ```typescript
 interface Episode {
   timestamp: number;
-  input: RoaringBitmap;          // Original input
-  activeGroups: number[];        // Activated groups
+  inputBits: number[];           // Original input (as sparse bit indices)
+  activeGroupIds: number[];      // Activated groups
   surprise: number;              // Surprise magnitude
   reward: number;                // RL signal (if any)
   importance: number;            // Computed at record time
@@ -364,15 +325,19 @@ interface SerializedState {
   deductions: SerializedDeduction[];
   
   // Indexes (optional, can be rebuilt)
-  belongsToHot?: {identity: number, groups: number[]}[];
+  belongsTo?: { identity: number, groups: number[] }[];
   
   // Replay buffer
   replayBuffer?: SerializedEpisode[];
 }
 
+type SerializedBitset =
+  | { type: 'sparse', bits: number[], maxSize: number }
+  | { type: 'dense', data: string, maxSize: number };
+
 interface SerializedGroup {
   id: number;
-  members: number[];         // Or base64-encoded Roaring
+  members: SerializedBitset;
   memberCounts: [number, number][];  // [identity, count][]
   salience: number;
   age: number;
@@ -380,27 +345,15 @@ interface SerializedGroup {
 }
 ```
 
-### 7.2 Serialized Roaring Format
+### 7.2 Serialized Bitset Format
 
 ```typescript
-class RoaringSerializer {
-  // Efficient serialization
-  static toBuffer(bitmap: RoaringBitmap): Buffer {
-    return bitmap.serialize();  // Built-in roaring method
-  }
-  
-  static toBase64(bitmap: RoaringBitmap): string {
-    return bitmap.serialize().toString('base64');
-  }
-  
-  static fromBuffer(buffer: Buffer): RoaringBitmap {
-    return RoaringBitmap.deserialize(buffer);
-  }
-  
-  static fromBase64(str: string): RoaringBitmap {
-    return RoaringBitmap.deserialize(Buffer.from(str, 'base64'));
-  }
-}
+// This mirrors the current SimpleBitset JSON shape:
+// - Sparse: store explicit set bits
+// - Dense: store the backing Uint32Array as base64
+type SerializedBitset =
+  | { type: 'sparse', bits: number[], maxSize: number }
+  | { type: 'dense', data: string, maxSize: number };
 ```
 
 ---
@@ -413,10 +366,10 @@ class RoaringSerializer {
 |-----------|----------|-------------------|
 | One group (avg) | ~2KB | - |
 | All groups | G * 2KB | ~20MB |
-| Hot index (10%) | 0.1N * 8B * avgGroups | ~80MB |
+| BelongsTo index | Σ identity fan-out | depends on caps |
 | Deduction graph | G * avgDeduce * 8B | ~8MB |
 | Replay buffer (50K) | 50K * 500B | ~25MB |
-| **Total** | - | **~135MB** |
+| **Total** | - | **varies** |
 
 ### 8.2 Operation Complexity
 
@@ -433,17 +386,11 @@ class RoaringSerializer {
 
 ## 9. Recommended Implementation
 
-### 9.1 Node.js Packages
+### 9.1 Runtime Dependencies
 
-```json
-{
-  "dependencies": {
-    "roaring": "^2.0.0",
-    "msgpack-lite": "^0.1.26",
-    "lru-cache": "^10.0.0"
-  }
-}
-```
+- No external runtime dependencies.
+- Use in-repo data structures (`SimpleBitset`, `GroupStore`, `DeductionGraph`, `ReplayBuffer`).
+- If on-disk compression is needed, use Node.js built-ins (`node:zlib`) for gzip-compressed JSON.
 
 ### 9.2 Alternative: Custom Bitset for Small Sets
 
@@ -491,5 +438,4 @@ class SimpleBitset {
 
 ## 10. References
 
-- Roaring Bitmap Paper: Chambi et al., "Better bitmap performance with Roaring bitmaps"
 - Sparse Distributed Representations: SDR theory from Numenta

@@ -24,28 +24,6 @@ Each task includes:
 
 ## Chapter 4 — Reporting & Visualization (Non-core, Useful for Review)
 
-### RPT-002 — Abstract primitives profile dashboard (Discovery-only)
-Chapter: Reporting & Visualization
-
-Description:
-Discovery results are easier to act on with a dashboard that highlights weaknesses and correlates them with config choices.
-
-Proposal:
-- Generate an HTML report from Discovery results JSON:
-  - per-system score + TTC
-  - tier summaries
-  - “weakness list” for targeted optimization
-- Implement as static HTML + inline JS (no external deps).
-
-Expected file changes:
-- NEW: `evals/abstract_primitives/dashboard.mjs`
-- NEW: `evals/abstract_primitives/templates/profile.html`
-
-Check:
-- Opening the generated HTML displays all systems and matches the JSON metrics.
-
----
-
 ## Chapter 5 — Documentation & Spec Hygiene
 
 ### DOC-001 — Fix English-only policy violations and DS inconsistencies
