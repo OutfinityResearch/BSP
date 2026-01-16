@@ -45,9 +45,9 @@
             </div>
 
             <h3>Structure of a Group</h3>
-            <pre><code>interface Group {
+<pre><code>interface Group {
     id: number;              // Unique identifier (e.g., 42)
-    members: RoaringBitmap;  // The features (tokens) that define this group
+    members: Bitset;         // The features (tokens) that define this group
     salience: number;        // How useful/important this group is (0.0 - 1.0)
     
     // Metadata

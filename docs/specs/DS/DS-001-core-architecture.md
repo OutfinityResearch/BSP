@@ -1,22 +1,40 @@
 # DS-001: Core Architecture - BSP (Bitset System for Prediction)
 
-**Version**: 1.0  
-**Status**: Draft  
+**Version**: 1.1  
+**Status**: Updated  
 **Author**: BSP Team  
-**Date**: 2026-01-15
+**Date**: 2026-01-15  
+**Updated**: 2026-01-16
 
 ---
 
 ## 1. Overview
 
-BSP is a CPU-based continuous-learning system that uses bitsets as representations and an MDL-style compression/minimum-surprise objective, without relying on Transformer architectures.
+BSP is a CPU-based continuous-learning system that uses bitsets as representations and an MDL-style compression objective to achieve **language understanding through compression**.
 
-### 1.1 Fundamental Principles
+### 1.1 Core Principle: Compression = Understanding
+
+**BSP's fundamental insight**: 
+> Good compression requires understanding. To predict what comes next, you must understand grammar, semantics, and context.
+
+**Compression is NOT the goal** - it's a measure of understanding:
+- Better compression → Better prediction → Better understanding
+- Grammar violations → Poor compression → System learns to avoid them
+- Coherent text → Good compression → System learns coherence
+
+**Applications**:
+- Text generation (predict next tokens)
+- Sentence completion (know when to stop)
+- Grammatical understanding (agreement, dependencies)
+- Semantic reasoning (deduction, inference)
+
+### 1.2 Fundamental Principles
 
 - **Essence**: Groups become a stable "identity of meaning"
 - **Grouping**: Identities stay together when they co-occur predictably
 - **Deduction**: Links between groups learned from temporal co-occurrence + conditioning
 - **Continuous Learning**: Continuous RL signals from interactions
+- **Grammar Emerges**: Grammatical structure discovered through compression pressure
 
 ### 1.2 Differences vs Traditional LLMs
 
@@ -27,6 +45,10 @@ BSP is a CPU-based continuous-learning system that uses bitsets as representatio
 | Inference | Matrix forward pass | Set intersections + popcount |
 | Learning | Offline batch training | Online, incremental |
 | Interpretability | Opaque | Groups = explicit identity lists |
+| Grammar | Implicit in weights | Explicit features + constraints |
+| Objective | Cross-entropy loss | MDL compression + grammar |
+
+**Key Difference**: BSP makes grammar and semantics **explicit and inspectable**, not hidden in weights.
 
 ---
 
@@ -72,6 +94,9 @@ BSP is a CPU-based continuous-learning system that uses bitsets as representatio
 
 ### 3.1 Input Processing
 
+Terminology note:
+- `Bitset` refers to the identity-bitset representation described in `docs/specs/DS/DS-002-data-structures.md`.
+
 ```
 Text Input
     │
@@ -87,7 +112,7 @@ Text Input
     │
     ▼
 ┌─────────────┐
-│ Bitset      │ → x: RoaringBitmap
+│ Bitset      │ → x: Bitset
 └─────────────┘
     │
     ▼
@@ -216,6 +241,6 @@ Where:
 
 ## 8. References
 
-- Roaring Bitmaps: https://roaringbitmap.org/
+- Bitset representation: see DS-002 (Data Structures).
 - MDL (Minimum Description Length): Rissanen, 1978
 - Predictive Coding: Rao & Ballard, 1999

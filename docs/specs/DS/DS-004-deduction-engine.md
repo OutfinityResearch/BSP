@@ -11,6 +11,9 @@
 
 The BSP Deduction Engine manages causal/temporal links between groups, enabling multi-hop prediction and reasoning without a neural forward pass.
 
+Terminology note:
+- `Bitset` refers to the identity-bitset representation described in `docs/specs/DS/DS-002-data-structures.md`.
+
 ---
 
 ## 2. Types of Deductions
@@ -54,7 +57,7 @@ class DeductionGraph {
   private forward: Map<number, Map<number, number>>;
   
   // Bitsets for fast search
-  private forwardBits: Map<number, RoaringBitmap>;
+  private forwardBits: Map<number, Bitset>;
   
   // Backward links for reverse queries
   private backward: Map<number, Map<number, number>>;
@@ -122,7 +125,7 @@ class DeductionGraph {
     if (newWeight >= DEDUCTION_THRESHOLD && currentWeight < DEDUCTION_THRESHOLD) {
       let bits = this.forwardBits.get(from);
       if (!bits) {
-        bits = new RoaringBitmap();
+        bits = new Bitset();
         this.forwardBits.set(from, bits);
       }
       bits.add(to);
@@ -293,12 +296,12 @@ function predictNextBits(
   context: Group[],
   graph: DeductionGraph,
   store: GroupStore
-): RoaringBitmap {
+): Bitset {
   // Group prediction
   const predictedGroups = predictNextGroups(context, graph, store, TOP_K_PREDICT);
   
   // Reconstruction into bits
-  const result = new RoaringBitmap();
+  const result = new Bitset();
   
   for (const {groupId, score} of predictedGroups) {
     if (score < MIN_PREDICTION_SCORE) continue;

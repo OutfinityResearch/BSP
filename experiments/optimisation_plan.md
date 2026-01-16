@@ -56,43 +56,17 @@
 - Build cost > search savings for current context
 - See: `experiments/EXPERIMENT_SUFFIX_ARRAY.md`
 
+### ⚠️ Frequency-Weighted Coding (Tested & Partial)
+- Implemented but breaks operator cost comparison
+- COPY ops dropped 82% (inconsistent costs)
+- Needs major refactoring of all operators
+- See: `experiments/EXPERIMENT_FREQUENCY_CODING.md`
+
 ---
 
 ## Next Optimizations (Priority Order)
 
-### 1. Frequency-Weighted Coding 📊
-
-**Problem**: All words cost log₂(vocab) ≈ 11 bits, high-frequency words should cost less
-
-**Solution**: Huffman-style encoding
-- Track word frequencies during training
-- Build code table (top 100 words: ~7 bits, rare: ~14 bits)
-- Average: ~9 bits (18% reduction)
-
-**Expected Impact**:
-- BPC: 2.21 → 1.90
-- Throughput: No change
-
-**Implementation**:
-```javascript
-// Track frequencies
-wordFreq = new Map();
-for (const word of words) {
-  wordFreq.set(word, (wordFreq.get(word) || 0) + 1);
-}
-
-// Build Huffman tree
-codeTable = buildHuffman(wordFreq);
-
-// Update cost calculations
-cost = codeTable.get(word).bitLength;
-```
-
-**Note**: Requires actual encoding implementation, not just cost calculation
-
----
-
-### 4. N-gram Pruning 🔍
+### 1. N-gram Pruning 🔍
 
 **Problem**: Vocabulary explosion (4,483 tokens) from n-grams (1-3)
 

@@ -35,13 +35,13 @@
             <h1>Data Structures</h1>
             <p>BSP is optimized for CPU performance using specialized data structures. The primary challenge in sparse systems is memory efficiency and intersection speed.</p>
 
-            <h2>Bitsets & Roaring Bitmaps</h2>
-            <p>Instead of dense float vectors, BSP uses <strong>Roaring Bitmaps</strong>. A bitset represents a set of integers (Identity IDs).</p>
+            <h2>Bitsets</h2>
+            <p>Instead of dense float vectors, BSP uses <strong>bitsets</strong>. A bitset represents a set of integers (Identity IDs).</p>
             
             <div class="callout">
                 <h4>Why Bitsets?</h4>
                 <p>Classic ML uses embeddings (e.g., <code>[0.1, -0.5, 0.9, ...]</code>). Operations are <code>O(N)</code> multiplications.</p>
-                <p>BSP uses sets (e.g., <code>{10, 55, 1009}</code>). Intersection is very fast. Roaring Bitmaps compress these sets, often requiring only a few bytes for sparse data.</p>
+                <p>BSP uses sets (e.g., <code>{10, 55, 1009}</code>). Intersection is very fast. A bitset representation is compact and supports fast bulk operations.</p>
             </div>
 
             <h3>Identity Universe</h3>
@@ -54,7 +54,7 @@
   id: number;                          // Unique identifier
   
   // Membership
-  members: RoaringBitmap;              // The "essence" of the group
+	  members: Bitset;                     // The "essence" of the group
   memberCounts: Map<number, number>;   // How often each feature appeared
   
   // Metadata

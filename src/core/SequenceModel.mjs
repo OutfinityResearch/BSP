@@ -431,6 +431,83 @@ class SequenceModel {
   }
 
   /**
+   * Compute the sequence cost (negative log probability) for a token sequence.
+   * This is the fundamental measure: unlikely sequences cost more bits.
+   * 
+   * Cost = -Σ log₂(P(token_i | token_{i-1}))
+   * 
+   * Grammar emerges naturally: "the cats are" has low cost (frequent),
+   * "the cats is" has high cost (rare/unseen).
+   * 
+   * @param {string[]} tokens - Sequence of tokens
+   * @param {object} [options]
+   * @param {boolean} [options.perToken=false] - Return cost per token instead of total
+   * @param {number} [options.unkPenalty=10] - Bits penalty for unknown transitions
+   * @returns {number} Cost in bits (lower = more likely sequence)
+   */
+  getSequenceCost(tokens, options = {}) {
+    const { perToken = false, unkPenalty = 10 } = options;
+    
+    if (!tokens || tokens.length < 2) {
+      return 0;
+    }
+    
+    let totalCost = 0;
+    let transitionCount = 0;
+    
+    for (let i = 0; i < tokens.length - 1; i++) {
+      const current = tokens[i];
+      const next = tokens[i + 1];
+      
+      // Get transition probability (with smoothing if configured)
+      let prob = this.getTransitionProbSmoothed(current, next);
+      
+      // If no transition data, use unigram backoff
+      if (prob === 0) {
+        prob = this.getUnigramProb(next);
+      }
+      
+      // Compute cost in bits
+      if (prob > 0) {
+        // Cost = -log₂(prob)
+        totalCost += -Math.log2(prob);
+      } else {
+        // Unknown transition: apply penalty
+        // This naturally penalizes unseen/ungrammatical sequences
+        totalCost += unkPenalty;
+      }
+      
+      transitionCount++;
+    }
+    
+    if (perToken && transitionCount > 0) {
+      return totalCost / transitionCount;
+    }
+    
+    return totalCost;
+  }
+
+  /**
+   * Compare two sequences and return which is more likely.
+   * Useful for minimal pair evaluation (like BLiMP).
+   * 
+   * @param {string[]} seq1 - First sequence
+   * @param {string[]} seq2 - Second sequence
+   * @returns {{winner: 1|2, cost1: number, cost2: number, ratio: number}}
+   */
+  compareSequences(seq1, seq2) {
+    const cost1 = this.getSequenceCost(seq1);
+    const cost2 = this.getSequenceCost(seq2);
+    
+    return {
+      winner: cost1 <= cost2 ? 1 : 2,
+      cost1,
+      cost2,
+      ratio: cost1 > 0 ? cost2 / cost1 : Infinity,
+    };
+  }
+
+  /**
    * Serialize to JSON
    * @returns {object}
    */

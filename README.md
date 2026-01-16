@@ -36,13 +36,28 @@ Open `docs/index.html` in a browser for the full documentation portal.
 | [DS-003](docs/specs/DS/DS-003-learning-algorithms.md) | Learning Algorithms | Online learning, group lifecycle, decay |
 | [DS-004](docs/specs/DS/DS-004-deduction-engine.md) | Deduction Engine | Temporal links, multi-hop reasoning |
 | [DS-005](docs/specs/DS/DS-005-rl-importance.md) | RL Integration | Importance, rewards, RL pressure |
-| [DS-006](docs/specs/DS/DS-006-http-server-chat.md) | HTTP Server & Chat | REST API, WebSocket, chat commands |
+| [DS-006](docs/specs/DS/DS-006-http-server-chat.md) | HTTP Server & Chat | REST API, chat commands |
 | [DS-007](docs/specs/DS/DS-007-serialization-sessions.md) | Serialization | State persistence, sessions, snapshots |
 | [DS-008](docs/specs/DS/DS-008-benchmarks-comparison.md) | Benchmarks | Datasets, metrics, GPT-2 comparison |
 
 ### Implementation
 
-See [docs/ROADMAP.md](docs/ROADMAP.md) for the complete 14-week implementation plan.
+See [`backlog.md`](backlog.md) for the consolidated implementation backlog.
+
+## Discovery Evals (Abstract Primitives)
+
+The synthetic Discovery suite is designed for architecture discovery and learning-speed diagnostics.
+
+```bash
+# Generate all synthetic datasets (deterministic)
+node evals/abstract_primitives/generate.mjs --all --seed=1
+
+# Train+evaluate BSP on all systems and save results
+node evals/abstract_primitives/evaluate.mjs --all --seed=1
+
+# Generate a static dashboard HTML report
+node evals/abstract_primitives/dashboard.mjs --seed=1
+```
 
 ## Quick Start (Coming Soon)
 
@@ -120,4 +135,4 @@ MIT
 
 ## Contributing
 
-See the roadmap and pick a task! All contributions welcome.
+See [`backlog.md`](backlog.md) and pick a task. All contributions welcome.

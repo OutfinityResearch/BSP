@@ -39,12 +39,7 @@
                 <span class="term-tag">Core</span>
             </div>
             <p>A data structure that compactly stores a set of integers. In BSP, bitsets represent the presence of features (identities). Operations like intersection (AND) and union (OR) are extremely fast.</p>
-
-            <div class="term-header">
-                <h2 id="roaring-bitmap">Roaring Bitmap</h2>
-                <span class="term-tag">Optimization</span>
-            </div>
-            <p>A compressed bitmap data structure that is efficient for both sparse and dense data. BSP can use Roaring Bitmaps as a high-performance backend for set operations. In this repository, the default engine uses a custom <code>SimpleBitset</code> implementation for portability (no external dependencies).</p>
+            <p><strong>Implementation:</strong> This repository uses an in-repo implementation (<code>SimpleBitset</code>) described in the Data Structures spec (DS-002).</p>
 
             <div class="term-header">
                 <h2 id="identity">Identity</h2>

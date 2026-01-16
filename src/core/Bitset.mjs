@@ -233,6 +233,154 @@ class SimpleBitset {
     return result;
   }
 
+  // ============================================================
+  // PRIMITIVE OPERATIONS FOR GEOMETRIC COMPRESSION (DS-023)
+  // ============================================================
+
+  /**
+   * XOR operation (symmetric difference / toggle bits)
+   * Core primitive for transforms: δ ⊕ a
+   * @param {SimpleBitset} other
+   * @returns {SimpleBitset} New bitset with XOR result
+   */
+  xor(other) {
+    const result = new SimpleBitset(Math.max(this.maxSize, other.maxSize));
+    const maxWords = Math.max(this.wordCount, other.wordCount);
+    for (let i = 0; i < maxWords; i++) {
+      const a = i < this.wordCount ? this.words[i] : 0;
+      const b = i < other.wordCount ? other.words[i] : 0;
+      result.words[i] = a ^ b;
+    }
+    result._dirty = true;
+    return result;
+  }
+
+  /**
+   * In-place XOR
+   * @param {SimpleBitset} other
+   */
+  xorInPlace(other) {
+    const minWords = Math.min(this.wordCount, other.wordCount);
+    for (let i = 0; i < minWords; i++) {
+      this.words[i] ^= other.words[i];
+    }
+    this._dirty = true;
+    this._sparseBits = null;
+  }
+
+  /**
+   * NOT operation (complement / flip all bits)
+   * Core primitive: ¬a
+   * Note: Only flips bits within maxSize range
+   * @returns {SimpleBitset} New bitset with complement
+   */
+  not() {
+    const result = new SimpleBitset(this.maxSize);
+    for (let i = 0; i < this.wordCount; i++) {
+      result.words[i] = ~this.words[i];
+    }
+    // Mask off bits beyond maxSize in the last word
+    const remainingBits = this.maxSize % 32;
+    if (remainingBits !== 0) {
+      const lastWordIndex = this.wordCount - 1;
+      const mask = (1 << remainingBits) - 1;
+      result.words[lastWordIndex] &= mask;
+    }
+    result._dirty = true;
+    return result;
+  }
+
+  /**
+   * In-place NOT
+   */
+  notInPlace() {
+    for (let i = 0; i < this.wordCount; i++) {
+      this.words[i] = ~this.words[i];
+    }
+    // Mask off bits beyond maxSize in the last word
+    const remainingBits = this.maxSize % 32;
+    if (remainingBits !== 0) {
+      const lastWordIndex = this.wordCount - 1;
+      const mask = (1 << remainingBits) - 1;
+      this.words[lastWordIndex] &= mask;
+    }
+    this._dirty = true;
+    this._sparseBits = null;
+  }
+
+  /**
+   * ROTATE/PERMUTE operation (circular shift of all bits)
+   * Core primitive for binding: π_k(a)
+   * @param {number} amount - Positive = rotate left, negative = rotate right
+   * @returns {SimpleBitset} New bitset with rotated bits
+   */
+  rotate(amount) {
+    const result = new SimpleBitset(this.maxSize);
+    // Normalize amount to [0, maxSize)
+    amount = ((amount % this.maxSize) + this.maxSize) % this.maxSize;
+    if (amount === 0) {
+      result.words.set(this.words);
+      result._dirty = this._dirty;
+      result._size = this._size;
+      return result;
+    }
+
+    // For each set bit, compute its new position
+    for (const bit of this) {
+      const newPos = (bit + amount) % this.maxSize;
+      result.add(newPos);
+    }
+    return result;
+  }
+
+  /**
+   * In-place AND
+   * @param {SimpleBitset} other
+   */
+  andInPlace(other) {
+    const minWords = Math.min(this.wordCount, other.wordCount);
+    for (let i = 0; i < minWords; i++) {
+      this.words[i] &= other.words[i];
+    }
+    // Zero out words beyond other's range
+    for (let i = minWords; i < this.wordCount; i++) {
+      this.words[i] = 0;
+    }
+    this._dirty = true;
+    this._sparseBits = null;
+  }
+
+  /**
+   * Compute 64-bit hash (fingerprint) for verification
+   * Uses FNV-1a style hashing on the word array
+   * @returns {bigint}
+   */
+  hash64() {
+    // FNV-1a 64-bit constants
+    let hash = 0xcbf29ce484222325n;
+    const prime = 0x100000001b3n;
+    
+    for (let i = 0; i < this.wordCount; i++) {
+      const word = this.words[i];
+      if (word !== 0) {
+        // Hash the word index and value
+        hash ^= BigInt(i);
+        hash = (hash * prime) & 0xFFFFFFFFFFFFFFFFn;
+        hash ^= BigInt(word >>> 0); // Ensure unsigned
+        hash = (hash * prime) & 0xFFFFFFFFFFFFFFFFn;
+      }
+    }
+    return hash;
+  }
+
+  /**
+   * Popcount (explicit method, size getter also works)
+   * @returns {number}
+   */
+  popcount() {
+    return this.size;
+  }
+
   /**
    * Compute Jaccard similarity
    * @param {SimpleBitset} other

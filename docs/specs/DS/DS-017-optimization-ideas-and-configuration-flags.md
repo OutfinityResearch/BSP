@@ -50,22 +50,22 @@ Use a fast approximate stage to prune candidates, then run exact scoring on a sm
 Provide a pluggable backend for group membership and large set ops:
 
 - `SimpleBitset` (portable, fast `has()`, dense memory)
-- `Roaring` (compressed, fast bulk AND/OR/DIFF, native dep)
+- `AdaptiveBitset` (in-repo hybrid sparse/dense representation)
 
-Important: if the scoring path relies on many `has()` calls, Roaring may not help unless we refactor to use bulk ops (e.g. `andCardinality` implemented natively).
+Important: if the scoring path relies on many `has()` calls, a compressed backend may not help unless we refactor to use bulk ops (e.g. `andCardinality`).
 
 **Recommendation**
 - Keep `SimpleBitset` for very small universes and low group counts.
-- Prefer Roaring or an adaptive sparse container for large universes (≥ 1e6) or large group stores.
+- Prefer an adaptive sparse container for large universes (≥ 1e6) or large group stores.
 
 ### 3.2 Adaptive Group Members (Small-Set Fast Path)
 
 Instead of storing every group as a dense bitset, use an adaptive representation:
 
 - small groups: sorted `Uint32Array` (binary search for `has`, fast intersection via two-pointer)
-- large groups: bitset/roaring container (fast bulk operations)
+- large groups: bitset container (fast bulk operations)
 
-This mirrors Roaring’s container approach and can remove most memory pressure without a native dependency.
+This mirrors a containerized bitset approach and can remove most memory pressure without a native dependency.
 
 ### 3.3 Capped Inverted Index for “Hot” Identities
 
@@ -218,8 +218,7 @@ This is a classic “hard example mining” loop and improves sample efficiency.
 - `maintenance.pruneInterval` (number)
 
 **Bitset Backend**
-- `bitset.backend` (`"simple"|"roaring"|"adaptive"`)
-- `bitset.roaringWasmOrNative` (`"native"|"wasm"`) (optional)
+- `bitset.backend` (`"simple"|"adaptive"`)
 
 ### 5.2 Training Script Flags
 
@@ -247,7 +246,7 @@ Applies to `scripts/pretrain.mjs` / future train pipelines:
 
 ## 7. Next Steps
 
-1. Choose `bitset.backend` strategy (simple vs adaptive vs roaring).
+1. Choose `bitset.backend` strategy (simple vs adaptive).
 2. Implement index caps and hot-token subsampling.
 3. Add a streaming training pipeline with dedup + filtering.
 4. Benchmark on WikiText-2 / Gutenberg corpus with throughput + quality proxies.

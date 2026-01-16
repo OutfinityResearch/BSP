@@ -97,13 +97,13 @@
             <p>The raw input string is split into words (tokens). Each token is hashed to a unique integer ID (0 to 1,000,000). We use n-grams (e.g., "artificial intelligence") to capture local context immediately.</p>
 
             <h2 id="step-2-encoding">2. Bitset Encoding</h2>
-            <p>The list of IDs is converted into a <code>RoaringBitmap</code>. This single object represents the entire input state efficiently.</p>
+            <p>The list of IDs is converted into a <code>Bitset</code>. This single object represents the entire input state efficiently.</p>
             <pre><code>Input: "The cat sat"
 IDs: [104, 552, 891]
 Bitset: {104, 552, 891}</code></pre>
 
             <h2 id="step-3-activation">3. Activation</h2>
-            <p>The system queries the <strong>BitmapIndex</strong> to find groups that contain these features. It scores them based on overlap and selects the Top-K (e.g., 16) "Active Groups". These groups form the system's "Understanding" of the input.</p>
+            <p>The system queries an <strong>inverted index</strong> to find groups that contain these features. It scores them based on overlap and selects the Top-K (e.g., 16) "Active Groups". These groups form the system's "Understanding" of the input.</p>
 
             <h2 id="step-4-surprise">4. Surprise Calculation</h2>
             <p>The system reconstructs the features from the Active Groups and compares them to the actual input.</p>

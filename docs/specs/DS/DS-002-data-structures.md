@@ -62,9 +62,15 @@ function encode(text: string): SimpleBitset {
 
 ### 3.1 Group Structure
 
+Groups can represent either CONTENT (what something is) or TRANSFORM (how to go from A to B).
+Both use the same representation space; the distinction is in how they're used.
+
 ```typescript
 interface Group {
   id: number;                          // Unique identifier
+  
+  // Type: CONTENT or TRANSFORM (DS-023)
+  type: 'CONTENT' | 'TRANSFORM';       // Default: 'CONTENT'
   
   // Membership
   members: SimpleBitset;               // The "essential" identities
@@ -77,7 +83,35 @@ interface Group {
   usageCount: number;                  // Total activations
 
   // Note: deductions/edges are stored in DeductionGraph (DS-004), not inside the Group object.
+  
+  // === TRANSFORM-specific fields (only when type === 'TRANSFORM') ===
+  
+  // Decomposition into primitive operations (DS-023)
+  primitives?: PrimitiveOp[];          // Sequence of primitives that compose this transform
+  
+  // Simple XOR pattern (most common case)
+  deltaPattern?: SimpleBitset;         // For simple XOR transforms: the delta bits
+  
+  // Ranking for cost model
+  rank?: number;                       // Position in frequency ranking (0 = most frequent)
+  compressionSavings?: number;         // Total bits saved by using this transform
 }
+
+// Primitive operation types (DS-023)
+interface PrimitiveOp {
+  type: 'XOR' | 'AND' | 'OR' | 'PERMUTE' | 'IDENTITY' | 'NEGATE';
+  operand?: SimpleBitset | number;     // Mask/delta for XOR/AND/OR, rotation amount for PERMUTE
+}
+
+// Primitive operation costs (in bits)
+const PRIMITIVE_COSTS = {
+  IDENTITY: 0,        // Free - no change
+  XOR: 2,             // 2 bits (opcode)
+  AND: 2,
+  OR: 2,
+  PERMUTE: 4,         // 2 bits opcode + 2 bits rotation amount
+  NEGATE: 2,
+};
 ```
 
 ### 3.2 GroupStore
@@ -307,9 +341,88 @@ class ReplayBuffer {
 
 ---
 
-## 7. Serialization
+## 7. Attention Buffer and Persistence (DS-024)
 
-### 7.1 On-disk Format
+### 7.1 Attention Buffer
+
+The Attention Buffer is a priority queue of unresolved compression problems.
+Items with high surprise (compression failures) get priority.
+
+```typescript
+interface AttentionItem {
+  input: SimpleBitset;                 // The problematic input
+  surprise: number;                    // How badly compression failed (bits unexplained)
+  context?: number[];                  // Group IDs from context
+  timestamp: number;                   // When added
+  recurrence: number;                  // How many similar items seen
+  priority: number;                    // Computed priority for queue ordering
+}
+
+class AttentionBuffer {
+  items: PriorityQueue<AttentionItem>; // Max-heap by priority
+  maxItems: number;                    // Capacity limit
+  
+  // Add a problem to the buffer
+  add(input: SimpleBitset, surprise: number, context?: number[]): void;
+  
+  // Get top N problems for sleep processing
+  getTopProblems(n: number): AttentionItem[];
+  
+  // Mark a problem as resolved
+  markResolved(item: AttentionItem): void;
+  
+  // Get unresolved items (for session end persistence)
+  getUnresolved(): AttentionItem[];
+}
+```
+
+### 7.2 Persistent Concerns
+
+Problems that recur across sessions are promoted to Persistent Concerns.
+They get priority boosts in future sessions.
+
+```typescript
+interface PersistentConcern {
+  signature: SimpleBitset;             // Common pattern in failed compressions
+  occurrences: number;                 // Total times seen
+  firstSeen: number;                   // Timestamp
+  lastSeen: number;                    // Timestamp
+  sessions: number;                    // How many sessions it appeared in
+  persistenceBonus: number;            // Priority multiplier (grows with sessions)
+  attempts: AttemptRecord[];           // Previous solution attempts
+  bestAttempt?: AttemptRecord;         // Best partial solution so far
+}
+
+interface AttemptRecord {
+  timestamp: number;
+  transform?: number;                  // Transform ID tried
+  improvement: number;                 // Bits saved (negative if worse)
+}
+
+class PersistentConcerns {
+  concerns: Map<bigint, PersistentConcern>;  // hash -> concern
+  minRecurrence: number;               // Threshold for persistence
+  minSessions: number;                 // Minimum sessions before persisting
+  
+  // Find existing concern matching a signature
+  find(signature: SimpleBitset): PersistentConcern | undefined;
+  
+  // Add or update a concern
+  addOrUpdate(problem: AttentionItem): void;
+  
+  // Load from disk at session start
+  load(): PersistentConcern[];
+  
+  // Save to disk at session end
+  save(): void;
+}
+```
+
+---
+
+## 8. Serialization
+
+### 8.1 On-disk Format
 
 ```typescript
 interface SerializedState {
@@ -345,7 +458,7 @@ interface SerializedGroup {
 }
 ```
 
-### 7.2 Serialized Bitset Format
+### 8.2 Serialized Bitset Format
 
 ```typescript
 // This mirrors the current SimpleBitset JSON shape:
@@ -358,9 +471,9 @@ type SerializedBitset =
 
 ---
 
-## 8. Complexity and Memory
+## 9. Complexity and Memory
 
-### 8.1 Memory Estimates
+### 9.1 Memory Estimates
 
 | Structure | Estimate | For N=1M, G=10K |
 |-----------|----------|-------------------|
@@ -371,7 +484,7 @@ type SerializedBitset =
 | Replay buffer (50K) | 50K * 500B | ~25MB |
 | **Total** | - | **varies** |
 
-### 8.2 Operation Complexity
+### 9.2 Operation Complexity
 
 | Operation | Complexity |
 |----------|--------------|
@@ -384,15 +497,15 @@ type SerializedBitset =
 
 ---
 
-## 9. Recommended Implementation
+## 10. Recommended Implementation
 
-### 9.1 Runtime Dependencies
+### 10.1 Runtime Dependencies
 
 - No external runtime dependencies.
 - Use in-repo data structures (`SimpleBitset`, `GroupStore`, `DeductionGraph`, `ReplayBuffer`).
 - If on-disk compression is needed, use Node.js built-ins (`node:zlib`) for gzip-compressed JSON.
 
-### 9.2 Alternative: Custom Bitset for Small Sets
+### 10.2 Alternative: Custom Bitset for Small Sets
 
 ```typescript
 class SimpleBitset {
@@ -436,6 +549,6 @@ class SimpleBitset {
 
 ---
 
-## 10. References
+## 11. References
 
 - Sparse Distributed Representations: SDR theory from Numenta

@@ -11,6 +11,9 @@
 
 This document describes BSP's online, incremental learning algorithms, focused on minimizing surprise and enabling continuous adaptation.
 
+Terminology note:
+- `Bitset` refers to the identity-bitset representation described in `docs/specs/DS/DS-002-data-structures.md`.
+
 ---
 
 ## 2. Learning Objective
@@ -43,9 +46,9 @@ We minimize future surprise by:
 ### 3.1 Selection Algorithm
 
 ```typescript
-function activate(x: RoaringBitmap, store: GroupStore, index: BitmapIndex): Group[] {
+function activate(x: Bitset, store: GroupStore): Group[] {
   // 1. Find candidates
-  const candidates = index.getCandidates(x);
+  const candidates = store.getCandidates(x);
   
   // 2. Score each candidate
   const scores: {group: Group, score: number}[] = [];
@@ -68,7 +71,7 @@ function activate(x: RoaringBitmap, store: GroupStore, index: BitmapIndex): Grou
   return greedySelect(topK, x);
 }
 
-function computeScore(group: Group, x: RoaringBitmap): number {
+function computeScore(group: Group, x: Bitset): number {
   const intersection = group.members.andCardinality(x);
   const groupSize = group.members.size;
   
@@ -88,10 +91,10 @@ function computeScore(group: Group, x: RoaringBitmap): number {
 
 function greedySelect(
   candidates: {group: Group, score: number}[], 
-  x: RoaringBitmap
+  x: Bitset
 ): Group[] {
   const selected: Group[] = [];
-  const explained = new RoaringBitmap();
+  const explained = new Bitset();
   
   for (const {group, score} of candidates) {
     // How much does this group add?
@@ -121,8 +124,8 @@ function greedySelect(
 ```typescript
 function updateMemberships(
   activeGroups: Group[],
-  x: RoaringBitmap,
-  reconstruction: RoaringBitmap,
+  x: Bitset,
+  reconstruction: Bitset,
   importance: number
 ): void {
   const surprise = x.andNot(reconstruction);
@@ -168,7 +171,7 @@ function updateMemberships(
   }
 }
 
-function shouldExpand(group: Group, identity: number, x: RoaringBitmap): boolean {
+function shouldExpand(group: Group, identity: number, x: Bitset): boolean {
   // Expand the group if the identity co-occurs consistently with existing members
   const coOccurrence = group.members.andCardinality(x) / group.members.size;
   return coOccurrence >= CO_OCCURRENCE_THRESHOLD;
@@ -187,8 +190,8 @@ We create a new group when:
 
 ```typescript
 function maybeCreateGroup(
-  x: RoaringBitmap,
-  surprise: RoaringBitmap,
+  x: Bitset,
+  surprise: Bitset,
   activeGroups: Group[],
   store: GroupStore,
   recentPatterns: PatternTracker
@@ -218,12 +221,12 @@ function maybeCreateGroup(
 
 class PatternTracker {
   private patterns: Map<number, {
-    bitmap: RoaringBitmap,
+    bitmap: Bitset,
     count: number,
     lastSeen: number
   }>;
   
-  record(hash: number, pattern: RoaringBitmap): number {
+  record(hash: number, pattern: Bitset): number {
     const existing = this.patterns.get(hash);
     
     if (existing) {
@@ -242,8 +245,8 @@ class PatternTracker {
     }
   }
   
-  getStableCore(hash: number): RoaringBitmap {
-    return this.patterns.get(hash)?.bitmap || new RoaringBitmap();
+  getStableCore(hash: number): Bitset {
+    return this.patterns.get(hash)?.bitmap || new Bitset();
   }
 }
 ```
@@ -321,8 +324,8 @@ function maybeSplit(store: GroupStore, stats: ActivationStats): void {
 
 function splitGroup(group: Group, store: GroupStore): void {
   // Identify core vs peripheral based on counts
-  const coreIdentities = new RoaringBitmap();
-  const peripheralIdentities = new RoaringBitmap();
+  const coreIdentities = new Bitset();
+  const peripheralIdentities = new Bitset();
   
   const counts = Array.from(group.memberCounts.entries());
   const medianCount = computeMedian(counts.map(([_, c]) => c));
@@ -491,7 +494,178 @@ async function consolidate(
 
 ---
 
-## 10. Complete Pseudocode: Training Step
+## 10. Transform Observation (DS-023 Integration)
+
+### 10.1 Observing Potential Transforms
+
+During learning, we observe transitions between representations to discover potential transforms.
+This is lightweight - actual discovery happens during sleep (DS-010).
+
+```typescript
+// Candidate transform storage (pending discovery)
+class CandidateTransforms {
+  candidates: Map<bigint, CandidateTransform>;  // hash -> candidate
+  maxCandidates: number = 10000;
+}
+
+interface CandidateTransform {
+  delta: Bitset;                    // XOR of source and target
+  observations: TransformObservation[];
+  firstSeen: number;
+  lastSeen: number;
+}
+
+interface TransformObservation {
+  source: Bitset;
+  target: Bitset;
+  context?: number[];               // Group IDs from context
+  timestamp: number;
+}
+
+function observePotentialTransform(
+  source: Bitset,
+  target: Bitset,
+  candidates: CandidateTransforms,
+  transformStore: GroupStore
+): void {
+  const delta = source.xor(target);
+  const deltaHash = delta.hash64();
+  
+  // Quick check: is this similar to existing transforms?
+  const existingTransform = findSimilarTransform(delta, transformStore, 0.9);
+  
+  if (existingTransform) {
+    // Strengthen existing transform
+    existingTransform.usageCount++;
+    return;
+  }
+  
+  // Store as candidate for sleep phase discovery
+  const existing = candidates.candidates.get(deltaHash);
+  
+  if (existing) {
+    existing.observations.push({
+      source: source.clone(),
+      target: target.clone(),
+      timestamp: Date.now(),
+    });
+    existing.lastSeen = Date.now();
+  } else {
+    candidates.candidates.set(deltaHash, {
+      delta: delta.clone(),
+      observations: [{
+        source: source.clone(),
+        target: target.clone(),
+        timestamp: Date.now(),
+      }],
+      firstSeen: Date.now(),
+      lastSeen: Date.now(),
+    });
+  }
+  
+  // Evict old candidates if over capacity
+  if (candidates.candidates.size > candidates.maxCandidates) {
+    evictOldestCandidate(candidates);
+  }
+}
+
+function findSimilarTransform(
+  delta: Bitset,
+  transformStore: GroupStore,
+  threshold: number
+): Group | null {
+  // Only check TRANSFORM type groups
+  for (const group of transformStore.getAll()) {
+    if (group.type !== 'TRANSFORM') continue;
+    if (!group.deltaPattern) continue;
+    
+    const similarity = delta.jaccard(group.deltaPattern);
+    if (similarity >= threshold) {
+      return group;
+    }
+  }
+  return null;
+}
+```
+
+### 10.2 When to Observe
+
+Observe transforms when:
+1. Sequential tokens are processed (temporal transitions)
+2. Similar inputs produce different outputs (semantic variations)
+3. Context-driven predictions (deduction paths)
+
+```typescript
+function trainStepWithTransformObservation(
+  input: string,
+  context: Group[],
+  engine: BSPEngine,
+  previousRepresentation?: Bitset
+): TrainResult {
+  // ... existing encoding and activation ...
+  const x = engine.encode(input);
+  const activeGroups = engine.activate(x);
+  const reconstruction = engine.reconstruct(activeGroups);
+  
+  // Observe potential temporal transform
+  if (previousRepresentation) {
+    observePotentialTransform(
+      previousRepresentation,
+      x,
+      engine.candidateTransforms,
+      engine.groupStore
+    );
+  }
+  
+  // ... rest of training ...
+}
+```
+
+---
+
+## 11. Attention Buffer Integration (DS-024)
+
+### 11.1 Adding to Attention Buffer
+
+When compression fails (high surprise), add to attention buffer for later processing.
+
+```typescript
+function handleHighSurprise(
+  input: Bitset,
+  surprise: Bitset,
+  context: number[],
+  attentionBuffer: AttentionBuffer,
+  threshold: number
+): void {
+  const surpriseRatio = surprise.size / input.size;
+  
+  if (surpriseRatio >= threshold) {
+    attentionBuffer.add(input, surprise.size, context);
+  }
+}
+```
+
+### 11.2 Priority Computation
+
+```typescript
+function computeAttentionPriority(
+  input: Bitset,
+  surprise: number,
+  recurrence: number,
+  recency: number
+): number {
+  const surpriseFactor = surprise / input.size;
+  
+  // High surprise = needs attention
+  // High recurrence = persistent problem
+  // High recency = fresh problem
+  return surpriseFactor * (1 + recurrence) * recency;
+}
+```
+
+---
+
+## 12. Complete Pseudocode: Training Step
 
 ```typescript
 function trainStep(

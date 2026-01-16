@@ -24,7 +24,10 @@ class BSPEngine {
       rlPressure: options.rlPressure || 0.3,
       decayInterval: options.decayInterval || 1000,
       consolidateInterval: options.consolidateInterval || 100,
-      adaptiveUniverse: options.adaptiveUniverse !== false, // NEW: enabled by default
+      adaptiveUniverse: options.adaptiveUniverse !== false, // DS-020: enabled by default
+      // DS-022: Emergent grammar through sequence cost
+      sequenceCostWeight: options.sequenceCostWeight ?? 1.0, // Weight of sequence cost in MDL
+      unknownTransitionPenalty: options.unknownTransitionPenalty ?? 10, // Bits for unknown transitions
       ...options,
     };
 
@@ -149,12 +152,32 @@ class BSPEngine {
   }
 
   /**
-   * Compute MDL cost in bits for a given surprise count
+   * Compute MDL cost in bits for a given surprise count and token sequence.
+   * 
+   * DS-022: Complete MDL = group_cost + sequence_cost
+   *   - group_cost: measures WHAT tokens appear (co-occurrence)
+   *   - sequence_cost: measures in what ORDER they appear (grammar emerges from this)
+   * 
    * @param {number} surpriseBits - Number of unexpected bits
+   * @param {string[]} [tokens] - Token sequence for sequence cost (optional)
    * @returns {number} Cost in bits
    */
-  computeMDLCost(surpriseBits) {
-    return surpriseBits * Math.log2(this.effectiveUniverseSize);
+  computeMDLCost(surpriseBits, tokens = null) {
+    // Group-based cost: how surprising is the content?
+    const groupCost = surpriseBits * Math.log2(this.effectiveUniverseSize);
+    
+    // If no tokens or weight is 0, return just group cost
+    if (!tokens || tokens.length < 2 || this.config.sequenceCostWeight === 0) {
+      return groupCost;
+    }
+    
+    // Sequence-based cost: how likely is this word order?
+    // Grammar emerges naturally: unlikely sequences have high cost
+    const sequenceCost = this.sequenceModel.getSequenceCost(tokens, {
+      unkPenalty: this.config.unknownTransitionPenalty,
+    });
+    
+    return groupCost + this.config.sequenceCostWeight * sequenceCost;
   }
 
   /**
@@ -375,8 +398,15 @@ class BSPEngine {
     // DS-021: Template Learning - DISABLED (see EXPERIMENT_TEMPLATE_LEARNING.md)
     // Sentence buffer collection and learning removed for performance
 
-    // DS-020: Compute MDL cost with adaptive universe (group-based)
-    const groupMdlCost = this.computeMDLCost(surprise.size);
+    // DS-022: Compute MDL cost with sequence cost (grammar emerges from this)
+    // group_cost: measures WHAT tokens appear
+    // sequence_cost: measures in what ORDER (frequent sequences = grammatical)
+    const groupMdlCost = this.computeMDLCost(surprise.size, wordTokens);
+    
+    // Compute sequence cost separately for metrics
+    const sequenceCost = wordTokens.length >= 2 
+      ? this.sequenceModel.getSequenceCost(wordTokens, { unkPenalty: this.config.unknownTransitionPenalty })
+      : 0;
 
     // DS-021: Compute compression machine cost (program-based)
     let programCost = Infinity;
@@ -386,10 +416,13 @@ class BSPEngine {
       // Use previous context (before adding current tokens)
       const prevContext = this.contextTokens.slice(0, -wordTokens.length);
       compressionProgram = this.compressionMachine.encode(wordTokens, prevContext);
-      programCost = compressionProgram.cost;
+      // DS-022: Add sequence cost to program cost as well
+      // This ensures grammar is always part of the cost, regardless of compression method
+      programCost = compressionProgram.cost + this.config.sequenceCostWeight * sequenceCost;
     }
 
     // Best cost is minimum of group-based and program-based
+    // Both now include sequence cost (DS-022)
     const bestCost = Math.min(groupMdlCost, programCost);
     const compressionMethod = programCost < groupMdlCost ? 'program' : 'group';
     
@@ -404,7 +437,8 @@ class BSPEngine {
       wordTokens,  // Include for response generation
       // MDL compression metrics
       mdlCost: bestCost,                    // Best of both methods
-      groupMdlCost,                          // Group-based cost
+      groupMdlCost,                          // Group-based cost (includes sequence cost per DS-022)
+      sequenceCost,                          // DS-022: Sequence cost component (grammar signal)
       programCost: programCost === Infinity ? null : programCost,  // Program-based cost
       compressionMethod,                     // Which method was better
       compressionProgram: compressionProgram ? compressionProgram.toString() : null,

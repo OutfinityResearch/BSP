@@ -8,6 +8,7 @@
 
 import { SuffixArray } from './utils/SuffixArray.mjs';
 import { RollingHashMap } from './utils/RollingHashMap.mjs';
+import { FrequencyCodeTable } from './utils/FrequencyCodeTable.mjs';
 
 /**
  * A compression program is a sequence of operations that generate tokens
@@ -231,11 +232,15 @@ class CompressionMachine {
     this.minRepeatCount = options.minRepeatCount || 2;
     this.useSuffixArray = options.useSuffixArray === true; // Disabled by default (linear faster for small context)
     this.useHashMap = options.useHashMap !== false; // Enabled by default
+    this.useFrequencyCoding = options.useFrequencyCoding === true; // Disabled by default (needs more work)
 
     // Word-level vocabulary (separate from n-gram vocab)
     // This gives more accurate costs for compression
     this.wordVocab = new Set();
     this.minWordVocab = options.minWordVocab || 500;  // Minimum assumed vocab
+    
+    // Frequency-based code table
+    this.codeTable = new FrequencyCodeTable();
 
     // Suffix array for fast COPY matching (large context)
     this.suffixArray = null;
@@ -273,7 +278,30 @@ class CompressionMachine {
   observeTokens(tokens) {
     for (const t of tokens) {
       this.wordVocab.add(t);
+      if (this.useFrequencyCoding) {
+        this.codeTable.observe(t);
+      }
     }
+  }
+
+  /**
+   * Get cost for a single token
+   */
+  getTokenCost(token) {
+    if (this.useFrequencyCoding && this.codeTable.codeTable.size > 0) {
+      return this.codeTable.getBitLength(token);
+    }
+    return Math.log2(this.effectiveVocabSize);
+  }
+
+  /**
+   * Get cost for multiple tokens
+   */
+  getTokensCost(tokens) {
+    if (this.useFrequencyCoding && this.codeTable.codeTable.size > 0) {
+      return tokens.reduce((sum, t) => sum + this.codeTable.getBitLength(t), 0);
+    }
+    return tokens.length * Math.log2(this.effectiveVocabSize);
   }
 
   /**
@@ -287,12 +315,17 @@ class CompressionMachine {
 
     // Update word vocabulary
     this.observeTokens(tokens);
+    
+    // Build code table periodically (every 100 encodes)
+    if (this.useFrequencyCoding && this.stats.totalEncodes % 100 === 0) {
+      this.codeTable.build();
+    }
 
     // Use effective vocab size for costs
     const effectiveVocab = this.effectiveVocabSize;
 
-    // Baseline: literal encoding
-    const literalCost = tokens.length * Math.log2(effectiveVocab);
+    // Baseline: literal encoding (use frequency-based cost if available)
+    const literalCost = this.getTokensCost(tokens);
     
     // Try to find better encodings
     const candidates = [];

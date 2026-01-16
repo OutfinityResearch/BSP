@@ -240,3 +240,271 @@ Planned improvements:
 1. Add budgets (`maxMergesPerRun`, `maxCandidatesPerPrimary`).
 2. Add an `aliasMap` for merged IDs to preserve session continuity.
 3. Add tests that assert index/graph invariants after merges.
+
+---
+
+## 11. Transform Discovery (DS-023 Integration)
+
+Sleep consolidation now has a second major function: discovering transform groups.
+
+### 11.1 Extended Sleep Phase
+
+```typescript
+function sleepConsolidation(
+  store: GroupStore,
+  graph: DeductionGraph,
+  candidateTransforms: CandidateTransforms,
+  attentionBuffer: AttentionBuffer,
+  budget: SleepBudget
+): SleepResult {
+  // Phase 1: Content group merge (existing)
+  const merges = mergeContentGroups(store, graph, budget);
+  
+  // Phase 2: Transform discovery (new)
+  const newTransforms = discoverTransforms(candidateTransforms, store, budget);
+  
+  // Phase 3: Process attention buffer problems
+  const resolved = processAttentionProblems(attentionBuffer, store, budget);
+  
+  // Phase 4: Prune unused transforms
+  const pruned = pruneUnusedTransforms(store);
+  
+  // Phase 5: Re-rank all transforms by utility
+  rerankTransforms(store);
+  
+  return { merges, newTransforms, resolved, pruned };
+}
+```
+
+### 11.2 Transform Discovery Algorithm
+
+```typescript
+function discoverTransforms(
+  candidates: CandidateTransforms,
+  store: GroupStore,
+  budget: SleepBudget
+): number {
+  let discovered = 0;
+  
+  // Sort candidates by observation count (most observed first)
+  const sorted = [...candidates.candidates.values()]
+    .filter(c => c.observations.length >= MIN_OBSERVATIONS)
+    .sort((a, b) => b.observations.length - a.observations.length);
+  
+  for (const candidate of sorted) {
+    if (budget.exhausted()) break;
+    
+    // Compute consensus delta (intersection of all observation deltas)
+    const consensus = computeConsensus(candidate.observations);
+    
+    if (consensus.size < MIN_TRANSFORM_SIZE) continue;
+    
+    // Check if similar transform already exists
+    const existing = findSimilarTransform(consensus, store, MERGE_THRESHOLD);
+    
+    if (existing) {
+      // Strengthen existing transform
+      existing.usageCount += candidate.observations.length;
+      existing.compressionSavings += estimateSavings(consensus);
+    } else {
+      // Create new TRANSFORM group
+      const transform = store.create(consensus, 0.5);
+      transform.type = 'TRANSFORM';
+      transform.deltaPattern = consensus.clone();
+      transform.primitives = [{ type: 'XOR', operand: consensus }];
+      transform.compressionSavings = estimateSavings(consensus);
+      discovered++;
+    }
+    
+    // Remove processed candidate
+    candidates.candidates.delete(candidate.delta.hash64());
+  }
+  
+  return discovered;
+}
+
+function computeConsensus(observations: TransformObservation[]): Bitset {
+  if (observations.length === 0) return new SimpleBitset(0);
+  
+  // Start with the first delta
+  const first = observations[0].source.xor(observations[0].target);
+  let consensus = first.clone();
+  
+  // Intersect with all subsequent deltas
+  for (let i = 1; i < observations.length; i++) {
+    const delta = observations[i].source.xor(observations[i].target);
+    consensus = consensus.and(delta);
+  }
+  
+  return consensus;
+}
+
+function estimateSavings(transform: Bitset): number {
+  // Savings = bits that don't need to be stored literally
+  // Cost = log2(rank) once transform is ranked
+  // Net = transform.size - log2(estimated_rank)
+  return transform.size * 0.8;  // Conservative estimate
+}
+```
+
+### 11.3 Transform Ranking
+
+```typescript
+function rerankTransforms(store: GroupStore): void {
+  // Get all TRANSFORM type groups
+  const transforms = [...store.getAll()]
+    .filter(g => g.type === 'TRANSFORM');
+  
+  // Sort by compression utility
+  transforms.sort((a, b) => {
+    const utilityA = (a.compressionSavings || 0) * (a.usageCount || 1);
+    const utilityB = (b.compressionSavings || 0) * (b.usageCount || 1);
+    return utilityB - utilityA;
+  });
+  
+  // Assign ranks (0 = most useful)
+  for (let i = 0; i < transforms.length; i++) {
+    transforms[i].rank = i;
+  }
+}
+
+function getTransformCost(transform: Group): number {
+  if (transform.rank !== undefined) {
+    // Frequent transforms are cheap
+    return Math.log2(transform.rank + 2);  // +2 to avoid log(1)=0
+  }
+  // Unknown transform: pay full primitive cost
+  return (transform.deltaPattern?.size || 0) * LITERAL_BIT_COST;
+}
+```
+
+---
+
+## 12. Attention-Driven Processing (DS-024 Integration)
+
+### 12.1 Processing Attention Problems
+
+During sleep, we focus on the highest-priority unresolved problems.
+
+```typescript
+function processAttentionProblems(
+  buffer: AttentionBuffer,
+  store: GroupStore,
+  budget: SleepBudget
+): number {
+  let resolved = 0;
+  
+  // Get top problems sorted by priority
+  const problems = buffer.getTopProblems(budget.maxProblems);
+  
+  for (const problem of problems) {
+    if (budget.exhausted()) break;
+    
+    // Try to find a pattern that explains this problem
+    const solution = searchForPattern(problem, store);
+    
+    if (solution.found) {
+      // Solution found! Create or strengthen group/transform
+      if (solution.isTransform) {
+        createOrStrengthenTransform(solution, store);
+      } else {
+        createOrStrengthenGroup(solution, store);
+      }
+      
+      buffer.markResolved(problem);
+      resolved++;
+    }
+  }
+  
+  return resolved;
+}
+
+function searchForPattern(
+  problem: AttentionItem,
+  store: GroupStore
+): SearchResult {
+  // Strategy 1: Find existing groups that partially cover
+  const partialMatches = findPartialMatches(problem.input, store);
+  
+  // Strategy 2: Look for similar problems in recent history
+  // (implemented via candidate transforms during learning)
+  
+  // Strategy 3: Try small variations of existing groups
+  for (const match of partialMatches) {
+    const residual = problem.input.andNot(match.members);
+    if (residual.size < problem.surprise * 0.5) {
+      // This group + small extension could explain the input
+      return {
+        found: true,
+        isTransform: false,
+        groupToExtend: match,
+        extension: residual,
+      };
+    }
+  }
+  
+  return { found: false };
+}
+```
+
+### 12.2 Sleep Budget Levels (DS-024)
+
+```typescript
+interface SleepBudget {
+  maxTimeMs: number;
+  maxMerges: number;
+  maxDiscoveries: number;
+  maxProblems: number;
+  
+  startTime: number;
+  mergesDone: number;
+  discoveriesDone: number;
+  problemsDone: number;
+  
+  exhausted(): boolean {
+    return Date.now() - this.startTime >= this.maxTimeMs ||
+           this.mergesDone >= this.maxMerges ||
+           this.discoveriesDone >= this.maxDiscoveries ||
+           this.problemsDone >= this.maxProblems;
+  }
+}
+
+const LIGHT_SLEEP_BUDGET: SleepBudget = {
+  maxTimeMs: 1000,
+  maxMerges: 10,
+  maxDiscoveries: 5,
+  maxProblems: 20,
+  // ...
+};
+
+const DEEP_SLEEP_BUDGET: SleepBudget = {
+  maxTimeMs: 60000,
+  maxMerges: 100,
+  maxDiscoveries: 50,
+  maxProblems: 200,
+  // ...
+};
+```
+
+---
+
+## 13. Configuration (Updated)
+
+### 13.1 Current knobs
+
+- `learner.mergeThreshold` (default ~`0.8`): merge if `J ≥ threshold`
+- `index.maxGroupsPerIdentity`: cap candidate fan-out for frequent identities
+- `index.indexEvictPolicy`: eviction when the cap is exceeded (`random|lowestUsage|lowestSalience`)
+- `deduction.maxEdgesPerNode`: prevents the graph from exploding during merges/redirects
+
+### 13.2 New knobs (DS-023/DS-024)
+
+- `maintenance.sleepInterval` (steps): how often to run sleep consolidation
+- `maintenance.maxMergesPerSleep` (count): hard budget per run
+- `maintenance.maxCandidatesPerGroup` (count): cap candidate comparisons per primary
+- `transform.minObservations` (default: 3): minimum observations before discovering
+- `transform.minSize` (default: 2): minimum bits in a transform delta
+- `transform.maxTransforms` (default: 1000): maximum transform groups
+- `attention.maxItems` (default: 10000): attention buffer capacity
+- `attention.surpriseWeight` (default: 1.0): weight for surprise in priority
+- `attention.recurrenceWeight` (default: 2.0): weight for recurrence in priority

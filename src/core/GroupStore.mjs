@@ -8,6 +8,7 @@ import { SimpleBitset } from './Bitset.mjs';
 /**
  * @typedef {object} Group
  * @property {number} id - Unique identifier
+ * @property {'CONTENT'|'TRANSFORM'} type - Group type (DS-023)
  * @property {SimpleBitset} members - Identity bits in this group
  * @property {Map<number, number>} memberCounts - Count per identity
  * @property {number} salience - Importance score (0-1)
@@ -15,6 +16,10 @@ import { SimpleBitset } from './Bitset.mjs';
  * @property {number} usageCount - Total activations
  * @property {number} lastUsed - Timestamp of last activation
  * @property {number} created - Creation timestamp
+ * @property {SimpleBitset} [deltaPattern] - For TRANSFORM: the XOR delta pattern
+ * @property {Array} [primitives] - For TRANSFORM: sequence of primitive ops
+ * @property {number} [rank] - For TRANSFORM: position in frequency ranking
+ * @property {number} [compressionSavings] - For TRANSFORM: total bits saved
  */
 
 class GroupStore {
@@ -54,9 +59,10 @@ class GroupStore {
    * Create a new group
    * @param {SimpleBitset} initialMembers - Initial member bits
    * @param {number} [initialSalience=0.5] - Initial salience
+   * @param {'CONTENT'|'TRANSFORM'} [type='CONTENT'] - Group type
    * @returns {Group}
    */
-  create(initialMembers, initialSalience = 0.5) {
+  create(initialMembers, initialSalience = 0.5, type = 'CONTENT') {
     if (this.groups.size >= this.maxGroups) {
       this._pruneLowestSalience();
     }
@@ -64,6 +70,7 @@ class GroupStore {
     const id = this.nextId++;
     const group = {
       id,
+      type,
       members: initialMembers.clone(),
       memberCounts: new Map(),
       salience: initialSalience,
@@ -371,8 +378,9 @@ class GroupStore {
   toJSON() {
     const groups = [];
     for (const group of this.groups.values()) {
-      groups.push({
+      const serialized = {
         id: group.id,
+        type: group.type || 'CONTENT',
         members: group.members.toJSON(),
         memberCounts: [...group.memberCounts.entries()],
         salience: group.salience,
@@ -380,7 +388,25 @@ class GroupStore {
         usageCount: group.usageCount,
         lastUsed: group.lastUsed,
         created: group.created,
-      });
+      };
+      
+      // TRANSFORM-specific fields
+      if (group.type === 'TRANSFORM') {
+        if (group.deltaPattern) {
+          serialized.deltaPattern = group.deltaPattern.toJSON();
+        }
+        if (group.primitives) {
+          serialized.primitives = group.primitives;
+        }
+        if (group.rank !== undefined) {
+          serialized.rank = group.rank;
+        }
+        if (group.compressionSavings !== undefined) {
+          serialized.compressionSavings = group.compressionSavings;
+        }
+      }
+      
+      groups.push(serialized);
     }
     
     return {
@@ -413,6 +439,7 @@ class GroupStore {
     for (const g of json.groups) {
       const group = {
         id: g.id,
+        type: g.type || 'CONTENT',
         members: SimpleBitset.fromJSON(g.members),
         memberCounts: new Map(g.memberCounts),
         salience: g.salience,
@@ -421,6 +448,22 @@ class GroupStore {
         lastUsed: g.lastUsed,
         created: g.created,
       };
+      
+      // TRANSFORM-specific fields
+      if (g.type === 'TRANSFORM') {
+        if (g.deltaPattern) {
+          group.deltaPattern = SimpleBitset.fromJSON(g.deltaPattern);
+        }
+        if (g.primitives) {
+          group.primitives = g.primitives;
+        }
+        if (g.rank !== undefined) {
+          group.rank = g.rank;
+        }
+        if (g.compressionSavings !== undefined) {
+          group.compressionSavings = g.compressionSavings;
+        }
+      }
       
       store.groups.set(group.id, group);
       store._updateIndex(group, 'add');

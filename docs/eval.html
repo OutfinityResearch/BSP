@@ -20,48 +20,63 @@
         </ul>
     </nav>
 
-    <div class="container">
-        <main class="content">
-            <h1>Evaluation & Benchmarks</h1>
-            <p>
-                BSP is not a Transformer LM, so standard LLM metrics are only comparable through
-                proxies. We still evaluate on classic datasets to track progress and compare against
-                small LMs (e.g. GPT-2).
-            </p>
+	    <div class="container">
+	        <main class="content">
+	            <h1>Evaluation</h1>
+	            <p>
+	                BSP evaluation is split into two tracks:
+	                <strong>Discovery Evals</strong> (synthetic, for architecture discovery) and
+	                <strong>Comparative Benchmarks</strong> (dataset-based, for positioning).
+	            </p>
 
-            <div class="callout">
-                <h4>What We Measure</h4>
-                <p>
-                    <strong>Compression / Language Modeling:</strong> bits-per-character proxy (BPC), surprise rate.<br>
-                    <strong>Reasoning / Deduction:</strong> LAMBADA-style cloze accuracy via group prediction.<br>
-                    <strong>Efficiency:</strong> throughput (lines/sec), memory growth (groups/edges).
-                </p>
-            </div>
+	            <div class="callout">
+	                <h4>Two Evaluation Tracks</h4>
+	                <p>
+	                    <strong>Discovery:</strong> learning curves, time-to-threshold, and diagnostic signals on synthetic primitives.<br>
+	                    <strong>Comparative:</strong> BPC proxy, surprise rate, and dataset-based reasoning proxies.<br>
+	                    <strong>Efficiency:</strong> throughput and memory growth (groups/edges).
+	                </p>
+	            </div>
 
-            <h2>Run the Evaluation Suite</h2>
-            <pre><code># Evaluate a trained model (model path is configurable)
-node scripts/evaluate.mjs --model data/model_wiki.json
+	            <h2>1) Discovery Evals (Abstract Primitives)</h2>
+	            <p>
+	                The Abstract Primitives suite is synthetic and is used to stress-test specific capabilities and
+	                measure learning speed and stability.
+	            </p>
+	            <pre><code># Generate datasets (deterministic)
+	node evals/abstract_primitives/generate.mjs --all --seed=1
 
-# Evaluate only LAMBADA (if present)
-node scripts/evaluate.mjs --type lambada --model data/model_wiki.json
-</code></pre>
+	# Train+evaluate and save results
+	node evals/abstract_primitives/evaluate.mjs --all --seed=1
 
-            <h2>Compare Against GPT-2 (Small) and Baselines</h2>
-            <p>
-                The comparative benchmark reports BSP vs Shannon entropy, Gzip, and GPT-2 (Small) reference values.
-            </p>
-            <pre><code>node scripts/benchmark_comparative.mjs</code></pre>
+	# Generate a static HTML dashboard
+	node evals/abstract_primitives/dashboard.mjs --seed=1
+	</code></pre>
+	            <p>
+	                Results are saved under <code>evals/abstract_primitives/results/seed_1/</code>.
+	            </p>
 
-            <h3>Reference Benchmarks</h3>
-            <ul>
-                <li><strong>WikiText-2</strong>: common LM benchmark (perplexity for LMs, BPC proxy for BSP).</li>
-                <li><strong>LAMBADA</strong>: long-range dependency / cloze reasoning.</li>
+	            <h2>2) Comparative Benchmarks (Positioning)</h2>
+	            <p>
+	                Comparative benchmarks run on real text datasets to track progress and keep reference baselines.
+	            </p>
+	            <pre><code># One-command comparative run (downloads datasets if available, otherwise uses fallback data)
+	node evals/runLM_Comp.mjs
+
+	# Evaluate a trained model on any available datasets under data/
+	node scripts/evaluate.mjs --model data/model_wiki.json
+	</code></pre>
+
+	            <h3>Reference Benchmarks</h3>
+	            <ul>
+	                <li><strong>WikiText-2</strong>: common LM benchmark (perplexity for LMs, BPC proxy for BSP).</li>
+	                <li><strong>LAMBADA</strong>: long-range dependency / cloze reasoning.</li>
             </ul>
 
-            <p>
-                For the full benchmarking plan and GPT-2 reference targets, see
-                <a href="specs/DS/DS-008-benchmarks-comparison.md">DS-008</a>.
-            </p>
+	            <p>
+	                For the full benchmarking plan and GPT-2 reference targets, see
+	                <a href="specs/DS/DS-008-benchmarks-comparison.md">DS-008</a>.
+	            </p>
 
             <h2>Future Benchmark Extensions (Small-LLM Style)</h2>
             <p>

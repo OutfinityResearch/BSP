@@ -24,3 +24,7 @@ export {
 } from './CompressionMachine.mjs';
 export { SuffixArray } from './utils/SuffixArray.mjs';
 export { RollingHashMap } from './utils/RollingHashMap.mjs';
+
+// DS-024: Unified Learning / Sleep Architecture
+export { AttentionBuffer } from './AttentionBuffer.mjs';
+export { PersistentConcerns } from './PersistentConcerns.mjs';

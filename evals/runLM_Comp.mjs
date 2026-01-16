@@ -43,6 +43,10 @@ const CONFIG = {
     universeSize: 100_000,
     maxGroups: 20_000,
     topK: 16,
+    // DS-022: Emergent grammar through sequence cost
+    // Lower weight to balance BPC vs grammar
+    sequenceCostWeight: 0.1,
+    unknownTransitionPenalty: 8,
   },
   
   // Training
@@ -564,15 +568,15 @@ async function runBLiMP() {
     for (const ex of examples) {
       if (!ex.sentence_good || !ex.sentence_bad) continue;
       
-      // Score both sentences
+      // Score both sentences using MDL cost (lower = better/more probable)
       const goodResult = engine.process(ex.sentence_good, { learn: false });
       const badResult = engine.process(ex.sentence_bad, { learn: false });
       
-      // Lower surprise = better
-      const goodScore = -(goodResult.surprise || 0);
-      const badScore = -(badResult.surprise || 0);
+      // Lower MDL cost = more probable = better
+      const goodCost = goodResult.mdlCost || Infinity;
+      const badCost = badResult.mdlCost || Infinity;
       
-      if (goodScore > badScore) correct++;
+      if (goodCost < badCost) correct++;
       total++;
     }
     

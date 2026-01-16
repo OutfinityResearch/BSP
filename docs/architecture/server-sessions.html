@@ -31,7 +31,7 @@
             </ul>
         </aside>
 
-        <main class="content">
+	        <main class="content">
             <h1>Server & Session Management</h1>
             <p>BSP operates as a stateful conversational agent. Unlike standard REST APIs which are stateless, BSP maintains a persistent context and learning state for each session.</p>
 
@@ -49,10 +49,10 @@
             </div>
 
             <h2>Architecture Layering</h2>
-            <pre><code>HTTP / WebSocket Server
-      │
-      ▼
-Session Manager (Map<ID, Session>)
+	            <pre><code>HTTP Server
+	      │
+	      ▼
+	Session Manager (Map<ID, Session>)
       │
       ▼
    Session

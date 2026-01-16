@@ -46,3 +46,38 @@ test('SimpleBitset: toJSON/fromJSON roundtrip', () => {
   assertEqual(b.size, 3);
   assert(b.has(10) && b.has(20) && b.has(30));
 });
+
+test('SimpleBitset: andCardinality matches intersection size', () => {
+  const a = SimpleBitset.fromArray([1, 2, 3, 4, 10], 128);
+  const b = SimpleBitset.fromArray([3, 4, 5, 6, 10, 11], 128);
+  const intersection = a.and(b);
+  assertEqual(a.andCardinality(b), intersection.size);
+  assertEqual(b.andCardinality(a), intersection.size);
+});
+
+test('SimpleBitset: jaccard is symmetric and in [0,1]', () => {
+  const a = SimpleBitset.fromArray([1, 2, 3], 128);
+  const b = SimpleBitset.fromArray([2, 3, 4, 5], 128);
+  const j1 = a.jaccard(b);
+  const j2 = b.jaccard(a);
+  assert(Math.abs(j1 - j2) < 1e-12, 'jaccard must be symmetric');
+  assert(j1 >= 0 && j1 <= 1, 'jaccard must be within [0,1]');
+
+  assertEqual(a.jaccard(a), 1);
+  assertEqual(a.jaccard(SimpleBitset.fromArray([], 128)), 0);
+});
+
+test('SimpleBitset: toJSON/fromJSON dense roundtrip', () => {
+  const maxSize = 256;
+  const bits = Array.from({ length: 96 }, (_, i) => i);
+  const a = SimpleBitset.fromArray(bits, maxSize);
+  const json = a.toJSON();
+  assertEqual(json.type, 'dense');
+
+  const b = SimpleBitset.fromJSON(json);
+  assertEqual(b.maxSize, maxSize);
+  assertEqual(b.size, a.size);
+  for (const bit of bits) {
+    assert(b.has(bit), `Missing bit ${bit} after dense roundtrip`);
+  }
+});

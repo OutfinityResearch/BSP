@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep & Learning - BSP Theory</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .insight-box {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid #58a6ff;
+        }
+        .insight-box h3 {
+            color: #58a6ff;
+            margin-top: 0;
+        }
+        .spectrum {
+            display: flex;
+            justify-content: space-between;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: white;
+            font-weight: bold;
+        }
+        .spectrum-item {
+            text-align: center;
+            flex: 1;
+        }
+        .spectrum-item small {
+            display: block;
+            font-weight: normal;
+            opacity: 0.8;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #30363d;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .comparison-table th {
+            background: #21262d;
+            color: #58a6ff;
+        }
+        .comparison-table tr:nth-child(even) {
+            background: #161b22;
+        }
+        .phase-card {
+            background: #21262d;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid #30363d;
+        }
+        .phase-card h4 {
+            color: #3fb950;
+            margin-top: 0;
+        }
+        .bio-parallel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .bio-parallel > div {
+            background: #161b22;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .bio-parallel h5 {
+            margin-top: 0;
+            color: #d29922;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">BSP Docs</a>
+        <ul>
+            <li><a href="../architecture/index.html">Architecture</a></li>
+            <li><a href="index.html" class="active">Theory</a></li>
+            <li><a href="../research/index.html">Research</a></li>
+            <li><a href="../specs/index.html">Specs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Theory</h3>
+            <ul>
+                <li><a href="index.html">Predictive Coding</a></li>
+                <li><a href="attention.html">Attention Mechanism</a></li>
+                <li><a href="learning-loop.html">The Learning Loop</a></li>
+                <li><a href="sleep-learning.html" class="active">Sleep & Learning</a></li>
+                <li><a href="mdl.html">MDL Principle</a></li>
+                <li><a href="rl.html">Reinforcement Learning</a></li>
+                <li><a href="importance.html">Importance & Salience</a></li>
+                <li><a href="generation.html">Sequence Generation</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Sleep, Attention, and Learning</h1>
+            
+            <p>
+                A key insight in BSP is that <strong>learning and sleep are not separate processes</strong>. 
+                They are the same compression algorithm operating with different compute budgets.
+            </p>
+
+            <div class="insight-box">
+                <h3>The Core Insight</h3>
+                <p>
+                    <strong>Learning IS Compression.</strong> When we "learn" something, we're finding a more efficient 
+                    way to represent it. When we "sleep", we search for patterns that compress better. 
+                    The only difference is how much time we spend searching.
+                </p>
+            </div>
+
+            <h2>The Compute Budget Spectrum</h2>
+            
+            <p>Instead of discrete modes, BSP operates on a continuous spectrum:</p>
+
+            <div class="spectrum">
+                <div class="spectrum-item">
+                    AWAKE
+                    <small>~10ms</small>
+                </div>
+                <div class="spectrum-item">
+                    LIGHT SLEEP
+                    <small>~1sec</small>
+                </div>
+                <div class="spectrum-item">
+                    DEEP SLEEP
+                    <small>~1min</small>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Time Budget</th>
+                        <th>What Happens</th>
+                        <th>Outcome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Awake</strong></td>
+                        <td>&lt;10ms</td>
+                        <td>Try to compress with existing knowledge</td>
+                        <td>Recognize known patterns</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Light Sleep</strong></td>
+                        <td>100ms - 1s</td>
+                        <td>Compare recent failures, find local patterns</td>
+                        <td>Discover simple transforms</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deep Sleep</strong></td>
+                        <td>1s - 1min</td>
+                        <td>Search for new transforms, reorganize library</td>
+                        <td>Major restructuring</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Attention: What to Focus On</h2>
+
+            <p>
+                Not everything deserves equal processing. BSP maintains an <strong>Attention Buffer</strong> - 
+                a priority queue of unresolved problems, sorted by importance.
+            </p>
+
+            <div class="phase-card">
+                <h4>Priority Factors</h4>
+                <ul>
+                    <li><strong>Surprise:</strong> How badly did compression fail? Higher surprise = needs more attention.</li>
+                    <li><strong>Recurrence:</strong> Does this problem keep appearing? Recurring issues get priority.</li>
+                    <li><strong>Recency:</strong> Fresh problems get a boost, but it decays over time.</li>
+                    <li><strong>Utility:</strong> If there's a reward signal, important failures get boosted.</li>
+                </ul>
+            </div>
+
+            <p>
+                When entering a sleep phase, BSP processes items from the attention buffer in priority order. 
+                High-priority items get processed first, ensuring limited compute goes where it matters most.
+            </p>
+
+            <h2>Persistent Concerns</h2>
+
+            <p>
+                Some problems are too hard for a single session. They require:
+            </p>
+            <ul>
+                <li>More examples to see the pattern</li>
+                <li>More compute than currently available</li>
+                <li>Connections to knowledge from other contexts</li>
+            </ul>
+
+            <div class="insight-box">
+                <h3>Cross-Session Memory</h3>
+                <p>
+                    Problems that recur across multiple sessions become <strong>Persistent Concerns</strong>. 
+                    Each time the system restarts, these get boosted priority. This is how the system 
+                    gradually learns difficult concepts that can't be mastered in one sitting.
+                </p>
+            </div>
+
+            <h2>Biological Parallels</h2>
+
+            <p>This architecture mirrors what we know about biological learning:</p>
+
+            <div class="bio-parallel">
+                <div>
+                    <h5>🧠 Brain</h5>
+                    <ul>
+                        <li><strong>Awake:</strong> Fast pattern matching (recognition)</li>
+                        <li><strong>Attention:</strong> Emotional/surprise tagging (amygdala)</li>
+                        <li><strong>Light sleep:</strong> Local consolidation (hippocampus replay)</li>
+                        <li><strong>Deep sleep:</strong> Reorganization (cortical integration)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>💻 BSP</h5>
+                    <ul>
+                        <li><strong>Awake:</strong> Lookup in group/transform library</li>
+                        <li><strong>Attention:</strong> Priority buffer with surprise scores</li>
+                        <li><strong>Light sleep:</strong> Cluster recent failures, find patterns</li>
+                        <li><strong>Deep sleep:</strong> Reorganize transform library</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>The Unified Loop</h2>
+
+            <div class="diagram-container">
+                <svg width="700" height="400" viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Session box -->
+                    <rect x="50" y="30" width="600" height="340" rx="10" fill="none" stroke="#30363d" stroke-width="2" stroke-dasharray="5,5"/>
+                    <text x="350" y="55" text-anchor="middle" fill="#8b949e" font-size="14">SESSION</text>
+                    
+                    <!-- Awake phase -->
+                    <rect x="80" y="80" width="180" height="80" rx="8" fill="#1f3a5f" stroke="#3b82f6" stroke-width="2"/>
+                    <text x="170" y="115" text-anchor="middle" fill="#58a6ff" font-weight="bold">AWAKE</text>
+                    <text x="170" y="140" text-anchor="middle" fill="#8b949e" font-size="12">Try instant compression</text>
+                    
+                    <!-- Attention buffer -->
+                    <rect x="80" y="190" width="180" height="60" rx="8" fill="#3d2a1d" stroke="#d29922" stroke-width="2"/>
+                    <text x="170" y="225" text-anchor="middle" fill="#d29922" font-weight="bold">ATTENTION BUFFER</text>
+                    
+                    <!-- Light sleep -->
+                    <rect x="300" y="190" width="160" height="60" rx="8" fill="#2d1b4e" stroke="#8b5cf6" stroke-width="2"/>
+                    <text x="380" y="225" text-anchor="middle" fill="#a371f7" font-weight="bold">LIGHT SLEEP</text>
+                    
+                    <!-- Deep sleep -->
+                    <rect x="500" y="190" width="130" height="60" rx="8" fill="#1a2744" stroke="#ec4899" stroke-width="2"/>
+                    <text x="565" y="225" text-anchor="middle" fill="#ec4899" font-weight="bold">DEEP SLEEP</text>
+                    
+                    <!-- Persistent concerns -->
+                    <rect x="300" y="290" width="200" height="60" rx="8" fill="#1d2d1d" stroke="#3fb950" stroke-width="2"/>
+                    <text x="400" y="320" text-anchor="middle" fill="#3fb950" font-weight="bold">PERSISTENT CONCERNS</text>
+                    <text x="400" y="340" text-anchor="middle" fill="#8b949e" font-size="11">Survives across sessions</text>
+                    
+                    <!-- Arrows -->
+                    <path d="M170 160 L170 190" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+                    <text x="180" y="180" fill="#8b949e" font-size="10">fail</text>
+                    
+                    <path d="M260 220 L300 220" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+                    
+                    <path d="M460 220 L500 220" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+                    
+                    <path d="M170 250 L170 290 L300 290" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+                    
+                    <path d="M400 290 L400 260" stroke="#3fb950" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrow-green)"/>
+                    <text x="410" y="280" fill="#3fb950" font-size="10">boost</text>
+                    
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
+                        </marker>
+                        <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#3fb950" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <h2>Key Takeaways</h2>
+
+            <div class="callout">
+                <h4>Summary</h4>
+                <ul>
+                    <li><strong>Learning = Compression</strong> - We learn by finding better ways to encode information</li>
+                    <li><strong>Sleep = Search</strong> - More time means deeper search for patterns</li>
+                    <li><strong>Attention = Priority</strong> - Focus on what matters (high surprise, recurring problems)</li>
+                    <li><strong>Persistence = Long-term Memory</strong> - Hard problems accumulate across sessions</li>
+                </ul>
+                <p>
+                    There's no magic - just compute applied where it matters most. 
+                    The system naturally focuses on what's surprising and persistent.
+                </p>
+            </div>
+
+            <div class="pager">
+                <a href="learning-loop.html" class="pager-link prev">
+                    <span class="label">Previous</span>
+                    <span class="title">The Learning Loop</span>
+                </a>
+                <a href="mdl.html" class="pager-link next">
+                    <span class="label">Next</span>
+                    <span class="title">MDL Principle</span>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
