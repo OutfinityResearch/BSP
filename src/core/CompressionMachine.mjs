@@ -227,6 +227,11 @@ class CompressionMachine {
     this.minCopyLen = options.minCopyLen || 3;
     this.minRepeatCount = options.minRepeatCount || 2;
 
+    // Word-level vocabulary (separate from n-gram vocab)
+    // This gives more accurate costs for compression
+    this.wordVocab = new Set();
+    this.minWordVocab = options.minWordVocab || 500;  // Minimum assumed vocab
+
     // Learned templates
     this.templates = new Map();
     this.nextTemplateId = 0;
@@ -242,6 +247,24 @@ class CompressionMachine {
   }
 
   /**
+   * Get effective vocabulary size for cost calculation
+   * Uses word-level vocab, not n-gram vocab
+   */
+  get effectiveVocabSize() {
+    return Math.max(this.minWordVocab, this.wordVocab.size * 2);
+  }
+
+  /**
+   * Observe tokens to build word vocabulary
+   * @param {string[]} tokens
+   */
+  observeTokens(tokens) {
+    for (const t of tokens) {
+      this.wordVocab.add(t);
+    }
+  }
+
+  /**
    * Find the best program to encode tokens given context
    * @param {string[]} tokens - Tokens to encode
    * @param {string[]} context - Previous tokens (for COPY)
@@ -250,27 +273,33 @@ class CompressionMachine {
   encode(tokens, context = []) {
     this.stats.totalEncodes++;
 
+    // Update word vocabulary
+    this.observeTokens(tokens);
+
+    // Use effective vocab size for costs
+    const effectiveVocab = this.effectiveVocabSize;
+
     // Baseline: literal encoding
-    const literalCost = tokens.length * Math.log2(this.vocabSize);
+    const literalCost = tokens.length * Math.log2(effectiveVocab);
     
     // Try to find better encodings
     const candidates = [];
 
     // Option 1: Pure literal
     const literalProg = new Program();
-    literalProg.add(new LiteralOp(tokens, this.vocabSize));
+    literalProg.add(new LiteralOp(tokens, effectiveVocab));
     candidates.push(literalProg);
 
     // Option 2: COPY-based encoding
-    const copyProg = this._tryCopyEncoding(tokens, context);
+    const copyProg = this._tryCopyEncoding(tokens, context, effectiveVocab);
     if (copyProg) candidates.push(copyProg);
 
     // Option 3: REPEAT-based encoding
-    const repeatProg = this._tryRepeatEncoding(tokens);
+    const repeatProg = this._tryRepeatEncoding(tokens, effectiveVocab);
     if (repeatProg) candidates.push(repeatProg);
 
     // Option 4: Template-based encoding
-    const templateProg = this._tryTemplateEncoding(tokens);
+    const templateProg = this._tryTemplateEncoding(tokens, effectiveVocab);
     if (templateProg) candidates.push(templateProg);
 
     // Option 5: Hybrid (COPY + LITERAL for residual)
@@ -297,10 +326,11 @@ class CompressionMachine {
    * Try to encode using COPY from context
    * @private
    */
-  _tryCopyEncoding(tokens, context) {
+  _tryCopyEncoding(tokens, context, vocabSize) {
     if (context.length < this.minCopyLen) return null;
+    const effectiveVocab = vocabSize || this.effectiveVocabSize;
 
-    const copies = this._findCopyMatches(tokens, context);
+    const copies = this._findCopyMatches(tokens, context, effectiveVocab);
     if (copies.length === 0) return null;
 
     // Greedy: take best non-overlapping copies
@@ -322,7 +352,7 @@ class CompressionMachine {
       // Emit literals before this copy
       if (copy.targetOffset > pos) {
         const literals = tokens.slice(pos, copy.targetOffset);
-        prog.add(new LiteralOp(literals, this.vocabSize));
+        prog.add(new LiteralOp(literals, effectiveVocab));
       }
 
       // Emit copy
@@ -334,19 +364,19 @@ class CompressionMachine {
 
     // Emit remaining literals
     if (pos < tokens.length) {
-      prog.add(new LiteralOp(tokens.slice(pos), this.vocabSize));
+      prog.add(new LiteralOp(tokens.slice(pos), effectiveVocab));
     }
 
-    return prog.cost < tokens.length * Math.log2(this.vocabSize) ? prog : null;
+    return prog.cost < tokens.length * Math.log2(effectiveVocab) ? prog : null;
   }
 
   /**
    * Find copy matches between tokens and context
    * @private
    */
-  _findCopyMatches(tokens, context) {
+  _findCopyMatches(tokens, context, vocabSize) {
     const matches = [];
-    const contextStr = context.join('\x00');
+    const effectiveVocab = vocabSize || this.effectiveVocabSize;
 
     for (let i = 0; i < tokens.length; i++) {
       // Find longest match starting at position i
@@ -372,7 +402,7 @@ class CompressionMachine {
 
       if (bestLen >= this.minCopyLen) {
         const copyCost = Math.log2(context.length) + Math.log2(this.maxCopyLen);
-        const literalCost = bestLen * Math.log2(this.vocabSize);
+        const literalCost = bestLen * Math.log2(effectiveVocab);
         const savings = literalCost - copyCost;
 
         if (savings > 0) {
@@ -393,8 +423,9 @@ class CompressionMachine {
    * Try to encode using REPEAT
    * @private
    */
-  _tryRepeatEncoding(tokens) {
+  _tryRepeatEncoding(tokens, vocabSize) {
     if (tokens.length < 4) return null;
+    const effectiveVocab = vocabSize || this.effectiveVocabSize;
 
     // Try different pattern lengths
     for (let patLen = 1; patLen <= Math.min(10, Math.floor(tokens.length / 2)); patLen++) {
@@ -415,7 +446,7 @@ class CompressionMachine {
       }
 
       if (count >= this.minRepeatCount) {
-        const repeatOp = new RepeatOp(pattern, count, this.vocabSize, this.maxRepeat);
+        const repeatOp = new RepeatOp(pattern, count, effectiveVocab, this.maxRepeat);
         const repeatedLen = patLen * count;
         
         const prog = new Program();

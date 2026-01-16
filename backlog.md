@@ -20,39 +20,6 @@ Each task includes:
 
 ## Chapter 2 — Discovery Evals (Synthetic / Artificial, Architecture Discovery)
 
-### DISC-004 — Remove test leakage and define a consistent training/eval protocol for synthetic tasks
-Chapter: Discovery Evals
-
-Description:
-`evals/abstract_primitives/evaluate.mjs` currently calls `engine.process(prompt)` during testing without `learn:false`, which trains on test items. This invalidates scores and learning curves.
-
-Proposal:
-- Enforce:
-  - train phase: `learn:true`
-  - test phase: `learn:false`
-- Define a consistent protocol per system:
-  - engine config suitable for synthetic tokens:
-    - `useVocab: true`
-    - tokenizer ngrams: `[1]` (unigram-only) to keep evaluation interpretable and reduce confounds
-  - reset context rules:
-    - reset before each prompt
-- Update evaluator to:
-  - parse `prompt<TAB>expected_json<TAB>meta_json`
-  - run `engine.process(prompt, { learn:false })`
-  - compute predictions using a system-specific scorer (DISC-005), not a generic token inclusion heuristic
-
-Expected file changes:
-- `evals/abstract_primitives/evaluate.mjs`
-
-Check:
-- Add a unit test that:
-  - captures engine state (step/groups/edges/vocab/docCount) before testing
-  - runs a test batch
-  - asserts no training state changed
-- Run `node evals/abstract_primitives/evaluate.mjs --system=05` twice with the same seed and confirm identical outputs.
-
----
-
 ### DISC-005 — Implement system-specific scorers for all 20 synthetic systems (DS-019)
 Chapter: Discovery Evals
 

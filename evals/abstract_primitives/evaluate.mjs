@@ -96,7 +96,10 @@ async function evaluateSystem(systemId, BSPEngine, config) {
   const engine = new BSPEngine({
     universeSize: 10000,
     maxGroups: 5000,
-    useVocab: true
+    useVocab: true,
+    tokenizerConfig: {
+      ngramSizes: [1]
+    }
   });
   
   // Training phase
@@ -107,7 +110,7 @@ async function evaluateSystem(systemId, BSPEngine, config) {
   let trainCount = 0;
   for await (const line of trainRl) {
     if (!line.trim()) continue;
-    await engine.process(line);
+    engine.process(line, { learn: true });
     trainCount++;
     if (trainCount % 2000 === 0) {
       process.stdout.write(`\r  Trained ${trainCount} samples...`);
@@ -127,16 +130,25 @@ async function evaluateSystem(systemId, BSPEngine, config) {
     if (!line.trim()) continue;
     
     const parts = line.split('\t');
-    const input = parts[0];
-    const expected = parts[1];
-    
-    if (!expected) {
-      // No expected value, skip
-      continue;
+    if (parts.length !== 3) {
+      throw new Error(`Invalid test format for ${systemId}: ${JSON.stringify(line)}`);
+    }
+
+    const prompt = parts[0];
+    const expectedRaw = parts[1];
+    const metaRaw = parts[2];
+
+    let expected;
+    let meta;
+    try {
+      expected = JSON.parse(expectedRaw);
+      meta = JSON.parse(metaRaw);
+    } catch (error) {
+      throw new Error(`Invalid JSON fields in ${systemId} test line: ${JSON.stringify(line)}`);
     }
     
     engine.resetContext();
-    const result = await engine.process(input);
+    const result = engine.process(prompt, { learn: false });
     
     // Check if prediction matches expected
     // This is simplified - each system needs custom evaluation logic
@@ -152,7 +164,7 @@ async function evaluateSystem(systemId, BSPEngine, config) {
       }
     }
     
-    if (predictedTokens.includes(expected.trim())) {
+    if (typeof expected === 'string' && predictedTokens.includes(expected)) {
       correct++;
     }
     

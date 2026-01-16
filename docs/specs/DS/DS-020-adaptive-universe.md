@@ -1,9 +1,10 @@
 # DS-020: Adaptive Universe Size (Dynamic Bit-Width Encoding)
 
-**Version**: 1.0  
-**Status**: Proposal  
+**Version**: 2.0  
+**Status**: Implemented  
 **Author**: BSP Team  
-**Date**: 2026-01-16
+**Date**: 2026-01-16  
+**Updated**: 2026-01-16
 
 ---
 
@@ -22,295 +23,176 @@ This violates the MDL principle: we should use the **minimum description length*
 
 ---
 
-## 2. Proposed Solution: Adaptive Universe
+## 2. Implementation Status
 
-### 2.1 Core Idea
+### 2.1 What Was Implemented
 
-The universe size should grow with the system's knowledge:
+| Component | File | Status |
+|-----------|------|--------|
+| `vocabTracker` | `BSPEngine.mjs` | ✅ Done |
+| `effectiveUniverseSize` getter | `BSPEngine.mjs` | ✅ Done |
+| `computeMDLCost()` method | `BSPEngine.mjs` | ✅ Done |
+| Serialization support | `BSPEngine.mjs` | ✅ Done |
+| Benchmark integration | `runLM_Comp.mjs` | ✅ Done |
 
-```
-effectiveUniverse = f(vocabulary_seen, groups_learned, tokens_processed)
-```
-
-Instead of paying for a universe we haven't explored, we pay for what we've actually seen.
-
-### 2.2 Three Levels of Adaptation
-
-#### Level 1: Vocabulary-Aware (Simplest)
-Track unique tokens seen. Cost = log2(vocab_size + 1)
-
-```javascript
-class AdaptiveEncoder {
-  constructor() {
-    this.seenTokens = new Set();
-  }
-  
-  observe(token) {
-    this.seenTokens.add(token);
-  }
-  
-  get effectiveUniverse() {
-    // +1 for "unknown token" symbol
-    return this.seenTokens.size + 1;
-  }
-  
-  encodingCost(surpriseBits) {
-    return surpriseBits * Math.log2(this.effectiveUniverse);
-  }
-}
-```
-
-**Pros**: Simple, theoretically sound  
-**Cons**: Vocabulary can grow large quickly
-
-#### Level 2: Frequency-Weighted (Huffman-style)
-Common tokens cost less, rare tokens cost more.
-
-```javascript
-class FrequencyEncoder {
-  constructor() {
-    this.tokenCounts = new Map();
-    this.totalCount = 0;
-  }
-  
-  observe(token) {
-    this.tokenCounts.set(token, (this.tokenCounts.get(token) || 0) + 1);
-    this.totalCount++;
-  }
-  
-  encodingCost(token) {
-    const count = this.tokenCounts.get(token) || 0;
-    if (count === 0) {
-      // Unknown token: full cost
-      return Math.log2(this.tokenCounts.size + 1);
-    }
-    // Probability-based cost (Shannon entropy)
-    const p = count / this.totalCount;
-    return -Math.log2(p);  // Common tokens → low cost
-  }
-}
-```
-
-**Pros**: Optimal for known distribution  
-**Cons**: Requires tracking frequencies
-
-#### Level 3: Hierarchical Expansion (Most Sophisticated)
-Start with a small hash space, expand when needed.
-
-```javascript
-class HierarchicalUniverse {
-  constructor() {
-    this.currentBits = 8;  // Start with 256 buckets
-    this.maxBits = 20;     // Can grow to 1M
-    this.collisionCount = 0;
-    this.expansionThreshold = 0.7;  // Expand at 70% collision rate
-  }
-  
-  hash(token) {
-    const fullHash = murmurhash(token);
-    // Use only currentBits of the hash
-    return fullHash & ((1 << this.currentBits) - 1);
-  }
-  
-  get effectiveUniverse() {
-    return 1 << this.currentBits;  // 2^currentBits
-  }
-  
-  maybeExpand() {
-    const collisionRate = this.collisionCount / this.totalTokens;
-    if (collisionRate > this.expansionThreshold && this.currentBits < this.maxBits) {
-      this.currentBits++;
-      console.log(`Universe expanded to 2^${this.currentBits} = ${this.effectiveUniverse}`);
-    }
-  }
-}
-```
-
-**Pros**: Automatic scaling, controls memory  
-**Cons**: More complex, needs collision tracking
-
----
-
-## 3. Implementation Plan
-
-### 3.1 Phase 1: Add Vocabulary Tracking (Low-hanging fruit)
-
-Modify `BSPEngine` to track vocabulary size:
+### 2.2 Implementation Details
 
 ```javascript
 // In BSPEngine constructor
 this.vocabTracker = {
   seen: new Set(),
+  totalTokens: 0,
   observe(tokens) {
-    for (const t of tokens) this.seen.add(t);
+    for (const t of tokens) {
+      this.seen.add(t);
+      this.totalTokens++;
+    }
   },
-  get size() { return this.seen.size; }
+  get size() { return this.seen.size; },
 };
 
-// In process()
-this.vocabTracker.observe(tokens);
-
-// New method
+// Getter for effective universe
 get effectiveUniverseSize() {
-  return Math.max(1000, this.vocabTracker.size * 2);  // 2x headroom
-}
-```
-
-### 3.2 Phase 2: Dynamic Cost Calculation
-
-Update MDL cost to use effective universe:
-
-```javascript
-// OLD (in runLM_Comp.mjs benchmark)
-const dataCost = result.surprise * Math.log2(engine.config.universeSize);
-
-// NEW
-const dataCost = result.surprise * Math.log2(engine.effectiveUniverseSize);
-```
-
-### 3.3 Phase 3: Progressive Hash Expansion
-
-For the hierarchical approach:
-
-```javascript
-class ProgressiveHasher {
-  constructor(initialBits = 10) {
-    this.bits = initialBits;
-    this.buckets = new Map();  // bucket -> count
+  if (!this.config.adaptiveUniverse) {
+    return this.config.universeSize;
   }
-  
-  hash(value) {
-    const h = this.fullHash(value);
-    return h >>> (32 - this.bits);  // Use top N bits
-  }
-  
-  observe(value) {
-    const bucket = this.hash(value);
-    const prev = this.buckets.get(bucket) || 0;
-    this.buckets.set(bucket, prev + 1);
-    
-    // Check if expansion needed
-    if (this.shouldExpand()) {
-      this.expand();
-    }
-  }
-  
-  shouldExpand() {
-    // Expand if average bucket size > 10
-    const avgSize = this.totalCount / this.buckets.size;
-    return avgSize > 10 && this.bits < 20;
-  }
-  
-  expand() {
-    this.bits++;
-    // Note: existing hashes become prefixes of new hashes
-    // No rehashing needed if we use consistent hashing
-  }
-  
-  get universeSize() {
-    return 1 << this.bits;
-  }
-}
-```
-
----
-
-## 4. Expected Impact
-
-### 4.1 Compression Improvement
-
-| Stage | Vocab Size | Universe | Cost/Surprise | Expected BPC |
-|-------|------------|----------|---------------|--------------|
-| Start (0 tokens) | 0 | 1,000 | 10.0 bits | ~4.0 |
-| Early (1K tokens) | 500 | 1,000 | 10.0 bits | ~4.0 |
-| Medium (10K tokens) | 3,000 | 6,000 | 12.5 bits | ~5.0 |
-| Late (100K tokens) | 10,000 | 20,000 | 14.3 bits | ~5.7 |
-| Max | 50,000 | 100,000 | 16.6 bits | ~6.5 |
-
-### 4.2 Learning Curve
-
-With adaptive encoding, the system can:
-1. **Bootstrap faster**: Low initial cost allows rapid early learning
-2. **Scale gracefully**: Costs grow only as needed
-3. **Match MDL theory**: Description length reflects actual knowledge
-
----
-
-## 5. Theoretical Justification
-
-### 5.1 MDL Principle
-
-MDL (Minimum Description Length) says the best model minimizes:
-
-```
-Total Cost = Model Description + Data Given Model
-```
-
-Currently, we over-specify the model by assuming universe = 100K. 
-
-With adaptive encoding:
-```
-Total Cost = log2(vocab_size) + Model + Data|Model
-```
-
-This adds a small overhead (encoding the vocab size) but saves significantly on data encoding.
-
-### 5.2 Kraft Inequality
-
-For a valid prefix-free code, we need:
-```
-Σ 2^(-length_i) ≤ 1
-```
-
-With vocabulary V, the minimum average code length is:
-```
-H(V) = -Σ p(v) log2(p(v))
-```
-
-Using a fixed universe 100K when we have vocab 1K wastes:
-```
-log2(100000) - log2(1000) = 6.6 bits per symbol
-```
-
----
-
-## 6. Implementation Checklist
-
-- [ ] Add `VocabTracker` class to track unique tokens
-- [ ] Add `effectiveUniverseSize` property to `BSPEngine`
-- [ ] Update MDL cost calculation in `Learner`
-- [ ] Update benchmark to use dynamic cost
-- [ ] Add `--adaptive` flag to benchmark for A/B testing
-- [ ] Implement `ProgressiveHasher` for Phase 3
-- [ ] Run comparative benchmarks (fixed vs adaptive)
-
----
-
-## 7. Risks and Mitigations
-
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| Vocab grows too fast | High costs anyway | Cap at reasonable max (50K) |
-| Serialization complexity | Breaks saved models | Include vocab in model state |
-| Non-monotonic costs | Confusing metrics | Only expand, never shrink |
-| Hash collisions | Poor grouping | Use consistent hashing |
-
----
-
-## 8. Quick Win: Minimal Change
-
-The simplest improvement that can be done **right now**:
-
-```javascript
-// In BSPEngine, add:
-get effectiveUniverseSize() {
-  // Use vocab size with 2x headroom, capped at config.universeSize
-  const vocabSize = this.tokenizer?.vocab?.size || 1000;
+  const vocabSize = this.vocabTracker.size || 1000;
   return Math.min(
     Math.max(1000, vocabSize * 2),
     this.config.universeSize
   );
 }
+
+// MDL cost calculation
+computeMDLCost(surpriseBits) {
+  return surpriseBits * Math.log2(this.effectiveUniverseSize);
+}
 ```
 
-This single change could reduce BPC by **30-50%** in early training.
+---
+
+## 3. Measured Results
+
+### 3.1 Quick Training (1000 lines)
+
+| Metric | Fixed Universe | Adaptive Universe | Improvement |
+|--------|----------------|-------------------|-------------|
+| Universe Size | 100,000 | 1,000 | - |
+| Bits per Surprise | 16.6 | 10.0 | **40%** |
+| BPC | 3.78 | **2.27** | **40%** |
+| vs Gzip (2.41) | -57% | **+5.9%** | ✅ PASS |
+
+### 3.2 Full Training (5000 lines)
+
+| Metric | Fixed Universe | Adaptive Universe | Notes |
+|--------|----------------|-------------------|-------|
+| Vocab Size | - | 4,483 | Grows with n-grams |
+| Effective Universe | 100,000 | 8,966 | vocab × 2 |
+| Bits per Surprise | 16.6 | 13.1 | Still high |
+| BPC | 4.93 | **2.97** | 40% better |
+| vs Gzip (2.41) | -104% | **-23%** | Not passing yet |
+
+### 3.3 Key Insight
+
+The improvement is **proportional to log ratio**:
+```
+Improvement = log₂(100000) / log₂(effectiveUniverse)
+            = 16.6 / 13.1 = 1.27 (27% improvement in cost/bit)
+```
+
+But **surprise count stays the same** - groups don't compress better.
+
+---
+
+## 4. Interaction with Compression Machine (DS-021)
+
+When combined with DS-021 CompressionMachine:
+
+| Training | BPC (Groups only) | BPC (Combined) | Program Win Rate |
+|----------|-------------------|----------------|------------------|
+| 1000 lines | 2.29 | **2.27** | 8.3% |
+| 5000 lines | 2.97 | **2.79** | 37.5% |
+
+The Compression Machine provides **additional 6-8% improvement** on top of adaptive universe.
+
+---
+
+## 5. Known Issues
+
+### 5.1 Vocabulary Explosion
+
+The tokenizer generates **n-grams** (1-3), which causes vocabulary to grow rapidly:
+- "The cat sat" → `[the, cat, sat, the_cat, cat_sat, the_cat_sat]` = 6 tokens
+- With 5000 sentences → 4,483 unique n-grams
+
+**Impact**: `effectiveUniverse = 8,966` → 13.1 bits/surprise (still high)
+
+### 5.2 Potential Solutions
+
+1. **Track only unigrams** for universe sizing
+2. **Use frequency-weighted coding** (Huffman-style)
+3. **Cap vocabulary** at reasonable size (e.g., 5000)
+
+---
+
+## 6. Configuration
+
+### 6.1 Enable/Disable
+
+```javascript
+const engine = new BSPEngine({
+  adaptiveUniverse: true,  // default: true
+  universeSize: 100000,    // max cap
+});
+```
+
+### 6.2 Check Current State
+
+```javascript
+console.log('Effective universe:', engine.effectiveUniverseSize);
+console.log('Vocab size:', engine.vocabTracker.size);
+console.log('Cost per surprise bit:', Math.log2(engine.effectiveUniverseSize));
+```
+
+---
+
+## 7. Implementation Checklist
+
+- [x] Add `vocabTracker` to BSPEngine constructor
+- [x] Add `effectiveUniverseSize` getter
+- [x] Add `computeMDLCost()` method
+- [x] Update `process()` to track vocabulary
+- [x] Update `process()` to return `mdlCost`
+- [x] Serialize/deserialize `vocabTracker`
+- [x] Update benchmark to use new metrics
+- [ ] Implement frequency-weighted coding (Level 2)
+- [ ] Track only unigrams for universe sizing
+
+---
+
+## 8. Files Modified
+
+```
+src/core/BSPEngine.mjs
+├── constructor: +vocabTracker
+├── get effectiveUniverseSize()
+├── computeMDLCost()
+├── process(): vocabTracker.observe(), return mdlCost
+├── toJSON(): serialize vocabTracker
+└── fromJSON(): deserialize vocabTracker
+
+evals/runLM_Comp.mjs
+├── Training: enable adaptiveUniverse
+└── Benchmark: use result.mdlCost
+```
+
+---
+
+## 9. Conclusion
+
+**Adaptive Universe works** and provides significant compression improvement (~40% BPC reduction) when vocabulary is small. The benefit decreases as vocabulary grows due to n-gram explosion.
+
+**Next steps**:
+1. Track only unigrams for universe sizing
+2. Implement frequency-weighted coding for high-frequency tokens
+3. Combine with better group learning to reduce surprise count

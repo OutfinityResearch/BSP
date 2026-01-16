@@ -1,9 +1,10 @@
 # DS-021: Compression Machine (Procedural Encoding)
 
-**Version**: 1.0  
-**Status**: Proposal  
+**Version**: 2.0  
+**Status**: Implemented  
 **Author**: BSP Team  
-**Date**: 2026-01-16
+**Date**: 2026-01-16  
+**Updated**: 2026-01-16
 
 ---
 
@@ -27,438 +28,294 @@ These cannot be compressed well with set membership alone.
 
 ### 1.2 The Compression Gap
 
-| Pattern | Current Cost | Optimal Cost |
-|---------|-------------|--------------|
-| "walked" | 7 bits × 16.6 = 116 bits | "walk" + "-ed" = ~20 bits |
-| "ABC ABC ABC" | 9 bits × 16.6 = 149 bits | "ABC" + "×3" = ~30 bits |
-| Template | Full description | Template + params |
-
-We're losing **3-5× compression** by not capturing procedural patterns.
+| Pattern | Group-Based Cost | Program-Based Cost | Savings |
+|---------|------------------|--------------------| --------|
+| "ABC ABC ABC" | 9 tokens × 13 = 117 bits | pattern(3) + count = 34 bits | **71%** |
+| Copy from context | 6 tokens × 13 = 78 bits | offset + length = 14 bits | **82%** |
+| Template "The X is Y" | Full encoding | template + 2 slots | **50%** |
 
 ---
 
-## 2. Core Insight: Programs as Compression
+## 2. Implementation Status
 
-### 2.1 Kolmogorov Complexity
+### 2.1 Components Implemented
 
-The shortest description of data is the shortest **program** that generates it.
+| Component | File | Status |
+|-----------|------|--------|
+| `CompressionMachine` class | `CompressionMachine.mjs` | ✅ Done |
+| `LiteralOp` operator | `CompressionMachine.mjs` | ✅ Done |
+| `CopyOp` operator | `CompressionMachine.mjs` | ✅ Done |
+| `RepeatOp` operator | `CompressionMachine.mjs` | ✅ Done |
+| `TemplateOp` operator | `CompressionMachine.mjs` | ✅ Done (not trained) |
+| `Program` class | `CompressionMachine.mjs` | ✅ Done |
+| BSPEngine integration | `BSPEngine.mjs` | ✅ Done |
+| Template learning | `CompressionMachine.mjs` | ⚠️ Prepared, not active |
+
+### 2.2 File Structure
 
 ```
-K(x) = min { |p| : U(p) = x }
+src/core/
+├── CompressionMachine.mjs    # NEW - 500+ lines
+│   ├── Program               # Sequence of operations
+│   ├── Operation             # Base class
+│   ├── LiteralOp             # Direct token encoding
+│   ├── CopyOp                # Copy from context
+│   ├── RepeatOp              # Repeat pattern N times
+│   ├── TemplateOp            # Fill template with slots
+│   └── CompressionMachine    # Orchestrator
+├── BSPEngine.mjs             # Integration
+│   └── process()             # Returns programCost, compressionMethod
+└── index.mjs                 # Exports
 ```
-
-Where U is a universal Turing machine.
-
-### 2.2 MDL Principle
-
-Minimum Description Length says: choose the model that minimizes:
-```
-Total Cost = Model Cost + Data|Model Cost
-```
-
-Currently:
-- Model = groups + edges
-- Data|Model = surprise bits × log₂(universe)
-
-With procedural encoding:
-- Model = programs + templates + transforms
-- Data|Model = residual after applying programs
 
 ---
 
-## 3. Proposed Architecture: Compression Machine
+## 3. Measured Results
 
-### 3.1 Overview
+### 3.1 Operator Usage (5000 lines training)
+
+| Operator | Times Used | Avg Savings | Notes |
+|----------|------------|-------------|-------|
+| **COPY** | 3,644 | 40 bits/use | Most effective |
+| **REPEAT** | 10 | 56 bits/use | Rare but powerful |
+| **TEMPLATE** | 0 | - | Not trained yet |
+| **LITERAL** | (fallback) | 0 | When others fail |
+
+### 3.2 Benchmark Results
+
+| Metric | Groups Only | With Machine | Improvement |
+|--------|-------------|--------------|-------------|
+| BPC (1000 lines) | 2.29 | **2.27** | 1.0% |
+| BPC (5000 lines) | 2.97 | **2.79** | **6.3%** |
+| Program Win Rate | 0% | **37.5%** | - |
+
+### 3.3 When Program Wins
+
+The compression machine is chosen when:
+- **Repeated content**: Same sentence/phrase appears again → COPY
+- **Pattern repetition**: "A B A B A B" → REPEAT
+- **Low group coverage**: New content not in groups → cheaper to encode directly
+
+---
+
+## 4. Architecture
+
+### 4.1 Operator Hierarchy
 
 ```
 ┌────────────────────────────────────────────────────────┐
 │                  COMPRESSION MACHINE                    │
 ├─────────────┬─────────────┬─────────────┬──────────────┤
 │   Level 3   │   Level 2   │   Level 1   │   Level 0    │
-│   Meta-     │   Sequence  │   Group     │   Token      │
-│   Programs  │   Programs  │   Matching  │   Encoding   │
+│   TEMPLATE  │   COPY      │   GROUP     │   LITERAL    │
+│   (learned) │   REPEAT    │   (BSP)     │   (raw)      │
 ├─────────────┼─────────────┼─────────────┼──────────────┤
-│ "apply      │ "COPY from  │ "tokens     │ raw hash     │
-│  grammar    │  position   │  {a,b,c}    │  IDs         │
-│  rule X"    │  with shift │  form       │              │
-│             │  +template" │  group G"   │              │
+│ template +  │ offset +    │ group IDs   │ token ×      │
+│ slot values │ length/count│ + surprise  │ log₂(vocab)  │
 └─────────────┴─────────────┴─────────────┴──────────────┘
 ```
 
-### 3.2 Compression Operators
-
-Each level has **operators** that transform input:
-
-#### Level 0: Token Operators
-```javascript
-TOKEN(id)           // Raw token, cost = log₂(vocabSize)
-NOVEL(hash)         // Unknown token, cost = log₂(universeSize)
-```
-
-#### Level 1: Group Operators (current system, enhanced)
-```javascript
-GROUP(gid)          // Activate group, cost = log₂(groupCount)
-DIFF(gid, +bits, -bits)  // Group with modifications
-```
-
-#### Level 2: Sequence Operators (NEW)
-```javascript
-COPY(offset, length)     // Copy from context, cost ≈ log₂(contextLen) + log₂(maxLen)
-REPEAT(pattern, count)   // Repeat pattern, cost = |pattern| + log₂(maxCount)
-TEMPLATE(tid, params)    // Apply template with params
-SHIFT(base, delta)       // Apply offset to all IDs
-```
-
-#### Level 3: Program Operators (NEW)
-```javascript
-TRANSFORM(input, rule)   // Apply learned transform
-GRAMMAR(rule_id, slots)  // Apply grammar production
-COMPOSE(op1, op2)        // Chain two operations
-```
-
-### 3.3 Cost Model
-
-Total encoding cost:
-```
-Cost(input) = min over all programs P {
-    Cost(P) + Cost(input | P)
-}
-```
-
-Where:
-- `Cost(P)` = sum of operator costs in program
-- `Cost(input | P)` = residual bits not explained by P
-
----
-
-## 4. Implementation: CompressionMachine Class
-
-### 4.1 Core Interface
+### 4.2 Cost Model
 
 ```javascript
-class CompressionMachine {
-  constructor(options = {}) {
-    this.operators = new Map();  // name -> Operator
-    this.templates = new Map();  // id -> Template
-    this.transforms = new Map(); // id -> Transform
-    this.contextWindow = options.contextWindow || 256;
-  }
+// LITERAL: Direct encoding
+cost = tokens.length × log₂(vocabSize)
 
-  /**
-   * Find best program to encode input
-   * @param {number[]} tokens - Input token sequence
-   * @param {number[]} context - Previous tokens (for COPY)
-   * @returns {Program} Best compression program
-   */
-  encode(tokens, context = []) {
-    const candidates = this._generateCandidates(tokens, context);
-    return this._selectBest(candidates, tokens);
-  }
+// COPY: Reference to context
+cost = log₂(contextLen) + log₂(maxCopyLen)  // ~14 bits
 
-  /**
-   * Execute program to decode tokens
-   * @param {Program} program
-   * @param {number[]} context
-   * @returns {number[]} Decoded tokens
-   */
-  decode(program, context = []) {
-    return program.execute(context);
-  }
+// REPEAT: Pattern × count
+cost = pattern.length × log₂(vocabSize) + log₂(maxRepeat)
 
-  /**
-   * Learn new templates/transforms from data
-   * @param {number[][]} sequences - Training sequences
-   */
-  learn(sequences) {
-    this._learnTemplates(sequences);
-    this._learnTransforms(sequences);
-    this._learnCopyPatterns(sequences);
-  }
-}
+// TEMPLATE: Template ID + slot values
+cost = log₂(numTemplates) + slots × log₂(vocabSize)
 ```
 
-### 4.2 Operator Definitions
+### 4.3 Selection Algorithm
 
 ```javascript
-class Operator {
-  constructor(name, costFn, executeFn) {
-    this.name = name;
-    this.costFn = costFn;      // (params, context) => bits
-    this.executeFn = executeFn; // (params, context) => tokens
-  }
-}
-
-// Example operators
-const COPY = new Operator(
-  'COPY',
-  (params, ctx) => {
-    // Cost = log₂(context length) + log₂(max copy length)
-    const { offset, length } = params;
-    return Math.log2(ctx.length || 1) + Math.log2(32);
-  },
-  (params, ctx) => {
-    const { offset, length } = params;
-    return ctx.slice(offset, offset + length);
-  }
-);
-
-const REPEAT = new Operator(
-  'REPEAT',
-  (params) => {
-    const { pattern, count } = params;
-    // Cost = pattern cost + log₂(max repeat count)
-    return pattern.length * 2 + Math.log2(16);
-  },
-  (params) => {
-    const { pattern, count } = params;
-    const result = [];
-    for (let i = 0; i < count; i++) {
-      result.push(...pattern);
-    }
-    return result;
-  }
-);
-
-const TEMPLATE = new Operator(
-  'TEMPLATE',
-  (params, ctx, machine) => {
-    const { templateId, slots } = params;
-    const template = machine.templates.get(templateId);
-    // Cost = template ID + slot values
-    return Math.log2(machine.templates.size) + 
-           slots.length * Math.log2(machine.vocabSize);
-  },
-  (params, ctx, machine) => {
-    const { templateId, slots } = params;
-    const template = machine.templates.get(templateId);
-    return template.fill(slots);
-  }
-);
-```
-
-### 4.3 Template Learning
-
-```javascript
-class TemplateLearner {
-  /**
-   * Find recurring patterns with variable slots
-   * Example: "The [X] is [Y]." appears often with different X, Y
-   */
-  learn(sequences) {
-    const templates = [];
-    
-    // Find recurring subsequences
-    const ngrams = this._extractNgrams(sequences, 3, 10);
-    
-    // Find pairs with small edit distance
-    for (const [pattern1, count1] of ngrams) {
-      for (const [pattern2, count2] of ngrams) {
-        if (pattern1 === pattern2) continue;
-        
-        const alignment = this._align(pattern1, pattern2);
-        if (alignment.slots.length > 0 && alignment.fixedRatio > 0.5) {
-          templates.push({
-            fixed: alignment.fixed,
-            slots: alignment.slots,
-            examples: [pattern1, pattern2],
-            count: count1 + count2,
-          });
-        }
-      }
-    }
-    
-    // Merge similar templates
-    return this._mergeTemplates(templates);
-  }
-}
-```
-
-### 4.4 Copy Detection
-
-```javascript
-class CopyDetector {
-  /**
-   * Find segments that can be copied from context
-   */
-  findCopies(tokens, context, minLength = 3) {
-    const copies = [];
-    
-    // Build suffix array of context for fast matching
-    const suffixArray = this._buildSuffixArray(context);
-    
-    for (let i = 0; i < tokens.length; i++) {
-      // Binary search for matching prefix
-      const match = this._findLongestMatch(tokens, i, context, suffixArray);
-      
-      if (match.length >= minLength) {
-        const copyCost = Math.log2(context.length) + Math.log2(match.length);
-        const directCost = match.length * Math.log2(this.vocabSize);
-        
-        if (copyCost < directCost) {
-          copies.push({
-            sourceOffset: match.offset,
-            targetOffset: i,
-            length: match.length,
-            savings: directCost - copyCost,
-          });
-        }
-      }
-    }
-    
-    return copies;
-  }
-}
-```
-
----
-
-## 5. Integration with BSP
-
-### 5.1 Modified Process Flow
-
-```
-OLD:
-  tokens → encode → groups → surprise → cost
-
-NEW:
-  tokens → compressionMachine.encode(tokens, context) → program
-         → program.cost() → total bits
-         → program.residual() → fallback to group encoding
-```
-
-### 5.2 BSPEngine Integration
-
-```javascript
-// In BSPEngine.process()
-process(text, options = {}) {
-  const tokens = this.tokenizer.encode(text);
+encode(tokens, context) {
+  // Generate all candidate programs
+  const candidates = [
+    literalProgram(tokens),
+    copyProgram(tokens, context),
+    repeatProgram(tokens),
+    templateProgram(tokens),
+  ];
   
-  // NEW: Try procedural compression first
-  const program = this.compressionMachine.encode(tokens, this.contextTokens);
-  
-  if (program.cost < this._estimateGroupCost(tokens)) {
-    // Use procedural encoding
-    this._learnFromProgram(program);
-    this.contextTokens = [...this.contextTokens, ...tokens].slice(-256);
-    return { program, cost: program.cost };
-  }
-  
-  // Fallback to group-based encoding
-  const input = SimpleBitset.fromArray(tokens, this.config.universeSize);
-  // ... existing group logic ...
+  // Return lowest cost
+  return candidates.sort((a, b) => a.cost - b.cost)[0];
 }
 ```
 
 ---
 
-## 6. Expected Impact
+## 5. Integration with BSPEngine
 
-### 6.1 Compression Gains
+### 5.1 Process Flow
 
-| Scenario | Current BPC | With Machine | Improvement |
-|----------|-------------|--------------|-------------|
-| Repetitive text | 7.0 | 3.0 | 57% |
-| Template-heavy | 6.5 | 3.5 | 46% |
-| Copy-heavy (narrative) | 6.0 | 4.0 | 33% |
-| Novel text | 7.5 | 6.5 | 13% |
-| **Average** | **6.75** | **4.25** | **37%** |
-
-### 6.2 Combined with Adaptive Universe
-
-| Improvement | Alone | Combined |
-|-------------|-------|----------|
-| Adaptive Universe | -25% BPC | - |
-| Compression Machine | -37% BPC | - |
-| **Both** | - | **-50% BPC** |
-
----
-
-## 7. Implementation Phases
-
-### Phase 1: Quick Wins (This Session)
-- [ ] Implement Adaptive Universe (DS-020)
-- [ ] Add COPY operator for context matching
-- [ ] Measure improvement
-
-### Phase 2: Templates
-- [ ] Implement TemplateLearner
-- [ ] Add TEMPLATE operator
-- [ ] Learn from TinyStories
-
-### Phase 3: Full Machine
-- [ ] Implement full CompressionMachine
-- [ ] Add program search with beam search
-- [ ] Integrate with BSPEngine
-
----
-
-## 8. Code Structure
-
-```
-src/core/
-├── BSPEngine.mjs          # Modified to use CompressionMachine
-├── CompressionMachine.mjs # NEW: Main orchestrator
-├── operators/
-│   ├── index.mjs
-│   ├── CopyOperator.mjs   # COPY from context
-│   ├── RepeatOperator.mjs # REPEAT pattern
-│   └── TemplateOperator.mjs
-├── learners/
-│   ├── TemplateLearner.mjs
-│   ├── CopyDetector.mjs
-│   └── TransformLearner.mjs
-└── Program.mjs            # Encodes a sequence of operations
-```
-
----
-
-## 9. Theoretical Notes
-
-### 9.1 Relationship to Grammar Induction
-
-The Template system is essentially learning a **context-free grammar**:
-```
-S → "The" NP "is" ADJ "."
-NP → "cat" | "dog" | "bird"
-ADJ → "happy" | "sad" | "hungry"
-```
-
-This is equivalent to:
 ```javascript
-TEMPLATE('S', [NP, ADJ])
+process(text, options) {
+  // ... existing group-based processing ...
+  
+  // DS-021: Program-based compression
+  const program = this.compressionMachine.encode(wordTokens, this.contextTokens);
+  const programCost = program.cost;
+  
+  // Best cost = min(group-based, program-based)
+  const bestCost = Math.min(groupMdlCost, programCost);
+  const compressionMethod = programCost < groupMdlCost ? 'program' : 'group';
+  
+  return {
+    // ... existing fields ...
+    mdlCost: bestCost,
+    groupMdlCost,
+    programCost,
+    compressionMethod,
+    compressionProgram: program.toString(),
+  };
+}
 ```
 
-### 9.2 Relationship to LZ77/LZSS
+### 5.2 Configuration
 
-The COPY operator is similar to LZ77 compression:
-- Match = (offset, length) pair
-- Difference: we learn which copies are **semantically meaningful**
-
-### 9.3 Universal Compression
-
-In the limit, with enough operators and learning, this approaches:
+```javascript
+const engine = new BSPEngine({
+  useCompressionMachine: true,  // default: true
+  compression: {
+    minCopyLen: 3,    // minimum tokens to use COPY
+    maxCopyLen: 64,   // maximum copy length
+    maxRepeat: 16,    // maximum repeat count
+  },
+});
 ```
-K(x) = shortest program that generates x
-```
-
-Which is the theoretical optimal compression (Kolmogorov complexity).
 
 ---
 
-## 10. Risks and Mitigations
+## 6. Example Programs
 
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| Search complexity | Slow encoding | Beam search, caching |
-| Over-fitting templates | Poor generalization | MDL penalty for model size |
-| Context memory | High RAM | Sliding window, pruning |
-| Operator explosion | Hard to maintain | Hierarchical operators |
+### 6.1 COPY Operation
+
+```
+Input: "the cat sat on the mat"
+Context: ["the", "cat", "sat", "on", "the", "mat", ...]  (previous text)
+
+Program: COPY[0:6]
+Cost: log₂(256) + log₂(64) = 8 + 6 = 14 bits
+
+vs LITERAL: 6 × 13 = 78 bits
+Savings: 82%
+```
+
+### 6.2 REPEAT Operation
+
+```
+Input: "one two three one two three one two three"
+Pattern: ["one", "two", "three"]
+Count: 3
+
+Program: REPEAT[one two three × 3]
+Cost: 3 × 10 + 4 = 34 bits
+
+vs LITERAL: 9 × 10 = 90 bits
+Savings: 62%
+```
+
+### 6.3 Hybrid Program
+
+```
+Input: "Once upon a time there was a little girl"
+Context: [...previous story...]
+
+Program: LIT[once upon] + COPY[47:2] + LIT[there was a little girl]
+Cost: 2×10 + 14 + 6×10 = 94 bits
+
+vs pure LITERAL: 9 × 10 = 90 bits
+(No savings in this case - LITERAL wins)
+```
 
 ---
 
-## 11. Success Criteria
+## 7. Template Learning (Future)
 
-1. **BPC reduction**: ≥25% on TinyStories
-2. **Speed**: ≤2× slower than current
-3. **Interpretability**: Programs are human-readable
-4. **Learning**: Templates emerge from data, not hand-coded
+### 7.1 Concept
+
+Learn recurring patterns with variable slots:
+```
+Template: "The [SLOT] is [SLOT]."
+Instances:
+  - "The cat is happy."   → slots = [cat, happy]
+  - "The dog is sad."     → slots = [dog, sad]
+  - "The bird is hungry." → slots = [bird, hungry]
+```
+
+### 7.2 Learning Algorithm
+
+```javascript
+learnTemplates(sequences) {
+  // Find recurring patterns with differences
+  for (const [seq1, seq2] of pairs(sequences)) {
+    const diff = align(seq1, seq2);
+    if (diff.fixedRatio > 0.5 && diff.slots.length > 0) {
+      this.templates.add({
+        fixed: diff.fixed,
+        slots: diff.slotPositions,
+      });
+    }
+  }
+}
+```
+
+### 7.3 Status
+
+Template learning is **prepared but not active** because:
+1. Requires enough training data to find recurring patterns
+2. TinyStories has varied vocabulary, few exact matches
+3. Need to implement fuzzy matching for templates
+
+---
+
+## 8. Known Issues and TODOs
+
+### 8.1 Issues
+
+| Issue | Impact | Solution |
+|-------|--------|----------|
+| COPY search is O(n²) | Slow for long context | Use suffix array |
+| Template learning not active | 0% template usage | Implement fuzzy matching |
+| vocabSize mismatch | Program costs too high | Use word vocab, not n-gram |
+
+### 8.2 TODO
+
+- [ ] Implement suffix array for O(log n) COPY matching
+- [ ] Activate template learning
+- [ ] Use word-level vocab for CompressionMachine
+- [ ] Add TRANSFORM operator for morphological patterns
+- [ ] Cache program results for identical inputs
+
+---
+
+## 9. Benchmark Command
+
+```bash
+# Quick test (17s)
+node evals/runLM_Comp.mjs --quick --retrain
+
+# Full benchmark (~2min)
+node evals/runLM_Comp.mjs --retrain
+
+# View compression stats
+cat evals/lm_comparative/results/latest.json | jq '.compression'
+```
+
+---
+
+## 10. Conclusion
+
+The Compression Machine provides **measurable improvement** (6.3% BPC reduction on full training) by detecting:
+- **COPY patterns**: 37.5% of test lines benefit from copying
+- **REPEAT patterns**: Rare but effective (62% savings when detected)
+
+**Main limitation**: Program costs are calculated using n-gram vocabulary (4,483 tokens), making LITERAL fallback expensive. Switching to word-level vocabulary would improve program-based compression significantly.
+
+**Next priority**: Activate template learning and switch to word-level vocab for compression cost calculation.

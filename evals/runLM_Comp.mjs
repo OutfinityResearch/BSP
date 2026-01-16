@@ -448,9 +448,6 @@ async function runBenchmark() {
   }
   
   const duration = Date.now() - startTime;
-  const bpc = totalBits / totalChars;
-  const avgSurprise = totalSurprise / lines.length;
-  const throughput = (lines.length / duration) * 1000;
   
   // Baselines
   const { gzipSync } = await import('node:zlib');
@@ -601,10 +598,34 @@ function printReport(benchResults, blimpResults) {
     console.log('║ LANGUAGE MODELING (TinyStories)                                   ║');
     console.log('╠───────────────────────────────────────────────────────────────────╣');
     console.log(`║   BSP Bits-per-Char:     ${benchResults.bsp.bpc.toFixed(4).padEnd(41)}║`);
+    if (benchResults.bsp.groupOnlyBpc) {
+      console.log(`║   Group-only BPC:        ${benchResults.bsp.groupOnlyBpc.toFixed(4).padEnd(41)}║`);
+    }
     console.log(`║   Gzip Baseline:         ${benchResults.baselines.gzipBpc.toFixed(4).padEnd(41)}║`);
     console.log(`║   Shannon Entropy:       ${benchResults.baselines.shannonEntropy.toFixed(4).padEnd(41)}║`);
     console.log(`║   Throughput:            ${(benchResults.bsp.throughput.toFixed(0) + ' lines/sec').padEnd(41)}║`);
     console.log(`║   Groups Learned:        ${formatNum(benchResults.bsp.groups).padEnd(41)}║`);
+    console.log(`║   Vocab Size:            ${formatNum(benchResults.bsp.vocabSize || 0).padEnd(41)}║`);
+    
+    // Compression machine stats
+    if (benchResults.compression) {
+      console.log('╠───────────────────────────────────────────────────────────────────╣');
+      console.log('║ COMPRESSION MACHINE (DS-021)                                      ║');
+      console.log(`║   Program Wins:          ${benchResults.compression.programWinRate.padEnd(41)}║`);
+      if (benchResults.compression.machineStats) {
+        const stats = benchResults.compression.machineStats;
+        console.log(`║   Copy Ops Used:         ${formatNum(stats.copyOpsUsed || 0).padEnd(41)}║`);
+        console.log(`║   Repeat Ops Used:       ${formatNum(stats.repeatOpsUsed || 0).padEnd(41)}║`);
+        console.log(`║   Avg Savings/Encode:    ${(stats.avgSavingsPerEncode || 0).toFixed(1).padEnd(38)}bits ║`);
+      }
+    }
+    
+    // Improvements
+    if (benchResults.improvement) {
+      console.log('╠───────────────────────────────────────────────────────────────────╣');
+      console.log(`║   Improvement vs Gzip:   ${benchResults.improvement.vsGzip.padEnd(41)}║`);
+      console.log(`║   Improvement vs Groups: ${benchResults.improvement.vsGroupOnly.padEnd(41)}║`);
+    }
     
     const isGood = benchResults.bsp.bpc < benchResults.baselines.gzipBpc;
     const verdict = isGood ? '✓ PASS (Better than Gzip)' : '⚠ NEEDS WORK (Worse than Gzip)';
