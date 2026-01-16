@@ -11,6 +11,7 @@ import { ReplayBuffer } from './ReplayBuffer.mjs';
 import { SequenceModel } from './SequenceModel.mjs';
 import { IDFTracker } from './IDFTracker.mjs';
 import { CompressionMachine } from './CompressionMachine.mjs';
+import { AttentionBuffer } from './AttentionBuffer.mjs';
 
 class BSPEngine {
   /**
@@ -130,6 +131,22 @@ class BSPEngine {
     this.maxSentenceBuffer = options.maxSentenceBuffer || 500;
     this.templateLearningInterval = options.templateLearningInterval || Infinity;  // Disabled by default
     this.processedLines = 0;
+
+    // DS-024: Unified learning/sleep architecture - AttentionBuffer tracks compression problems
+    const attentionConfig = options.attentionBuffer || options.attention || {};
+    this.attentionBuffer = new AttentionBuffer({
+      maxItems: attentionConfig.maxItems || 5000,
+      surpriseWeight: attentionConfig.surpriseWeight ?? 1.0,
+      recurrenceWeight: attentionConfig.recurrenceWeight ?? 2.0,
+      ...attentionConfig,
+    });
+
+    // Sleep phase configuration (DS-024)
+    this.sleepConfig = {
+      lightSleepBudgetMs: options.lightSleepBudgetMs || 100,    // 100ms for light sleep
+      deepSleepBudgetMs: options.deepSleepBudgetMs || 5000,     // 5s for deep sleep
+      surpriseThreshold: options.surpriseThreshold || 0.3,      // Add to attention if surprise ratio > 30%
+    };
   }
 
   /**

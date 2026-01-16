@@ -44,9 +44,13 @@ const CONFIG = {
     maxGroups: 20_000,
     topK: 16,
     // DS-022: Emergent grammar through sequence cost
-    // Lower weight to balance BPC vs grammar
-    sequenceCostWeight: 0.1,
+    sequenceCostWeight: 0.1,  // Keep low - sequence cost already high
     unknownTransitionPenalty: 8,
+    // Sequence model smoothing for unseen transitions
+    sequenceModel: {
+      smoothing: 'addAlpha',
+      smoothingAlpha: 0.01,  // Small alpha for backoff
+    },
   },
   
   // Training
